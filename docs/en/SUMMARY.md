@@ -11,7 +11,7 @@
 
 * [ysautoml.data](api-references/ysautoml.data/README.md)
   * [ysautoml.data.fyi](api-references/ysautoml.data/ysautoml.data.fyi.md)
-  * [ysautoml.data.dualbn](api-references/ysautoml.data/ysautoml.data.dualbn.md)
+  * [ysautoml.data.dsbn](api-references/ysautoml.data/ysautoml.data.dsbn.md)
 * [ysautoml.network](api-references/ysautoml.network/README.md)
   * [ysautoml.network.fewshot](api-references/ysautoml.network/ysautoml.network.fewshot.md)
   * [ysautoml.network.oneshot](api-references/ysautoml.network/ysautoml.network.oneshot.md)
