@@ -1,0 +1,22 @@
+# Table of contents
+
+* [WELCOME TO YSAUTOML'S DOCUMENTATION!](README.md)
+
+## Get Started
+
+* [OVERVIEW](get-started/overview.md)
+* [GET STARTED](get-started/get-started.md)
+
+## API References
+
+* [ysautoml.data](api-references/ysautoml.data/README.md)
+  * [ysautoml.data.fyi](api-references/ysautoml.data/ysautoml.data.fyi.md)
+  * [ysautoml.data.dualbn](api-references/ysautoml.data/ysautoml.data.dualbn.md)
+* [ysautoml.network](api-references/ysautoml.network/README.md)
+  * [ysautoml.network.fewshot](api-references/ysautoml.network/ysautoml.network.fewshot.md)
+  * [ysautoml.network.oneshot](api-references/ysautoml.network/ysautoml.network.oneshot.md)
+  * [ysautoml.network.zeroshot](api-references/ysautoml.network/ysautoml.network.zeroshot.md)
+* [ysautoml.optimization](api-references/ysautoml.optimization/README.md)
+  * [ysautoml.optimization.fxp](api-references/ysautoml.optimization/ysautoml.optimization.fxp.md)
+  * [ysautoml.optimization.losssearch](api-references/ysautoml.optimization/ysautoml.optimization.losssearch.md)
+  * [ysautoml.optimization.mtlloss](api-references/ysautoml.optimization/ysautoml.optimization.mtlloss.md)
