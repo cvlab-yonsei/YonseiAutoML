@@ -1,0 +1,25 @@
+import argparse
+
+def make_parser():
+    p = argparse.ArgumentParser(description="Dataset Condensation")
+    p.add_argument('--method', type=str, default='DC', help='DC/DSA')
+    p.add_argument('--dataset', type=str, default='CIFAR10', help='dataset')
+    p.add_argument('--model', type=str, default='ConvNet', help='model')
+    p.add_argument('--ipc', type=int, default=1, help='image(s) per class')
+    p.add_argument('--eval_mode', type=str, default='S', help='S/M/W/D/A/P/N')
+    p.add_argument('--num_exp', type=int, default=5)
+    p.add_argument('--num_eval', type=int, default=20)
+    p.add_argument('--epoch_eval_train', type=int, default=300)
+    p.add_argument('--Iteration', type=int, default=1000)
+    p.add_argument('--lr_img', type=float, default=0.1)
+    p.add_argument('--lr_net', type=float, default=0.01)
+    p.add_argument('--batch_real', type=int, default=256)
+    p.add_argument('--batch_train', type=int, default=256)
+    p.add_argument('--init', type=str, default='noise', help='noise/real')
+    p.add_argument('--dsa_strategy', type=str, default='None')
+    p.add_argument('--data_path', type=str, default='/dataset')
+    p.add_argument('--dis_metric', type=str, default='ours')
+    p.add_argument('--device', type=str, default='0')
+    p.add_argument('--run_name', type=str, default='RUN')
+    p.add_argument('--run_tags', type=str, default=None)
+    return p
