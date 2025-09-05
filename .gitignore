@@ -163,3 +163,4 @@ cython_debug/
 ### new
 /logs
 /yscvlab
+/data
