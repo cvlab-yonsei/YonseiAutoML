@@ -82,7 +82,7 @@ pip install -v -e
 
 ```
 !git clone https://github.com/cvlab-yonsei/TempAutoML.git
-%cd mmdetection
+%cd TempAutoML
 !pip install -e .
 ```
 
