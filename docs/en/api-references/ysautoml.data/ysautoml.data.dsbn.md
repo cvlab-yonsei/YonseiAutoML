@@ -1,7 +1,123 @@
 # ysautoml.data.dsbn
 
+## funtional
+
+### ysautoml.data.dsbn.convert\_and\_wrap
+
+> ysautoml.data.dsbn.convert\_and\_wrap(\*\*kwargs)
+
+Convert all `BatchNorm2d` layers in a model to **DSBN2d** (Domain-Specific BatchNorm) and set initial mode. DSBN maintains two sets of BN statistics (`BN_S` for source, `BN_T` for target/aug).
+
+> Parameters
+
+* **model\_or\_name** _(str or nn.Module)_:\
+  Model name (factory-built, e.g. `"resnet18_cifar"`) or an existing model instance.
+* **dataset** _(str, default `"CIFAR10"`)_: Dataset tag (reserved for model factory use).
+* **num\_classes** _(int, default 10)_: Number of classes.
+* **use\_aug** _(bool, default False)_: If `True` and `mode=None`, initial mode is set to 2 (Target BN). Otherwise 1 (Source BN).
+* **mode** _(int or None, default None)_: DSBN mode.
+  * `1`: use Source BN (`BN_S`)
+  * `2`: use Target BN (`BN_T`)
+  * `3`: split-half (first half BN\_S, second half BN\_T). Batch size must be even.\
+    If `None`, inferred from `use_aug`.
+* **device** _(str, default `"0"`)_: Device spec (sets `CUDA_VISIBLE_DEVICES` and moves model).
+* **export\_path** _(str or None)_: If given, saves `model.state_dict()` to this path.
+
+
+
+> Returns
+
+* **nn.Module**: DSBN-converted model with mode set.
+
+
+
+***
+
+### ysautoml.data.dsbn.train\_with\_dsbn
+
+> ysautoml.data.dsbn.train\_with\_dsbn(\*\*kwargs)
+
+Train a DSBN-converted model using either **separate** or **mixed** batch training.
+
+* **Separate mode** (`mixed_batch=False`):\
+  Each iteration uses one source batch (mode=1) and one target batch (mode=2).
+* **Mixed mode** (`mixed_batch=True`):\
+  Each batch contains source+target samples concatenated. Model runs with mode=3, applying BN\_S to the first half and BN\_T to the second half.
+
+> Parameters
+
+* **model** _(nn.Module)_: DSBN-converted model.
+* **train\_loader\_source** _(DataLoader)_: Source domain loader. In mixed mode, pass a mixed loader here.
+* **train\_loader\_target** _(DataLoader, optional)_: Target loader (required for separate mode).
+* **epochs** _(int, default 1)_: Number of training epochs.
+* **lr** _(float, default 0.1)_: Learning rate.
+* **mixed\_batch** _(bool, default False)_: If `True`, expects mixed batches and uses split-half mode.
+* **device** _(str, default `"cuda"`)_: Training device.
+* **log\_interval** _(int, default 10)_: Print loss every `log_interval` steps.
+
+
+
+> Returns
+
+* **dict** containing:
+  * **logs** _(list)_: Training logs per step.
+    * Separate mode: `(epoch, step, (loss_source, loss_target))`
+    * Mixed mode: `(epoch, step, loss)`
+  * **final\_acc** _(float)_: Final accuracy measured on source loader.
+  * **state\_dict** _(OrderedDict)_: Trained model parameters.
+
+***
+
+#### Examples
+
+```python
+
+# separated batch training
+from ysautoml.data.dsbn import convert_and_wrap, train_with_dsbn
+import torch
+import torchvision
+import torchvision.transforms as transforms
+from torch.utils.data import DataLoader, random_split
+
+# 1. preparing dataset (source/target split)
+transform = transforms.Compose([
+    transforms.ToTensor(),
+])
+
+full_train = torchvision.datasets.CIFAR10(root="./data", train=True, download=True, transform=transform)
+len_source = len(full_train) // 2
+len_target = len(full_train) - len_source
+source_dataset, target_dataset = random_split(full_train, [len_source, len_target])
+
+source_loader = DataLoader(source_dataset, batch_size=128, shuffle=True, num_workers=2)
+target_loader = DataLoader(target_dataset, batch_size=128, shuffle=True, num_workers=2)
+
+# 2. converting model (BN → DSBN)
+model = convert_and_wrap("resnet18_cifar", dataset="CIFAR10", num_classes=10, use_aug=True, device="0")
+
+# 3. training (seperated batch training mode)
+result = train_with_dsbn(model, source_loader, target_loader,
+                         epochs=2, lr=0.01, mixed_batch=True, device="cuda")
+
+print("Final Accuracy:", result["final_acc"])
+print("Number of log entries:", len(result["logs"]))
+
+# if you want to save state_dict
+import torch
+torch.save(result["state_dict"], "./logs/dsbn_trained.pth")
 ```
-(yscvlab) root@d63c8bd87808:/data2/hyunju/data/TempAutoML# python api_test.py
+
+
+
+***
+
+
+
+<details>
+
+<summary>Training log</summary>
+
+```
 Files already downloaded and verified
 [Epoch 1/2][Step 0] LossS=2.4569 LossT=2.4533
 [Epoch 1/2][Step 10] LossS=2.0590 LossT=2.1778
@@ -96,3 +212,6 @@ Files already downloaded and verified
 Final Accuracy: 0.59148
 Number of log entries: 392
 ```
+
+</details>
+
