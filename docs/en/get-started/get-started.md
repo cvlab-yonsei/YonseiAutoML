@@ -102,7 +102,7 @@ Within Jupyter, the exclamation mark `!` is used to call external executables an
 
 ## Troubleshooting
 
-If you have some issues during the installation, please first view the [FAQ](https://mmdetection.readthedocs.io/en/latest/notes/faq.html) page. You may [open an issue](https://github.com/cvlab-yonsei/TempAutoML/issues) on GitHub if no solution is found.
+If you have some issues during the installation, please first view the FAQ page. You may [open an issue](https://github.com/cvlab-yonsei/TempAutoML/issues) on GitHub if no solution is found.
 
 
 
