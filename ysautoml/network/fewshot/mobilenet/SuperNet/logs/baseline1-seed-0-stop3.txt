@@ -1,0 +1,116 @@
+[02/27 06:19:42] SuperNet Training INFO: tag                 : baseline1
+[02/27 06:19:42] SuperNet Training INFO: seed                : 0
+[02/27 06:19:42] SuperNet Training INFO: workers             : 8
+[02/27 06:19:42] SuperNet Training INFO: data_path           : ../../data/imagenet
+[02/27 06:19:42] SuperNet Training INFO: save_path           : ./SuperNet
+[02/27 06:19:42] SuperNet Training INFO: search_space        : proxyless
+[02/27 06:19:42] SuperNet Training INFO: valid_size          : 50000
+[02/27 06:19:42] SuperNet Training INFO: num_gpus            : 8
+[02/27 06:19:42] SuperNet Training INFO: interval_ep_eval    : 8
+[02/27 06:19:42] SuperNet Training INFO: train_batch_size    : 1024
+[02/27 06:19:42] SuperNet Training INFO: test_batch_size     : 256
+[02/27 06:19:42] SuperNet Training INFO: max_epoch           : 120
+[02/27 06:19:42] SuperNet Training INFO: learning_rate       : 0.045
+[02/27 06:19:42] SuperNet Training INFO: momentum            : 0.9
+[02/27 06:19:42] SuperNet Training INFO: weight_decay        : 4e-05
+[02/27 06:19:42] SuperNet Training INFO: nesterov            : True
+[02/27 06:19:42] SuperNet Training INFO: lr_schedule_type    : cosine
+[02/27 06:19:42] SuperNet Training INFO: freeze_bn           : True
+[02/27 06:19:42] SuperNet Training INFO: label_smooth        : 0.1
+[02/27 06:19:42] SuperNet Training INFO: rank                : 0
+[02/27 06:19:42] SuperNet Training INFO: gpu                 : 0
+[02/27 06:19:42] SuperNet Training INFO: save_name           : baseline1-seed-0
+[02/27 06:19:42] SuperNet Training INFO: log_path            : ./SuperNet/logs/baseline1-seed-0.txt
+[02/27 06:19:42] SuperNet Training INFO: ckpt_path           : ./SuperNet/checkpoint/baseline1-seed-0.pt
+[02/27 06:19:42] SuperNet Training INFO: dist_url            : tcp://127.0.0.1:23456
+[02/27 06:19:42] SuperNet Training INFO: world_size          : 8
+[02/27 06:19:42] SuperNet Training INFO: distributed         : True
+[02/27 06:20:09] SuperNet Training INFO: Trainset Size: 1231167
+[02/27 06:20:09] SuperNet Training INFO: Validset Size:   50000
+[02/27 06:20:09] SuperNet Training INFO: --> START baseline1-seed-0
+[02/27 06:20:59] SuperNet Training INFO:     0/ 1202  CE: 6.9078  
+[02/27 06:21:53] SuperNet Training INFO:   120/ 1202  CE: 6.9074  
+[02/27 06:22:42] SuperNet Training INFO:   240/ 1202  CE: 6.9071  
+[02/27 06:23:31] SuperNet Training INFO:   360/ 1202  CE: 6.9071  
+[02/27 06:24:21] SuperNet Training INFO:   480/ 1202  CE: 6.9071  
+[02/27 06:25:10] SuperNet Training INFO:   600/ 1202  CE: 6.9075  
+[02/27 06:26:00] SuperNet Training INFO:   720/ 1202  CE: 6.9080  
+[02/27 06:26:49] SuperNet Training INFO:   840/ 1202  CE: 6.9079  
+[02/27 06:27:38] SuperNet Training INFO:   960/ 1202  CE: 6.9061  
+[02/27 06:28:27] SuperNet Training INFO:  1080/ 1202  CE: 6.9056  
+[02/27 06:29:15] SuperNet Training INFO:  1200/ 1202  CE: 6.9055  
+[02/27 06:29:21] SuperNet Training INFO: epoch:   1/120  avg CE: 6.9131  lr: 0.044992276978416075  
+[02/27 06:30:11] SuperNet Training INFO:     0/ 1202  CE: 6.9063  
+[02/27 06:31:00] SuperNet Training INFO:   120/ 1202  CE: 6.9063  
+[02/27 06:31:49] SuperNet Training INFO:   240/ 1202  CE: 6.9066  
+[02/27 06:32:39] SuperNet Training INFO:   360/ 1202  CE: 6.9103  
+[02/27 06:33:29] SuperNet Training INFO:   480/ 1202  CE: 6.9068  
+[02/27 06:34:18] SuperNet Training INFO:   600/ 1202  CE: 6.9032  
+[02/27 06:35:08] SuperNet Training INFO:   720/ 1202  CE: 6.9086  
+[02/27 06:35:57] SuperNet Training INFO:   840/ 1202  CE: 6.9071  
+[02/27 06:36:47] SuperNet Training INFO:   960/ 1202  CE: 6.9065  
+[02/27 06:37:36] SuperNet Training INFO:  1080/ 1202  CE: 6.9064  
+[02/27 06:38:24] SuperNet Training INFO:  1200/ 1202  CE: 6.9075  
+[02/27 06:38:30] SuperNet Training INFO: epoch:   2/120  avg CE: 6.9127  lr: 0.04496911321544734  
+[02/27 06:39:20] SuperNet Training INFO:     0/ 1202  CE: 6.9120  
+[02/27 06:40:09] SuperNet Training INFO:   120/ 1202  CE: 6.9072  
+[02/27 06:40:58] SuperNet Training INFO:   240/ 1202  CE: 6.9103  
+[02/27 06:41:48] SuperNet Training INFO:   360/ 1202  CE: 6.9092  
+[02/27 06:42:37] SuperNet Training INFO:   480/ 1202  CE: 6.9055  
+[02/27 06:43:26] SuperNet Training INFO:   600/ 1202  CE: 6.9028  
+[02/27 06:44:17] SuperNet Training INFO:   720/ 1202  CE: 6.9046  
+[02/27 06:45:06] SuperNet Training INFO:   840/ 1202  CE: 6.9024  
+[02/27 06:45:56] SuperNet Training INFO:   960/ 1202  CE: 6.9133  
+[02/27 06:46:46] SuperNet Training INFO:  1080/ 1202  CE: 6.9102  
+[02/27 06:47:34] SuperNet Training INFO:  1200/ 1202  CE: 6.9045  
+[02/27 06:47:40] SuperNet Training INFO: epoch:   3/120  avg CE: 6.9125  lr: 0.044930524612804106  
+[02/27 06:48:28] SuperNet Training INFO:     0/ 1202  CE: 6.9043  
+[02/27 06:49:16] SuperNet Training INFO:   120/ 1202  CE: 6.9054  
+[02/27 06:50:07] SuperNet Training INFO:   240/ 1202  CE: 6.9089  
+[02/27 06:50:55] SuperNet Training INFO:   360/ 1202  CE: 6.9112  
+[02/27 06:51:45] SuperNet Training INFO:   480/ 1202  CE: 6.9041  
+[02/27 06:52:34] SuperNet Training INFO:   600/ 1202  CE: 6.9056  
+[02/27 06:53:23] SuperNet Training INFO:   720/ 1202  CE: 6.9022  
+[02/27 06:54:13] SuperNet Training INFO:   840/ 1202  CE: 6.9080  
+[02/27 06:55:01] SuperNet Training INFO:   960/ 1202  CE: 6.9036  
+[02/27 06:55:50] SuperNet Training INFO:  1080/ 1202  CE: 6.9050  
+[02/27 06:56:37] SuperNet Training INFO:  1200/ 1202  CE: 6.9075  
+[02/27 06:56:43] SuperNet Training INFO: epoch:   4/120  avg CE: 6.9122  lr: 0.04487653766120739  
+[02/27 06:57:33] SuperNet Training INFO:     0/ 1202  CE: 6.9054  
+[02/27 06:58:23] SuperNet Training INFO:   120/ 1202  CE: 6.9049  
+[02/27 06:59:12] SuperNet Training INFO:   240/ 1202  CE: 6.9041  
+[02/27 07:00:02] SuperNet Training INFO:   360/ 1202  CE: 6.9048  
+[02/27 07:00:50] SuperNet Training INFO:   480/ 1202  CE: 6.9076  
+[02/27 07:01:39] SuperNet Training INFO:   600/ 1202  CE: 6.9076  
+[02/27 07:02:29] SuperNet Training INFO:   720/ 1202  CE: 6.9026  
+[02/27 07:03:17] SuperNet Training INFO:   840/ 1202  CE: 6.9054  
+[02/27 07:04:06] SuperNet Training INFO:   960/ 1202  CE: 6.9068  
+[02/27 07:04:55] SuperNet Training INFO:  1080/ 1202  CE: 6.9007  
+[02/27 07:05:44] SuperNet Training INFO:  1200/ 1202  CE: 6.8998  
+[02/27 07:05:50] SuperNet Training INFO: epoch:   5/120  avg CE: 6.9122  lr: 0.04480718942220313  
+[02/27 07:06:41] SuperNet Training INFO:     0/ 1202  CE: 6.9034  
+[02/27 07:07:29] SuperNet Training INFO:   120/ 1202  CE: 6.9034  
+[02/27 07:08:18] SuperNet Training INFO:   240/ 1202  CE: 6.9137  
+[02/27 07:09:08] SuperNet Training INFO:   360/ 1202  CE: 6.9067  
+[02/27 07:09:58] SuperNet Training INFO:   480/ 1202  CE: 6.9054  
+[02/27 07:10:48] SuperNet Training INFO:   600/ 1202  CE: 6.9041  
+[02/27 07:11:36] SuperNet Training INFO:   720/ 1202  CE: 6.9065  
+[02/27 07:12:26] SuperNet Training INFO:   840/ 1202  CE: 6.9118  
+[02/27 07:13:15] SuperNet Training INFO:   960/ 1202  CE: 6.9051  
+[02/27 07:14:05] SuperNet Training INFO:  1080/ 1202  CE: 6.9102  
+[02/27 07:14:54] SuperNet Training INFO:  1200/ 1202  CE: 6.9103  
+[02/27 07:15:00] SuperNet Training INFO: epoch:   6/120  avg CE: 6.9123  lr: 0.04472252750272011  
+[02/27 07:15:49] SuperNet Training INFO:     0/ 1202  CE: 6.9023  
+[02/27 07:16:37] SuperNet Training INFO:   120/ 1202  CE: 6.9032  
+[02/27 07:17:27] SuperNet Training INFO:   240/ 1202  CE: 6.9108  
+[02/27 07:18:16] SuperNet Training INFO:   360/ 1202  CE: 6.9048  
+[02/27 07:19:05] SuperNet Training INFO:   480/ 1202  CE: 6.9060  
+[02/27 07:19:54] SuperNet Training INFO:   600/ 1202  CE: 6.9107  
+[02/27 07:20:44] SuperNet Training INFO:   720/ 1202  CE: 6.9028  
+[02/27 07:21:33] SuperNet Training INFO:   840/ 1202  CE: 6.9062  
+[02/27 07:22:23] SuperNet Training INFO:   960/ 1202  CE: 6.9030  
+[02/27 07:23:12] SuperNet Training INFO:  1080/ 1202  CE: 6.9045  
+[02/27 07:24:00] SuperNet Training INFO:  1200/ 1202  CE: 6.9006  
+[02/27 07:24:06] SuperNet Training INFO: epoch:   7/120  avg CE: 6.9121  lr: 0.044622610022387814  
+[02/27 07:24:57] SuperNet Training INFO:     0/ 1202  CE: 6.9057  
+[02/27 07:25:46] SuperNet Training INFO:   120/ 1202  CE: 6.9046  

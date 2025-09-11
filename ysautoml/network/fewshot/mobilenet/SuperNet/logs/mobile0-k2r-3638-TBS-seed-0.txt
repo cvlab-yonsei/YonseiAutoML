@@ -1,0 +1,1405 @@
+[05/18 05:06:00] SuperNet Training INFO: tag                 : mobile0-k2r-3638-TBS
+[05/18 05:06:00] SuperNet Training INFO: seed                : 0
+[05/18 05:06:00] SuperNet Training INFO: num_K               : 2
+[05/18 05:06:00] SuperNet Training INFO: thresholds          : [36]
+[05/18 05:06:00] SuperNet Training INFO: data_path           : ../../../dataset/ILSVRC2012
+[05/18 05:06:00] SuperNet Training INFO: save_path           : ./SuperNet
+[05/18 05:06:00] SuperNet Training INFO: search_space        : proxyless
+[05/18 05:06:00] SuperNet Training INFO: valid_size          : 50000
+[05/18 05:06:00] SuperNet Training INFO: num_gpus            : 8
+[05/18 05:06:00] SuperNet Training INFO: workers             : 4
+[05/18 05:06:00] SuperNet Training INFO: interval_ep_eval    : 8
+[05/18 05:06:00] SuperNet Training INFO: train_batch_size    : 1024
+[05/18 05:06:00] SuperNet Training INFO: test_batch_size     : 256
+[05/18 05:06:00] SuperNet Training INFO: max_epoch           : 120
+[05/18 05:06:00] SuperNet Training INFO: learning_rate       : 0.12
+[05/18 05:06:00] SuperNet Training INFO: momentum            : 0.9
+[05/18 05:06:00] SuperNet Training INFO: weight_decay        : 4e-05
+[05/18 05:06:00] SuperNet Training INFO: nesterov            : True
+[05/18 05:06:00] SuperNet Training INFO: lr_schedule_type    : cosine
+[05/18 05:06:00] SuperNet Training INFO: label_smooth        : 0.1
+[05/18 05:06:00] SuperNet Training INFO: rank                : 0
+[05/18 05:06:00] SuperNet Training INFO: gpu                 : 0
+[05/18 05:06:00] SuperNet Training INFO: save_name           : mobile0-k2r-3638-TBS-seed-0
+[05/18 05:06:00] SuperNet Training INFO: log_path            : ./SuperNet/logs/mobile0-k2r-3638-TBS-seed-0.txt
+[05/18 05:06:00] SuperNet Training INFO: ckpt_path           : ./SuperNet/checkpoint/mobile0-k2r-3638-TBS-seed-0.pt
+[05/18 05:06:00] SuperNet Training INFO: dist_url            : tcp://127.0.0.1:23456
+[05/18 05:06:00] SuperNet Training INFO: world_size          : 8
+[05/18 05:06:00] SuperNet Training INFO: distributed         : True
+[05/18 05:06:00] SuperNet Training INFO: ['3x3_MBConv3', '3x3_MBConv6', '5x5_MBConv3', '5x5_MBConv6', '7x7_MBConv3', '7x7_MBConv6', 'Identity']
+[05/18 05:06:47] SuperNet Training INFO: [6, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7, 7, 6]
+[05/18 05:07:22] SuperNet Training INFO: Trainset Size: 1231167
+[05/18 05:07:22] SuperNet Training INFO: Validset Size:   50000
+[05/18 05:07:22] SuperNet Training INFO: Compose(
+    RandomResizedCrop(size=(224, 224), scale=(0.08, 1.0), ratio=(0.75, 1.3333), interpolation=bilinear)
+    RandomHorizontalFlip(p=0.5)
+    ToTensor()
+    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+)
+[05/18 05:08:12] SuperNet Training INFO: tag                 : mobile0-k2r-3638-TBS
+[05/18 05:08:12] SuperNet Training INFO: seed                : 0
+[05/18 05:08:12] SuperNet Training INFO: num_K               : 2
+[05/18 05:08:12] SuperNet Training INFO: thresholds          : [36]
+[05/18 05:08:12] SuperNet Training INFO: data_path           : ../../../dataset/ILSVRC2012
+[05/18 05:08:12] SuperNet Training INFO: save_path           : ./SuperNet
+[05/18 05:08:12] SuperNet Training INFO: search_space        : proxyless
+[05/18 05:08:12] SuperNet Training INFO: valid_size          : 50000
+[05/18 05:08:12] SuperNet Training INFO: num_gpus            : 8
+[05/18 05:08:12] SuperNet Training INFO: workers             : 4
+[05/18 05:08:12] SuperNet Training INFO: interval_ep_eval    : 8
+[05/18 05:08:12] SuperNet Training INFO: train_batch_size    : 1024
+[05/18 05:08:12] SuperNet Training INFO: test_batch_size     : 256
+[05/18 05:08:12] SuperNet Training INFO: max_epoch           : 120
+[05/18 05:08:12] SuperNet Training INFO: learning_rate       : 0.12
+[05/18 05:08:12] SuperNet Training INFO: momentum            : 0.9
+[05/18 05:08:12] SuperNet Training INFO: weight_decay        : 4e-05
+[05/18 05:08:12] SuperNet Training INFO: nesterov            : True
+[05/18 05:08:12] SuperNet Training INFO: lr_schedule_type    : cosine
+[05/18 05:08:12] SuperNet Training INFO: warmup              : False
+[05/18 05:08:12] SuperNet Training INFO: label_smooth        : 0.1
+[05/18 05:08:12] SuperNet Training INFO: rank                : 0
+[05/18 05:08:12] SuperNet Training INFO: gpu                 : 0
+[05/18 05:08:12] SuperNet Training INFO: save_name           : mobile0-k2r-3638-TBS-seed-0
+[05/18 05:08:12] SuperNet Training INFO: log_path            : ./SuperNet/logs/mobile0-k2r-3638-TBS-seed-0.txt
+[05/18 05:08:12] SuperNet Training INFO: ckpt_path           : ./SuperNet/checkpoint/mobile0-k2r-3638-TBS-seed-0.pt
+[05/18 05:08:12] SuperNet Training INFO: dist_url            : tcp://127.0.0.1:23456
+[05/18 05:08:12] SuperNet Training INFO: world_size          : 8
+[05/18 05:08:12] SuperNet Training INFO: distributed         : True
+[05/18 05:08:12] SuperNet Training INFO: ['3x3_MBConv3', '3x3_MBConv6', '5x5_MBConv3', '5x5_MBConv6', '7x7_MBConv3', '7x7_MBConv6', 'Identity']
+[05/18 05:08:58] SuperNet Training INFO: [6, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7, 7, 6]
+[05/18 05:09:34] SuperNet Training INFO: Trainset Size: 1231167
+[05/18 05:09:34] SuperNet Training INFO: Validset Size:   50000
+[05/18 05:09:34] SuperNet Training INFO: Compose(
+    RandomResizedCrop(size=(224, 224), scale=(0.08, 1.0), ratio=(0.75, 1.3333), interpolation=bilinear)
+    RandomHorizontalFlip(p=0.5)
+    ToTensor()
+    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+)
+[05/18 05:09:34] SuperNet Training INFO: --> START mobile0-k2r-3638-TBS-seed-0
+[05/18 05:09:34] SuperNet Training INFO: {0: 0, 1: 0}
+[05/18 05:12:28] SuperNet Training INFO: iter:   120/144360  CE: 6.9146  
+[05/18 05:13:34] SuperNet Training INFO: iter:   240/144360  CE: 6.8518  
+[05/18 05:14:40] SuperNet Training INFO: iter:   360/144360  CE: 6.9288  
+[05/18 05:15:46] SuperNet Training INFO: iter:   480/144360  CE: 6.9353  
+[05/18 05:16:52] SuperNet Training INFO: iter:   600/144360  CE: 6.9086  
+[05/18 05:17:58] SuperNet Training INFO: iter:   720/144360  CE: 6.9275  
+[05/18 05:19:04] SuperNet Training INFO: iter:   840/144360  CE: 6.8758  
+[05/18 05:20:09] SuperNet Training INFO: iter:   960/144360  CE: 6.9275  
+[05/18 05:21:14] SuperNet Training INFO: iter:  1080/144360  CE: 6.8537  
+[05/18 05:22:19] SuperNet Training INFO: iter:  1200/144360  CE: 6.9050  
+[05/18 05:22:21] SuperNet Training INFO: --> epoch:   1/120  avg CE: 6.8961  lr: 0.11997943949853311  
+[05/18 05:24:06] SuperNet Training INFO: iter:  1320/144360  CE: 6.8278  
+[05/18 05:25:14] SuperNet Training INFO: iter:  1440/144360  CE: 6.8331  
+[05/18 05:26:22] SuperNet Training INFO: iter:  1560/144360  CE: 6.7767  
+[05/18 05:27:29] SuperNet Training INFO: iter:  1680/144360  CE: 6.7013  
+[05/18 05:28:37] SuperNet Training INFO: iter:  1800/144360  CE: 6.8217  
+[05/18 05:29:44] SuperNet Training INFO: iter:  1920/144360  CE: 6.8783  
+[05/18 05:30:52] SuperNet Training INFO: iter:  2040/144360  CE: 6.7125  
+[05/18 05:32:00] SuperNet Training INFO: iter:  2160/144360  CE: 6.8416  
+[05/18 05:33:08] SuperNet Training INFO: iter:  2280/144360  CE: 6.6668  
+[05/18 05:34:16] SuperNet Training INFO: iter:  2400/144360  CE: 6.6747  
+[05/18 05:34:18] SuperNet Training INFO: --> epoch:   2/120  avg CE: 6.7799  lr: 0.11991777208527424  
+[05/18 05:36:01] SuperNet Training INFO: iter:  2520/144360  CE: 6.7039  
+[05/18 05:37:09] SuperNet Training INFO: iter:  2640/144360  CE: 6.7235  
+[05/18 05:38:16] SuperNet Training INFO: iter:  2760/144360  CE: 6.6671  
+[05/18 05:39:23] SuperNet Training INFO: iter:  2880/144360  CE: 6.7040  
+[05/18 05:40:30] SuperNet Training INFO: iter:  3000/144360  CE: 6.8682  
+[05/18 05:41:38] SuperNet Training INFO: iter:  3120/144360  CE: 6.6885  
+[05/18 05:42:45] SuperNet Training INFO: iter:  3240/144360  CE: 6.6374  
+[05/18 05:43:52] SuperNet Training INFO: iter:  3360/144360  CE: 6.5833  
+[05/18 05:44:59] SuperNet Training INFO: iter:  3480/144360  CE: 6.7122  
+[05/18 05:46:07] SuperNet Training INFO: iter:  3600/144360  CE: 6.5897  
+[05/18 05:46:11] SuperNet Training INFO: --> epoch:   3/120  avg CE: 6.6436  lr: 0.11981504002398749  
+[05/18 05:47:53] SuperNet Training INFO: iter:  3720/144360  CE: 6.4739  
+[05/18 05:49:01] SuperNet Training INFO: iter:  3840/144360  CE: 6.6014  
+[05/18 05:50:10] SuperNet Training INFO: iter:  3960/144360  CE: 6.5728  
+[05/18 05:51:17] SuperNet Training INFO: iter:  4080/144360  CE: 6.4844  
+[05/18 05:52:26] SuperNet Training INFO: iter:  4200/144360  CE: 6.4873  
+[05/18 05:53:33] SuperNet Training INFO: iter:  4320/144360  CE: 6.4052  
+[05/18 05:54:42] SuperNet Training INFO: iter:  4440/144360  CE: 6.5642  
+[05/18 05:55:50] SuperNet Training INFO: iter:  4560/144360  CE: 6.4438  
+[05/18 05:56:58] SuperNet Training INFO: iter:  4680/144360  CE: 6.2915  
+[05/18 05:58:06] SuperNet Training INFO: iter:  4800/144360  CE: 6.4511  
+[05/18 05:58:12] SuperNet Training INFO: --> epoch:   4/120  avg CE: 6.4864  lr: 0.11967131372209595  
+[05/18 05:59:52] SuperNet Training INFO: iter:  4920/144360  CE: 6.4428  
+[05/18 06:00:59] SuperNet Training INFO: iter:  5040/144360  CE: 6.2849  
+[05/18 06:02:07] SuperNet Training INFO: iter:  5160/144360  CE: 6.3553  
+[05/18 06:03:15] SuperNet Training INFO: iter:  5280/144360  CE: 6.2320  
+[05/18 06:04:23] SuperNet Training INFO: iter:  5400/144360  CE: 6.2509  
+[05/18 06:05:32] SuperNet Training INFO: iter:  5520/144360  CE: 6.4440  
+[05/18 06:06:40] SuperNet Training INFO: iter:  5640/144360  CE: 6.1258  
+[05/18 06:07:48] SuperNet Training INFO: iter:  5760/144360  CE: 6.3649  
+[05/18 06:08:56] SuperNet Training INFO: iter:  5880/144360  CE: 6.2915  
+[05/18 06:10:04] SuperNet Training INFO: iter:  6000/144360  CE: 6.2951  
+[05/18 06:10:12] SuperNet Training INFO: --> epoch:   5/120  avg CE: 6.3413  lr: 0.11948669168242801  
+[05/18 06:11:49] SuperNet Training INFO: iter:  6120/144360  CE: 6.2389  
+[05/18 06:12:56] SuperNet Training INFO: iter:  6240/144360  CE: 6.2122  
+[05/18 06:14:03] SuperNet Training INFO: iter:  6360/144360  CE: 6.1813  
+[05/18 06:15:11] SuperNet Training INFO: iter:  6480/144360  CE: 6.1624  
+[05/18 06:16:19] SuperNet Training INFO: iter:  6600/144360  CE: 6.1304  
+[05/18 06:17:27] SuperNet Training INFO: iter:  6720/144360  CE: 6.0142  
+[05/18 06:18:35] SuperNet Training INFO: iter:  6840/144360  CE: 6.3468  
+[05/18 06:19:43] SuperNet Training INFO: iter:  6960/144360  CE: 6.1108  
+[05/18 06:20:52] SuperNet Training INFO: iter:  7080/144360  CE: 6.1566  
+[05/18 06:22:00] SuperNet Training INFO: iter:  7200/144360  CE: 6.1697  
+[05/18 06:22:10] SuperNet Training INFO: --> epoch:   6/120  avg CE: 6.1825  lr: 0.1192613004357081  
+[05/18 06:23:47] SuperNet Training INFO: iter:  7320/144360  CE: 6.2603  
+[05/18 06:24:55] SuperNet Training INFO: iter:  7440/144360  CE: 6.0498  
+[05/18 06:26:03] SuperNet Training INFO: iter:  7560/144360  CE: 5.9961  
+[05/18 06:27:11] SuperNet Training INFO: iter:  7680/144360  CE: 6.0982  
+[05/18 06:28:19] SuperNet Training INFO: iter:  7800/144360  CE: 5.9967  
+[05/18 06:29:26] SuperNet Training INFO: iter:  7920/144360  CE: 6.0443  
+[05/18 06:30:34] SuperNet Training INFO: iter:  8040/144360  CE: 6.0063  
+[05/18 06:31:42] SuperNet Training INFO: iter:  8160/144360  CE: 6.0332  
+[05/18 06:32:50] SuperNet Training INFO: iter:  8280/144360  CE: 6.1688  
+[05/18 06:33:58] SuperNet Training INFO: iter:  8400/144360  CE: 5.9518  
+[05/18 06:34:09] SuperNet Training INFO: --> epoch:   7/120  avg CE: 6.0281  lr: 0.11899529445383715  
+[05/18 06:35:45] SuperNet Training INFO: iter:  8520/144360  CE: 5.9833  
+[05/18 06:36:53] SuperNet Training INFO: iter:  8640/144360  CE: 5.9728  
+[05/18 06:38:00] SuperNet Training INFO: iter:  8760/144360  CE: 5.8052  
+[05/18 06:39:08] SuperNet Training INFO: iter:  8880/144360  CE: 6.1174  
+[05/18 06:40:17] SuperNet Training INFO: iter:  9000/144360  CE: 5.8578  
+[05/18 06:41:24] SuperNet Training INFO: iter:  9120/144360  CE: 5.6469  
+[05/18 06:42:36] SuperNet Training INFO: iter:  9240/144360  CE: 5.7790  
+[05/18 06:43:48] SuperNet Training INFO: iter:  9360/144360  CE: 5.9570  
+[05/18 06:45:00] SuperNet Training INFO: iter:  9480/144360  CE: 5.9632  
+[05/18 06:46:12] SuperNet Training INFO: iter:  9600/144360  CE: 5.9592  
+[05/18 06:46:25] SuperNet Training INFO: --> epoch:   8/120  avg CE: 5.9089  lr: 0.11868885604402826  
+[05/18 06:48:02] SuperNet Training INFO: iter:  9720/144360  CE: 5.8475  
+[05/18 06:49:14] SuperNet Training INFO: iter:  9840/144360  CE: 5.8074  
+[05/18 06:50:25] SuperNet Training INFO: iter:  9960/144360  CE: 5.8172  
+[05/18 06:51:37] SuperNet Training INFO: iter: 10080/144360  CE: 5.7777  
+[05/18 06:52:48] SuperNet Training INFO: iter: 10200/144360  CE: 5.7944  
+[05/18 06:54:00] SuperNet Training INFO: iter: 10320/144360  CE: 5.8640  
+[05/18 06:55:10] SuperNet Training INFO: iter: 10440/144360  CE: 5.9057  
+[05/18 06:56:23] SuperNet Training INFO: iter: 10560/144360  CE: 5.7341  
+[05/18 06:57:35] SuperNet Training INFO: iter: 10680/144360  CE: 5.9537  
+[05/18 06:58:47] SuperNet Training INFO: iter: 10800/144360  CE: 5.5703  
+[05/18 06:59:01] SuperNet Training INFO: --> epoch:   9/120  avg CE: 5.8106  lr: 0.11834219522386061  
+[05/18 07:00:36] SuperNet Training INFO: iter: 10920/144360  CE: 5.7103  
+[05/18 07:01:48] SuperNet Training INFO: iter: 11040/144360  CE: 5.4779  
+[05/18 07:02:59] SuperNet Training INFO: iter: 11160/144360  CE: 5.6130  
+[05/18 07:04:11] SuperNet Training INFO: iter: 11280/144360  CE: 5.8853  
+[05/18 07:05:23] SuperNet Training INFO: iter: 11400/144360  CE: 5.5393  
+[05/18 07:06:35] SuperNet Training INFO: iter: 11520/144360  CE: 5.7631  
+[05/18 07:07:47] SuperNet Training INFO: iter: 11640/144360  CE: 5.8245  
+[05/18 07:08:59] SuperNet Training INFO: iter: 11760/144360  CE: 5.5231  
+[05/18 07:10:10] SuperNet Training INFO: iter: 11880/144360  CE: 5.6977  
+[05/18 07:11:21] SuperNet Training INFO: iter: 12000/144360  CE: 5.6720  
+[05/18 07:11:38] SuperNet Training INFO: --> epoch:  10/120  avg CE: 5.7155  lr: 0.1179555495773443  
+[05/18 07:13:10] SuperNet Training INFO: iter: 12120/144360  CE: 5.8226  
+[05/18 07:14:22] SuperNet Training INFO: iter: 12240/144360  CE: 5.6274  
+[05/18 07:15:34] SuperNet Training INFO: iter: 12360/144360  CE: 5.5737  
+[05/18 07:16:46] SuperNet Training INFO: iter: 12480/144360  CE: 5.8777  
+[05/18 07:17:57] SuperNet Training INFO: iter: 12600/144360  CE: 5.5683  
+[05/18 07:19:09] SuperNet Training INFO: iter: 12720/144360  CE: 5.8358  
+[05/18 07:20:21] SuperNet Training INFO: iter: 12840/144360  CE: 5.5207  
+[05/18 07:21:33] SuperNet Training INFO: iter: 12960/144360  CE: 5.4104  
+[05/18 07:22:45] SuperNet Training INFO: iter: 13080/144360  CE: 5.5557  
+[05/18 07:23:57] SuperNet Training INFO: iter: 13200/144360  CE: 5.5973  
+[05/18 07:24:16] SuperNet Training INFO: --> epoch:  11/120  avg CE: 5.6284  lr: 0.11752918409209158  
+[05/18 07:25:47] SuperNet Training INFO: iter: 13320/144360  CE: 5.4519  
+[05/18 07:26:58] SuperNet Training INFO: iter: 13440/144360  CE: 5.2907  
+[05/18 07:28:10] SuperNet Training INFO: iter: 13560/144360  CE: 5.7233  
+[05/18 07:29:22] SuperNet Training INFO: iter: 13680/144360  CE: 5.5813  
+[05/18 07:30:33] SuperNet Training INFO: iter: 13800/144360  CE: 5.4316  
+[05/18 07:31:45] SuperNet Training INFO: iter: 13920/144360  CE: 5.5777  
+[05/18 07:32:57] SuperNet Training INFO: iter: 14040/144360  CE: 5.4975  
+[05/18 07:34:09] SuperNet Training INFO: iter: 14160/144360  CE: 5.4757  
+[05/18 07:35:20] SuperNet Training INFO: iter: 14280/144360  CE: 5.3268  
+[05/18 07:36:32] SuperNet Training INFO: iter: 14400/144360  CE: 5.6399  
+[05/18 07:36:52] SuperNet Training INFO: --> epoch:  12/120  avg CE: 5.5412  lr: 0.11706339097770935  
+[05/18 07:38:21] SuperNet Training INFO: iter: 14520/144360  CE: 5.2555  
+[05/18 07:39:33] SuperNet Training INFO: iter: 14640/144360  CE: 5.4208  
+[05/18 07:40:45] SuperNet Training INFO: iter: 14760/144360  CE: 5.5409  
+[05/18 07:41:57] SuperNet Training INFO: iter: 14880/144360  CE: 5.6559  
+[05/18 07:43:08] SuperNet Training INFO: iter: 15000/144360  CE: 5.5656  
+[05/18 07:44:20] SuperNet Training INFO: iter: 15120/144360  CE: 5.3965  
+[05/18 07:45:32] SuperNet Training INFO: iter: 15240/144360  CE: 5.4849  
+[05/18 07:46:43] SuperNet Training INFO: iter: 15360/144360  CE: 5.5091  
+[05/18 07:47:55] SuperNet Training INFO: iter: 15480/144360  CE: 5.3872  
+[05/18 07:49:06] SuperNet Training INFO: iter: 15600/144360  CE: 5.2648  
+[05/18 07:49:28] SuperNet Training INFO: --> epoch:  13/120  avg CE: 5.4458  lr: 0.11655848946553125  
+[05/18 07:50:54] SuperNet Training INFO: iter: 15720/144360  CE: 5.5691  
+[05/18 07:52:06] SuperNet Training INFO: iter: 15840/144360  CE: 5.2005  
+[05/18 07:53:18] SuperNet Training INFO: iter: 15960/144360  CE: 5.2681  
+[05/18 07:54:30] SuperNet Training INFO: iter: 16080/144360  CE: 5.4242  
+[05/18 07:55:43] SuperNet Training INFO: iter: 16200/144360  CE: 5.3754  
+[05/18 07:56:55] SuperNet Training INFO: iter: 16320/144360  CE: 5.2792  
+[05/18 07:58:06] SuperNet Training INFO: iter: 16440/144360  CE: 5.2706  
+[05/18 07:59:18] SuperNet Training INFO: iter: 16560/144360  CE: 5.2830  
+[05/18 08:00:30] SuperNet Training INFO: iter: 16680/144360  CE: 5.3580  
+[05/18 08:01:42] SuperNet Training INFO: iter: 16800/144360  CE: 5.3415  
+[05/18 08:02:06] SuperNet Training INFO: --> epoch:  14/120  avg CE: 5.3595  lr: 0.11601482558983225  
+[05/18 08:03:33] SuperNet Training INFO: iter: 16920/144360  CE: 5.3184  
+[05/18 08:04:45] SuperNet Training INFO: iter: 17040/144360  CE: 5.4836  
+[05/18 08:05:57] SuperNet Training INFO: iter: 17160/144360  CE: 5.0802  
+[05/18 08:07:08] SuperNet Training INFO: iter: 17280/144360  CE: 5.0920  
+[05/18 08:08:20] SuperNet Training INFO: iter: 17400/144360  CE: 5.4197  
+[05/18 08:09:33] SuperNet Training INFO: iter: 17520/144360  CE: 5.1658  
+[05/18 08:10:44] SuperNet Training INFO: iter: 17640/144360  CE: 5.3414  
+[05/18 08:11:55] SuperNet Training INFO: iter: 17760/144360  CE: 5.1234  
+[05/18 08:13:07] SuperNet Training INFO: iter: 17880/144360  CE: 5.1546  
+[05/18 08:14:18] SuperNet Training INFO: iter: 18000/144360  CE: 5.1822  
+[05/18 08:14:44] SuperNet Training INFO: --> epoch:  15/120  avg CE: 5.2803  lr: 0.11543277195067722  
+[05/18 08:16:07] SuperNet Training INFO: iter: 18120/144360  CE: 5.0494  
+[05/18 08:17:18] SuperNet Training INFO: iter: 18240/144360  CE: 5.3371  
+[05/18 08:18:30] SuperNet Training INFO: iter: 18360/144360  CE: 5.1783  
+[05/18 08:19:43] SuperNet Training INFO: iter: 18480/144360  CE: 5.3052  
+[05/18 08:20:54] SuperNet Training INFO: iter: 18600/144360  CE: 5.3128  
+[05/18 08:22:06] SuperNet Training INFO: iter: 18720/144360  CE: 4.8632  
+[05/18 08:23:18] SuperNet Training INFO: iter: 18840/144360  CE: 5.4303  
+[05/18 08:24:29] SuperNet Training INFO: iter: 18960/144360  CE: 5.1072  
+[05/18 08:25:41] SuperNet Training INFO: iter: 19080/144360  CE: 5.3195  
+[05/18 08:26:52] SuperNet Training INFO: iter: 19200/144360  CE: 5.0405  
+[05/18 08:27:19] SuperNet Training INFO: --> epoch:  16/120  avg CE: 5.2037  lr: 0.1148127274585561  
+[05/18 08:28:41] SuperNet Training INFO: iter: 19320/144360  CE: 5.1348  
+[05/18 08:29:53] SuperNet Training INFO: iter: 19440/144360  CE: 5.1573  
+[05/18 08:31:05] SuperNet Training INFO: iter: 19560/144360  CE: 5.3235  
+[05/18 08:32:17] SuperNet Training INFO: iter: 19680/144360  CE: 5.1264  
+[05/18 08:33:28] SuperNet Training INFO: iter: 19800/144360  CE: 4.7925  
+[05/18 08:34:40] SuperNet Training INFO: iter: 19920/144360  CE: 5.1610  
+[05/18 08:35:53] SuperNet Training INFO: iter: 20040/144360  CE: 5.2726  
+[05/18 08:37:05] SuperNet Training INFO: iter: 20160/144360  CE: 5.2209  
+[05/18 08:38:17] SuperNet Training INFO: iter: 20280/144360  CE: 5.0864  
+[05/18 08:39:29] SuperNet Training INFO: iter: 20400/144360  CE: 5.0533  
+[05/18 08:39:58] SuperNet Training INFO: --> epoch:  17/120  avg CE: 5.1271  lr: 0.11415511706099139  
+[05/18 08:41:17] SuperNet Training INFO: iter: 20520/144360  CE: 5.3274  
+[05/18 08:42:29] SuperNet Training INFO: iter: 20640/144360  CE: 5.1242  
+[05/18 08:43:41] SuperNet Training INFO: iter: 20760/144360  CE: 5.0058  
+[05/18 08:44:53] SuperNet Training INFO: iter: 20880/144360  CE: 5.4653  
+[05/18 08:46:05] SuperNet Training INFO: iter: 21000/144360  CE: 4.9873  
+[05/18 08:47:17] SuperNet Training INFO: iter: 21120/144360  CE: 5.3871  
+[05/18 08:48:29] SuperNet Training INFO: iter: 21240/144360  CE: 5.0466  
+[05/18 08:49:41] SuperNet Training INFO: iter: 21360/144360  CE: 5.1287  
+[05/18 08:50:53] SuperNet Training INFO: iter: 21480/144360  CE: 5.0532  
+[05/18 08:52:05] SuperNet Training INFO: iter: 21600/144360  CE: 5.1571  
+[05/18 08:52:36] SuperNet Training INFO: --> epoch:  18/120  avg CE: 5.0530  lr: 0.11346039145130195  
+[05/18 08:53:55] SuperNet Training INFO: iter: 21720/144360  CE: 4.7413  
+[05/18 08:55:08] SuperNet Training INFO: iter: 21840/144360  CE: 4.9922  
+[05/18 08:56:20] SuperNet Training INFO: iter: 21960/144360  CE: 5.0082  
+[05/18 08:57:32] SuperNet Training INFO: iter: 22080/144360  CE: 4.9460  
+[05/18 08:58:44] SuperNet Training INFO: iter: 22200/144360  CE: 4.9593  
+[05/18 08:59:56] SuperNet Training INFO: iter: 22320/144360  CE: 5.0180  
+[05/18 09:01:08] SuperNet Training INFO: iter: 22440/144360  CE: 5.2570  
+[05/18 09:02:19] SuperNet Training INFO: iter: 22560/144360  CE: 5.0234  
+[05/18 09:03:31] SuperNet Training INFO: iter: 22680/144360  CE: 4.8337  
+[05/18 09:04:43] SuperNet Training INFO: iter: 22800/144360  CE: 5.0416  
+[05/18 09:05:16] SuperNet Training INFO: --> epoch:  19/120  avg CE: 4.9934  lr: 0.11272902675971772  
+[05/18 09:06:32] SuperNet Training INFO: iter: 22920/144360  CE: 4.8815  
+[05/18 09:07:44] SuperNet Training INFO: iter: 23040/144360  CE: 4.7628  
+[05/18 09:08:56] SuperNet Training INFO: iter: 23160/144360  CE: 4.9301  
+[05/18 09:10:08] SuperNet Training INFO: iter: 23280/144360  CE: 5.0684  
+[05/18 09:11:19] SuperNet Training INFO: iter: 23400/144360  CE: 5.1647  
+[05/18 09:12:31] SuperNet Training INFO: iter: 23520/144360  CE: 5.0368  
+[05/18 09:13:43] SuperNet Training INFO: iter: 23640/144360  CE: 5.1898  
+[05/18 09:14:54] SuperNet Training INFO: iter: 23760/144360  CE: 4.8055  
+[05/18 09:16:06] SuperNet Training INFO: iter: 23880/144360  CE: 5.2290  
+[05/18 09:17:18] SuperNet Training INFO: iter: 24000/144360  CE: 5.0487  
+[05/18 09:17:54] SuperNet Training INFO: --> epoch:  20/120  avg CE: 4.9446  lr: 0.11196152422706572  
+[05/18 09:19:07] SuperNet Training INFO: iter: 24120/144360  CE: 4.8954  
+[05/18 09:20:18] SuperNet Training INFO: iter: 24240/144360  CE: 5.2805  
+[05/18 09:21:30] SuperNet Training INFO: iter: 24360/144360  CE: 5.0449  
+[05/18 09:22:42] SuperNet Training INFO: iter: 24480/144360  CE: 4.6203  
+[05/18 09:23:55] SuperNet Training INFO: iter: 24600/144360  CE: 4.9882  
+[05/18 09:25:07] SuperNet Training INFO: iter: 24720/144360  CE: 4.5954  
+[05/18 09:26:18] SuperNet Training INFO: iter: 24840/144360  CE: 4.9316  
+[05/18 09:27:30] SuperNet Training INFO: iter: 24960/144360  CE: 4.8693  
+[05/18 09:28:41] SuperNet Training INFO: iter: 25080/144360  CE: 4.7936  
+[05/18 09:29:53] SuperNet Training INFO: iter: 25200/144360  CE: 4.8219  
+[05/18 09:30:29] SuperNet Training INFO: --> epoch:  21/120  avg CE: 4.8814  lr: 0.11115840986124514  
+[05/18 09:31:41] SuperNet Training INFO: iter: 25320/144360  CE: 4.7827  
+[05/18 09:32:53] SuperNet Training INFO: iter: 25440/144360  CE: 5.0806  
+[05/18 09:34:05] SuperNet Training INFO: iter: 25560/144360  CE: 5.0450  
+[05/18 09:35:16] SuperNet Training INFO: iter: 25680/144360  CE: 4.7038  
+[05/18 09:36:28] SuperNet Training INFO: iter: 25800/144360  CE: 4.8675  
+[05/18 09:37:40] SuperNet Training INFO: iter: 25920/144360  CE: 4.9789  
+[05/18 09:38:52] SuperNet Training INFO: iter: 26040/144360  CE: 4.9123  
+[05/18 09:40:03] SuperNet Training INFO: iter: 26160/144360  CE: 4.9711  
+[05/18 09:41:14] SuperNet Training INFO: iter: 26280/144360  CE: 4.9396  
+[05/18 09:42:26] SuperNet Training INFO: iter: 26400/144360  CE: 4.5893  
+[05/18 09:43:06] SuperNet Training INFO: --> epoch:  22/120  avg CE: 4.8393  lr: 0.11032023407672516  
+[05/18 09:44:18] SuperNet Training INFO: iter: 26520/144360  CE: 4.6969  
+[05/18 09:45:30] SuperNet Training INFO: iter: 26640/144360  CE: 4.7834  
+[05/18 09:46:41] SuperNet Training INFO: iter: 26760/144360  CE: 4.5814  
+[05/18 09:47:53] SuperNet Training INFO: iter: 26880/144360  CE: 4.7618  
+[05/18 09:49:05] SuperNet Training INFO: iter: 27000/144360  CE: 4.5176  
+[05/18 09:50:16] SuperNet Training INFO: iter: 27120/144360  CE: 4.7463  
+[05/18 09:51:28] SuperNet Training INFO: iter: 27240/144360  CE: 4.6892  
+[05/18 09:52:40] SuperNet Training INFO: iter: 27360/144360  CE: 4.7497  
+[05/18 09:53:52] SuperNet Training INFO: iter: 27480/144360  CE: 4.8730  
+[05/18 09:55:04] SuperNet Training INFO: iter: 27600/144360  CE: 4.8311  
+[05/18 09:55:44] SuperNet Training INFO: --> epoch:  23/120  avg CE: 4.7826  lr: 0.10944757131732062  
+[05/18 09:56:53] SuperNet Training INFO: iter: 27720/144360  CE: 5.1049  
+[05/18 09:58:05] SuperNet Training INFO: iter: 27840/144360  CE: 4.9228  
+[05/18 09:59:16] SuperNet Training INFO: iter: 27960/144360  CE: 5.0291  
+[05/18 10:00:29] SuperNet Training INFO: iter: 28080/144360  CE: 4.5669  
+[05/18 10:01:41] SuperNet Training INFO: iter: 28200/144360  CE: 4.7139  
+[05/18 10:02:53] SuperNet Training INFO: iter: 28320/144360  CE: 4.5632  
+[05/18 10:04:05] SuperNet Training INFO: iter: 28440/144360  CE: 4.7205  
+[05/18 10:05:18] SuperNet Training INFO: iter: 28560/144360  CE: 4.8484  
+[05/18 10:06:30] SuperNet Training INFO: iter: 28680/144360  CE: 4.6855  
+[05/18 10:07:42] SuperNet Training INFO: iter: 28800/144360  CE: 4.7023  
+[05/18 10:08:23] SuperNet Training INFO: --> epoch:  24/120  avg CE: 4.7393  lr: 0.10854101966249682  
+[05/18 10:09:31] SuperNet Training INFO: iter: 28920/144360  CE: 4.7946  
+[05/18 10:10:43] SuperNet Training INFO: iter: 29040/144360  CE: 4.5408  
+[05/18 10:11:56] SuperNet Training INFO: iter: 29160/144360  CE: 4.7898  
+[05/18 10:13:08] SuperNet Training INFO: iter: 29280/144360  CE: 4.7980  
+[05/18 10:14:20] SuperNet Training INFO: iter: 29400/144360  CE: 4.5859  
+[05/18 10:15:32] SuperNet Training INFO: iter: 29520/144360  CE: 4.5639  
+[05/18 10:16:44] SuperNet Training INFO: iter: 29640/144360  CE: 4.6354  
+[05/18 10:17:56] SuperNet Training INFO: iter: 29760/144360  CE: 4.8580  
+[05/18 10:19:08] SuperNet Training INFO: iter: 29880/144360  CE: 4.6389  
+[05/18 10:20:20] SuperNet Training INFO: iter: 30000/144360  CE: 4.6306  
+[05/18 10:21:04] SuperNet Training INFO: --> epoch:  25/120  avg CE: 4.7047  lr: 0.10760120041747454  
+[05/18 10:22:10] SuperNet Training INFO: iter: 30120/144360  CE: 4.6283  
+[05/18 10:23:22] SuperNet Training INFO: iter: 30240/144360  CE: 4.5611  
+[05/18 10:24:34] SuperNet Training INFO: iter: 30360/144360  CE: 4.6899  
+[05/18 10:25:46] SuperNet Training INFO: iter: 30480/144360  CE: 4.6143  
+[05/18 10:26:58] SuperNet Training INFO: iter: 30600/144360  CE: 4.5868  
+[05/18 10:28:09] SuperNet Training INFO: iter: 30720/144360  CE: 4.4798  
+[05/18 10:29:21] SuperNet Training INFO: iter: 30840/144360  CE: 4.6600  
+[05/18 10:30:33] SuperNet Training INFO: iter: 30960/144360  CE: 4.9359  
+[05/18 10:31:46] SuperNet Training INFO: iter: 31080/144360  CE: 4.5526  
+[05/18 10:32:58] SuperNet Training INFO: iter: 31200/144360  CE: 4.7120  
+[05/18 10:33:44] SuperNet Training INFO: --> epoch:  26/120  avg CE: 4.6513  lr: 0.10662875768741867  
+[05/18 10:34:48] SuperNet Training INFO: iter: 31320/144360  CE: 4.5022  
+[05/18 10:36:01] SuperNet Training INFO: iter: 31440/144360  CE: 4.7682  
+[05/18 10:37:12] SuperNet Training INFO: iter: 31560/144360  CE: 4.6131  
+[05/18 10:38:25] SuperNet Training INFO: iter: 31680/144360  CE: 4.5921  
+[05/18 10:39:37] SuperNet Training INFO: iter: 31800/144360  CE: 4.6043  
+[05/18 10:40:49] SuperNet Training INFO: iter: 31920/144360  CE: 4.8632  
+[05/18 10:42:01] SuperNet Training INFO: iter: 32040/144360  CE: 4.5643  
+[05/18 10:43:13] SuperNet Training INFO: iter: 32160/144360  CE: 4.5129  
+[05/18 10:44:26] SuperNet Training INFO: iter: 32280/144360  CE: 4.5959  
+[05/18 10:45:37] SuperNet Training INFO: iter: 32400/144360  CE: 4.5713  
+[05/18 10:46:25] SuperNet Training INFO: --> epoch:  27/120  avg CE: 4.6101  lr: 0.10562435793600224  
+[05/18 10:47:27] SuperNet Training INFO: iter: 32520/144360  CE: 4.5214  
+[05/18 10:48:39] SuperNet Training INFO: iter: 32640/144360  CE: 4.7954  
+[05/18 10:49:50] SuperNet Training INFO: iter: 32760/144360  CE: 4.4918  
+[05/18 10:51:01] SuperNet Training INFO: iter: 32880/144360  CE: 4.5713  
+[05/18 10:52:14] SuperNet Training INFO: iter: 33000/144360  CE: 4.4747  
+[05/18 10:53:25] SuperNet Training INFO: iter: 33120/144360  CE: 4.6547  
+[05/18 10:54:37] SuperNet Training INFO: iter: 33240/144360  CE: 4.8703  
+[05/18 10:55:49] SuperNet Training INFO: iter: 33360/144360  CE: 4.6325  
+[05/18 10:57:01] SuperNet Training INFO: iter: 33480/144360  CE: 4.5053  
+[05/18 10:58:12] SuperNet Training INFO: iter: 33600/144360  CE: 4.1311  
+[05/18 10:59:02] SuperNet Training INFO: --> epoch:  28/120  avg CE: 4.5644  lr: 0.10458868952864393  
+[05/18 11:00:03] SuperNet Training INFO: iter: 33720/144360  CE: 4.3712  
+[05/18 11:01:15] SuperNet Training INFO: iter: 33840/144360  CE: 4.5395  
+[05/18 11:02:27] SuperNet Training INFO: iter: 33960/144360  CE: 4.5453  
+[05/18 11:03:39] SuperNet Training INFO: iter: 34080/144360  CE: 4.5193  
+[05/18 11:04:51] SuperNet Training INFO: iter: 34200/144360  CE: 4.6635  
+[05/18 11:06:03] SuperNet Training INFO: iter: 34320/144360  CE: 4.5872  
+[05/18 11:07:15] SuperNet Training INFO: iter: 34440/144360  CE: 4.5538  
+[05/18 11:08:26] SuperNet Training INFO: iter: 34560/144360  CE: 4.4061  
+[05/18 11:09:37] SuperNet Training INFO: iter: 34680/144360  CE: 4.8065  
+[05/18 11:10:48] SuperNet Training INFO: iter: 34800/144360  CE: 4.3997  
+[05/18 11:11:39] SuperNet Training INFO: --> epoch:  29/120  avg CE: 4.5151  lr: 0.10352246226073762  
+[05/18 11:12:37] SuperNet Training INFO: iter: 34920/144360  CE: 4.4626  
+[05/18 11:13:50] SuperNet Training INFO: iter: 35040/144360  CE: 4.2148  
+[05/18 11:15:02] SuperNet Training INFO: iter: 35160/144360  CE: 4.8326  
+[05/18 11:16:13] SuperNet Training INFO: iter: 35280/144360  CE: 4.4624  
+[05/18 11:17:24] SuperNet Training INFO: iter: 35400/144360  CE: 4.6650  
+[05/18 11:18:36] SuperNet Training INFO: iter: 35520/144360  CE: 4.6200  
+[05/18 11:19:48] SuperNet Training INFO: iter: 35640/144360  CE: 4.5623  
+[05/18 11:21:00] SuperNet Training INFO: iter: 35760/144360  CE: 4.4028  
+[05/18 11:22:12] SuperNet Training INFO: iter: 35880/144360  CE: 4.6224  
+[05/18 11:23:24] SuperNet Training INFO: iter: 36000/144360  CE: 4.5136  
+[05/18 11:24:18] SuperNet Training INFO: --> epoch:  30/120  avg CE: 4.4843  lr: 0.10242640687119343  
+[05/18 11:25:14] SuperNet Training INFO: iter: 36120/144360  CE: 4.5250  
+[05/18 11:26:25] SuperNet Training INFO: iter: 36240/144360  CE: 4.5982  
+[05/18 11:27:36] SuperNet Training INFO: iter: 36360/144360  CE: 4.3597  
+[05/18 11:28:48] SuperNet Training INFO: iter: 36480/144360  CE: 4.9607  
+[05/18 11:30:00] SuperNet Training INFO: iter: 36600/144360  CE: 4.3890  
+[05/18 11:31:11] SuperNet Training INFO: iter: 36720/144360  CE: 4.3879  
+[05/18 11:32:24] SuperNet Training INFO: iter: 36840/144360  CE: 4.3893  
+[05/18 11:33:36] SuperNet Training INFO: iter: 36960/144360  CE: 4.7109  
+[05/18 11:34:49] SuperNet Training INFO: iter: 37080/144360  CE: 4.6018  
+[05/18 11:36:00] SuperNet Training INFO: iter: 37200/144360  CE: 4.2970  
+[05/18 11:36:55] SuperNet Training INFO: --> epoch:  31/120  avg CE: 4.4484  lr: 0.10130127454162571  
+[05/18 11:37:50] SuperNet Training INFO: iter: 37320/144360  CE: 4.5127  
+[05/18 11:39:03] SuperNet Training INFO: iter: 37440/144360  CE: 4.3688  
+[05/18 11:40:14] SuperNet Training INFO: iter: 37560/144360  CE: 4.3846  
+[05/18 11:41:26] SuperNet Training INFO: iter: 37680/144360  CE: 4.4628  
+[05/18 11:42:38] SuperNet Training INFO: iter: 37800/144360  CE: 4.1494  
+[05/18 11:43:50] SuperNet Training INFO: iter: 37920/144360  CE: 4.3071  
+[05/18 11:45:02] SuperNet Training INFO: iter: 38040/144360  CE: 4.5641  
+[05/18 11:46:14] SuperNet Training INFO: iter: 38160/144360  CE: 4.2560  
+[05/18 11:47:26] SuperNet Training INFO: iter: 38280/144360  CE: 4.5216  
+[05/18 11:48:37] SuperNet Training INFO: iter: 38400/144360  CE: 4.0861  
+[05/18 11:49:34] SuperNet Training INFO: --> epoch:  32/120  avg CE: 4.4191  lr: 0.10014783638153192  
+[05/18 11:50:28] SuperNet Training INFO: iter: 38520/144360  CE: 4.1729  
+[05/18 11:51:39] SuperNet Training INFO: iter: 38640/144360  CE: 4.6526  
+[05/18 11:52:51] SuperNet Training INFO: iter: 38760/144360  CE: 4.1572  
+[05/18 11:54:02] SuperNet Training INFO: iter: 38880/144360  CE: 4.4107  
+[05/18 11:55:14] SuperNet Training INFO: iter: 39000/144360  CE: 4.4624  
+[05/18 11:56:25] SuperNet Training INFO: iter: 39120/144360  CE: 4.1156  
+[05/18 11:57:37] SuperNet Training INFO: iter: 39240/144360  CE: 4.2548  
+[05/18 11:58:47] SuperNet Training INFO: iter: 39360/144360  CE: 4.6705  
+[05/18 11:59:59] SuperNet Training INFO: iter: 39480/144360  CE: 4.3287  
+[05/18 12:01:11] SuperNet Training INFO: iter: 39600/144360  CE: 4.4582  
+[05/18 12:02:09] SuperNet Training INFO: --> epoch:  33/120  avg CE: 4.3816  lr: 0.09896688289981138  
+[05/18 12:03:00] SuperNet Training INFO: iter: 39720/144360  CE: 4.1547  
+[05/18 12:04:13] SuperNet Training INFO: iter: 39840/144360  CE: 4.3975  
+[05/18 12:05:25] SuperNet Training INFO: iter: 39960/144360  CE: 4.3246  
+[05/18 12:06:38] SuperNet Training INFO: iter: 40080/144360  CE: 3.9417  
+[05/18 12:07:50] SuperNet Training INFO: iter: 40200/144360  CE: 4.6175  
+[05/18 12:09:01] SuperNet Training INFO: iter: 40320/144360  CE: 4.2761  
+[05/18 12:10:14] SuperNet Training INFO: iter: 40440/144360  CE: 4.3712  
+[05/18 12:11:25] SuperNet Training INFO: iter: 40560/144360  CE: 4.0684  
+[05/18 12:12:38] SuperNet Training INFO: iter: 40680/144360  CE: 4.3446  
+[05/18 12:13:50] SuperNet Training INFO: iter: 40800/144360  CE: 4.5795  
+[05/18 12:14:50] SuperNet Training INFO: --> epoch:  34/120  avg CE: 4.3460  lr: 0.09775922346299062  
+[05/18 12:15:39] SuperNet Training INFO: iter: 40920/144360  CE: 4.4629  
+[05/18 12:16:52] SuperNet Training INFO: iter: 41040/144360  CE: 4.2091  
+[05/18 12:18:05] SuperNet Training INFO: iter: 41160/144360  CE: 4.1463  
+[05/18 12:19:18] SuperNet Training INFO: iter: 41280/144360  CE: 4.0796  
+[05/18 12:20:31] SuperNet Training INFO: iter: 41400/144360  CE: 4.5068  
+[05/18 12:21:43] SuperNet Training INFO: iter: 41520/144360  CE: 4.4578  
+[05/18 12:22:56] SuperNet Training INFO: iter: 41640/144360  CE: 4.2019  
+[05/18 12:24:09] SuperNet Training INFO: iter: 41760/144360  CE: 4.4443  
+[05/18 12:25:22] SuperNet Training INFO: iter: 41880/144360  CE: 4.6050  
+[05/18 12:26:36] SuperNet Training INFO: iter: 42000/144360  CE: 4.4654  
+[05/18 12:27:39] SuperNet Training INFO: --> epoch:  35/120  avg CE: 4.3175  lr: 0.09652568574052359  
+[05/18 12:28:25] SuperNet Training INFO: iter: 42120/144360  CE: 4.5199  
+[05/18 12:29:38] SuperNet Training INFO: iter: 42240/144360  CE: 4.5242  
+[05/18 12:30:50] SuperNet Training INFO: iter: 42360/144360  CE: 4.5422  
+[05/18 12:32:04] SuperNet Training INFO: iter: 42480/144360  CE: 4.7609  
+[05/18 12:33:16] SuperNet Training INFO: iter: 42600/144360  CE: 4.1965  
+[05/18 12:34:28] SuperNet Training INFO: iter: 42720/144360  CE: 4.2521  
+[05/18 12:35:41] SuperNet Training INFO: iter: 42840/144360  CE: 4.1955  
+[05/18 12:36:53] SuperNet Training INFO: iter: 42960/144360  CE: 4.1999  
+[05/18 12:38:06] SuperNet Training INFO: iter: 43080/144360  CE: 4.2627  
+[05/18 12:39:18] SuperNet Training INFO: iter: 43200/144360  CE: 4.3022  
+[05/18 12:40:23] SuperNet Training INFO: --> epoch:  36/120  avg CE: 4.2991  lr: 0.09526711513754865  
+[05/18 12:41:07] SuperNet Training INFO: iter: 43320/144360  CE: 4.3172  
+[05/18 12:42:21] SuperNet Training INFO: iter: 43440/144360  CE: 4.4322  
+[05/18 12:43:34] SuperNet Training INFO: iter: 43560/144360  CE: 4.5971  
+[05/18 12:44:48] SuperNet Training INFO: iter: 43680/144360  CE: 4.7674  
+[05/18 12:46:02] SuperNet Training INFO: iter: 43800/144360  CE: 4.1893  
+[05/18 12:47:15] SuperNet Training INFO: iter: 43920/144360  CE: 4.4770  
+[05/18 12:48:29] SuperNet Training INFO: iter: 44040/144360  CE: 4.2395  
+[05/18 12:49:42] SuperNet Training INFO: iter: 44160/144360  CE: 4.1582  
+[05/18 12:50:56] SuperNet Training INFO: iter: 44280/144360  CE: 4.3332  
+[05/18 12:52:09] SuperNet Training INFO: iter: 44400/144360  CE: 4.2368  
+[05/18 12:53:15] SuperNet Training INFO: --> epoch:  37/120  avg CE: 4.2672  lr: 0.0939843742154901  
+[05/18 12:53:57] SuperNet Training INFO: iter: 44520/144360  CE: 4.4465  
+[05/18 12:55:10] SuperNet Training INFO: iter: 44640/144360  CE: 3.9957  
+[05/18 12:56:23] SuperNet Training INFO: iter: 44760/144360  CE: 4.1391  
+[05/18 12:57:35] SuperNet Training INFO: iter: 44880/144360  CE: 4.1844  
+[05/18 12:58:48] SuperNet Training INFO: iter: 45000/144360  CE: 4.2108  
+[05/18 13:00:01] SuperNet Training INFO: iter: 45120/144360  CE: 4.3846  
+[05/18 13:01:15] SuperNet Training INFO: iter: 45240/144360  CE: 4.3145  
+[05/18 13:02:28] SuperNet Training INFO: iter: 45360/144360  CE: 4.5627  
+[05/18 13:03:40] SuperNet Training INFO: iter: 45480/144360  CE: 4.2382  
+[05/18 13:04:53] SuperNet Training INFO: iter: 45600/144360  CE: 4.6027  
+[05/18 13:06:00] SuperNet Training INFO: --> epoch:  38/120  avg CE: 4.2427  lr: 0.0926783421009017  
+[05/18 13:06:42] SuperNet Training INFO: iter: 45720/144360  CE: 4.1352  
+[05/18 13:07:55] SuperNet Training INFO: iter: 45840/144360  CE: 3.9721  
+[05/18 13:09:09] SuperNet Training INFO: iter: 45960/144360  CE: 4.1866  
+[05/18 13:10:22] SuperNet Training INFO: iter: 46080/144360  CE: 4.1280  
+[05/18 13:11:34] SuperNet Training INFO: iter: 46200/144360  CE: 4.4715  
+[05/18 13:12:47] SuperNet Training INFO: iter: 46320/144360  CE: 3.9365  
+[05/18 13:14:00] SuperNet Training INFO: iter: 46440/144360  CE: 4.0940  
+[05/18 13:15:13] SuperNet Training INFO: iter: 46560/144360  CE: 4.2573  
+[05/18 13:16:26] SuperNet Training INFO: iter: 46680/144360  CE: 4.2645  
+[05/18 13:17:38] SuperNet Training INFO: iter: 46800/144360  CE: 4.3598  
+[05/18 13:18:48] SuperNet Training INFO: --> epoch:  39/120  avg CE: 4.2304  lr: 0.09134991388295689  
+[05/18 13:19:27] SuperNet Training INFO: iter: 46920/144360  CE: 4.0478  
+[05/18 13:20:39] SuperNet Training INFO: iter: 47040/144360  CE: 4.1744  
+[05/18 13:21:52] SuperNet Training INFO: iter: 47160/144360  CE: 4.4322  
+[05/18 13:23:07] SuperNet Training INFO: iter: 47280/144360  CE: 4.1862  
+[05/18 13:24:20] SuperNet Training INFO: iter: 47400/144360  CE: 4.1821  
+[05/18 13:25:32] SuperNet Training INFO: iter: 47520/144360  CE: 4.0362  
+[05/18 13:26:45] SuperNet Training INFO: iter: 47640/144360  CE: 4.1324  
+[05/18 13:27:57] SuperNet Training INFO: iter: 47760/144360  CE: 3.9008  
+[05/18 13:29:10] SuperNet Training INFO: iter: 47880/144360  CE: 3.9662  
+[05/18 13:30:21] SuperNet Training INFO: iter: 48000/144360  CE: 4.1294  
+[05/18 13:31:32] SuperNet Training INFO: iter: 48120/144360  CE: 4.5178  
+[05/18 13:31:32] SuperNet Training INFO: --> epoch:  40/120  avg CE: 4.2125  lr: 0.0899999999999998  
+[05/18 13:33:22] SuperNet Training INFO: iter: 48240/144360  CE: 4.1186  
+[05/18 13:34:35] SuperNet Training INFO: iter: 48360/144360  CE: 4.1722  
+[05/18 13:35:47] SuperNet Training INFO: iter: 48480/144360  CE: 3.9301  
+[05/18 13:36:59] SuperNet Training INFO: iter: 48600/144360  CE: 3.8107  
+[05/18 13:38:12] SuperNet Training INFO: iter: 48720/144360  CE: 4.5122  
+[05/18 13:39:24] SuperNet Training INFO: iter: 48840/144360  CE: 4.4791  
+[05/18 13:40:37] SuperNet Training INFO: iter: 48960/144360  CE: 3.8648  
+[05/18 13:41:49] SuperNet Training INFO: iter: 49080/144360  CE: 4.0953  
+[05/18 13:43:01] SuperNet Training INFO: iter: 49200/144360  CE: 4.0494  
+[05/18 13:44:13] SuperNet Training INFO: iter: 49320/144360  CE: 3.9318  
+[05/18 13:44:14] SuperNet Training INFO: --> epoch:  41/120  avg CE: 4.1784  lr: 0.08862952561557644  
+[05/18 13:46:03] SuperNet Training INFO: iter: 49440/144360  CE: 3.8865  
+[05/18 13:47:16] SuperNet Training INFO: iter: 49560/144360  CE: 4.3384  
+[05/18 13:48:29] SuperNet Training INFO: iter: 49680/144360  CE: 4.1265  
+[05/18 13:49:40] SuperNet Training INFO: iter: 49800/144360  CE: 4.1912  
+[05/18 13:50:53] SuperNet Training INFO: iter: 49920/144360  CE: 4.0021  
+[05/18 13:52:05] SuperNet Training INFO: iter: 50040/144360  CE: 4.2617  
+[05/18 13:53:17] SuperNet Training INFO: iter: 50160/144360  CE: 3.9334  
+[05/18 13:54:30] SuperNet Training INFO: iter: 50280/144360  CE: 3.7337  
+[05/18 13:55:42] SuperNet Training INFO: iter: 50400/144360  CE: 4.4583  
+[05/18 13:56:55] SuperNet Training INFO: iter: 50520/144360  CE: 3.9894  
+[05/18 13:56:57] SuperNet Training INFO: --> epoch:  42/120  avg CE: 4.1526  lr: 0.08723942998437267  
+[05/18 13:58:42] SuperNet Training INFO: iter: 50640/144360  CE: 4.4152  
+[05/18 13:59:54] SuperNet Training INFO: iter: 50760/144360  CE: 4.1665  
+[05/18 14:01:06] SuperNet Training INFO: iter: 50880/144360  CE: 4.0600  
+[05/18 14:02:18] SuperNet Training INFO: iter: 51000/144360  CE: 4.1285  
+[05/18 14:03:31] SuperNet Training INFO: iter: 51120/144360  CE: 4.3242  
+[05/18 14:04:42] SuperNet Training INFO: iter: 51240/144360  CE: 4.2963  
+[05/18 14:05:55] SuperNet Training INFO: iter: 51360/144360  CE: 4.0873  
+[05/18 14:07:07] SuperNet Training INFO: iter: 51480/144360  CE: 4.2092  
+[05/18 14:08:19] SuperNet Training INFO: iter: 51600/144360  CE: 3.9791  
+[05/18 14:09:32] SuperNet Training INFO: iter: 51720/144360  CE: 3.8757  
+[05/18 14:09:36] SuperNet Training INFO: --> epoch:  43/120  avg CE: 4.1464  lr: 0.08583066580849745  
+[05/18 14:11:19] SuperNet Training INFO: iter: 51840/144360  CE: 4.1598  
+[05/18 14:12:32] SuperNet Training INFO: iter: 51960/144360  CE: 4.0972  
+[05/18 14:13:44] SuperNet Training INFO: iter: 52080/144360  CE: 4.0207  
+[05/18 14:14:57] SuperNet Training INFO: iter: 52200/144360  CE: 3.9341  
+[05/18 14:16:10] SuperNet Training INFO: iter: 52320/144360  CE: 4.1405  
+[05/18 14:17:23] SuperNet Training INFO: iter: 52440/144360  CE: 4.2632  
+[05/18 14:18:36] SuperNet Training INFO: iter: 52560/144360  CE: 3.8375  
+[05/18 14:19:48] SuperNet Training INFO: iter: 52680/144360  CE: 4.2977  
+[05/18 14:21:01] SuperNet Training INFO: iter: 52800/144360  CE: 4.0722  
+[05/18 14:22:14] SuperNet Training INFO: iter: 52920/144360  CE: 4.2339  
+[05/18 14:22:20] SuperNet Training INFO: --> epoch:  44/120  avg CE: 4.1207  lr: 0.08440419858454766  
+[05/18 14:24:03] SuperNet Training INFO: iter: 53040/144360  CE: 4.2854  
+[05/18 14:25:15] SuperNet Training INFO: iter: 53160/144360  CE: 4.4210  
+[05/18 14:26:27] SuperNet Training INFO: iter: 53280/144360  CE: 4.2125  
+[05/18 14:27:39] SuperNet Training INFO: iter: 53400/144360  CE: 3.8793  
+[05/18 14:28:52] SuperNet Training INFO: iter: 53520/144360  CE: 3.8925  
+[05/18 14:30:04] SuperNet Training INFO: iter: 53640/144360  CE: 3.9672  
+[05/18 14:31:16] SuperNet Training INFO: iter: 53760/144360  CE: 4.2388  
+[05/18 14:32:29] SuperNet Training INFO: iter: 53880/144360  CE: 4.1018  
+[05/18 14:33:41] SuperNet Training INFO: iter: 54000/144360  CE: 3.7573  
+[05/18 14:34:53] SuperNet Training INFO: iter: 54120/144360  CE: 4.1840  
+[05/18 14:35:01] SuperNet Training INFO: --> epoch:  45/120  avg CE: 4.1122  lr: 0.0829610059419049  
+[05/18 14:36:41] SuperNet Training INFO: iter: 54240/144360  CE: 3.9732  
+[05/18 14:37:53] SuperNet Training INFO: iter: 54360/144360  CE: 4.0490  
+[05/18 14:39:05] SuperNet Training INFO: iter: 54480/144360  CE: 4.0388  
+[05/18 14:40:17] SuperNet Training INFO: iter: 54600/144360  CE: 4.3509  
+[05/18 14:41:29] SuperNet Training INFO: iter: 54720/144360  CE: 4.0117  
+[05/18 14:42:41] SuperNet Training INFO: iter: 54840/144360  CE: 4.1709  
+[05/18 14:43:53] SuperNet Training INFO: iter: 54960/144360  CE: 4.2481  
+[05/18 14:45:05] SuperNet Training INFO: iter: 55080/144360  CE: 3.9995  
+[05/18 14:46:17] SuperNet Training INFO: iter: 55200/144360  CE: 4.1914  
+[05/18 14:47:31] SuperNet Training INFO: iter: 55320/144360  CE: 3.8936  
+[05/18 14:47:40] SuperNet Training INFO: --> epoch:  46/120  avg CE: 4.0889  lr: 0.08150207697271764  
+[05/18 14:49:19] SuperNet Training INFO: iter: 55440/144360  CE: 4.0903  
+[05/18 14:50:31] SuperNet Training INFO: iter: 55560/144360  CE: 4.1778  
+[05/18 14:51:43] SuperNet Training INFO: iter: 55680/144360  CE: 4.2331  
+[05/18 14:52:55] SuperNet Training INFO: iter: 55800/144360  CE: 3.8734  
+[05/18 14:54:07] SuperNet Training INFO: iter: 55920/144360  CE: 4.2318  
+[05/18 14:55:20] SuperNet Training INFO: iter: 56040/144360  CE: 4.5839  
+[05/18 14:56:32] SuperNet Training INFO: iter: 56160/144360  CE: 4.0157  
+[05/18 14:57:45] SuperNet Training INFO: iter: 56280/144360  CE: 3.6670  
+[05/18 14:58:57] SuperNet Training INFO: iter: 56400/144360  CE: 3.9903  
+[05/18 15:00:10] SuperNet Training INFO: iter: 56520/144360  CE: 3.9084  
+[05/18 15:00:21] SuperNet Training INFO: --> epoch:  47/120  avg CE: 4.0624  lr: 0.08002841155402596  
+[05/18 15:01:58] SuperNet Training INFO: iter: 56640/144360  CE: 4.0220  
+[05/18 15:03:10] SuperNet Training INFO: iter: 56760/144360  CE: 4.0923  
+[05/18 15:04:22] SuperNet Training INFO: iter: 56880/144360  CE: 4.4111  
+[05/18 15:05:35] SuperNet Training INFO: iter: 57000/144360  CE: 4.1438  
+[05/18 15:06:47] SuperNet Training INFO: iter: 57120/144360  CE: 4.2388  
+[05/18 15:08:00] SuperNet Training INFO: iter: 57240/144360  CE: 3.9230  
+[05/18 15:09:11] SuperNet Training INFO: iter: 57360/144360  CE: 4.1732  
+[05/18 15:10:24] SuperNet Training INFO: iter: 57480/144360  CE: 4.1061  
+[05/18 15:11:40] SuperNet Training INFO: iter: 57600/144360  CE: 4.1658  
+[05/18 15:12:52] SuperNet Training INFO: iter: 57720/144360  CE: 4.0810  
+[05/18 15:13:05] SuperNet Training INFO: --> epoch:  48/120  avg CE: 4.0562  lr: 0.07854101966249659  
+[05/18 15:14:39] SuperNet Training INFO: iter: 57840/144360  CE: 4.1344  
+[05/18 15:15:51] SuperNet Training INFO: iter: 57960/144360  CE: 4.2345  
+[05/18 15:17:03] SuperNet Training INFO: iter: 58080/144360  CE: 3.9591  
+[05/18 15:18:15] SuperNet Training INFO: iter: 58200/144360  CE: 3.8159  
+[05/18 15:19:28] SuperNet Training INFO: iter: 58320/144360  CE: 3.9053  
+[05/18 15:20:40] SuperNet Training INFO: iter: 58440/144360  CE: 4.1685  
+[05/18 15:21:53] SuperNet Training INFO: iter: 58560/144360  CE: 3.9981  
+[05/18 15:23:05] SuperNet Training INFO: iter: 58680/144360  CE: 4.2847  
+[05/18 15:24:16] SuperNet Training INFO: iter: 58800/144360  CE: 3.6784  
+[05/18 15:25:29] SuperNet Training INFO: iter: 58920/144360  CE: 4.0664  
+[05/18 15:25:44] SuperNet Training INFO: --> epoch:  49/120  avg CE: 4.0350  lr: 0.07704092068223518  
+[05/18 15:27:18] SuperNet Training INFO: iter: 59040/144360  CE: 3.7551  
+[05/18 15:28:31] SuperNet Training INFO: iter: 59160/144360  CE: 3.9607  
+[05/18 15:29:43] SuperNet Training INFO: iter: 59280/144360  CE: 3.8712  
+[05/18 15:30:56] SuperNet Training INFO: iter: 59400/144360  CE: 3.8684  
+[05/18 15:32:08] SuperNet Training INFO: iter: 59520/144360  CE: 4.0031  
+[05/18 15:33:21] SuperNet Training INFO: iter: 59640/144360  CE: 4.0471  
+[05/18 15:34:35] SuperNet Training INFO: iter: 59760/144360  CE: 4.1328  
+[05/18 15:35:48] SuperNet Training INFO: iter: 59880/144360  CE: 3.9216  
+[05/18 15:37:00] SuperNet Training INFO: iter: 60000/144360  CE: 3.7897  
+[05/18 15:38:13] SuperNet Training INFO: iter: 60120/144360  CE: 3.8279  
+[05/18 15:38:29] SuperNet Training INFO: --> epoch:  50/120  avg CE: 4.0149  lr: 0.07552914270615126  
+[05/18 15:40:01] SuperNet Training INFO: iter: 60240/144360  CE: 4.3302  
+[05/18 15:41:14] SuperNet Training INFO: iter: 60360/144360  CE: 3.8284  
+[05/18 15:42:26] SuperNet Training INFO: iter: 60480/144360  CE: 4.0853  
+[05/18 15:43:39] SuperNet Training INFO: iter: 60600/144360  CE: 3.6961  
+[05/18 15:44:51] SuperNet Training INFO: iter: 60720/144360  CE: 4.1612  
+[05/18 15:46:04] SuperNet Training INFO: iter: 60840/144360  CE: 4.0564  
+[05/18 15:47:16] SuperNet Training INFO: iter: 60960/144360  CE: 4.2529  
+[05/18 15:48:29] SuperNet Training INFO: iter: 61080/144360  CE: 4.1041  
+[05/18 15:49:42] SuperNet Training INFO: iter: 61200/144360  CE: 3.8984  
+[05/18 15:50:54] SuperNet Training INFO: iter: 61320/144360  CE: 4.0751  
+[05/18 15:51:13] SuperNet Training INFO: --> epoch:  51/120  avg CE: 4.0097  lr: 0.0740067218313545  
+[05/18 15:52:44] SuperNet Training INFO: iter: 61440/144360  CE: 3.9773  
+[05/18 15:53:57] SuperNet Training INFO: iter: 61560/144360  CE: 4.0018  
+[05/18 15:55:10] SuperNet Training INFO: iter: 61680/144360  CE: 4.0072  
+[05/18 15:56:22] SuperNet Training INFO: iter: 61800/144360  CE: 4.0079  
+[05/18 15:57:35] SuperNet Training INFO: iter: 61920/144360  CE: 4.2214  
+[05/18 15:58:48] SuperNet Training INFO: iter: 62040/144360  CE: 4.3123  
+[05/18 16:00:00] SuperNet Training INFO: iter: 62160/144360  CE: 3.7166  
+[05/18 16:01:12] SuperNet Training INFO: iter: 62280/144360  CE: 3.8141  
+[05/18 16:02:25] SuperNet Training INFO: iter: 62400/144360  CE: 4.3215  
+[05/18 16:03:37] SuperNet Training INFO: iter: 62520/144360  CE: 4.0213  
+[05/18 16:03:58] SuperNet Training INFO: --> epoch:  52/120  avg CE: 3.9871  lr: 0.07247470144906537  
+[05/18 16:05:25] SuperNet Training INFO: iter: 62640/144360  CE: 4.2373  
+[05/18 16:06:37] SuperNet Training INFO: iter: 62760/144360  CE: 3.9462  
+[05/18 16:07:50] SuperNet Training INFO: iter: 62880/144360  CE: 3.9868  
+[05/18 16:09:02] SuperNet Training INFO: iter: 63000/144360  CE: 4.0118  
+[05/18 16:10:14] SuperNet Training INFO: iter: 63120/144360  CE: 3.8784  
+[05/18 16:11:26] SuperNet Training INFO: iter: 63240/144360  CE: 3.7107  
+[05/18 16:12:38] SuperNet Training INFO: iter: 63360/144360  CE: 3.7818  
+[05/18 16:13:51] SuperNet Training INFO: iter: 63480/144360  CE: 3.5679  
+[05/18 16:15:03] SuperNet Training INFO: iter: 63600/144360  CE: 4.0499  
+[05/18 16:16:14] SuperNet Training INFO: iter: 63720/144360  CE: 4.0339  
+[05/18 16:16:37] SuperNet Training INFO: --> epoch:  53/120  avg CE: 3.9722  lr: 0.07093413152952865  
+[05/18 16:18:03] SuperNet Training INFO: iter: 63840/144360  CE: 4.0439  
+[05/18 16:19:16] SuperNet Training INFO: iter: 63960/144360  CE: 4.0174  
+[05/18 16:20:28] SuperNet Training INFO: iter: 64080/144360  CE: 4.1143  
+[05/18 16:21:41] SuperNet Training INFO: iter: 64200/144360  CE: 4.0407  
+[05/18 16:22:53] SuperNet Training INFO: iter: 64320/144360  CE: 4.0479  
+[05/18 16:24:06] SuperNet Training INFO: iter: 64440/144360  CE: 4.1128  
+[05/18 16:25:18] SuperNet Training INFO: iter: 64560/144360  CE: 4.1949  
+[05/18 16:26:31] SuperNet Training INFO: iter: 64680/144360  CE: 3.6643  
+[05/18 16:27:44] SuperNet Training INFO: iter: 64800/144360  CE: 3.9425  
+[05/18 16:28:57] SuperNet Training INFO: iter: 64920/144360  CE: 3.9724  
+[05/18 16:29:21] SuperNet Training INFO: --> epoch:  54/120  avg CE: 3.9606  lr: 0.06938606790241343  
+[05/18 16:30:45] SuperNet Training INFO: iter: 65040/144360  CE: 4.3321  
+[05/18 16:31:58] SuperNet Training INFO: iter: 65160/144360  CE: 3.8947  
+[05/18 16:33:10] SuperNet Training INFO: iter: 65280/144360  CE: 4.1379  
+[05/18 16:34:22] SuperNet Training INFO: iter: 65400/144360  CE: 3.7025  
+[05/18 16:35:34] SuperNet Training INFO: iter: 65520/144360  CE: 4.3179  
+[05/18 16:36:46] SuperNet Training INFO: iter: 65640/144360  CE: 3.9486  
+[05/18 16:37:59] SuperNet Training INFO: iter: 65760/144360  CE: 3.6854  
+[05/18 16:39:11] SuperNet Training INFO: iter: 65880/144360  CE: 3.7661  
+[05/18 16:40:24] SuperNet Training INFO: iter: 66000/144360  CE: 3.7527  
+[05/18 16:41:37] SuperNet Training INFO: iter: 66120/144360  CE: 3.8175  
+[05/18 16:42:03] SuperNet Training INFO: --> epoch:  55/120  avg CE: 3.9370  lr: 0.06783157153320266  
+[05/18 16:43:27] SuperNet Training INFO: iter: 66240/144360  CE: 3.7946  
+[05/18 16:44:39] SuperNet Training INFO: iter: 66360/144360  CE: 3.8683  
+[05/18 16:45:51] SuperNet Training INFO: iter: 66480/144360  CE: 4.0053  
+[05/18 16:47:04] SuperNet Training INFO: iter: 66600/144360  CE: 3.9636  
+[05/18 16:48:16] SuperNet Training INFO: iter: 66720/144360  CE: 3.8345  
+[05/18 16:49:30] SuperNet Training INFO: iter: 66840/144360  CE: 3.5760  
+[05/18 16:50:42] SuperNet Training INFO: iter: 66960/144360  CE: 3.8642  
+[05/18 16:51:54] SuperNet Training INFO: iter: 67080/144360  CE: 4.1325  
+[05/18 16:53:07] SuperNet Training INFO: iter: 67200/144360  CE: 3.9210  
+[05/18 16:54:20] SuperNet Training INFO: iter: 67320/144360  CE: 4.2835  
+[05/18 16:54:48] SuperNet Training INFO: --> epoch:  56/120  avg CE: 3.9278  lr: 0.06627170779605904  
+[05/18 16:56:10] SuperNet Training INFO: iter: 67440/144360  CE: 4.0457  
+[05/18 16:57:21] SuperNet Training INFO: iter: 67560/144360  CE: 4.0297  
+[05/18 16:58:33] SuperNet Training INFO: iter: 67680/144360  CE: 3.9603  
+[05/18 16:59:46] SuperNet Training INFO: iter: 67800/144360  CE: 3.9637  
+[05/18 17:01:01] SuperNet Training INFO: iter: 67920/144360  CE: 3.7625  
+[05/18 17:02:13] SuperNet Training INFO: iter: 68040/144360  CE: 3.8847  
+[05/18 17:03:25] SuperNet Training INFO: iter: 68160/144360  CE: 3.6337  
+[05/18 17:04:37] SuperNet Training INFO: iter: 68280/144360  CE: 3.5960  
+[05/18 17:05:49] SuperNet Training INFO: iter: 68400/144360  CE: 3.9731  
+[05/18 17:07:01] SuperNet Training INFO: iter: 68520/144360  CE: 4.1172  
+[05/18 17:07:31] SuperNet Training INFO: --> epoch:  57/120  avg CE: 3.9101  lr: 0.06470754574367053  
+[05/18 17:08:50] SuperNet Training INFO: iter: 68640/144360  CE: 4.0728  
+[05/18 17:10:02] SuperNet Training INFO: iter: 68760/144360  CE: 3.8811  
+[05/18 17:11:14] SuperNet Training INFO: iter: 68880/144360  CE: 3.9093  
+[05/18 17:12:26] SuperNet Training INFO: iter: 69000/144360  CE: 3.9827  
+[05/18 17:13:38] SuperNet Training INFO: iter: 69120/144360  CE: 3.8535  
+[05/18 17:14:50] SuperNet Training INFO: iter: 69240/144360  CE: 3.9746  
+[05/18 17:16:02] SuperNet Training INFO: iter: 69360/144360  CE: 4.1891  
+[05/18 17:17:14] SuperNet Training INFO: iter: 69480/144360  CE: 3.6539  
+[05/18 17:18:26] SuperNet Training INFO: iter: 69600/144360  CE: 4.0319  
+[05/18 17:19:38] SuperNet Training INFO: iter: 69720/144360  CE: 3.7237  
+[05/18 17:20:10] SuperNet Training INFO: --> epoch:  58/120  avg CE: 3.9019  lr: 0.06314015737457618  
+[05/18 17:21:27] SuperNet Training INFO: iter: 69840/144360  CE: 3.7636  
+[05/18 17:22:40] SuperNet Training INFO: iter: 69960/144360  CE: 3.9036  
+[05/18 17:23:51] SuperNet Training INFO: iter: 70080/144360  CE: 4.1238  
+[05/18 17:25:04] SuperNet Training INFO: iter: 70200/144360  CE: 3.7013  
+[05/18 17:26:16] SuperNet Training INFO: iter: 70320/144360  CE: 4.0386  
+[05/18 17:27:29] SuperNet Training INFO: iter: 70440/144360  CE: 3.6311  
+[05/18 17:28:41] SuperNet Training INFO: iter: 70560/144360  CE: 4.1019  
+[05/18 17:29:54] SuperNet Training INFO: iter: 70680/144360  CE: 4.0314  
+[05/18 17:31:07] SuperNet Training INFO: iter: 70800/144360  CE: 3.6935  
+[05/18 17:32:19] SuperNet Training INFO: iter: 70920/144360  CE: 3.4077  
+[05/18 17:32:53] SuperNet Training INFO: --> epoch:  59/120  avg CE: 3.8862  lr: 0.061570616898472125  
+[05/18 17:34:09] SuperNet Training INFO: iter: 71040/144360  CE: 3.6450  
+[05/18 17:35:22] SuperNet Training INFO: iter: 71160/144360  CE: 3.6645  
+[05/18 17:36:35] SuperNet Training INFO: iter: 71280/144360  CE: 3.8968  
+[05/18 17:37:47] SuperNet Training INFO: iter: 71400/144360  CE: 3.8303  
+[05/18 17:39:00] SuperNet Training INFO: iter: 71520/144360  CE: 4.3427  
+[05/18 17:40:12] SuperNet Training INFO: iter: 71640/144360  CE: 3.9608  
+[05/18 17:41:25] SuperNet Training INFO: iter: 71760/144360  CE: 3.7631  
+[05/18 17:42:36] SuperNet Training INFO: iter: 71880/144360  CE: 3.5867  
+[05/18 17:43:48] SuperNet Training INFO: iter: 72000/144360  CE: 3.7543  
+[05/18 17:45:01] SuperNet Training INFO: iter: 72120/144360  CE: 3.9536  
+[05/18 17:45:36] SuperNet Training INFO: --> epoch:  60/120  avg CE: 3.8786  lr: 0.05999999999999976  
+[05/18 17:46:49] SuperNet Training INFO: iter: 72240/144360  CE: 3.9685  
+[05/18 17:48:01] SuperNet Training INFO: iter: 72360/144360  CE: 3.7890  
+[05/18 17:49:13] SuperNet Training INFO: iter: 72480/144360  CE: 3.9895  
+[05/18 17:50:25] SuperNet Training INFO: iter: 72600/144360  CE: 3.7648  
+[05/18 17:51:38] SuperNet Training INFO: iter: 72720/144360  CE: 3.3338  
+[05/18 17:52:51] SuperNet Training INFO: iter: 72840/144360  CE: 3.7974  
+[05/18 17:54:04] SuperNet Training INFO: iter: 72960/144360  CE: 3.6631  
+[05/18 17:55:16] SuperNet Training INFO: iter: 73080/144360  CE: 3.9657  
+[05/18 17:56:29] SuperNet Training INFO: iter: 73200/144360  CE: 3.6374  
+[05/18 17:57:41] SuperNet Training INFO: iter: 73320/144360  CE: 4.1790  
+[05/18 17:58:18] SuperNet Training INFO: --> epoch:  61/120  avg CE: 3.8612  lr: 0.058429383101527455  
+[05/18 17:59:30] SuperNet Training INFO: iter: 73440/144360  CE: 3.9980  
+[05/18 18:00:43] SuperNet Training INFO: iter: 73560/144360  CE: 3.7123  
+[05/18 18:01:56] SuperNet Training INFO: iter: 73680/144360  CE: 3.9679  
+[05/18 18:03:09] SuperNet Training INFO: iter: 73800/144360  CE: 3.7662  
+[05/18 18:04:21] SuperNet Training INFO: iter: 73920/144360  CE: 3.9514  
+[05/18 18:05:34] SuperNet Training INFO: iter: 74040/144360  CE: 3.9565  
+[05/18 18:06:47] SuperNet Training INFO: iter: 74160/144360  CE: 4.1024  
+[05/18 18:08:00] SuperNet Training INFO: iter: 74280/144360  CE: 3.8809  
+[05/18 18:09:12] SuperNet Training INFO: iter: 74400/144360  CE: 3.8404  
+[05/18 18:10:25] SuperNet Training INFO: iter: 74520/144360  CE: 3.6080  
+[05/18 18:11:04] SuperNet Training INFO: --> epoch:  62/120  avg CE: 3.8486  lr: 0.05685984262542327  
+[05/18 18:12:15] SuperNet Training INFO: iter: 74640/144360  CE: 4.1969  
+[05/18 18:13:28] SuperNet Training INFO: iter: 74760/144360  CE: 4.0797  
+[05/18 18:14:41] SuperNet Training INFO: iter: 74880/144360  CE: 4.0146  
+[05/18 18:15:53] SuperNet Training INFO: iter: 75000/144360  CE: 4.0871  
+[05/18 18:17:06] SuperNet Training INFO: iter: 75120/144360  CE: 4.2169  
+[05/18 18:18:18] SuperNet Training INFO: iter: 75240/144360  CE: 3.7910  
+[05/18 18:19:30] SuperNet Training INFO: iter: 75360/144360  CE: 3.7699  
+[05/18 18:20:42] SuperNet Training INFO: iter: 75480/144360  CE: 3.9512  
+[05/18 18:21:54] SuperNet Training INFO: iter: 75600/144360  CE: 3.8214  
+[05/18 18:23:06] SuperNet Training INFO: iter: 75720/144360  CE: 3.7841  
+[05/18 18:23:47] SuperNet Training INFO: --> epoch:  63/120  avg CE: 3.8349  lr: 0.05529245425632924  
+[05/18 18:24:56] SuperNet Training INFO: iter: 75840/144360  CE: 3.7025  
+[05/18 18:26:08] SuperNet Training INFO: iter: 75960/144360  CE: 3.9625  
+[05/18 18:27:21] SuperNet Training INFO: iter: 76080/144360  CE: 3.9318  
+[05/18 18:28:33] SuperNet Training INFO: iter: 76200/144360  CE: 3.6926  
+[05/18 18:29:45] SuperNet Training INFO: iter: 76320/144360  CE: 4.0803  
+[05/18 18:30:58] SuperNet Training INFO: iter: 76440/144360  CE: 3.8387  
+[05/18 18:32:10] SuperNet Training INFO: iter: 76560/144360  CE: 3.6857  
+[05/18 18:33:23] SuperNet Training INFO: iter: 76680/144360  CE: 4.0906  
+[05/18 18:34:36] SuperNet Training INFO: iter: 76800/144360  CE: 3.8925  
+[05/18 18:35:48] SuperNet Training INFO: iter: 76920/144360  CE: 3.9677  
+[05/18 18:36:30] SuperNet Training INFO: --> epoch:  64/120  avg CE: 3.8215  lr: 0.05372829220394078  
+[05/18 18:37:37] SuperNet Training INFO: iter: 77040/144360  CE: 3.9251  
+[05/18 18:38:49] SuperNet Training INFO: iter: 77160/144360  CE: 3.9185  
+[05/18 18:40:00] SuperNet Training INFO: iter: 77280/144360  CE: 3.9429  
+[05/18 18:41:11] SuperNet Training INFO: iter: 77400/144360  CE: 4.1140  
+[05/18 18:42:23] SuperNet Training INFO: iter: 77520/144360  CE: 3.9204  
+[05/18 18:43:35] SuperNet Training INFO: iter: 77640/144360  CE: 3.7614  
+[05/18 18:44:47] SuperNet Training INFO: iter: 77760/144360  CE: 3.7146  
+[05/18 18:46:00] SuperNet Training INFO: iter: 77880/144360  CE: 3.7152  
+[05/18 18:47:12] SuperNet Training INFO: iter: 78000/144360  CE: 4.1485  
+[05/18 18:48:24] SuperNet Training INFO: iter: 78120/144360  CE: 3.6320  
+[05/18 18:49:08] SuperNet Training INFO: --> epoch:  65/120  avg CE: 3.8076  lr: 0.05216842846679694  
+[05/18 18:50:14] SuperNet Training INFO: iter: 78240/144360  CE: 3.7302  
+[05/18 18:51:29] SuperNet Training INFO: iter: 78360/144360  CE: 3.8035  
+[05/18 18:52:41] SuperNet Training INFO: iter: 78480/144360  CE: 3.9071  
+[05/18 18:53:54] SuperNet Training INFO: iter: 78600/144360  CE: 3.8139  
+[05/18 18:55:05] SuperNet Training INFO: iter: 78720/144360  CE: 3.4013  
+[05/18 18:56:18] SuperNet Training INFO: iter: 78840/144360  CE: 3.8040  
+[05/18 18:57:30] SuperNet Training INFO: iter: 78960/144360  CE: 4.1304  
+[05/18 18:58:41] SuperNet Training INFO: iter: 79080/144360  CE: 3.7671  
+[05/18 18:59:54] SuperNet Training INFO: iter: 79200/144360  CE: 3.7566  
+[05/18 19:01:07] SuperNet Training INFO: iter: 79320/144360  CE: 4.1966  
+[05/18 19:01:53] SuperNet Training INFO: --> epoch:  66/120  avg CE: 3.7995  lr: 0.05061393209758616  
+[05/18 19:02:55] SuperNet Training INFO: iter: 79440/144360  CE: 4.1397  
+[05/18 19:04:08] SuperNet Training INFO: iter: 79560/144360  CE: 3.9546  
+[05/18 19:05:21] SuperNet Training INFO: iter: 79680/144360  CE: 3.8273  
+[05/18 19:06:33] SuperNet Training INFO: iter: 79800/144360  CE: 3.7004  
+[05/18 19:07:45] SuperNet Training INFO: iter: 79920/144360  CE: 3.7551  
+[05/18 19:08:57] SuperNet Training INFO: iter: 80040/144360  CE: 3.6578  
+[05/18 19:10:09] SuperNet Training INFO: iter: 80160/144360  CE: 3.9000  
+[05/18 19:11:21] SuperNet Training INFO: iter: 80280/144360  CE: 3.7903  
+[05/18 19:12:33] SuperNet Training INFO: iter: 80400/144360  CE: 3.7380  
+[05/18 19:13:45] SuperNet Training INFO: iter: 80520/144360  CE: 4.1870  
+[05/18 19:14:33] SuperNet Training INFO: --> epoch:  67/120  avg CE: 3.7785  lr: 0.04906586847047105  
+[05/18 19:15:34] SuperNet Training INFO: iter: 80640/144360  CE: 3.4921  
+[05/18 19:16:46] SuperNet Training INFO: iter: 80760/144360  CE: 3.8800  
+[05/18 19:17:57] SuperNet Training INFO: iter: 80880/144360  CE: 3.6494  
+[05/18 19:19:09] SuperNet Training INFO: iter: 81000/144360  CE: 3.9065  
+[05/18 19:20:21] SuperNet Training INFO: iter: 81120/144360  CE: 3.6947  
+[05/18 19:21:34] SuperNet Training INFO: iter: 81240/144360  CE: 3.9194  
+[05/18 19:22:46] SuperNet Training INFO: iter: 81360/144360  CE: 3.5681  
+[05/18 19:23:58] SuperNet Training INFO: iter: 81480/144360  CE: 3.7472  
+[05/18 19:25:10] SuperNet Training INFO: iter: 81600/144360  CE: 3.8642  
+[05/18 19:26:23] SuperNet Training INFO: iter: 81720/144360  CE: 4.1000  
+[05/18 19:27:12] SuperNet Training INFO: --> epoch:  68/120  avg CE: 3.7700  lr: 0.04752529855093431  
+[05/18 19:28:10] SuperNet Training INFO: iter: 81840/144360  CE: 3.5555  
+[05/18 19:29:21] SuperNet Training INFO: iter: 81960/144360  CE: 3.6734  
+[05/18 19:30:34] SuperNet Training INFO: iter: 82080/144360  CE: 3.7480  
+[05/18 19:31:47] SuperNet Training INFO: iter: 82200/144360  CE: 3.8956  
+[05/18 19:32:58] SuperNet Training INFO: iter: 82320/144360  CE: 3.6842  
+[05/18 19:34:10] SuperNet Training INFO: iter: 82440/144360  CE: 4.3162  
+[05/18 19:35:22] SuperNet Training INFO: iter: 82560/144360  CE: 3.5115  
+[05/18 19:36:33] SuperNet Training INFO: iter: 82680/144360  CE: 3.7522  
+[05/18 19:37:46] SuperNet Training INFO: iter: 82800/144360  CE: 3.8885  
+[05/18 19:38:58] SuperNet Training INFO: iter: 82920/144360  CE: 3.7219  
+[05/18 19:39:49] SuperNet Training INFO: --> epoch:  69/120  avg CE: 3.7600  lr: 0.04599327816864548  
+[05/18 19:40:47] SuperNet Training INFO: iter: 83040/144360  CE: 3.8522  
+[05/18 19:41:57] SuperNet Training INFO: iter: 83160/144360  CE: 3.9327  
+[05/18 19:43:06] SuperNet Training INFO: iter: 83280/144360  CE: 3.7567  
+[05/18 19:44:17] SuperNet Training INFO: iter: 83400/144360  CE: 3.8114  
+[05/18 19:45:27] SuperNet Training INFO: iter: 83520/144360  CE: 3.9134  
+[05/18 19:46:37] SuperNet Training INFO: iter: 83640/144360  CE: 3.6626  
+[05/18 19:47:48] SuperNet Training INFO: iter: 83760/144360  CE: 3.5956  
+[05/18 19:49:00] SuperNet Training INFO: iter: 83880/144360  CE: 3.9603  
+[05/18 19:50:12] SuperNet Training INFO: iter: 84000/144360  CE: 3.8037  
+[05/18 19:51:24] SuperNet Training INFO: iter: 84120/144360  CE: 3.7018  
+[05/18 19:52:18] SuperNet Training INFO: --> epoch:  70/120  avg CE: 3.7448  lr: 0.04447085729384866  
+[05/18 19:53:14] SuperNet Training INFO: iter: 84240/144360  CE: 3.8556  
+[05/18 19:54:27] SuperNet Training INFO: iter: 84360/144360  CE: 3.4811  
+[05/18 19:55:39] SuperNet Training INFO: iter: 84480/144360  CE: 3.6798  
+[05/18 19:56:52] SuperNet Training INFO: iter: 84600/144360  CE: 3.9176  
+[05/18 19:58:05] SuperNet Training INFO: iter: 84720/144360  CE: 3.6987  
+[05/18 19:59:16] SuperNet Training INFO: iter: 84840/144360  CE: 3.5566  
+[05/18 20:00:29] SuperNet Training INFO: iter: 84960/144360  CE: 3.7889  
+[05/18 20:01:41] SuperNet Training INFO: iter: 85080/144360  CE: 3.7156  
+[05/18 20:02:53] SuperNet Training INFO: iter: 85200/144360  CE: 3.8102  
+[05/18 20:04:05] SuperNet Training INFO: iter: 85320/144360  CE: 3.5905  
+[05/18 20:04:59] SuperNet Training INFO: --> epoch:  71/120  avg CE: 3.7388  lr: 0.04295907931776456  
+[05/18 20:05:53] SuperNet Training INFO: iter: 85440/144360  CE: 3.6379  
+[05/18 20:07:03] SuperNet Training INFO: iter: 85560/144360  CE: 3.8013  
+[05/18 20:08:13] SuperNet Training INFO: iter: 85680/144360  CE: 3.7216  
+[05/18 20:09:23] SuperNet Training INFO: iter: 85800/144360  CE: 3.4212  
+[05/18 20:10:33] SuperNet Training INFO: iter: 85920/144360  CE: 3.4038  
+[05/18 20:11:43] SuperNet Training INFO: iter: 86040/144360  CE: 3.6608  
+[05/18 20:12:53] SuperNet Training INFO: iter: 86160/144360  CE: 3.9312  
+[05/18 20:14:03] SuperNet Training INFO: iter: 86280/144360  CE: 3.7730  
+[05/18 20:15:14] SuperNet Training INFO: iter: 86400/144360  CE: 3.5673  
+[05/18 20:16:27] SuperNet Training INFO: iter: 86520/144360  CE: 3.9089  
+[05/18 20:17:23] SuperNet Training INFO: --> epoch:  72/120  avg CE: 3.7256  lr: 0.04145898033750296  
+[05/18 20:18:17] SuperNet Training INFO: iter: 86640/144360  CE: 3.6171  
+[05/18 20:19:29] SuperNet Training INFO: iter: 86760/144360  CE: 3.6106  
+[05/18 20:20:41] SuperNet Training INFO: iter: 86880/144360  CE: 3.7551  
+[05/18 20:21:53] SuperNet Training INFO: iter: 87000/144360  CE: 3.5659  
+[05/18 20:23:06] SuperNet Training INFO: iter: 87120/144360  CE: 3.5082  
+[05/18 20:24:19] SuperNet Training INFO: iter: 87240/144360  CE: 3.4681  
+[05/18 20:25:31] SuperNet Training INFO: iter: 87360/144360  CE: 3.8617  
+[05/18 20:26:43] SuperNet Training INFO: iter: 87480/144360  CE: 4.0252  
+[05/18 20:27:55] SuperNet Training INFO: iter: 87600/144360  CE: 3.5792  
+[05/18 20:29:08] SuperNet Training INFO: iter: 87720/144360  CE: 3.6794  
+[05/18 20:30:07] SuperNet Training INFO: --> epoch:  73/120  avg CE: 3.7156  lr: 0.03997158844597365  
+[05/18 20:30:56] SuperNet Training INFO: iter: 87840/144360  CE: 3.7364  
+[05/18 20:32:05] SuperNet Training INFO: iter: 87960/144360  CE: 3.7976  
+[05/18 20:33:17] SuperNet Training INFO: iter: 88080/144360  CE: 3.6798  
+[05/18 20:34:28] SuperNet Training INFO: iter: 88200/144360  CE: 3.7993  
+[05/18 20:35:40] SuperNet Training INFO: iter: 88320/144360  CE: 3.9709  
+[05/18 20:36:51] SuperNet Training INFO: iter: 88440/144360  CE: 3.7123  
+[05/18 20:38:04] SuperNet Training INFO: iter: 88560/144360  CE: 3.4256  
+[05/18 20:39:19] SuperNet Training INFO: iter: 88680/144360  CE: 3.3237  
+[05/18 20:40:31] SuperNet Training INFO: iter: 88800/144360  CE: 3.5134  
+[05/18 20:41:43] SuperNet Training INFO: iter: 88920/144360  CE: 3.9221  
+[05/18 20:42:44] SuperNet Training INFO: --> epoch:  74/120  avg CE: 3.6937  lr: 0.03849792302728192  
+[05/18 20:43:32] SuperNet Training INFO: iter: 89040/144360  CE: 3.8036  
+[05/18 20:44:45] SuperNet Training INFO: iter: 89160/144360  CE: 3.6992  
+[05/18 20:45:58] SuperNet Training INFO: iter: 89280/144360  CE: 3.4209  
+[05/18 20:47:10] SuperNet Training INFO: iter: 89400/144360  CE: 3.6401  
+[05/18 20:48:23] SuperNet Training INFO: iter: 89520/144360  CE: 3.6897  
+[05/18 20:49:35] SuperNet Training INFO: iter: 89640/144360  CE: 3.6733  
+[05/18 20:50:47] SuperNet Training INFO: iter: 89760/144360  CE: 3.8868  
+[05/18 20:52:00] SuperNet Training INFO: iter: 89880/144360  CE: 3.9707  
+[05/18 20:53:13] SuperNet Training INFO: iter: 90000/144360  CE: 3.8187  
+[05/18 20:54:25] SuperNet Training INFO: iter: 90120/144360  CE: 3.6483  
+[05/18 20:55:28] SuperNet Training INFO: --> epoch:  75/120  avg CE: 3.6920  lr: 0.03703899405809455  
+[05/18 20:56:15] SuperNet Training INFO: iter: 90240/144360  CE: 3.7904  
+[05/18 20:57:28] SuperNet Training INFO: iter: 90360/144360  CE: 3.6131  
+[05/18 20:58:41] SuperNet Training INFO: iter: 90480/144360  CE: 3.7484  
+[05/18 20:59:53] SuperNet Training INFO: iter: 90600/144360  CE: 3.5360  
+[05/18 21:01:05] SuperNet Training INFO: iter: 90720/144360  CE: 3.5329  
+[05/18 21:02:16] SuperNet Training INFO: iter: 90840/144360  CE: 3.8305  
+[05/18 21:03:29] SuperNet Training INFO: iter: 90960/144360  CE: 3.7262  
+[05/18 21:04:42] SuperNet Training INFO: iter: 91080/144360  CE: 3.7668  
+[05/18 21:05:54] SuperNet Training INFO: iter: 91200/144360  CE: 3.9383  
+[05/18 21:07:05] SuperNet Training INFO: iter: 91320/144360  CE: 3.4952  
+[05/18 21:08:09] SuperNet Training INFO: --> epoch:  76/120  avg CE: 3.6883  lr: 0.035595801415451815  
+[05/18 21:08:54] SuperNet Training INFO: iter: 91440/144360  CE: 3.8622  
+[05/18 21:10:06] SuperNet Training INFO: iter: 91560/144360  CE: 4.3450  
+[05/18 21:11:18] SuperNet Training INFO: iter: 91680/144360  CE: 3.8102  
+[05/18 21:12:30] SuperNet Training INFO: iter: 91800/144360  CE: 3.6009  
+[05/18 21:13:42] SuperNet Training INFO: iter: 91920/144360  CE: 3.2153  
+[05/18 21:14:54] SuperNet Training INFO: iter: 92040/144360  CE: 3.8617  
+[05/18 21:16:05] SuperNet Training INFO: iter: 92160/144360  CE: 3.5743  
+[05/18 21:17:16] SuperNet Training INFO: iter: 92280/144360  CE: 3.7484  
+[05/18 21:18:28] SuperNet Training INFO: iter: 92400/144360  CE: 3.7951  
+[05/18 21:19:39] SuperNet Training INFO: iter: 92520/144360  CE: 3.4539  
+[05/18 21:20:44] SuperNet Training INFO: --> epoch:  77/120  avg CE: 3.6861  lr: 0.03416933419150217  
+[05/18 21:21:27] SuperNet Training INFO: iter: 92640/144360  CE: 3.5528  
+[05/18 21:22:40] SuperNet Training INFO: iter: 92760/144360  CE: 3.6458  
+[05/18 21:23:52] SuperNet Training INFO: iter: 92880/144360  CE: 3.9862  
+[05/18 21:25:04] SuperNet Training INFO: iter: 93000/144360  CE: 3.8293  
+[05/18 21:26:16] SuperNet Training INFO: iter: 93120/144360  CE: 3.9985  
+[05/18 21:27:28] SuperNet Training INFO: iter: 93240/144360  CE: 3.4822  
+[05/18 21:28:41] SuperNet Training INFO: iter: 93360/144360  CE: 3.6455  
+[05/18 21:29:54] SuperNet Training INFO: iter: 93480/144360  CE: 3.7586  
+[05/18 21:31:07] SuperNet Training INFO: iter: 93600/144360  CE: 3.8766  
+[05/18 21:32:19] SuperNet Training INFO: iter: 93720/144360  CE: 3.6596  
+[05/18 21:33:26] SuperNet Training INFO: --> epoch:  78/120  avg CE: 3.6760  lr: 0.03276057001562702  
+[05/18 21:34:06] SuperNet Training INFO: iter: 93840/144360  CE: 3.8367  
+[05/18 21:35:18] SuperNet Training INFO: iter: 93960/144360  CE: 3.5771  
+[05/18 21:36:30] SuperNet Training INFO: iter: 94080/144360  CE: 3.4816  
+[05/18 21:37:41] SuperNet Training INFO: iter: 94200/144360  CE: 3.5827  
+[05/18 21:38:54] SuperNet Training INFO: iter: 94320/144360  CE: 3.2388  
+[05/18 21:40:06] SuperNet Training INFO: iter: 94440/144360  CE: 3.6209  
+[05/18 21:41:18] SuperNet Training INFO: iter: 94560/144360  CE: 3.7145  
+[05/18 21:42:30] SuperNet Training INFO: iter: 94680/144360  CE: 3.6594  
+[05/18 21:43:42] SuperNet Training INFO: iter: 94800/144360  CE: 3.6946  
+[05/18 21:44:54] SuperNet Training INFO: iter: 94920/144360  CE: 3.7462  
+[05/18 21:46:03] SuperNet Training INFO: --> epoch:  79/120  avg CE: 3.6542  lr: 0.031370474384423336  
+[05/18 21:46:43] SuperNet Training INFO: iter: 95040/144360  CE: 3.8276  
+[05/18 21:47:55] SuperNet Training INFO: iter: 95160/144360  CE: 3.7013  
+[05/18 21:49:07] SuperNet Training INFO: iter: 95280/144360  CE: 3.6342  
+[05/18 21:50:19] SuperNet Training INFO: iter: 95400/144360  CE: 3.7819  
+[05/18 21:51:31] SuperNet Training INFO: iter: 95520/144360  CE: 3.4699  
+[05/18 21:52:43] SuperNet Training INFO: iter: 95640/144360  CE: 3.6306  
+[05/18 21:53:56] SuperNet Training INFO: iter: 95760/144360  CE: 3.5386  
+[05/18 21:55:08] SuperNet Training INFO: iter: 95880/144360  CE: 3.6152  
+[05/18 21:56:20] SuperNet Training INFO: iter: 96000/144360  CE: 3.4822  
+[05/18 21:57:32] SuperNet Training INFO: iter: 96120/144360  CE: 3.4154  
+[05/18 21:58:44] SuperNet Training INFO: iter: 96240/144360  CE: 3.2907  
+[05/18 21:58:44] SuperNet Training INFO: --> epoch:  80/120  avg CE: 3.6389  lr: 0.02999999999999983  
+[05/18 22:00:34] SuperNet Training INFO: iter: 96360/144360  CE: 3.5681  
+[05/18 22:01:47] SuperNet Training INFO: iter: 96480/144360  CE: 3.2412  
+[05/18 22:02:59] SuperNet Training INFO: iter: 96600/144360  CE: 3.6068  
+[05/18 22:04:12] SuperNet Training INFO: iter: 96720/144360  CE: 3.8860  
+[05/18 22:05:25] SuperNet Training INFO: iter: 96840/144360  CE: 3.3799  
+[05/18 22:06:38] SuperNet Training INFO: iter: 96960/144360  CE: 3.5935  
+[05/18 22:07:50] SuperNet Training INFO: iter: 97080/144360  CE: 3.5775  
+[05/18 22:09:03] SuperNet Training INFO: iter: 97200/144360  CE: 3.8637  
+[05/18 22:10:16] SuperNet Training INFO: iter: 97320/144360  CE: 4.3709  
+[05/18 22:11:28] SuperNet Training INFO: iter: 97440/144360  CE: 3.5845  
+[05/18 22:11:29] SuperNet Training INFO: --> epoch:  81/120  avg CE: 3.6390  lr: 0.028650086117042926  
+[05/18 22:13:18] SuperNet Training INFO: iter: 97560/144360  CE: 3.9177  
+[05/18 22:14:31] SuperNet Training INFO: iter: 97680/144360  CE: 3.4504  
+[05/18 22:15:44] SuperNet Training INFO: iter: 97800/144360  CE: 3.7173  
+[05/18 22:16:57] SuperNet Training INFO: iter: 97920/144360  CE: 3.6882  
+[05/18 22:18:10] SuperNet Training INFO: iter: 98040/144360  CE: 3.3661  
+[05/18 22:19:23] SuperNet Training INFO: iter: 98160/144360  CE: 3.8749  
+[05/18 22:20:37] SuperNet Training INFO: iter: 98280/144360  CE: 3.5738  
+[05/18 22:21:49] SuperNet Training INFO: iter: 98400/144360  CE: 3.6228  
+[05/18 22:23:03] SuperNet Training INFO: iter: 98520/144360  CE: 3.7026  
+[05/18 22:24:16] SuperNet Training INFO: iter: 98640/144360  CE: 3.7909  
+[05/18 22:24:19] SuperNet Training INFO: --> epoch:  82/120  avg CE: 3.6268  lr: 0.027321657899098132  
+[05/18 22:26:05] SuperNet Training INFO: iter: 98760/144360  CE: 3.0024  
+[05/18 22:27:18] SuperNet Training INFO: iter: 98880/144360  CE: 3.7114  
+[05/18 22:28:33] SuperNet Training INFO: iter: 99000/144360  CE: 3.5077  
+[05/18 22:29:44] SuperNet Training INFO: iter: 99120/144360  CE: 3.6148  
+[05/18 22:30:56] SuperNet Training INFO: iter: 99240/144360  CE: 3.6151  
+[05/18 22:32:07] SuperNet Training INFO: iter: 99360/144360  CE: 3.9413  
+[05/18 22:33:19] SuperNet Training INFO: iter: 99480/144360  CE: 3.5745  
+[05/18 22:34:31] SuperNet Training INFO: iter: 99600/144360  CE: 3.8174  
+[05/18 22:35:44] SuperNet Training INFO: iter: 99720/144360  CE: 3.6829  
+[05/18 22:36:56] SuperNet Training INFO: iter: 99840/144360  CE: 3.6180  
+[05/18 22:37:00] SuperNet Training INFO: --> epoch:  83/120  avg CE: 3.6230  lr: 0.0260156257845098  
+[05/18 22:38:43] SuperNet Training INFO: iter: 99960/144360  CE: 3.6118  
+[05/18 22:39:53] SuperNet Training INFO: iter: 100080/144360  CE: 3.5177  
+[05/18 22:41:04] SuperNet Training INFO: iter: 100200/144360  CE: 3.9534  
+[05/18 22:42:16] SuperNet Training INFO: iter: 100320/144360  CE: 3.6684  
+[05/18 22:43:27] SuperNet Training INFO: iter: 100440/144360  CE: 3.5006  
+[05/18 22:44:38] SuperNet Training INFO: iter: 100560/144360  CE: 3.5297  
+[05/18 22:45:48] SuperNet Training INFO: iter: 100680/144360  CE: 3.4460  
+[05/18 22:47:00] SuperNet Training INFO: iter: 100800/144360  CE: 3.4792  
+[05/18 22:48:11] SuperNet Training INFO: iter: 100920/144360  CE: 3.7999  
+[05/18 22:49:22] SuperNet Training INFO: iter: 101040/144360  CE: 3.7359  
+[05/18 22:49:28] SuperNet Training INFO: --> epoch:  84/120  avg CE: 3.6043  lr: 0.02473288486245143  
+[05/18 22:51:08] SuperNet Training INFO: iter: 101160/144360  CE: 3.6294  
+[05/18 22:52:18] SuperNet Training INFO: iter: 101280/144360  CE: 3.8068  
+[05/18 22:53:31] SuperNet Training INFO: iter: 101400/144360  CE: 3.7708  
+[05/18 22:54:42] SuperNet Training INFO: iter: 101520/144360  CE: 3.4605  
+[05/18 22:55:53] SuperNet Training INFO: iter: 101640/144360  CE: 3.6739  
+[05/18 22:57:06] SuperNet Training INFO: iter: 101760/144360  CE: 3.6198  
+[05/18 22:58:18] SuperNet Training INFO: iter: 101880/144360  CE: 3.8460  
+[05/18 22:59:31] SuperNet Training INFO: iter: 102000/144360  CE: 3.6426  
+[05/18 23:00:43] SuperNet Training INFO: iter: 102120/144360  CE: 3.5025  
+[05/18 23:01:56] SuperNet Training INFO: iter: 102240/144360  CE: 3.8021  
+[05/18 23:02:04] SuperNet Training INFO: --> epoch:  85/120  avg CE: 3.6033  lr: 0.023474314259476523  
+[05/18 23:03:44] SuperNet Training INFO: iter: 102360/144360  CE: 3.5418  
+[05/18 23:04:55] SuperNet Training INFO: iter: 102480/144360  CE: 3.4934  
+[05/18 23:06:07] SuperNet Training INFO: iter: 102600/144360  CE: 3.8227  
+[05/18 23:07:19] SuperNet Training INFO: iter: 102720/144360  CE: 3.3133  
+[05/18 23:08:30] SuperNet Training INFO: iter: 102840/144360  CE: 3.5356  
+[05/18 23:09:42] SuperNet Training INFO: iter: 102960/144360  CE: 3.4399  
+[05/18 23:10:53] SuperNet Training INFO: iter: 103080/144360  CE: 3.5337  
+[05/18 23:12:05] SuperNet Training INFO: iter: 103200/144360  CE: 3.4918  
+[05/18 23:13:16] SuperNet Training INFO: iter: 103320/144360  CE: 3.4526  
+[05/18 23:14:27] SuperNet Training INFO: iter: 103440/144360  CE: 3.7697  
+[05/18 23:14:37] SuperNet Training INFO: --> epoch:  86/120  avg CE: 3.5978  lr: 0.02224077653700959  
+[05/18 23:16:16] SuperNet Training INFO: iter: 103560/144360  CE: 3.4954  
+[05/18 23:17:29] SuperNet Training INFO: iter: 103680/144360  CE: 3.5615  
+[05/18 23:18:41] SuperNet Training INFO: iter: 103800/144360  CE: 3.5940  
+[05/18 23:19:55] SuperNet Training INFO: iter: 103920/144360  CE: 3.6458  
+[05/18 23:21:08] SuperNet Training INFO: iter: 104040/144360  CE: 3.6252  
+[05/18 23:22:20] SuperNet Training INFO: iter: 104160/144360  CE: 3.7575  
+[05/18 23:23:31] SuperNet Training INFO: iter: 104280/144360  CE: 3.5532  
+[05/18 23:24:42] SuperNet Training INFO: iter: 104400/144360  CE: 3.6582  
+[05/18 23:25:54] SuperNet Training INFO: iter: 104520/144360  CE: 3.7915  
+[05/18 23:27:05] SuperNet Training INFO: iter: 104640/144360  CE: 3.6101  
+[05/18 23:27:17] SuperNet Training INFO: --> epoch:  87/120  avg CE: 3.5783  lr: 0.02103311710018879  
+[05/18 23:28:52] SuperNet Training INFO: iter: 104760/144360  CE: 3.5470  
+[05/18 23:30:04] SuperNet Training INFO: iter: 104880/144360  CE: 3.2946  
+[05/18 23:31:16] SuperNet Training INFO: iter: 105000/144360  CE: 3.5250  
+[05/18 23:32:28] SuperNet Training INFO: iter: 105120/144360  CE: 3.7850  
+[05/18 23:33:40] SuperNet Training INFO: iter: 105240/144360  CE: 3.8823  
+[05/18 23:34:52] SuperNet Training INFO: iter: 105360/144360  CE: 3.4542  
+[05/18 23:36:04] SuperNet Training INFO: iter: 105480/144360  CE: 3.7350  
+[05/18 23:37:16] SuperNet Training INFO: iter: 105600/144360  CE: 3.7672  
+[05/18 23:38:29] SuperNet Training INFO: iter: 105720/144360  CE: 3.7755  
+[05/18 23:39:41] SuperNet Training INFO: iter: 105840/144360  CE: 3.6107  
+[05/18 23:39:55] SuperNet Training INFO: --> epoch:  88/120  avg CE: 3.5770  lr: 0.019852163618468272  
+[05/18 23:41:30] SuperNet Training INFO: iter: 105960/144360  CE: 3.7933  
+[05/18 23:42:43] SuperNet Training INFO: iter: 106080/144360  CE: 3.6199  
+[05/18 23:43:54] SuperNet Training INFO: iter: 106200/144360  CE: 3.3548  
+[05/18 23:45:06] SuperNet Training INFO: iter: 106320/144360  CE: 3.3324  
+[05/18 23:46:19] SuperNet Training INFO: iter: 106440/144360  CE: 3.2729  
+[05/18 23:47:31] SuperNet Training INFO: iter: 106560/144360  CE: 3.7228  
+[05/18 23:48:42] SuperNet Training INFO: iter: 106680/144360  CE: 3.4163  
+[05/18 23:49:55] SuperNet Training INFO: iter: 106800/144360  CE: 3.5234  
+[05/18 23:51:07] SuperNet Training INFO: iter: 106920/144360  CE: 3.5009  
+[05/18 23:52:19] SuperNet Training INFO: iter: 107040/144360  CE: 3.8160  
+[05/18 23:52:35] SuperNet Training INFO: --> epoch:  89/120  avg CE: 3.5596  lr: 0.018698725458374543  
+[05/18 23:54:06] SuperNet Training INFO: iter: 107160/144360  CE: 3.7331  
+[05/18 23:55:17] SuperNet Training INFO: iter: 107280/144360  CE: 3.3671  
+[05/18 23:56:29] SuperNet Training INFO: iter: 107400/144360  CE: 3.6169  
+[05/18 23:57:40] SuperNet Training INFO: iter: 107520/144360  CE: 3.4485  
+[05/18 23:58:52] SuperNet Training INFO: iter: 107640/144360  CE: 3.4424  
+[05/19 00:00:05] SuperNet Training INFO: iter: 107760/144360  CE: 3.4332  
+[05/19 00:01:17] SuperNet Training INFO: iter: 107880/144360  CE: 3.5382  
+[05/19 00:02:28] SuperNet Training INFO: iter: 108000/144360  CE: 3.7319  
+[05/19 00:03:40] SuperNet Training INFO: iter: 108120/144360  CE: 3.6106  
+[05/19 00:04:52] SuperNet Training INFO: iter: 108240/144360  CE: 3.8149  
+[05/19 00:05:09] SuperNet Training INFO: --> epoch:  90/120  avg CE: 3.5553  lr: 0.01757359312880703  
+[05/19 00:06:40] SuperNet Training INFO: iter: 108360/144360  CE: 3.5311  
+[05/19 00:07:52] SuperNet Training INFO: iter: 108480/144360  CE: 3.5198  
+[05/19 00:09:03] SuperNet Training INFO: iter: 108600/144360  CE: 3.4018  
+[05/19 00:10:15] SuperNet Training INFO: iter: 108720/144360  CE: 3.7138  
+[05/19 00:11:26] SuperNet Training INFO: iter: 108840/144360  CE: 3.6577  
+[05/19 00:12:38] SuperNet Training INFO: iter: 108960/144360  CE: 3.3626  
+[05/19 00:13:50] SuperNet Training INFO: iter: 109080/144360  CE: 3.7677  
+[05/19 00:15:02] SuperNet Training INFO: iter: 109200/144360  CE: 3.5324  
+[05/19 00:16:15] SuperNet Training INFO: iter: 109320/144360  CE: 3.5315  
+[05/19 00:17:29] SuperNet Training INFO: iter: 109440/144360  CE: 3.6285  
+[05/19 00:17:47] SuperNet Training INFO: --> epoch:  91/120  avg CE: 3.5418  lr: 0.016477537739262627  
+[05/19 00:19:17] SuperNet Training INFO: iter: 109560/144360  CE: 3.5328  
+[05/19 00:20:30] SuperNet Training INFO: iter: 109680/144360  CE: 3.4735  
+[05/19 00:21:41] SuperNet Training INFO: iter: 109800/144360  CE: 3.4056  
+[05/19 00:22:53] SuperNet Training INFO: iter: 109920/144360  CE: 3.5914  
+[05/19 00:24:05] SuperNet Training INFO: iter: 110040/144360  CE: 3.3624  
+[05/19 00:25:18] SuperNet Training INFO: iter: 110160/144360  CE: 3.3228  
+[05/19 00:26:31] SuperNet Training INFO: iter: 110280/144360  CE: 3.5796  
+[05/19 00:27:43] SuperNet Training INFO: iter: 110400/144360  CE: 3.6944  
+[05/19 00:28:55] SuperNet Training INFO: iter: 110520/144360  CE: 3.5525  
+[05/19 00:30:08] SuperNet Training INFO: iter: 110640/144360  CE: 3.4820  
+[05/19 00:30:28] SuperNet Training INFO: --> epoch:  92/120  avg CE: 3.5425  lr: 0.015411310471356233  
+[05/19 00:31:57] SuperNet Training INFO: iter: 110760/144360  CE: 3.6911  
+[05/19 00:33:09] SuperNet Training INFO: iter: 110880/144360  CE: 3.6005  
+[05/19 00:34:22] SuperNet Training INFO: iter: 111000/144360  CE: 3.5098  
+[05/19 00:35:34] SuperNet Training INFO: iter: 111120/144360  CE: 3.5344  
+[05/19 00:36:46] SuperNet Training INFO: iter: 111240/144360  CE: 3.3111  
+[05/19 00:37:58] SuperNet Training INFO: iter: 111360/144360  CE: 3.2383  
+[05/19 00:39:10] SuperNet Training INFO: iter: 111480/144360  CE: 3.3685  
+[05/19 00:40:23] SuperNet Training INFO: iter: 111600/144360  CE: 3.4600  
+[05/19 00:41:36] SuperNet Training INFO: iter: 111720/144360  CE: 3.7507  
+[05/19 00:42:48] SuperNet Training INFO: iter: 111840/144360  CE: 3.5886  
+[05/19 00:43:10] SuperNet Training INFO: --> epoch:  93/120  avg CE: 3.5228  lr: 0.014375642063998082  
+[05/19 00:44:38] SuperNet Training INFO: iter: 111960/144360  CE: 3.8315  
+[05/19 00:45:52] SuperNet Training INFO: iter: 112080/144360  CE: 3.5383  
+[05/19 00:47:04] SuperNet Training INFO: iter: 112200/144360  CE: 3.2932  
+[05/19 00:48:16] SuperNet Training INFO: iter: 112320/144360  CE: 3.5137  
+[05/19 00:49:28] SuperNet Training INFO: iter: 112440/144360  CE: 3.8207  
+[05/19 00:50:40] SuperNet Training INFO: iter: 112560/144360  CE: 3.7031  
+[05/19 00:51:53] SuperNet Training INFO: iter: 112680/144360  CE: 3.4425  
+[05/19 00:53:05] SuperNet Training INFO: iter: 112800/144360  CE: 3.4265  
+[05/19 00:54:17] SuperNet Training INFO: iter: 112920/144360  CE: 3.3979  
+[05/19 00:55:30] SuperNet Training INFO: iter: 113040/144360  CE: 3.3009  
+[05/19 00:55:54] SuperNet Training INFO: --> epoch:  94/120  avg CE: 3.5275  lr: 0.01337124231258167  
+[05/19 00:57:18] SuperNet Training INFO: iter: 113160/144360  CE: 3.4422  
+[05/19 00:58:31] SuperNet Training INFO: iter: 113280/144360  CE: 3.5804  
+[05/19 00:59:42] SuperNet Training INFO: iter: 113400/144360  CE: 3.5477  
+[05/19 01:00:54] SuperNet Training INFO: iter: 113520/144360  CE: 3.8534  
+[05/19 01:02:06] SuperNet Training INFO: iter: 113640/144360  CE: 3.4655  
+[05/19 01:03:17] SuperNet Training INFO: iter: 113760/144360  CE: 3.4396  
+[05/19 01:04:29] SuperNet Training INFO: iter: 113880/144360  CE: 3.2877  
+[05/19 01:05:42] SuperNet Training INFO: iter: 114000/144360  CE: 3.3618  
+[05/19 01:06:54] SuperNet Training INFO: iter: 114120/144360  CE: 3.3619  
+[05/19 01:08:06] SuperNet Training INFO: iter: 114240/144360  CE: 3.4081  
+[05/19 01:08:32] SuperNet Training INFO: --> epoch:  95/120  avg CE: 3.5148  lr: 0.012398799582525794  
+[05/19 01:09:54] SuperNet Training INFO: iter: 114360/144360  CE: 3.3882  
+[05/19 01:11:06] SuperNet Training INFO: iter: 114480/144360  CE: 3.2642  
+[05/19 01:12:18] SuperNet Training INFO: iter: 114600/144360  CE: 3.5913  
+[05/19 01:13:31] SuperNet Training INFO: iter: 114720/144360  CE: 3.6439  
+[05/19 01:14:43] SuperNet Training INFO: iter: 114840/144360  CE: 3.7199  
+[05/19 01:15:55] SuperNet Training INFO: iter: 114960/144360  CE: 4.2357  
+[05/19 01:17:09] SuperNet Training INFO: iter: 115080/144360  CE: 3.3434  
+[05/19 01:18:20] SuperNet Training INFO: iter: 115200/144360  CE: 3.4014  
+[05/19 01:19:32] SuperNet Training INFO: iter: 115320/144360  CE: 3.3326  
+[05/19 01:20:44] SuperNet Training INFO: iter: 115440/144360  CE: 3.5248  
+[05/19 01:21:11] SuperNet Training INFO: --> epoch:  96/120  avg CE: 3.5159  lr: 0.01145898033750309  
+[05/19 01:22:34] SuperNet Training INFO: iter: 115560/144360  CE: 3.8706  
+[05/19 01:23:46] SuperNet Training INFO: iter: 115680/144360  CE: 3.2397  
+[05/19 01:24:59] SuperNet Training INFO: iter: 115800/144360  CE: 3.5557  
+[05/19 01:26:11] SuperNet Training INFO: iter: 115920/144360  CE: 3.5255  
+[05/19 01:27:23] SuperNet Training INFO: iter: 116040/144360  CE: 3.4260  
+[05/19 01:28:36] SuperNet Training INFO: iter: 116160/144360  CE: 3.2057  
+[05/19 01:29:48] SuperNet Training INFO: iter: 116280/144360  CE: 3.3617  
+[05/19 01:31:00] SuperNet Training INFO: iter: 116400/144360  CE: 3.3410  
+[05/19 01:32:12] SuperNet Training INFO: iter: 116520/144360  CE: 3.5669  
+[05/19 01:33:24] SuperNet Training INFO: iter: 116640/144360  CE: 3.4100  
+[05/19 01:33:54] SuperNet Training INFO: --> epoch:  97/120  avg CE: 3.4992  lr: 0.01055242868267905  
+[05/19 01:35:13] SuperNet Training INFO: iter: 116760/144360  CE: 3.5764  
+[05/19 01:36:25] SuperNet Training INFO: iter: 116880/144360  CE: 3.2322  
+[05/19 01:37:37] SuperNet Training INFO: iter: 117000/144360  CE: 3.6743  
+[05/19 01:38:49] SuperNet Training INFO: iter: 117120/144360  CE: 3.5185  
+[05/19 01:40:01] SuperNet Training INFO: iter: 117240/144360  CE: 3.3926  
+[05/19 01:41:13] SuperNet Training INFO: iter: 117360/144360  CE: 3.4084  
+[05/19 01:42:25] SuperNet Training INFO: iter: 117480/144360  CE: 3.2044  
+[05/19 01:43:36] SuperNet Training INFO: iter: 117600/144360  CE: 3.7076  
+[05/19 01:44:48] SuperNet Training INFO: iter: 117720/144360  CE: 3.6981  
+[05/19 01:45:59] SuperNet Training INFO: iter: 117840/144360  CE: 3.5042  
+[05/19 01:46:31] SuperNet Training INFO: --> epoch:  98/120  avg CE: 3.4848  lr: 0.009679765923274538  
+[05/19 01:47:48] SuperNet Training INFO: iter: 117960/144360  CE: 3.5330  
+[05/19 01:49:00] SuperNet Training INFO: iter: 118080/144360  CE: 3.5528  
+[05/19 01:50:12] SuperNet Training INFO: iter: 118200/144360  CE: 3.5575  
+[05/19 01:51:24] SuperNet Training INFO: iter: 118320/144360  CE: 3.2403  
+[05/19 01:52:36] SuperNet Training INFO: iter: 118440/144360  CE: 3.4046  
+[05/19 01:53:48] SuperNet Training INFO: iter: 118560/144360  CE: 3.2104  
+[05/19 01:55:01] SuperNet Training INFO: iter: 118680/144360  CE: 3.7442  
+[05/19 01:56:14] SuperNet Training INFO: iter: 118800/144360  CE: 3.3681  
+[05/19 01:57:26] SuperNet Training INFO: iter: 118920/144360  CE: 3.3724  
+[05/19 01:58:40] SuperNet Training INFO: iter: 119040/144360  CE: 3.4128  
+[05/19 01:59:14] SuperNet Training INFO: --> epoch:  99/120  avg CE: 3.4760  lr: 0.008841590138754444  
+[05/19 02:00:30] SuperNet Training INFO: iter: 119160/144360  CE: 3.3576  
+[05/19 02:01:42] SuperNet Training INFO: iter: 119280/144360  CE: 3.4906  
+[05/19 02:02:54] SuperNet Training INFO: iter: 119400/144360  CE: 3.7617  
+[05/19 02:04:06] SuperNet Training INFO: iter: 119520/144360  CE: 3.2591  
+[05/19 02:05:18] SuperNet Training INFO: iter: 119640/144360  CE: 3.6691  
+[05/19 02:06:33] SuperNet Training INFO: iter: 119760/144360  CE: 3.5636  
+[05/19 02:07:45] SuperNet Training INFO: iter: 119880/144360  CE: 3.4691  
+[05/19 02:08:58] SuperNet Training INFO: iter: 120000/144360  CE: 3.4290  
+[05/19 02:10:10] SuperNet Training INFO: iter: 120120/144360  CE: 3.3146  
+[05/19 02:11:21] SuperNet Training INFO: iter: 120240/144360  CE: 3.5223  
+[05/19 02:11:56] SuperNet Training INFO: --> epoch: 100/120  avg CE: 3.4669  lr: 0.00803847577293368  
+[05/19 02:13:09] SuperNet Training INFO: iter: 120360/144360  CE: 3.3834  
+[05/19 02:14:20] SuperNet Training INFO: iter: 120480/144360  CE: 3.1635  
+[05/19 02:15:32] SuperNet Training INFO: iter: 120600/144360  CE: 3.6331  
+[05/19 02:16:43] SuperNet Training INFO: iter: 120720/144360  CE: 3.8437  
+[05/19 02:17:55] SuperNet Training INFO: iter: 120840/144360  CE: 3.9370  
+[05/19 02:19:06] SuperNet Training INFO: iter: 120960/144360  CE: 3.4427  
+[05/19 02:20:17] SuperNet Training INFO: iter: 121080/144360  CE: 3.5465  
+[05/19 02:21:28] SuperNet Training INFO: iter: 121200/144360  CE: 3.3295  
+[05/19 02:22:40] SuperNet Training INFO: iter: 121320/144360  CE: 3.6876  
+[05/19 02:23:51] SuperNet Training INFO: iter: 121440/144360  CE: 3.4766  
+[05/19 02:24:28] SuperNet Training INFO: --> epoch: 101/120  avg CE: 3.4738  lr: 0.007270973240282054  
+[05/19 02:25:39] SuperNet Training INFO: iter: 121560/144360  CE: 3.6354  
+[05/19 02:26:51] SuperNet Training INFO: iter: 121680/144360  CE: 3.4178  
+[05/19 02:28:04] SuperNet Training INFO: iter: 121800/144360  CE: 3.4259  
+[05/19 02:29:16] SuperNet Training INFO: iter: 121920/144360  CE: 3.3807  
+[05/19 02:30:28] SuperNet Training INFO: iter: 122040/144360  CE: 3.4591  
+[05/19 02:31:40] SuperNet Training INFO: iter: 122160/144360  CE: 3.8383  
+[05/19 02:32:51] SuperNet Training INFO: iter: 122280/144360  CE: 3.3918  
+[05/19 02:34:03] SuperNet Training INFO: iter: 122400/144360  CE: 3.3968  
+[05/19 02:35:14] SuperNet Training INFO: iter: 122520/144360  CE: 3.3389  
+[05/19 02:36:27] SuperNet Training INFO: iter: 122640/144360  CE: 3.2967  
+[05/19 02:37:05] SuperNet Training INFO: --> epoch: 102/120  avg CE: 3.4602  lr: 0.006539608548697928  
+[05/19 02:38:14] SuperNet Training INFO: iter: 122760/144360  CE: 3.7113  
+[05/19 02:39:26] SuperNet Training INFO: iter: 122880/144360  CE: 3.2488  
+[05/19 02:40:39] SuperNet Training INFO: iter: 123000/144360  CE: 3.2509  
+[05/19 02:41:51] SuperNet Training INFO: iter: 123120/144360  CE: 3.2889  
+[05/19 02:43:03] SuperNet Training INFO: iter: 123240/144360  CE: 3.5282  
+[05/19 02:44:15] SuperNet Training INFO: iter: 123360/144360  CE: 3.2042  
+[05/19 02:45:27] SuperNet Training INFO: iter: 123480/144360  CE: 3.5055  
+[05/19 02:46:40] SuperNet Training INFO: iter: 123600/144360  CE: 3.5233  
+[05/19 02:47:53] SuperNet Training INFO: iter: 123720/144360  CE: 3.9158  
+[05/19 02:49:05] SuperNet Training INFO: iter: 123840/144360  CE: 3.4391  
+[05/19 02:49:46] SuperNet Training INFO: --> epoch: 103/120  avg CE: 3.4697  lr: 0.00584488293900834  
+[05/19 02:50:55] SuperNet Training INFO: iter: 123960/144360  CE: 3.3799  
+[05/19 02:52:07] SuperNet Training INFO: iter: 124080/144360  CE: 3.5222  
+[05/19 02:53:20] SuperNet Training INFO: iter: 124200/144360  CE: 3.5724  
+[05/19 02:54:32] SuperNet Training INFO: iter: 124320/144360  CE: 3.5229  
+[05/19 02:55:44] SuperNet Training INFO: iter: 124440/144360  CE: 3.5273  
+[05/19 02:56:56] SuperNet Training INFO: iter: 124560/144360  CE: 3.4547  
+[05/19 02:58:07] SuperNet Training INFO: iter: 124680/144360  CE: 3.5001  
+[05/19 02:59:20] SuperNet Training INFO: iter: 124800/144360  CE: 3.3369  
+[05/19 03:00:32] SuperNet Training INFO: iter: 124920/144360  CE: 3.6301  
+[05/19 03:01:44] SuperNet Training INFO: iter: 125040/144360  CE: 3.3090  
+[05/19 03:02:26] SuperNet Training INFO: --> epoch: 104/120  avg CE: 3.4538  lr: 0.005187272541443939  
+[05/19 03:03:34] SuperNet Training INFO: iter: 125160/144360  CE: 3.5647  
+[05/19 03:04:46] SuperNet Training INFO: iter: 125280/144360  CE: 3.7205  
+[05/19 03:05:59] SuperNet Training INFO: iter: 125400/144360  CE: 3.6166  
+[05/19 03:07:11] SuperNet Training INFO: iter: 125520/144360  CE: 3.6031  
+[05/19 03:08:24] SuperNet Training INFO: iter: 125640/144360  CE: 3.6264  
+[05/19 03:09:37] SuperNet Training INFO: iter: 125760/144360  CE: 3.3961  
+[05/19 03:10:49] SuperNet Training INFO: iter: 125880/144360  CE: 3.5590  
+[05/19 03:12:01] SuperNet Training INFO: iter: 126000/144360  CE: 3.0982  
+[05/19 03:13:14] SuperNet Training INFO: iter: 126120/144360  CE: 3.1269  
+[05/19 03:14:26] SuperNet Training INFO: iter: 126240/144360  CE: 3.5476  
+[05/19 03:15:10] SuperNet Training INFO: --> epoch: 105/120  avg CE: 3.4491  lr: 0.00456722804932279  
+[05/19 03:16:15] SuperNet Training INFO: iter: 126360/144360  CE: 3.2797  
+[05/19 03:17:25] SuperNet Training INFO: iter: 126480/144360  CE: 3.6053  
+[05/19 03:18:36] SuperNet Training INFO: iter: 126600/144360  CE: 3.3150  
+[05/19 03:19:46] SuperNet Training INFO: iter: 126720/144360  CE: 3.4322  
+[05/19 03:20:58] SuperNet Training INFO: iter: 126840/144360  CE: 3.5031  
+[05/19 03:22:11] SuperNet Training INFO: iter: 126960/144360  CE: 3.3102  
+[05/19 03:23:24] SuperNet Training INFO: iter: 127080/144360  CE: 3.3105  
+[05/19 03:24:37] SuperNet Training INFO: iter: 127200/144360  CE: 3.5123  
+[05/19 03:25:49] SuperNet Training INFO: iter: 127320/144360  CE: 3.6165  
+[05/19 03:27:02] SuperNet Training INFO: iter: 127440/144360  CE: 3.2141  
+[05/19 03:27:48] SuperNet Training INFO: --> epoch: 106/120  avg CE: 3.4422  lr: 0.003985174410167894  
+[05/19 03:28:52] SuperNet Training INFO: iter: 127560/144360  CE: 3.1226  
+[05/19 03:30:05] SuperNet Training INFO: iter: 127680/144360  CE: 3.4061  
+[05/19 03:31:17] SuperNet Training INFO: iter: 127800/144360  CE: 3.2243  
+[05/19 03:32:29] SuperNet Training INFO: iter: 127920/144360  CE: 3.3781  
+[05/19 03:33:41] SuperNet Training INFO: iter: 128040/144360  CE: 3.1324  
+[05/19 03:34:53] SuperNet Training INFO: iter: 128160/144360  CE: 3.6430  
+[05/19 03:36:07] SuperNet Training INFO: iter: 128280/144360  CE: 3.7566  
+[05/19 03:37:19] SuperNet Training INFO: iter: 128400/144360  CE: 3.4310  
+[05/19 03:38:32] SuperNet Training INFO: iter: 128520/144360  CE: 3.5508  
+[05/19 03:39:45] SuperNet Training INFO: iter: 128640/144360  CE: 3.5263  
+[05/19 03:40:33] SuperNet Training INFO: --> epoch: 107/120  avg CE: 3.4391  lr: 0.003441510534469298  
+[05/19 03:41:35] SuperNet Training INFO: iter: 128760/144360  CE: 3.5311  
+[05/19 03:42:47] SuperNet Training INFO: iter: 128880/144360  CE: 3.2021  
+[05/19 03:43:59] SuperNet Training INFO: iter: 129000/144360  CE: 3.1540  
+[05/19 03:45:11] SuperNet Training INFO: iter: 129120/144360  CE: 3.4705  
+[05/19 03:46:24] SuperNet Training INFO: iter: 129240/144360  CE: 3.3805  
+[05/19 03:47:36] SuperNet Training INFO: iter: 129360/144360  CE: 3.2673  
+[05/19 03:48:48] SuperNet Training INFO: iter: 129480/144360  CE: 3.3994  
+[05/19 03:50:00] SuperNet Training INFO: iter: 129600/144360  CE: 3.5476  
+[05/19 03:51:12] SuperNet Training INFO: iter: 129720/144360  CE: 3.4637  
+[05/19 03:52:25] SuperNet Training INFO: iter: 129840/144360  CE: 3.7381  
+[05/19 03:53:15] SuperNet Training INFO: --> epoch: 108/120  avg CE: 3.4296  lr: 0.002936609022290792  
+[05/19 03:54:14] SuperNet Training INFO: iter: 129960/144360  CE: 3.3990  
+[05/19 03:55:29] SuperNet Training INFO: iter: 130080/144360  CE: 3.5061  
+[05/19 03:56:41] SuperNet Training INFO: iter: 130200/144360  CE: 3.6011  
+[05/19 03:57:52] SuperNet Training INFO: iter: 130320/144360  CE: 3.3352  
+[05/19 03:59:04] SuperNet Training INFO: iter: 130440/144360  CE: 3.4271  
+[05/19 04:00:16] SuperNet Training INFO: iter: 130560/144360  CE: 3.1878  
+[05/19 04:01:27] SuperNet Training INFO: iter: 130680/144360  CE: 3.9576  
+[05/19 04:02:39] SuperNet Training INFO: iter: 130800/144360  CE: 3.6028  
+[05/19 04:03:51] SuperNet Training INFO: iter: 130920/144360  CE: 3.5959  
+[05/19 04:05:02] SuperNet Training INFO: iter: 131040/144360  CE: 3.5911  
+[05/19 04:05:52] SuperNet Training INFO: --> epoch: 109/120  avg CE: 3.4339  lr: 0.0024708159079084185  
+[05/19 04:06:48] SuperNet Training INFO: iter: 131160/144360  CE: 3.4081  
+[05/19 04:08:00] SuperNet Training INFO: iter: 131280/144360  CE: 3.6013  
+[05/19 04:09:12] SuperNet Training INFO: iter: 131400/144360  CE: 3.2451  
+[05/19 04:10:24] SuperNet Training INFO: iter: 131520/144360  CE: 3.1579  
+[05/19 04:11:35] SuperNet Training INFO: iter: 131640/144360  CE: 3.4882  
+[05/19 04:12:47] SuperNet Training INFO: iter: 131760/144360  CE: 3.4864  
+[05/19 04:13:59] SuperNet Training INFO: iter: 131880/144360  CE: 3.7421  
+[05/19 04:15:11] SuperNet Training INFO: iter: 132000/144360  CE: 3.3766  
+[05/19 04:16:23] SuperNet Training INFO: iter: 132120/144360  CE: 3.6223  
+[05/19 04:17:35] SuperNet Training INFO: iter: 132240/144360  CE: 3.4459  
+[05/19 04:18:28] SuperNet Training INFO: --> epoch: 110/120  avg CE: 3.4372  lr: 0.0020444504226559065  
+[05/19 04:19:25] SuperNet Training INFO: iter: 132360/144360  CE: 3.7585  
+[05/19 04:20:37] SuperNet Training INFO: iter: 132480/144360  CE: 3.8087  
+[05/19 04:21:49] SuperNet Training INFO: iter: 132600/144360  CE: 3.5006  
+[05/19 04:23:02] SuperNet Training INFO: iter: 132720/144360  CE: 3.2880  
+[05/19 04:24:15] SuperNet Training INFO: iter: 132840/144360  CE: 3.8137  
+[05/19 04:25:27] SuperNet Training INFO: iter: 132960/144360  CE: 3.3953  
+[05/19 04:26:39] SuperNet Training INFO: iter: 133080/144360  CE: 3.7559  
+[05/19 04:27:51] SuperNet Training INFO: iter: 133200/144360  CE: 3.2593  
+[05/19 04:29:04] SuperNet Training INFO: iter: 133320/144360  CE: 3.3853  
+[05/19 04:30:16] SuperNet Training INFO: iter: 133440/144360  CE: 3.3655  
+[05/19 04:31:11] SuperNet Training INFO: --> epoch: 111/120  avg CE: 3.4295  lr: 0.0016578047761394107  
+[05/19 04:32:05] SuperNet Training INFO: iter: 133560/144360  CE: 3.4227  
+[05/19 04:33:17] SuperNet Training INFO: iter: 133680/144360  CE: 3.5807  
+[05/19 04:34:30] SuperNet Training INFO: iter: 133800/144360  CE: 3.4464  
+[05/19 04:35:42] SuperNet Training INFO: iter: 133920/144360  CE: 3.4792  
+[05/19 04:36:55] SuperNet Training INFO: iter: 134040/144360  CE: 3.0493  
+[05/19 04:38:07] SuperNet Training INFO: iter: 134160/144360  CE: 3.4328  
+[05/19 04:39:20] SuperNet Training INFO: iter: 134280/144360  CE: 3.5801  
+[05/19 04:40:32] SuperNet Training INFO: iter: 134400/144360  CE: 3.2824  
+[05/19 04:41:44] SuperNet Training INFO: iter: 134520/144360  CE: 3.4909  
+[05/19 04:42:56] SuperNet Training INFO: iter: 134640/144360  CE: 3.5674  
+[05/19 04:43:53] SuperNet Training INFO: --> epoch: 112/120  avg CE: 3.4248  lr: 0.0013111439559716617  
+[05/19 04:44:45] SuperNet Training INFO: iter: 134760/144360  CE: 3.4368  
+[05/19 04:45:56] SuperNet Training INFO: iter: 134880/144360  CE: 3.3901  
+[05/19 04:47:08] SuperNet Training INFO: iter: 135000/144360  CE: 3.3767  
+[05/19 04:48:21] SuperNet Training INFO: iter: 135120/144360  CE: 3.3499  
+[05/19 04:49:33] SuperNet Training INFO: iter: 135240/144360  CE: 3.3372  
+[05/19 04:50:47] SuperNet Training INFO: iter: 135360/144360  CE: 3.5998  
+[05/19 04:51:59] SuperNet Training INFO: iter: 135480/144360  CE: 3.5243  
+[05/19 04:53:11] SuperNet Training INFO: iter: 135600/144360  CE: 3.4975  
+[05/19 04:54:24] SuperNet Training INFO: iter: 135720/144360  CE: 3.3609  
+[05/19 04:55:36] SuperNet Training INFO: iter: 135840/144360  CE: 3.0465  
+[05/19 04:56:35] SuperNet Training INFO: --> epoch: 113/120  avg CE: 3.4297  lr: 0.0010047055461627253  
+[05/19 04:57:26] SuperNet Training INFO: iter: 135960/144360  CE: 3.5084  
+[05/19 04:58:39] SuperNet Training INFO: iter: 136080/144360  CE: 3.4035  
+[05/19 04:59:52] SuperNet Training INFO: iter: 136200/144360  CE: 3.1976  
+[05/19 05:01:05] SuperNet Training INFO: iter: 136320/144360  CE: 3.5503  
+[05/19 05:02:17] SuperNet Training INFO: iter: 136440/144360  CE: 3.4137  
+[05/19 05:03:30] SuperNet Training INFO: iter: 136560/144360  CE: 3.5817  
+[05/19 05:04:42] SuperNet Training INFO: iter: 136680/144360  CE: 3.4537  
+[05/19 05:05:55] SuperNet Training INFO: iter: 136800/144360  CE: 3.3999  
+[05/19 05:07:07] SuperNet Training INFO: iter: 136920/144360  CE: 3.2189  
+[05/19 05:08:19] SuperNet Training INFO: iter: 137040/144360  CE: 3.7898  
+[05/19 05:09:20] SuperNet Training INFO: --> epoch: 114/120  avg CE: 3.4197  lr: 0.000738699564291742  
+[05/19 05:10:09] SuperNet Training INFO: iter: 137160/144360  CE: 3.1730  
+[05/19 05:11:19] SuperNet Training INFO: iter: 137280/144360  CE: 3.3055  
+[05/19 05:12:29] SuperNet Training INFO: iter: 137400/144360  CE: 3.4065  
+[05/19 05:13:42] SuperNet Training INFO: iter: 137520/144360  CE: 3.4515  
+[05/19 05:14:54] SuperNet Training INFO: iter: 137640/144360  CE: 3.3283  
+[05/19 05:16:06] SuperNet Training INFO: iter: 137760/144360  CE: 3.6535  
+[05/19 05:17:19] SuperNet Training INFO: iter: 137880/144360  CE: 3.4539  
+[05/19 05:18:31] SuperNet Training INFO: iter: 138000/144360  CE: 3.6800  
+[05/19 05:19:43] SuperNet Training INFO: iter: 138120/144360  CE: 3.6344  
+[05/19 05:20:55] SuperNet Training INFO: iter: 138240/144360  CE: 3.6727  
+[05/19 05:21:56] SuperNet Training INFO: --> epoch: 115/120  avg CE: 3.4106  lr: 0.0005133083175713779  
+[05/19 05:22:43] SuperNet Training INFO: iter: 138360/144360  CE: 3.4362  
+[05/19 05:23:55] SuperNet Training INFO: iter: 138480/144360  CE: 3.8143  
+[05/19 05:25:07] SuperNet Training INFO: iter: 138600/144360  CE: 3.4068  
+[05/19 05:26:19] SuperNet Training INFO: iter: 138720/144360  CE: 3.3764  
+[05/19 05:27:31] SuperNet Training INFO: iter: 138840/144360  CE: 3.3949  
+[05/19 05:28:44] SuperNet Training INFO: iter: 138960/144360  CE: 3.3791  
+[05/19 05:29:57] SuperNet Training INFO: iter: 139080/144360  CE: 3.4338  
+[05/19 05:31:10] SuperNet Training INFO: iter: 139200/144360  CE: 3.2361  
+[05/19 05:32:22] SuperNet Training INFO: iter: 139320/144360  CE: 3.3068  
+[05/19 05:33:35] SuperNet Training INFO: iter: 139440/144360  CE: 3.6558  
+[05/19 05:34:39] SuperNet Training INFO: --> epoch: 116/120  avg CE: 3.4194  lr: 0.00032868627790359544  
+[05/19 05:35:25] SuperNet Training INFO: iter: 139560/144360  CE: 3.5271  
+[05/19 05:36:38] SuperNet Training INFO: iter: 139680/144360  CE: 3.3175  
+[05/19 05:37:50] SuperNet Training INFO: iter: 139800/144360  CE: 3.0995  
+[05/19 05:39:03] SuperNet Training INFO: iter: 139920/144360  CE: 3.2419  
+[05/19 05:40:15] SuperNet Training INFO: iter: 140040/144360  CE: 3.4090  
+[05/19 05:41:28] SuperNet Training INFO: iter: 140160/144360  CE: 3.4041  
+[05/19 05:42:41] SuperNet Training INFO: iter: 140280/144360  CE: 3.3371  
+[05/19 05:43:54] SuperNet Training INFO: iter: 140400/144360  CE: 3.3308  
+[05/19 05:45:07] SuperNet Training INFO: iter: 140520/144360  CE: 3.5059  
+[05/19 05:46:19] SuperNet Training INFO: iter: 140640/144360  CE: 3.3697  
+[05/19 05:47:24] SuperNet Training INFO: --> epoch: 117/120  avg CE: 3.4250  lr: 0.00018495997601232129  
+[05/19 05:48:07] SuperNet Training INFO: iter: 140760/144360  CE: 3.4254  
+[05/19 05:49:19] SuperNet Training INFO: iter: 140880/144360  CE: 3.6694  
+[05/19 05:50:32] SuperNet Training INFO: iter: 141000/144360  CE: 3.4008  
+[05/19 05:51:45] SuperNet Training INFO: iter: 141120/144360  CE: 3.2859  
+[05/19 05:52:56] SuperNet Training INFO: iter: 141240/144360  CE: 3.8564  
+[05/19 05:54:09] SuperNet Training INFO: iter: 141360/144360  CE: 3.3147  
+[05/19 05:55:22] SuperNet Training INFO: iter: 141480/144360  CE: 3.2119  
+[05/19 05:56:35] SuperNet Training INFO: iter: 141600/144360  CE: 3.1603  
+[05/19 05:57:47] SuperNet Training INFO: iter: 141720/144360  CE: 3.2385  
+[05/19 05:58:59] SuperNet Training INFO: iter: 141840/144360  CE: 3.1809  
+[05/19 06:00:07] SuperNet Training INFO: --> epoch: 118/120  avg CE: 3.4082  lr: 8.222791472556962e-05  
+[05/19 06:00:49] SuperNet Training INFO: iter: 141960/144360  CE: 3.2788  
+[05/19 06:02:01] SuperNet Training INFO: iter: 142080/144360  CE: 3.4207  
+[05/19 06:03:12] SuperNet Training INFO: iter: 142200/144360  CE: 3.6088  
+[05/19 06:04:23] SuperNet Training INFO: iter: 142320/144360  CE: 3.2894  
+[05/19 06:05:34] SuperNet Training INFO: iter: 142440/144360  CE: 3.5194  
+[05/19 06:06:44] SuperNet Training INFO: iter: 142560/144360  CE: 3.2151  
+[05/19 06:07:55] SuperNet Training INFO: iter: 142680/144360  CE: 3.5339  
+[05/19 06:09:07] SuperNet Training INFO: iter: 142800/144360  CE: 3.4123  
+[05/19 06:10:18] SuperNet Training INFO: iter: 142920/144360  CE: 3.3015  
+[05/19 06:11:30] SuperNet Training INFO: iter: 143040/144360  CE: 3.3613  
+[05/19 06:12:39] SuperNet Training INFO: --> epoch: 119/120  avg CE: 3.4101  lr: 2.0560501466564365e-05  
+[05/19 06:13:19] SuperNet Training INFO: iter: 143160/144360  CE: 3.1201  
+[05/19 06:14:31] SuperNet Training INFO: iter: 143280/144360  CE: 3.1781  
+[05/19 06:15:44] SuperNet Training INFO: iter: 143400/144360  CE: 3.2342  
+[05/19 06:16:56] SuperNet Training INFO: iter: 143520/144360  CE: 3.0167  
+[05/19 06:18:08] SuperNet Training INFO: iter: 143640/144360  CE: 3.5390  
+[05/19 06:19:19] SuperNet Training INFO: iter: 143760/144360  CE: 3.4499  
+[05/19 06:20:31] SuperNet Training INFO: iter: 143880/144360  CE: 4.0028  
+[05/19 06:21:43] SuperNet Training INFO: iter: 144000/144360  CE: 3.5135  
+[05/19 06:22:55] SuperNet Training INFO: iter: 144120/144360  CE: 3.3967  
+[05/19 06:24:07] SuperNet Training INFO: iter: 144240/144360  CE: 3.6481  
+[05/19 06:25:18] SuperNet Training INFO: iter: 144360/144360  CE: 3.1675  
+[05/19 06:25:18] SuperNet Training INFO: --> epoch: 120/120  avg CE: 3.4133  lr: 0.0  
+[05/19 06:25:18] SuperNet Training INFO: --> END mobile0-k2r-3638-TBS-seed-0
+[05/19 06:25:18] SuperNet Training INFO: {0: 0, 1: 0}
+[05/19 06:25:25] SuperNet Training INFO: ELAPSED TIME: 90979.0(s) = 25(h) 16(m)

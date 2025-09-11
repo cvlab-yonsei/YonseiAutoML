@@ -1,3 +1,35 @@
+#######################
+
+## ysautoml.network.fewshot 연습 ##
+from ysautoml.network.fewshot.mobilenet import train_supernet
+import torch
+print("CUDA device count:", torch.cuda.device_count())
+
+
+# from ysautoml.network.fewshot.mobilenet import train_supernet, train_supernet_decom
+
+# 1) 일반 supernet 학습
+if __name__ == "__main__":
+    result = train_supernet(
+        tag="exp1",
+        seed=42,
+        thresholds=(38, 40),
+        num_gpus=2,
+        max_epoch=2
+    )
+
+
+# # 2) decom 버전 학습
+# result2 = train_supernet_decom(
+#     tag="exp002",
+#     seed=1,
+#     data_path="/dataset/ILSVRC2012",
+#     num_gpus=4,
+# )
+
+#######################
+
+
 # ## ysautoml.data.fyi ##
 # from ysautoml.data.fyi import run_dsa, run_dm
 
@@ -6,42 +38,43 @@
 
 # ########################
 
-## ysautoml.data.dsbn ##
+# ## ysautoml.data.dsbn ##
 
-# batch 분리 학습
-from ysautoml.data.dsbn import convert_and_wrap, train_with_dsbn
-import torch
-import torchvision
-import torchvision.transforms as transforms
-from torch.utils.data import DataLoader, random_split
+# # batch 분리 학습
+# from ysautoml.data.dsbn import convert_and_wrap, train_with_dsbn
+# import torch
+# import torchvision
+# import torchvision.transforms as transforms
+# from torch.utils.data import DataLoader, random_split
 
-# 1. 데이터 준비 (source / target 따로 분리)
-transform = transforms.Compose([
-    transforms.ToTensor(),
-])
+# # 1. 데이터 준비 (source / target 따로 분리)
+# transform = transforms.Compose([
+#     transforms.ToTensor(),
+# ])
 
-full_train = torchvision.datasets.CIFAR10(root="./data", train=True, download=True, transform=transform)
-len_source = len(full_train) // 2
-len_target = len(full_train) - len_source
-source_dataset, target_dataset = random_split(full_train, [len_source, len_target])
+# full_train = torchvision.datasets.CIFAR10(root="./data", train=True, download=True, transform=transform)
+# len_source = len(full_train) // 2
+# len_target = len(full_train) - len_source
+# source_dataset, target_dataset = random_split(full_train, [len_source, len_target])
 
-source_loader = DataLoader(source_dataset, batch_size=128, shuffle=True, num_workers=2)
-target_loader = DataLoader(target_dataset, batch_size=128, shuffle=True, num_workers=2)
+# source_loader = DataLoader(source_dataset, batch_size=128, shuffle=True, num_workers=2)
+# target_loader = DataLoader(target_dataset, batch_size=128, shuffle=True, num_workers=2)
 
-# 2. 모델 변환 (BN → DSBN)
-model = convert_and_wrap("resnet18_cifar", dataset="CIFAR10", num_classes=10, use_aug=True, device="0")
+# # 2. 모델 변환 (BN → DSBN)
+# model = convert_and_wrap("resnet18_cifar", dataset="CIFAR10", num_classes=10, use_aug=True, device="0")
 
-# 3. 학습 실행 (분리 학습 모드)
-result = train_with_dsbn(model, source_loader, target_loader,
-                         epochs=2, lr=0.01, mixed_batch=True, device="cuda")
+# # 3. 학습 실행 (분리 학습 모드)
+# result = train_with_dsbn(model, source_loader, target_loader,
+#                          epochs=2, lr=0.01, mixed_batch=True, device="cuda")
 
-print("Final Accuracy:", result["final_acc"])
-print("Number of log entries:", len(result["logs"]))
+# print("Final Accuracy:", result["final_acc"])
+# print("Number of log entries:", len(result["logs"]))
 
-# state_dict를 저장하고 싶을 때
-import torch
-torch.save(result["state_dict"], "./logs/dsbn_trained.pth")
+# # state_dict를 저장하고 싶을 때
+# import torch
+# torch.save(result["state_dict"], "./logs/dsbn_trained.pth")
 
+################
 
 # # batch 섞어서 학습
 # from ysautoml.data.dsbn import convert_and_wrap, train_with_dsbn_api

@@ -1,0 +1,1215 @@
+[04/12 13:30:17] Re-training INFO: tag                 : gss-mobile0-rms
+[04/12 13:30:17] Re-training INFO: arch                : [6, 4, 12, 6, 2, 4, 6, 8, 6, 4, 8, 10, 6, 0, 0, 4, 4, 6, 9, 0, 11]
+[04/12 13:30:17] Re-training INFO: seed                : 0
+[04/12 13:30:17] Re-training INFO: data_path           : ../../../dataset/ILSVRC2012
+[04/12 13:30:17] Re-training INFO: save_path           : ./Evaluation
+[04/12 13:30:17] Re-training INFO: search_space        : greedy
+[04/12 13:30:17] Re-training INFO: valid_size          : 0
+[04/12 13:30:17] Re-training INFO: num_gpus            : 8
+[04/12 13:30:17] Re-training INFO: workers             : 4
+[04/12 13:30:17] Re-training INFO: interval_ep_eval    : 20
+[04/12 13:30:17] Re-training INFO: train_batch_size    : 1024
+[04/12 13:30:17] Re-training INFO: test_batch_size     : 256
+[04/12 13:30:17] Re-training INFO: max_epoch           : 240
+[04/12 13:30:17] Re-training INFO: learning_rate       : 0.064
+[04/12 13:30:17] Re-training INFO: momentum            : 0.9
+[04/12 13:30:17] Re-training INFO: weight_decay        : 1e-05
+[04/12 13:30:17] Re-training INFO: nesterov            : False
+[04/12 13:30:17] Re-training INFO: lr_schedule_type    : cosine
+[04/12 13:30:17] Re-training INFO: warmup              : True
+[04/12 13:30:17] Re-training INFO: drop_out            : 0.2
+[04/12 13:30:17] Re-training INFO: label_smooth        : 0.1
+[04/12 13:30:17] Re-training INFO: rank                : 0
+[04/12 13:30:17] Re-training INFO: gpu                 : 0
+[04/12 13:30:17] Re-training INFO: save_name           : Retrain-gss-mobile0-rms-seed-0
+[04/12 13:30:17] Re-training INFO: log_path            : ./Evaluation/logs/Retrain-gss-mobile0-rms-seed-0.txt
+[04/12 13:30:17] Re-training INFO: ckpt_path           : ./Evaluation/checkpoint/Retrain-gss-mobile0-rms-seed-0.pt
+[04/12 13:30:17] Re-training INFO: dist_url            : tcp://127.0.0.1:23456
+[04/12 13:30:17] Re-training INFO: world_size          : 8
+[04/12 13:30:17] Re-training INFO: distributed         : True
+[04/12 13:30:17] Re-training INFO: ['3x3_MBConv3', '3x3_MBConv6', '5x5_MBConv3', '5x5_MBConv6', '7x7_MBConv3', '7x7_MBConv6', '3x3_MBConv3_SE', '3x3_MBConv6_SE', '5x5_MBConv3_SE', '5x5_MBConv6_SE', '7x7_MBConv3_SE', '7x7_MBConv6_SE', 'Identity']
+[04/12 13:30:51] Re-training INFO: CNN(
+  (first_conv): Sequential(
+    (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU6(inplace=True)
+  )
+  (first_block): InvertedResidual(
+    (depth_conv): Sequential(
+      (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=32, bias=False)
+      (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU6(inplace=True)
+    )
+    (point_linear): Sequential(
+      (0): Conv2d(32, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (blocks): ModuleList(
+    (0): InvertedResidual_SE(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(16, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=48, bias=False)
+        (1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(48, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (se): SqueezeExcite(
+        (conv_reduce): Conv2d(48, 16, kernel_size=(1, 1), stride=(1, 1))
+        (act1): ReLU6(inplace=True)
+        (conv_expand): Conv2d(16, 48, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Sigmoid()
+      )
+    )
+    (1): InvertedResidual(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(32, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(96, 96, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=96, bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(96, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (2): Identity()
+    (3): InvertedResidual_SE(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(32, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(96, 96, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=96, bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(96, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (se): SqueezeExcite(
+        (conv_reduce): Conv2d(96, 32, kernel_size=(1, 1), stride=(1, 1))
+        (act1): ReLU6(inplace=True)
+        (conv_expand): Conv2d(32, 96, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Sigmoid()
+      )
+    )
+    (4): InvertedResidual(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(32, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(96, 96, kernel_size=(5, 5), stride=(2, 2), padding=(2, 2), groups=96, bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(96, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (5): InvertedResidual(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(40, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(120, 120, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=120, bias=False)
+        (1): BatchNorm2d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(120, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (6): InvertedResidual_SE(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(40, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=120, bias=False)
+        (1): BatchNorm2d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(120, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (se): SqueezeExcite(
+        (conv_reduce): Conv2d(120, 40, kernel_size=(1, 1), stride=(1, 1))
+        (act1): ReLU6(inplace=True)
+        (conv_expand): Conv2d(40, 120, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Sigmoid()
+      )
+    )
+    (7): InvertedResidual_SE(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(40, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(120, 120, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2), groups=120, bias=False)
+        (1): BatchNorm2d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(120, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (se): SqueezeExcite(
+        (conv_reduce): Conv2d(120, 40, kernel_size=(1, 1), stride=(1, 1))
+        (act1): ReLU6(inplace=True)
+        (conv_expand): Conv2d(40, 120, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Sigmoid()
+      )
+    )
+    (8): InvertedResidual_SE(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(40, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(120, 120, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=120, bias=False)
+        (1): BatchNorm2d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(120, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (se): SqueezeExcite(
+        (conv_reduce): Conv2d(120, 40, kernel_size=(1, 1), stride=(1, 1))
+        (act1): ReLU6(inplace=True)
+        (conv_expand): Conv2d(40, 120, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Sigmoid()
+      )
+    )
+    (9): InvertedResidual(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(80, 240, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(240, 240, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=240, bias=False)
+        (1): BatchNorm2d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(240, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (10): InvertedResidual_SE(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(80, 240, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(240, 240, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2), groups=240, bias=False)
+        (1): BatchNorm2d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(240, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (se): SqueezeExcite(
+        (conv_reduce): Conv2d(240, 80, kernel_size=(1, 1), stride=(1, 1))
+        (act1): ReLU6(inplace=True)
+        (conv_expand): Conv2d(80, 240, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Sigmoid()
+      )
+    )
+    (11): InvertedResidual_SE(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(80, 240, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(240, 240, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=240, bias=False)
+        (1): BatchNorm2d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(240, 80, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (se): SqueezeExcite(
+        (conv_reduce): Conv2d(240, 80, kernel_size=(1, 1), stride=(1, 1))
+        (act1): ReLU6(inplace=True)
+        (conv_expand): Conv2d(80, 240, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Sigmoid()
+      )
+    )
+    (12): InvertedResidual_SE(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(80, 240, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(240, 240, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=240, bias=False)
+        (1): BatchNorm2d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(240, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (se): SqueezeExcite(
+        (conv_reduce): Conv2d(240, 80, kernel_size=(1, 1), stride=(1, 1))
+        (act1): ReLU6(inplace=True)
+        (conv_expand): Conv2d(80, 240, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Sigmoid()
+      )
+    )
+    (13): InvertedResidual(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(96, 288, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(288, 288, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=288, bias=False)
+        (1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(288, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (14): InvertedResidual(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(96, 288, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(288, 288, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=288, bias=False)
+        (1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(288, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (15): InvertedResidual(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(96, 288, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(288, 288, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=288, bias=False)
+        (1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(288, 96, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (16): InvertedResidual(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(96, 288, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(288, 288, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), groups=288, bias=False)
+        (1): BatchNorm2d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(288, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (17): InvertedResidual_SE(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(192, 576, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(576, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(576, 576, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=576, bias=False)
+        (1): BatchNorm2d(576, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(576, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (se): SqueezeExcite(
+        (conv_reduce): Conv2d(576, 192, kernel_size=(1, 1), stride=(1, 1))
+        (act1): ReLU6(inplace=True)
+        (conv_expand): Conv2d(192, 576, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Sigmoid()
+      )
+    )
+    (18): InvertedResidual_SE(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(192, 1152, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(1152, 1152, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2), groups=1152, bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(1152, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (se): SqueezeExcite(
+        (conv_reduce): Conv2d(1152, 192, kernel_size=(1, 1), stride=(1, 1))
+        (act1): ReLU6(inplace=True)
+        (conv_expand): Conv2d(192, 1152, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Sigmoid()
+      )
+    )
+    (19): InvertedResidual(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(192, 576, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(576, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(576, 576, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=576, bias=False)
+        (1): BatchNorm2d(576, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(576, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (20): InvertedResidual_SE(
+      (inverted_bottleneck): Sequential(
+        (0): Conv2d(192, 1152, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (depth_conv): Sequential(
+        (0): Conv2d(1152, 1152, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=1152, bias=False)
+        (1): BatchNorm2d(1152, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU6(inplace=True)
+      )
+      (point_linear): Sequential(
+        (0): Conv2d(1152, 320, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(320, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (se): SqueezeExcite(
+        (conv_reduce): Conv2d(1152, 192, kernel_size=(1, 1), stride=(1, 1))
+        (act1): ReLU6(inplace=True)
+        (conv_expand): Conv2d(192, 1152, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Sigmoid()
+      )
+    )
+  )
+  (feature_mix_layer): Sequential(
+    (0): Conv2d(320, 1280, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    (1): BatchNorm2d(1280, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU6(inplace=True)
+  )
+  (avgpool): AvgPool2d(kernel_size=7, stride=7, padding=0)
+  (classifier): Sequential(
+    (0): Dropout(p=0.2, inplace=False)
+    (1): Linear(in_features=1280, out_features=1000, bias=True)
+  )
+)
+[04/12 13:30:51] Re-training INFO: # of Params : 5.113
+[04/12 13:31:03] Re-training INFO: Trainset Size: 1281167
+[04/12 13:31:03] Re-training INFO: Validset Size:   50000
+[04/12 13:31:03] Re-training INFO: Compose(
+    RandomResizedCrop(size=(224, 224), scale=(0.08, 1.0), ratio=(0.75, 1.3333), interpolation=bilinear)
+    RandomHorizontalFlip(p=0.5)
+    ToTensor()
+    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+)
+[04/12 13:31:03] Re-training INFO: RMSprop (
+Parameter Group 0
+    alpha: 0.9
+    centered: False
+    eps: 1e-08
+    initial_lr: 0.064
+    lr: 0.064
+    momentum: 0.9
+    weight_decay: 1e-05
+
+Parameter Group 1
+    alpha: 0.9
+    centered: False
+    eps: 1e-08
+    initial_lr: 0.064
+    lr: 0.064
+    momentum: 0.9
+    weight_decay: 0.0
+)
+[04/12 13:31:03] Re-training INFO: --> START Retrain-gss-mobile0-rms-seed-0
+[04/12 13:33:31] Re-training INFO: iter:   125/300480  CE: 6.6288  
+[04/12 13:34:38] Re-training INFO: iter:   250/300480  CE: 6.3382  
+[04/12 13:35:46] Re-training INFO: iter:   375/300480  CE: 6.2378  
+[04/12 13:36:54] Re-training INFO: iter:   500/300480  CE: 6.1873  
+[04/12 13:38:01] Re-training INFO: iter:   625/300480  CE: 6.1704  
+[04/12 13:39:08] Re-training INFO: iter:   750/300480  CE: 5.8144  
+[04/12 13:40:15] Re-training INFO: iter:   875/300480  CE: 6.0789  
+[04/12 13:41:22] Re-training INFO: iter:  1000/300480  CE: 5.9920  
+[04/12 13:42:28] Re-training INFO: iter:  1125/300480  CE: 5.7027  
+[04/12 13:43:33] Re-training INFO: iter:  1250/300480  CE: 6.1280  
+[04/12 13:43:34] Re-training INFO: --> epoch:   1/240  avg CE: 6.1488  lr: 0.0128  
+[04/12 13:44:59] Re-training INFO: iter:  1375/300480  CE: 6.0703  
+[04/12 13:46:06] Re-training INFO: iter:  1500/300480  CE: 5.9312  
+[04/12 13:47:13] Re-training INFO: iter:  1625/300480  CE: 6.1606  
+[04/12 13:48:21] Re-training INFO: iter:  1750/300480  CE: 6.0709  
+[04/12 13:49:29] Re-training INFO: iter:  1875/300480  CE: 6.1437  
+[04/12 13:50:35] Re-training INFO: iter:  2000/300480  CE: 6.3523  
+[04/12 13:51:41] Re-training INFO: iter:  2125/300480  CE: 6.1721  
+[04/12 13:52:48] Re-training INFO: iter:  2250/300480  CE: 6.3441  
+[04/12 13:53:56] Re-training INFO: iter:  2375/300480  CE: 6.3519  
+[04/12 13:55:02] Re-training INFO: iter:  2500/300480  CE: 6.4147  
+[04/12 13:55:03] Re-training INFO: --> epoch:   2/240  avg CE: 6.1557  lr: 0.0256  
+[04/12 13:56:24] Re-training INFO: iter:  2625/300480  CE: 6.2517  
+[04/12 13:57:32] Re-training INFO: iter:  2750/300480  CE: 6.3090  
+[04/12 13:58:40] Re-training INFO: iter:  2875/300480  CE: 6.3890  
+[04/12 13:59:47] Re-training INFO: iter:  3000/300480  CE: 6.5601  
+[04/12 14:00:55] Re-training INFO: iter:  3125/300480  CE: 6.4150  
+[04/12 14:02:02] Re-training INFO: iter:  3250/300480  CE: 6.4822  
+[04/12 14:03:10] Re-training INFO: iter:  3375/300480  CE: 6.3450  
+[04/12 14:04:17] Re-training INFO: iter:  3500/300480  CE: 6.5038  
+[04/12 14:05:25] Re-training INFO: iter:  3625/300480  CE: 6.2435  
+[04/12 14:06:32] Re-training INFO: iter:  3750/300480  CE: 6.5736  
+[04/12 14:06:34] Re-training INFO: --> epoch:   3/240  avg CE: 6.4420  lr: 0.038400000000000004  
+[04/12 14:07:56] Re-training INFO: iter:  3875/300480  CE: 6.6429  
+[04/12 14:09:04] Re-training INFO: iter:  4000/300480  CE: 6.6935  
+[04/12 14:10:12] Re-training INFO: iter:  4125/300480  CE: 6.5955  
+[04/12 14:11:19] Re-training INFO: iter:  4250/300480  CE: 6.6134  
+[04/12 14:12:27] Re-training INFO: iter:  4375/300480  CE: 6.7254  
+[04/12 14:13:33] Re-training INFO: iter:  4500/300480  CE: 6.7066  
+[04/12 14:14:40] Re-training INFO: iter:  4625/300480  CE: 6.7259  
+[04/12 14:15:47] Re-training INFO: iter:  4750/300480  CE: 6.9359  
+[04/12 14:16:52] Re-training INFO: iter:  4875/300480  CE: 7.0186  
+[04/12 14:17:59] Re-training INFO: iter:  5000/300480  CE: 7.0128  
+[04/12 14:18:02] Re-training INFO: --> epoch:   4/240  avg CE: 6.7306  lr: 0.0512  
+[04/12 14:19:21] Re-training INFO: iter:  5125/300480  CE: 6.9843  
+[04/12 14:20:29] Re-training INFO: iter:  5250/300480  CE: 6.9820  
+[04/12 14:21:36] Re-training INFO: iter:  5375/300480  CE: 6.9884  
+[04/12 14:22:43] Re-training INFO: iter:  5500/300480  CE: 6.9512  
+[04/12 14:23:50] Re-training INFO: iter:  5625/300480  CE: 7.0032  
+[04/12 14:24:57] Re-training INFO: iter:  5750/300480  CE: 7.1000  
+[04/12 14:26:03] Re-training INFO: iter:  5875/300480  CE: 7.0488  
+[04/12 14:27:10] Re-training INFO: iter:  6000/300480  CE: 7.0032  
+[04/12 14:28:17] Re-training INFO: iter:  6125/300480  CE: 7.0663  
+[04/12 14:29:26] Re-training INFO: iter:  6250/300480  CE: 7.0547  
+[04/12 14:29:29] Re-training INFO: --> epoch:   5/240  avg CE: 7.0174  lr: 0.06398977635782747  
+[04/12 14:30:49] Re-training INFO: iter:  6375/300480  CE: 7.0806  
+[04/12 14:31:56] Re-training INFO: iter:  6500/300480  CE: 7.0355  
+[04/12 14:33:03] Re-training INFO: iter:  6625/300480  CE: 7.0054  
+[04/12 14:34:09] Re-training INFO: iter:  6750/300480  CE: 6.9974  
+[04/12 14:35:16] Re-training INFO: iter:  6875/300480  CE: 7.0621  
+[04/12 14:36:23] Re-training INFO: iter:  7000/300480  CE: 7.0901  
+[04/12 14:37:30] Re-training INFO: iter:  7125/300480  CE: 7.0846  
+[04/12 14:38:35] Re-training INFO: iter:  7250/300480  CE: 6.9750  
+[04/12 14:39:43] Re-training INFO: iter:  7375/300480  CE: 6.9871  
+[04/12 14:40:48] Re-training INFO: iter:  7500/300480  CE: 7.0494  
+[04/12 14:40:53] Re-training INFO: --> epoch:   6/240  avg CE: 7.0291  lr: 0.06398977635782747  
+[04/12 14:42:11] Re-training INFO: iter:  7625/300480  CE: 7.0304  
+[04/12 14:43:18] Re-training INFO: iter:  7750/300480  CE: 7.0090  
+[04/12 14:44:23] Re-training INFO: iter:  7875/300480  CE: 7.0350  
+[04/12 14:45:29] Re-training INFO: iter:  8000/300480  CE: 6.9903  
+[04/12 14:46:35] Re-training INFO: iter:  8125/300480  CE: 6.9363  
+[04/12 14:47:41] Re-training INFO: iter:  8250/300480  CE: 7.0171  
+[04/12 14:48:47] Re-training INFO: iter:  8375/300480  CE: 7.0452  
+[04/12 14:49:54] Re-training INFO: iter:  8500/300480  CE: 7.0102  
+[04/12 14:51:01] Re-training INFO: iter:  8625/300480  CE: 7.1629  
+[04/12 14:52:06] Re-training INFO: iter:  8750/300480  CE: 6.9924  
+[04/12 14:52:12] Re-training INFO: --> epoch:   7/240  avg CE: 7.0298  lr: 0.06398977635782747  
+[04/12 14:53:29] Re-training INFO: iter:  8875/300480  CE: 7.0391  
+[04/12 14:54:36] Re-training INFO: iter:  9000/300480  CE: 7.0811  
+[04/12 14:55:42] Re-training INFO: iter:  9125/300480  CE: 7.0609  
+[04/12 14:56:49] Re-training INFO: iter:  9250/300480  CE: 7.0199  
+[04/12 14:57:56] Re-training INFO: iter:  9375/300480  CE: 7.0408  
+[04/12 14:59:03] Re-training INFO: iter:  9500/300480  CE: 6.9957  
+[04/12 15:00:10] Re-training INFO: iter:  9625/300480  CE: 7.0556  
+[04/12 15:01:14] Re-training INFO: iter:  9750/300480  CE: 7.0010  
+[04/12 15:02:21] Re-training INFO: iter:  9875/300480  CE: 6.9855  
+[04/12 15:03:26] Re-training INFO: iter: 10000/300480  CE: 7.0292  
+[04/12 15:03:33] Re-training INFO: --> epoch:   8/240  avg CE: 7.0267  lr: 0.06223882756783262  
+[04/12 15:04:49] Re-training INFO: iter: 10125/300480  CE: 7.0348  
+[04/12 15:05:56] Re-training INFO: iter: 10250/300480  CE: 7.0078  
+[04/12 15:07:03] Re-training INFO: iter: 10375/300480  CE: 7.0169  
+[04/12 15:08:08] Re-training INFO: iter: 10500/300480  CE: 7.0186  
+[04/12 15:09:15] Re-training INFO: iter: 10625/300480  CE: 7.0088  
+[04/12 15:10:21] Re-training INFO: iter: 10750/300480  CE: 7.0458  
+[04/12 15:11:27] Re-training INFO: iter: 10875/300480  CE: 7.0552  
+[04/12 15:12:33] Re-training INFO: iter: 11000/300480  CE: 7.0532  
+[04/12 15:13:39] Re-training INFO: iter: 11125/300480  CE: 7.0047  
+[04/12 15:14:45] Re-training INFO: iter: 11250/300480  CE: 6.9548  
+[04/12 15:14:53] Re-training INFO: --> epoch:   9/240  avg CE: 7.0274  lr: 0.06223882756783262  
+[04/12 15:16:08] Re-training INFO: iter: 11375/300480  CE: 7.0603  
+[04/12 15:17:15] Re-training INFO: iter: 11500/300480  CE: 7.0382  
+[04/12 15:18:22] Re-training INFO: iter: 11625/300480  CE: 7.0492  
+[04/12 15:19:29] Re-training INFO: iter: 11750/300480  CE: 7.0459  
+[04/12 15:20:36] Re-training INFO: iter: 11875/300480  CE: 7.0427  
+[04/12 15:21:43] Re-training INFO: iter: 12000/300480  CE: 7.0049  
+[04/12 15:22:51] Re-training INFO: iter: 12125/300480  CE: 7.0112  
+[04/12 15:23:58] Re-training INFO: iter: 12250/300480  CE: 6.9966  
+[04/12 15:25:05] Re-training INFO: iter: 12375/300480  CE: 7.0148  
+[04/12 15:26:13] Re-training INFO: iter: 12500/300480  CE: 6.9877  
+[04/12 15:26:21] Re-training INFO: --> epoch:  10/240  avg CE: 7.0277  lr: 0.06037166274079763  
+[04/12 15:27:35] Re-training INFO: iter: 12625/300480  CE: 7.0050  
+[04/12 15:28:41] Re-training INFO: iter: 12750/300480  CE: 7.0441  
+[04/12 15:29:47] Re-training INFO: iter: 12875/300480  CE: 7.0550  
+[04/12 15:30:54] Re-training INFO: iter: 13000/300480  CE: 7.0022  
+[04/12 15:32:00] Re-training INFO: iter: 13125/300480  CE: 6.9734  
+[04/12 15:33:07] Re-training INFO: iter: 13250/300480  CE: 7.0369  
+[04/12 15:34:14] Re-training INFO: iter: 13375/300480  CE: 7.0321  
+[04/12 15:35:20] Re-training INFO: iter: 13500/300480  CE: 7.0166  
+[04/12 15:36:28] Re-training INFO: iter: 13625/300480  CE: 6.9636  
+[04/12 15:37:36] Re-training INFO: iter: 13750/300480  CE: 6.9988  
+[04/12 15:37:46] Re-training INFO: --> epoch:  11/240  avg CE: 7.0229  lr: 0.06037166274079763  
+[04/12 15:38:58] Re-training INFO: iter: 13875/300480  CE: 7.0085  
+[04/12 15:40:05] Re-training INFO: iter: 14000/300480  CE: 7.0085  
+[04/12 15:41:10] Re-training INFO: iter: 14125/300480  CE: 7.0072  
+[04/12 15:42:16] Re-training INFO: iter: 14250/300480  CE: 6.9865  
+[04/12 15:43:22] Re-training INFO: iter: 14375/300480  CE: 7.1375  
+[04/12 15:44:27] Re-training INFO: iter: 14500/300480  CE: 7.0622  
+[04/12 15:45:31] Re-training INFO: iter: 14625/300480  CE: 7.0058  
+[04/12 15:46:35] Re-training INFO: iter: 14750/300480  CE: 7.0476  
+[04/12 15:47:40] Re-training INFO: iter: 14875/300480  CE: 7.0506  
+[04/12 15:48:48] Re-training INFO: iter: 15000/300480  CE: 7.0230  
+[04/12 15:48:58] Re-training INFO: --> epoch:  12/240  avg CE: 7.0242  lr: 0.0585605128585737  
+[04/12 15:50:09] Re-training INFO: iter: 15125/300480  CE: 7.0429  
+[04/12 15:51:16] Re-training INFO: iter: 15250/300480  CE: 7.0359  
+[04/12 15:52:23] Re-training INFO: iter: 15375/300480  CE: 6.9837  
+[04/12 15:53:30] Re-training INFO: iter: 15500/300480  CE: 7.0693  
+[04/12 15:54:37] Re-training INFO: iter: 15625/300480  CE: 7.0361  
+[04/12 15:55:44] Re-training INFO: iter: 15750/300480  CE: 6.9807  
+[04/12 15:56:51] Re-training INFO: iter: 15875/300480  CE: 6.9638  
+[04/12 15:57:58] Re-training INFO: iter: 16000/300480  CE: 6.9967  
+[04/12 15:59:06] Re-training INFO: iter: 16125/300480  CE: 7.0672  
+[04/12 16:00:13] Re-training INFO: iter: 16250/300480  CE: 6.9964  
+[04/12 16:00:26] Re-training INFO: --> epoch:  13/240  avg CE: 7.0222  lr: 0.0585605128585737  
+[04/12 16:01:36] Re-training INFO: iter: 16375/300480  CE: 7.0379  
+[04/12 16:02:44] Re-training INFO: iter: 16500/300480  CE: 6.9983  
+[04/12 16:03:51] Re-training INFO: iter: 16625/300480  CE: 7.0109  
+[04/12 16:04:58] Re-training INFO: iter: 16750/300480  CE: 6.9781  
+[04/12 16:06:05] Re-training INFO: iter: 16875/300480  CE: 7.0053  
+[04/12 16:07:11] Re-training INFO: iter: 17000/300480  CE: 7.0220  
+[04/12 16:08:19] Re-training INFO: iter: 17125/300480  CE: 7.0485  
+[04/12 16:09:26] Re-training INFO: iter: 17250/300480  CE: 7.0300  
+[04/12 16:10:35] Re-training INFO: iter: 17375/300480  CE: 7.0587  
+[04/12 16:11:42] Re-training INFO: iter: 17500/300480  CE: 7.0153  
+[04/12 16:11:56] Re-training INFO: --> epoch:  14/240  avg CE: 7.0213  lr: 0.0585605128585737  
+[04/12 16:13:05] Re-training INFO: iter: 17625/300480  CE: 7.0145  
+[04/12 16:14:12] Re-training INFO: iter: 17750/300480  CE: 7.0264  
+[04/12 16:15:20] Re-training INFO: iter: 17875/300480  CE: 7.0338  
+[04/12 16:16:27] Re-training INFO: iter: 18000/300480  CE: 6.9867  
+[04/12 16:17:35] Re-training INFO: iter: 18125/300480  CE: 7.0810  
+[04/12 16:18:41] Re-training INFO: iter: 18250/300480  CE: 6.9636  
+[04/12 16:19:50] Re-training INFO: iter: 18375/300480  CE: 7.0478  
+[04/12 16:20:56] Re-training INFO: iter: 18500/300480  CE: 7.0884  
+[04/12 16:22:04] Re-training INFO: iter: 18625/300480  CE: 6.9745  
+[04/12 16:23:12] Re-training INFO: iter: 18750/300480  CE: 6.9644  
+[04/12 16:23:27] Re-training INFO: --> epoch:  15/240  avg CE: 7.0173  lr: 0.056803697472816495  
+[04/12 16:24:36] Re-training INFO: iter: 18875/300480  CE: 7.0330  
+[04/12 16:25:42] Re-training INFO: iter: 19000/300480  CE: 7.0014  
+[04/12 16:26:47] Re-training INFO: iter: 19125/300480  CE: 7.0038  
+[04/12 16:27:54] Re-training INFO: iter: 19250/300480  CE: 6.9933  
+[04/12 16:28:59] Re-training INFO: iter: 19375/300480  CE: 7.0256  
+[04/12 16:30:06] Re-training INFO: iter: 19500/300480  CE: 7.0062  
+[04/12 16:31:12] Re-training INFO: iter: 19625/300480  CE: 6.9801  
+[04/12 16:32:20] Re-training INFO: iter: 19750/300480  CE: 7.0746  
+[04/12 16:33:27] Re-training INFO: iter: 19875/300480  CE: 6.9912  
+[04/12 16:34:33] Re-training INFO: iter: 20000/300480  CE: 7.0176  
+[04/12 16:34:49] Re-training INFO: --> epoch:  16/240  avg CE: 7.0193  lr: 0.056803697472816495  
+[04/12 16:35:57] Re-training INFO: iter: 20125/300480  CE: 7.0733  
+[04/12 16:37:04] Re-training INFO: iter: 20250/300480  CE: 6.9984  
+[04/12 16:38:10] Re-training INFO: iter: 20375/300480  CE: 6.9620  
+[04/12 16:39:17] Re-training INFO: iter: 20500/300480  CE: 7.0668  
+[04/12 16:40:23] Re-training INFO: iter: 20625/300480  CE: 6.9995  
+[04/12 16:41:29] Re-training INFO: iter: 20750/300480  CE: 7.0021  
+[04/12 16:42:36] Re-training INFO: iter: 20875/300480  CE: 7.0362  
+[04/12 16:43:44] Re-training INFO: iter: 21000/300480  CE: 7.0237  
+[04/12 16:44:52] Re-training INFO: iter: 21125/300480  CE: 6.9518  
+[04/12 16:45:59] Re-training INFO: iter: 21250/300480  CE: 7.0173  
+[04/12 16:46:15] Re-training INFO: --> epoch:  17/240  avg CE: 7.0164  lr: 0.055099586548632  
+[04/12 16:47:21] Re-training INFO: iter: 21375/300480  CE: 7.0175  
+[04/12 16:48:27] Re-training INFO: iter: 21500/300480  CE: 7.0389  
+[04/12 16:49:34] Re-training INFO: iter: 21625/300480  CE: 7.0026  
+[04/12 16:50:41] Re-training INFO: iter: 21750/300480  CE: 6.9995  
+[04/12 16:51:47] Re-training INFO: iter: 21875/300480  CE: 7.0129  
+[04/12 16:52:53] Re-training INFO: iter: 22000/300480  CE: 6.9735  
+[04/12 16:53:59] Re-training INFO: iter: 22125/300480  CE: 6.9931  
+[04/12 16:55:05] Re-training INFO: iter: 22250/300480  CE: 7.0124  
+[04/12 16:56:11] Re-training INFO: iter: 22375/300480  CE: 7.0834  
+[04/12 16:57:17] Re-training INFO: iter: 22500/300480  CE: 6.9515  
+[04/12 16:57:34] Re-training INFO: --> epoch:  18/240  avg CE: 7.0140  lr: 0.055099586548632  
+[04/12 16:58:39] Re-training INFO: iter: 22625/300480  CE: 7.0256  
+[04/12 16:59:46] Re-training INFO: iter: 22750/300480  CE: 7.0203  
+[04/12 17:00:52] Re-training INFO: iter: 22875/300480  CE: 7.0361  
+[04/12 17:01:59] Re-training INFO: iter: 23000/300480  CE: 7.1096  
+[04/12 17:03:05] Re-training INFO: iter: 23125/300480  CE: 7.1121  
+[04/12 17:04:11] Re-training INFO: iter: 23250/300480  CE: 6.9141  
+[04/12 17:05:18] Re-training INFO: iter: 23375/300480  CE: 7.0341  
+[04/12 17:06:24] Re-training INFO: iter: 23500/300480  CE: 7.0327  
+[04/12 17:07:31] Re-training INFO: iter: 23625/300480  CE: 6.9694  
+[04/12 17:08:40] Re-training INFO: iter: 23750/300480  CE: 7.0548  
+[04/12 17:08:58] Re-training INFO: --> epoch:  19/240  avg CE: 7.0133  lr: 0.055099586548632  
+[04/12 17:10:03] Re-training INFO: iter: 23875/300480  CE: 7.0686  
+[04/12 17:11:09] Re-training INFO: iter: 24000/300480  CE: 7.0304  
+[04/12 17:12:16] Re-training INFO: iter: 24125/300480  CE: 6.9676  
+[04/12 17:13:24] Re-training INFO: iter: 24250/300480  CE: 6.8920  
+[04/12 17:14:33] Re-training INFO: iter: 24375/300480  CE: 6.9926  
+[04/12 17:15:40] Re-training INFO: iter: 24500/300480  CE: 7.0552  
+[04/12 17:16:48] Re-training INFO: iter: 24625/300480  CE: 7.0065  
+[04/12 17:17:57] Re-training INFO: iter: 24750/300480  CE: 7.0597  
+[04/12 17:19:03] Re-training INFO: iter: 24875/300480  CE: 7.0632  
+[04/12 17:20:12] Re-training INFO: iter: 25000/300480  CE: 6.9650  
+[04/12 17:20:31] Re-training INFO: --> epoch:  20/240  avg CE: 7.0113  lr: 0.05344659895217303  
+[04/12 17:21:07] Re-training INFO: # of Test Samples: 50000.0
+[04/12 17:21:07] Re-training INFO: Top-1/-5 acc:  0.10 /  0.50
+[04/12 17:21:07] Re-training INFO: Top-1/-5 acc: 99.90 / 99.50
+[04/12 17:21:07] Re-training INFO: 
+
+[04/12 17:22:11] Re-training INFO: iter: 25125/300480  CE: 7.0072  
+[04/12 17:23:17] Re-training INFO: iter: 25250/300480  CE: 7.0327  
+[04/12 17:24:24] Re-training INFO: iter: 25375/300480  CE: 6.9885  
+[04/12 17:25:31] Re-training INFO: iter: 25500/300480  CE: 7.0453  
+[04/12 17:26:39] Re-training INFO: iter: 25625/300480  CE: 7.0278  
+[04/12 17:27:47] Re-training INFO: iter: 25750/300480  CE: 7.0428  
+[04/12 17:28:55] Re-training INFO: iter: 25875/300480  CE: 6.9689  
+[04/12 17:30:03] Re-training INFO: iter: 26000/300480  CE: 6.9976  
+[04/12 17:31:11] Re-training INFO: iter: 26125/300480  CE: 6.9899  
+[04/12 17:32:18] Re-training INFO: iter: 26250/300480  CE: 6.9635  
+[04/12 17:32:39] Re-training INFO: --> epoch:  21/240  avg CE: 7.0117  lr: 0.05344659895217303  
+[04/12 17:33:42] Re-training INFO: iter: 26375/300480  CE: 7.0123  
+[04/12 17:34:48] Re-training INFO: iter: 26500/300480  CE: 7.0429  
+[04/12 17:35:56] Re-training INFO: iter: 26625/300480  CE: 6.9488  
+[04/12 17:37:04] Re-training INFO: iter: 26750/300480  CE: 7.0317  
+[04/12 17:38:10] Re-training INFO: iter: 26875/300480  CE: 7.0234  
+[04/12 17:39:17] Re-training INFO: iter: 27000/300480  CE: 7.0008  
+[04/12 17:40:22] Re-training INFO: iter: 27125/300480  CE: 7.0060  
+[04/12 17:41:30] Re-training INFO: iter: 27250/300480  CE: 7.0120  
+[04/12 17:42:35] Re-training INFO: iter: 27375/300480  CE: 7.0222  
+[04/12 17:43:41] Re-training INFO: iter: 27500/300480  CE: 6.9526  
+[04/12 17:44:02] Re-training INFO: --> epoch:  22/240  avg CE: 7.0097  lr: 0.05184320098360785  
+[04/12 17:45:03] Re-training INFO: iter: 27625/300480  CE: 6.9822  
+[04/12 17:46:09] Re-training INFO: iter: 27750/300480  CE: 7.0760  
+[04/12 17:47:14] Re-training INFO: iter: 27875/300480  CE: 7.0176  
+[04/12 17:48:21] Re-training INFO: iter: 28000/300480  CE: 6.9791  
+[04/12 17:49:27] Re-training INFO: iter: 28125/300480  CE: 6.9469  
+[04/12 17:50:32] Re-training INFO: iter: 28250/300480  CE: 7.0200  
+[04/12 17:51:39] Re-training INFO: iter: 28375/300480  CE: 7.0602  
+[04/12 17:52:45] Re-training INFO: iter: 28500/300480  CE: 6.9836  
+[04/12 17:53:52] Re-training INFO: iter: 28625/300480  CE: 7.1114  
+[04/12 17:54:58] Re-training INFO: iter: 28750/300480  CE: 6.9556  
+[04/12 17:55:20] Re-training INFO: --> epoch:  23/240  avg CE: 7.0091  lr: 0.05184320098360785  
+[04/12 17:56:20] Re-training INFO: iter: 28875/300480  CE: 7.0166  
+[04/12 17:57:26] Re-training INFO: iter: 29000/300480  CE: 7.0057  
+[04/12 17:58:33] Re-training INFO: iter: 29125/300480  CE: 6.9624  
+[04/12 17:59:40] Re-training INFO: iter: 29250/300480  CE: 7.0620  
+[04/12 18:00:45] Re-training INFO: iter: 29375/300480  CE: 6.9877  
+[04/12 18:01:51] Re-training INFO: iter: 29500/300480  CE: 7.0196  
+[04/12 18:02:57] Re-training INFO: iter: 29625/300480  CE: 6.9778  
+[04/12 18:04:05] Re-training INFO: iter: 29750/300480  CE: 6.9765  
+[04/12 18:05:11] Re-training INFO: iter: 29875/300480  CE: 6.9744  
+[04/12 18:06:17] Re-training INFO: iter: 30000/300480  CE: 7.0296  
+[04/12 18:06:41] Re-training INFO: --> epoch:  24/240  avg CE: 7.0091  lr: 0.050287904954099606  
+[04/12 18:07:40] Re-training INFO: iter: 30125/300480  CE: 7.0002  
+[04/12 18:08:47] Re-training INFO: iter: 30250/300480  CE: 6.9753  
+[04/12 18:09:54] Re-training INFO: iter: 30375/300480  CE: 7.0257  
+[04/12 18:10:57] Re-training INFO: iter: 30500/300480  CE: 7.0514  
+[04/12 18:12:00] Re-training INFO: iter: 30625/300480  CE: 6.9494  
+[04/12 18:13:03] Re-training INFO: iter: 30750/300480  CE: 7.0063  
+[04/12 18:14:07] Re-training INFO: iter: 30875/300480  CE: 6.9614  
+[04/12 18:15:11] Re-training INFO: iter: 31000/300480  CE: 7.0016  
+[04/12 18:16:14] Re-training INFO: iter: 31125/300480  CE: 7.0084  
+[04/12 18:17:17] Re-training INFO: iter: 31250/300480  CE: 6.9932  
+[04/12 18:17:41] Re-training INFO: --> epoch:  25/240  avg CE: 7.0057  lr: 0.050287904954099606  
+[04/12 18:18:37] Re-training INFO: iter: 31375/300480  CE: 7.0258  
+[04/12 18:19:40] Re-training INFO: iter: 31500/300480  CE: 7.0201  
+[04/12 18:20:43] Re-training INFO: iter: 31625/300480  CE: 7.0830  
+[04/12 18:21:47] Re-training INFO: iter: 31750/300480  CE: 7.0021  
+[04/12 18:22:50] Re-training INFO: iter: 31875/300480  CE: 7.0514  
+[04/12 18:23:53] Re-training INFO: iter: 32000/300480  CE: 7.0091  
+[04/12 18:24:55] Re-training INFO: iter: 32125/300480  CE: 7.0473  
+[04/12 18:25:58] Re-training INFO: iter: 32250/300480  CE: 7.0291  
+[04/12 18:26:59] Re-training INFO: iter: 32375/300480  CE: 7.0200  
+[04/12 18:28:01] Re-training INFO: iter: 32500/300480  CE: 7.0156  
+[04/12 18:28:25] Re-training INFO: --> epoch:  26/240  avg CE: 7.0064  lr: 0.050287904954099606  
+[04/12 18:29:19] Re-training INFO: iter: 32625/300480  CE: 6.9948  
+[04/12 18:30:22] Re-training INFO: iter: 32750/300480  CE: 7.0226  
+[04/12 18:31:26] Re-training INFO: iter: 32875/300480  CE: 7.0749  
+[04/12 18:32:28] Re-training INFO: iter: 33000/300480  CE: 7.0274  
+[04/12 18:33:30] Re-training INFO: iter: 33125/300480  CE: 7.0531  
+[04/12 18:34:32] Re-training INFO: iter: 33250/300480  CE: 6.9580  
+[04/12 18:35:36] Re-training INFO: iter: 33375/300480  CE: 6.9854  
+[04/12 18:36:38] Re-training INFO: iter: 33500/300480  CE: 6.9515  
+[04/12 18:37:41] Re-training INFO: iter: 33625/300480  CE: 6.9473  
+[04/12 18:38:43] Re-training INFO: iter: 33750/300480  CE: 6.9612  
+[04/12 18:39:09] Re-training INFO: --> epoch:  27/240  avg CE: 7.0031  lr: 0.04877926780547662  
+[04/12 18:40:04] Re-training INFO: iter: 33875/300480  CE: 7.0250  
+[04/12 18:41:06] Re-training INFO: iter: 34000/300480  CE: 6.9929  
+[04/12 18:42:10] Re-training INFO: iter: 34125/300480  CE: 7.0358  
+[04/12 18:43:15] Re-training INFO: iter: 34250/300480  CE: 7.0086  
+[04/12 18:44:22] Re-training INFO: iter: 34375/300480  CE: 7.0390  
+[04/12 18:45:28] Re-training INFO: iter: 34500/300480  CE: 6.9872  
+[04/12 18:46:35] Re-training INFO: iter: 34625/300480  CE: 7.0073  
+[04/12 18:47:43] Re-training INFO: iter: 34750/300480  CE: 7.0396  
+[04/12 18:48:52] Re-training INFO: iter: 34875/300480  CE: 6.9465  
+[04/12 18:49:59] Re-training INFO: iter: 35000/300480  CE: 7.0064  
+[04/12 18:50:28] Re-training INFO: --> epoch:  28/240  avg CE: 7.0036  lr: 0.04877926780547662  
+[04/12 18:51:23] Re-training INFO: iter: 35125/300480  CE: 7.0408  
+[04/12 18:52:29] Re-training INFO: iter: 35250/300480  CE: 6.9441  
+[04/12 18:53:35] Re-training INFO: iter: 35375/300480  CE: 7.0247  
+[04/12 18:54:41] Re-training INFO: iter: 35500/300480  CE: 6.9820  
+[04/12 18:55:48] Re-training INFO: iter: 35625/300480  CE: 6.9825  
+[04/12 18:56:56] Re-training INFO: iter: 35750/300480  CE: 7.0037  
+[04/12 18:58:03] Re-training INFO: iter: 35875/300480  CE: 7.0122  
+[04/12 18:59:10] Re-training INFO: iter: 36000/300480  CE: 7.0321  
+[04/12 19:00:18] Re-training INFO: iter: 36125/300480  CE: 7.0230  
+[04/12 19:01:25] Re-training INFO: iter: 36250/300480  CE: 6.9740  
+[04/12 19:01:53] Re-training INFO: --> epoch:  29/240  avg CE: 7.0009  lr: 0.04731588977131231  
+[04/12 19:02:48] Re-training INFO: iter: 36375/300480  CE: 7.0127  
+[04/12 19:03:55] Re-training INFO: iter: 36500/300480  CE: 7.0522  
+[04/12 19:05:01] Re-training INFO: iter: 36625/300480  CE: 6.8829  
+[04/12 19:06:07] Re-training INFO: iter: 36750/300480  CE: 6.9824  
+[04/12 19:07:15] Re-training INFO: iter: 36875/300480  CE: 7.0468  
+[04/12 19:08:21] Re-training INFO: iter: 37000/300480  CE: 7.0517  
+[04/12 19:09:28] Re-training INFO: iter: 37125/300480  CE: 7.0129  
+[04/12 19:10:35] Re-training INFO: iter: 37250/300480  CE: 7.0094  
+[04/12 19:11:42] Re-training INFO: iter: 37375/300480  CE: 6.9696  
+[04/12 19:12:47] Re-training INFO: iter: 37500/300480  CE: 7.0227  
+[04/12 19:13:18] Re-training INFO: --> epoch:  30/240  avg CE: 7.0000  lr: 0.04731588977131231  
+[04/12 19:14:11] Re-training INFO: iter: 37625/300480  CE: 6.9687  
+[04/12 19:15:18] Re-training INFO: iter: 37750/300480  CE: 6.9769  
+[04/12 19:16:26] Re-training INFO: iter: 37875/300480  CE: 7.0063  
+[04/12 19:17:33] Re-training INFO: iter: 38000/300480  CE: 6.9639  
+[04/12 19:18:40] Re-training INFO: iter: 38125/300480  CE: 7.0339  
+[04/12 19:19:47] Re-training INFO: iter: 38250/300480  CE: 7.0196  
+[04/12 19:20:56] Re-training INFO: iter: 38375/300480  CE: 7.0558  
+[04/12 19:22:03] Re-training INFO: iter: 38500/300480  CE: 6.9662  
+[04/12 19:23:11] Re-training INFO: iter: 38625/300480  CE: 7.0455  
+[04/12 19:24:18] Re-training INFO: iter: 38750/300480  CE: 7.0156  
+[04/12 19:24:50] Re-training INFO: --> epoch:  31/240  avg CE: 6.9980  lr: 0.04731588977131231  
+[04/12 19:25:42] Re-training INFO: iter: 38875/300480  CE: 7.0093  
+[04/12 19:26:47] Re-training INFO: iter: 39000/300480  CE: 7.0187  
+[04/12 19:27:54] Re-training INFO: iter: 39125/300480  CE: 6.9343  
+[04/12 19:29:01] Re-training INFO: iter: 39250/300480  CE: 6.9940  
+[04/12 19:30:08] Re-training INFO: iter: 39375/300480  CE: 6.9823  
+[04/12 19:31:14] Re-training INFO: iter: 39500/300480  CE: 6.9550  
+[04/12 19:32:22] Re-training INFO: iter: 39625/300480  CE: 7.0570  
+[04/12 19:33:30] Re-training INFO: iter: 39750/300480  CE: 6.9931  
+[04/12 19:34:38] Re-training INFO: iter: 39875/300480  CE: 7.0274  
+[04/12 19:35:45] Re-training INFO: iter: 40000/300480  CE: 7.0228  
+[04/12 19:36:17] Re-training INFO: --> epoch:  32/240  avg CE: 6.9980  lr: 0.04589641307817295  
+[04/12 19:37:08] Re-training INFO: iter: 40125/300480  CE: 7.0027  
+[04/12 19:38:17] Re-training INFO: iter: 40250/300480  CE: 6.9703  
+[04/12 19:39:25] Re-training INFO: iter: 40375/300480  CE: 7.0044  
+[04/12 19:40:32] Re-training INFO: iter: 40500/300480  CE: 6.9400  
+[04/12 19:41:39] Re-training INFO: iter: 40625/300480  CE: 6.9550  
+[04/12 19:42:46] Re-training INFO: iter: 40750/300480  CE: 6.9899  
+[04/12 19:43:54] Re-training INFO: iter: 40875/300480  CE: 7.0109  
+[04/12 19:45:03] Re-training INFO: iter: 41000/300480  CE: 7.0028  
+[04/12 19:46:10] Re-training INFO: iter: 41125/300480  CE: 6.9744  
+[04/12 19:47:19] Re-training INFO: iter: 41250/300480  CE: 7.0622  
+[04/12 19:47:53] Re-training INFO: --> epoch:  33/240  avg CE: 6.9980  lr: 0.04589641307817295  
+[04/12 19:48:43] Re-training INFO: iter: 41375/300480  CE: 6.9571  
+[04/12 19:49:50] Re-training INFO: iter: 41500/300480  CE: 6.9969  
+[04/12 19:50:58] Re-training INFO: iter: 41625/300480  CE: 6.9959  
+[04/12 19:52:05] Re-training INFO: iter: 41750/300480  CE: 6.9515  
+[04/12 19:53:14] Re-training INFO: iter: 41875/300480  CE: 6.9756  
+[04/12 19:54:22] Re-training INFO: iter: 42000/300480  CE: 6.9219  
+[04/12 19:55:29] Re-training INFO: iter: 42125/300480  CE: 7.0043  
+[04/12 19:56:36] Re-training INFO: iter: 42250/300480  CE: 7.0270  
+[04/12 19:57:43] Re-training INFO: iter: 42375/300480  CE: 6.9965  
+[04/12 19:58:51] Re-training INFO: iter: 42500/300480  CE: 6.9649  
+[04/12 19:59:26] Re-training INFO: --> epoch:  34/240  avg CE: 6.9962  lr: 0.044519520685827756  
+[04/12 20:00:15] Re-training INFO: iter: 42625/300480  CE: 6.9993  
+[04/12 20:01:23] Re-training INFO: iter: 42750/300480  CE: 6.9889  
+[04/12 20:02:31] Re-training INFO: iter: 42875/300480  CE: 6.9543  
+[04/12 20:03:39] Re-training INFO: iter: 43000/300480  CE: 6.9809  
+[04/12 20:04:48] Re-training INFO: iter: 43125/300480  CE: 7.0234  
+[04/12 20:05:56] Re-training INFO: iter: 43250/300480  CE: 7.0208  
+[04/12 20:07:03] Re-training INFO: iter: 43375/300480  CE: 6.9649  
+[04/12 20:08:10] Re-training INFO: iter: 43500/300480  CE: 6.9222  
+[04/12 20:09:17] Re-training INFO: iter: 43625/300480  CE: 6.9420  
+[04/12 20:10:23] Re-training INFO: iter: 43750/300480  CE: 7.0101  
+[04/12 20:10:59] Re-training INFO: --> epoch:  35/240  avg CE: 6.9944  lr: 0.044519520685827756  
+[04/12 20:11:46] Re-training INFO: iter: 43875/300480  CE: 6.9957  
+[04/12 20:12:55] Re-training INFO: iter: 44000/300480  CE: 6.9654  
+[04/12 20:14:03] Re-training INFO: iter: 44125/300480  CE: 6.9674  
+[04/12 20:15:10] Re-training INFO: iter: 44250/300480  CE: 6.9494  
+[04/12 20:16:19] Re-training INFO: iter: 44375/300480  CE: 6.9760  
+[04/12 20:17:27] Re-training INFO: iter: 44500/300480  CE: 6.9838  
+[04/12 20:18:36] Re-training INFO: iter: 44625/300480  CE: 7.0425  
+[04/12 20:19:43] Re-training INFO: iter: 44750/300480  CE: 7.0026  
+[04/12 20:20:50] Re-training INFO: iter: 44875/300480  CE: 6.9935  
+[04/12 20:21:57] Re-training INFO: iter: 45000/300480  CE: 6.9861  
+[04/12 20:22:34] Re-training INFO: --> epoch:  36/240  avg CE: 6.9940  lr: 0.04318393506525293  
+[04/12 20:23:20] Re-training INFO: iter: 45125/300480  CE: 6.9938  
+[04/12 20:24:27] Re-training INFO: iter: 45250/300480  CE: 6.9667  
+[04/12 20:25:34] Re-training INFO: iter: 45375/300480  CE: 7.0207  
+[04/12 20:26:41] Re-training INFO: iter: 45500/300480  CE: 6.9166  
+[04/12 20:27:48] Re-training INFO: iter: 45625/300480  CE: 6.9873  
+[04/12 20:28:55] Re-training INFO: iter: 45750/300480  CE: 6.9294  
+[04/12 20:30:01] Re-training INFO: iter: 45875/300480  CE: 6.9935  
+[04/12 20:31:08] Re-training INFO: iter: 46000/300480  CE: 6.9963  
+[04/12 20:32:14] Re-training INFO: iter: 46125/300480  CE: 6.9907  
+[04/12 20:33:23] Re-training INFO: iter: 46250/300480  CE: 6.9577  
+[04/12 20:34:01] Re-training INFO: --> epoch:  37/240  avg CE: 6.9920  lr: 0.04318393506525293  
+[04/12 20:34:47] Re-training INFO: iter: 46375/300480  CE: 7.0166  
+[04/12 20:35:55] Re-training INFO: iter: 46500/300480  CE: 6.9716  
+[04/12 20:37:00] Re-training INFO: iter: 46625/300480  CE: 6.9836  
+[04/12 20:38:06] Re-training INFO: iter: 46750/300480  CE: 6.9407  
+[04/12 20:39:12] Re-training INFO: iter: 46875/300480  CE: 6.9767  
+[04/12 20:40:18] Re-training INFO: iter: 47000/300480  CE: 6.9799  
+[04/12 20:41:26] Re-training INFO: iter: 47125/300480  CE: 7.0227  
+[04/12 20:42:33] Re-training INFO: iter: 47250/300480  CE: 6.9267  
+[04/12 20:43:39] Re-training INFO: iter: 47375/300480  CE: 6.9857  
+[04/12 20:44:46] Re-training INFO: iter: 47500/300480  CE: 7.0420  
+[04/12 20:45:25] Re-training INFO: --> epoch:  38/240  avg CE: 6.9939  lr: 0.04318393506525293  
+[04/12 20:46:10] Re-training INFO: iter: 47625/300480  CE: 7.0219  
+[04/12 20:47:15] Re-training INFO: iter: 47750/300480  CE: 7.0223  
+[04/12 20:48:23] Re-training INFO: iter: 47875/300480  CE: 7.0012  
+[04/12 20:49:30] Re-training INFO: iter: 48000/300480  CE: 6.9528  
+[04/12 20:50:37] Re-training INFO: iter: 48125/300480  CE: 6.9878  
+[04/12 20:51:43] Re-training INFO: iter: 48250/300480  CE: 7.0273  
+[04/12 20:52:50] Re-training INFO: iter: 48375/300480  CE: 6.9821  
+[04/12 20:53:57] Re-training INFO: iter: 48500/300480  CE: 6.9903  
+[04/12 20:55:04] Re-training INFO: iter: 48625/300480  CE: 7.0062  
+[04/12 20:56:12] Re-training INFO: iter: 48750/300480  CE: 6.9494  
+[04/12 20:56:53] Re-training INFO: --> epoch:  39/240  avg CE: 6.9903  lr: 0.041888417013295334  
+[04/12 20:57:37] Re-training INFO: iter: 48875/300480  CE: 6.9935  
+[04/12 20:58:44] Re-training INFO: iter: 49000/300480  CE: 6.9944  
+[04/12 20:59:51] Re-training INFO: iter: 49125/300480  CE: 6.9910  
+[04/12 21:00:59] Re-training INFO: iter: 49250/300480  CE: 6.9260  
+[04/12 21:02:07] Re-training INFO: iter: 49375/300480  CE: 7.0418  
+[04/12 21:03:13] Re-training INFO: iter: 49500/300480  CE: 6.9574  
+[04/12 21:04:20] Re-training INFO: iter: 49625/300480  CE: 7.0030  
+[04/12 21:05:29] Re-training INFO: iter: 49750/300480  CE: 7.0089  
+[04/12 21:06:36] Re-training INFO: iter: 49875/300480  CE: 6.9705  
+[04/12 21:07:44] Re-training INFO: iter: 50000/300480  CE: 7.0338  
+[04/12 21:08:24] Re-training INFO: --> epoch:  40/240  avg CE: 6.9888  lr: 0.041888417013295334  
+[04/12 21:09:00] Re-training INFO: # of Test Samples: 50000.0
+[04/12 21:09:00] Re-training INFO: Top-1/-5 acc:  0.10 /  0.50
+[04/12 21:09:00] Re-training INFO: Top-1/-5 acc: 99.90 / 99.50
+[04/12 21:09:00] Re-training INFO: 
+
+[04/12 21:09:43] Re-training INFO: iter: 50125/300480  CE: 7.0034  
+[04/12 21:10:49] Re-training INFO: iter: 50250/300480  CE: 7.0159  
+[04/12 21:11:57] Re-training INFO: iter: 50375/300480  CE: 7.0299  
+[04/12 21:13:04] Re-training INFO: iter: 50500/300480  CE: 6.9589  
+[04/12 21:14:11] Re-training INFO: iter: 50625/300480  CE: 7.0192  
+[04/12 21:15:18] Re-training INFO: iter: 50750/300480  CE: 6.9717  
+[04/12 21:16:26] Re-training INFO: iter: 50875/300480  CE: 6.9476  
+[04/12 21:17:33] Re-training INFO: iter: 51000/300480  CE: 7.0119  
+[04/12 21:18:41] Re-training INFO: iter: 51125/300480  CE: 6.9825  
+[04/12 21:19:47] Re-training INFO: iter: 51250/300480  CE: 6.9752  
+[04/12 21:20:30] Re-training INFO: --> epoch:  41/240  avg CE: 6.9893  lr: 0.040631764502896475  
+[04/12 21:21:11] Re-training INFO: iter: 51375/300480  CE: 6.9908  
+[04/12 21:22:15] Re-training INFO: iter: 51500/300480  CE: 7.0371  
+[04/12 21:23:21] Re-training INFO: iter: 51625/300480  CE: 6.9895  
+[04/12 21:24:27] Re-training INFO: iter: 51750/300480  CE: 6.9641  
+[04/12 21:25:34] Re-training INFO: iter: 51875/300480  CE: 6.9980  
+[04/12 21:26:38] Re-training INFO: iter: 52000/300480  CE: 6.9784  
+[04/12 21:27:45] Re-training INFO: iter: 52125/300480  CE: 7.0292  
+[04/12 21:28:52] Re-training INFO: iter: 52250/300480  CE: 7.0060  
+[04/12 21:29:57] Re-training INFO: iter: 52375/300480  CE: 7.0279  
+[04/12 21:31:04] Re-training INFO: iter: 52500/300480  CE: 6.9975  
+[04/12 21:31:45] Re-training INFO: --> epoch:  42/240  avg CE: 6.9872  lr: 0.040631764502896475  
+[04/12 21:32:26] Re-training INFO: iter: 52625/300480  CE: 6.9912  
+[04/12 21:33:33] Re-training INFO: iter: 52750/300480  CE: 6.9905  
+[04/12 21:34:39] Re-training INFO: iter: 52875/300480  CE: 6.9831  
+[04/12 21:35:46] Re-training INFO: iter: 53000/300480  CE: 6.9528  
+[04/12 21:36:53] Re-training INFO: iter: 53125/300480  CE: 6.9950  
+[04/12 21:38:00] Re-training INFO: iter: 53250/300480  CE: 7.0244  
+[04/12 21:39:09] Re-training INFO: iter: 53375/300480  CE: 6.9432  
+[04/12 21:40:15] Re-training INFO: iter: 53500/300480  CE: 6.9729  
+[04/12 21:41:24] Re-training INFO: iter: 53625/300480  CE: 6.9887  
+[04/12 21:42:31] Re-training INFO: iter: 53750/300480  CE: 7.0071  
+[04/12 21:43:16] Re-training INFO: --> epoch:  43/240  avg CE: 6.9882  lr: 0.040631764502896475  
+[04/12 21:43:54] Re-training INFO: iter: 53875/300480  CE: 6.9484  
+[04/12 21:45:02] Re-training INFO: iter: 54000/300480  CE: 7.0352  
+[04/12 21:46:09] Re-training INFO: iter: 54125/300480  CE: 6.9778  
+[04/12 21:47:16] Re-training INFO: iter: 54250/300480  CE: 6.9625  
+[04/12 21:48:24] Re-training INFO: iter: 54375/300480  CE: 7.0026  
+[04/12 21:49:32] Re-training INFO: iter: 54500/300480  CE: 7.0472  
+[04/12 21:50:39] Re-training INFO: iter: 54625/300480  CE: 6.9988  
+[04/12 21:51:47] Re-training INFO: iter: 54750/300480  CE: 6.9744  
+[04/12 21:52:56] Re-training INFO: iter: 54875/300480  CE: 6.9746  
+[04/12 21:54:03] Re-training INFO: iter: 55000/300480  CE: 7.0512  
+[04/12 21:54:48] Re-training INFO: --> epoch:  44/240  avg CE: 6.9875  lr: 0.039412811567809576  
+[04/12 21:55:26] Re-training INFO: iter: 55125/300480  CE: 7.0895  
+[04/12 21:56:32] Re-training INFO: iter: 55250/300480  CE: 6.9352  
+[04/12 21:57:36] Re-training INFO: iter: 55375/300480  CE: 7.0261  
+[04/12 21:58:43] Re-training INFO: iter: 55500/300480  CE: 7.0418  
+[04/12 21:59:49] Re-training INFO: iter: 55625/300480  CE: 6.9620  
+[04/12 22:00:54] Re-training INFO: iter: 55750/300480  CE: 7.0185  
+[04/12 22:02:00] Re-training INFO: iter: 55875/300480  CE: 7.0087  
+[04/12 22:03:08] Re-training INFO: iter: 56000/300480  CE: 7.0613  
+[04/12 22:04:13] Re-training INFO: iter: 56125/300480  CE: 7.0532  
+[04/12 22:05:21] Re-training INFO: iter: 56250/300480  CE: 6.9830  
+[04/12 22:06:07] Re-training INFO: --> epoch:  45/240  avg CE: 6.9865  lr: 0.039412811567809576  
+[04/12 22:06:44] Re-training INFO: iter: 56375/300480  CE: 6.9893  
+[04/12 22:07:51] Re-training INFO: iter: 56500/300480  CE: 7.0285  
+[04/12 22:08:58] Re-training INFO: iter: 56625/300480  CE: 6.9631  
+[04/12 22:10:04] Re-training INFO: iter: 56750/300480  CE: 7.0232  
+[04/12 22:11:10] Re-training INFO: iter: 56875/300480  CE: 7.0191  
+[04/12 22:12:19] Re-training INFO: iter: 57000/300480  CE: 6.9870  
+[04/12 22:13:26] Re-training INFO: iter: 57125/300480  CE: 7.0068  
+[04/12 22:14:32] Re-training INFO: iter: 57250/300480  CE: 6.9537  
+[04/12 22:15:38] Re-training INFO: iter: 57375/300480  CE: 6.9738  
+[04/12 22:16:44] Re-training INFO: iter: 57500/300480  CE: 6.9981  
+[04/12 22:17:32] Re-training INFO: --> epoch:  46/240  avg CE: 6.9834  lr: 0.03823042722077529  
+[04/12 22:18:08] Re-training INFO: iter: 57625/300480  CE: 6.9572  
+[04/12 22:19:15] Re-training INFO: iter: 57750/300480  CE: 7.0056  
+[04/12 22:20:22] Re-training INFO: iter: 57875/300480  CE: 6.9989  
+[04/12 22:21:28] Re-training INFO: iter: 58000/300480  CE: 6.9373  
+[04/12 22:22:34] Re-training INFO: iter: 58125/300480  CE: 6.9918  
+[04/12 22:23:41] Re-training INFO: iter: 58250/300480  CE: 6.9635  
+[04/12 22:24:48] Re-training INFO: iter: 58375/300480  CE: 6.9753  
+[04/12 22:25:54] Re-training INFO: iter: 58500/300480  CE: 6.9846  
+[04/12 22:27:02] Re-training INFO: iter: 58625/300480  CE: 7.0211  
+[04/12 22:28:09] Re-training INFO: iter: 58750/300480  CE: 6.9497  
+[04/12 22:28:57] Re-training INFO: --> epoch:  47/240  avg CE: 6.9827  lr: 0.03823042722077529  
+[04/12 22:29:32] Re-training INFO: iter: 58875/300480  CE: 6.9928  
+[04/12 22:30:38] Re-training INFO: iter: 59000/300480  CE: 6.9984  
+[04/12 22:31:44] Re-training INFO: iter: 59125/300480  CE: 7.0519  
+[04/12 22:32:50] Re-training INFO: iter: 59250/300480  CE: 6.9879  
+[04/12 22:33:56] Re-training INFO: iter: 59375/300480  CE: 7.0119  
+[04/12 22:34:59] Re-training INFO: iter: 59500/300480  CE: 7.0600  
+[04/12 22:36:02] Re-training INFO: iter: 59625/300480  CE: 6.9183  
+[04/12 22:37:08] Re-training INFO: iter: 59750/300480  CE: 6.9768  
+[04/12 22:38:14] Re-training INFO: iter: 59875/300480  CE: 7.0182  
+[04/12 22:39:20] Re-training INFO: iter: 60000/300480  CE: 6.9865  
+[04/12 22:40:08] Re-training INFO: --> epoch:  48/240  avg CE: 6.9819  lr: 0.03708351440415203  
+[04/12 22:40:41] Re-training INFO: iter: 60125/300480  CE: 6.9540  
+[04/12 22:41:49] Re-training INFO: iter: 60250/300480  CE: 6.9700  
+[04/12 22:42:55] Re-training INFO: iter: 60375/300480  CE: 6.9322  
+[04/12 22:44:02] Re-training INFO: iter: 60500/300480  CE: 6.9242  
+[04/12 22:45:09] Re-training INFO: iter: 60625/300480  CE: 6.9797  
+[04/12 22:46:16] Re-training INFO: iter: 60750/300480  CE: 6.9916  
+[04/12 22:47:22] Re-training INFO: iter: 60875/300480  CE: 6.9605  
+[04/12 22:48:27] Re-training INFO: iter: 61000/300480  CE: 7.0071  
+[04/12 22:49:34] Re-training INFO: iter: 61125/300480  CE: 7.0440  
+[04/12 22:50:40] Re-training INFO: iter: 61250/300480  CE: 7.0075  
+[04/12 22:51:29] Re-training INFO: --> epoch:  49/240  avg CE: 6.9807  lr: 0.03708351440415203  
+[04/12 22:52:02] Re-training INFO: iter: 61375/300480  CE: 6.9657  
+[04/12 22:53:09] Re-training INFO: iter: 61500/300480  CE: 7.0191  
+[04/12 22:54:14] Re-training INFO: iter: 61625/300480  CE: 7.0337  
+[04/12 22:55:21] Re-training INFO: iter: 61750/300480  CE: 7.0083  
+[04/12 22:56:27] Re-training INFO: iter: 61875/300480  CE: 7.0290  
+[04/12 22:57:33] Re-training INFO: iter: 62000/300480  CE: 6.9670  
+[04/12 22:58:40] Re-training INFO: iter: 62125/300480  CE: 6.9950  
+[04/12 22:59:47] Re-training INFO: iter: 62250/300480  CE: 6.9702  
+[04/12 23:00:52] Re-training INFO: iter: 62375/300480  CE: 6.9208  
+[04/12 23:01:58] Re-training INFO: iter: 62500/300480  CE: 6.9853  
+[04/12 23:02:50] Re-training INFO: --> epoch:  50/240  avg CE: 6.9801  lr: 0.03708351440415203  
+[04/12 23:03:21] Re-training INFO: iter: 62625/300480  CE: 6.9602  
+[04/12 23:04:28] Re-training INFO: iter: 62750/300480  CE: 6.9556  
+[04/12 23:05:34] Re-training INFO: iter: 62875/300480  CE: 6.9765  
+[04/12 23:06:41] Re-training INFO: iter: 63000/300480  CE: 7.0122  
+[04/12 23:07:48] Re-training INFO: iter: 63125/300480  CE: 6.9788  
+[04/12 23:08:55] Re-training INFO: iter: 63250/300480  CE: 6.9007  
+[04/12 23:10:01] Re-training INFO: iter: 63375/300480  CE: 6.9375  
+[04/12 23:11:07] Re-training INFO: iter: 63500/300480  CE: 7.0237  
+[04/12 23:12:14] Re-training INFO: iter: 63625/300480  CE: 6.9909  
+[04/12 23:13:20] Re-training INFO: iter: 63750/300480  CE: 6.9920  
+[04/12 23:14:09] Re-training INFO: --> epoch:  51/240  avg CE: 6.9791  lr: 0.03597100897202747  
+[04/12 23:14:41] Re-training INFO: iter: 63875/300480  CE: 6.9631  
+[04/12 23:15:48] Re-training INFO: iter: 64000/300480  CE: 6.9793  
+[04/12 23:16:56] Re-training INFO: iter: 64125/300480  CE: 6.9186  
+[04/12 23:18:04] Re-training INFO: iter: 64250/300480  CE: 6.9174  
+[04/12 23:19:12] Re-training INFO: iter: 64375/300480  CE: 6.9723  
+[04/12 23:20:19] Re-training INFO: iter: 64500/300480  CE: 6.9067  
+[04/12 23:21:26] Re-training INFO: iter: 64625/300480  CE: 6.9923  
+[04/12 23:22:35] Re-training INFO: iter: 64750/300480  CE: 7.0108  
+[04/12 23:23:42] Re-training INFO: iter: 64875/300480  CE: 7.0094  
+[04/12 23:24:50] Re-training INFO: iter: 65000/300480  CE: 6.9979  
+[04/12 23:25:44] Re-training INFO: --> epoch:  52/240  avg CE: 6.9790  lr: 0.03597100897202747  
+[04/12 23:26:13] Re-training INFO: iter: 65125/300480  CE: 6.9537  
+[04/12 23:27:21] Re-training INFO: iter: 65250/300480  CE: 7.0217  
+[04/12 23:28:28] Re-training INFO: iter: 65375/300480  CE: 6.9449  
+[04/12 23:29:37] Re-training INFO: iter: 65500/300480  CE: 6.9803  
+[04/12 23:30:44] Re-training INFO: iter: 65625/300480  CE: 6.9989  
+[04/12 23:31:51] Re-training INFO: iter: 65750/300480  CE: 6.9883  
+[04/12 23:32:59] Re-training INFO: iter: 65875/300480  CE: 6.9994  
+[04/12 23:34:06] Re-training INFO: iter: 66000/300480  CE: 6.9871  
+[04/12 23:35:13] Re-training INFO: iter: 66125/300480  CE: 6.9654  
+[04/12 23:36:20] Re-training INFO: iter: 66250/300480  CE: 6.9685  
+[04/12 23:37:16] Re-training INFO: --> epoch:  53/240  avg CE: 6.9780  lr: 0.03489187870286664  
+[04/12 23:37:45] Re-training INFO: iter: 66375/300480  CE: 7.0050  
+[04/12 23:38:51] Re-training INFO: iter: 66500/300480  CE: 6.9775  
+[04/12 23:39:57] Re-training INFO: iter: 66625/300480  CE: 6.9511  
+[04/12 23:41:03] Re-training INFO: iter: 66750/300480  CE: 6.9531  
+[04/12 23:42:07] Re-training INFO: iter: 66875/300480  CE: 6.9766  
+[04/12 23:43:14] Re-training INFO: iter: 67000/300480  CE: 6.9645  
+[04/12 23:44:21] Re-training INFO: iter: 67125/300480  CE: 6.9296  
+[04/12 23:45:26] Re-training INFO: iter: 67250/300480  CE: 6.9202  
+[04/12 23:46:32] Re-training INFO: iter: 67375/300480  CE: 7.0055  
+[04/12 23:47:39] Re-training INFO: iter: 67500/300480  CE: 6.9941  
+[04/12 23:48:35] Re-training INFO: --> epoch:  54/240  avg CE: 6.9788  lr: 0.03489187870286664  
+[04/12 23:49:02] Re-training INFO: iter: 67625/300480  CE: 6.9696  
+[04/12 23:50:08] Re-training INFO: iter: 67750/300480  CE: 6.9951  
+[04/12 23:51:16] Re-training INFO: iter: 67875/300480  CE: 7.0144  
+[04/12 23:52:22] Re-training INFO: iter: 68000/300480  CE: 6.9678  
+[04/12 23:53:30] Re-training INFO: iter: 68125/300480  CE: 7.0285  
+[04/12 23:54:36] Re-training INFO: iter: 68250/300480  CE: 6.9482  
+[04/12 23:55:43] Re-training INFO: iter: 68375/300480  CE: 6.9758  
+[04/12 23:56:50] Re-training INFO: iter: 68500/300480  CE: 6.9698  
+[04/12 23:57:57] Re-training INFO: iter: 68625/300480  CE: 6.9829  
+[04/12 23:59:04] Re-training INFO: iter: 68750/300480  CE: 6.9803  
+[04/13 00:00:00] Re-training INFO: --> epoch:  55/240  avg CE: 6.9754  lr: 0.03489187870286664  
+[04/13 00:00:26] Re-training INFO: iter: 68875/300480  CE: 6.9430  
+[04/13 00:01:35] Re-training INFO: iter: 69000/300480  CE: 7.0274  
+[04/13 00:02:41] Re-training INFO: iter: 69125/300480  CE: 6.9672  
+[04/13 00:03:48] Re-training INFO: iter: 69250/300480  CE: 6.9897  
+[04/13 00:04:56] Re-training INFO: iter: 69375/300480  CE: 6.9414  
+[04/13 00:06:03] Re-training INFO: iter: 69500/300480  CE: 6.8880  
+[04/13 00:07:12] Re-training INFO: iter: 69625/300480  CE: 6.9926  
+[04/13 00:08:17] Re-training INFO: iter: 69750/300480  CE: 6.9548  
+[04/13 00:09:25] Re-training INFO: iter: 69875/300480  CE: 6.9822  
+[04/13 00:10:32] Re-training INFO: iter: 70000/300480  CE: 6.9412  
+[04/13 00:11:32] Re-training INFO: --> epoch:  56/240  avg CE: 6.9742  lr: 0.033845122341780644  
+[04/13 00:11:57] Re-training INFO: iter: 70125/300480  CE: 6.9533  
+[04/13 00:13:03] Re-training INFO: iter: 70250/300480  CE: 6.9132  
+[04/13 00:14:09] Re-training INFO: iter: 70375/300480  CE: 7.0165  
+[04/13 00:15:16] Re-training INFO: iter: 70500/300480  CE: 6.9622  
+[04/13 00:16:24] Re-training INFO: iter: 70625/300480  CE: 7.0020  
+[04/13 00:17:30] Re-training INFO: iter: 70750/300480  CE: 6.9792  
+[04/13 00:18:38] Re-training INFO: iter: 70875/300480  CE: 7.0092  
+[04/13 00:19:45] Re-training INFO: iter: 71000/300480  CE: 6.9570  
+[04/13 00:20:51] Re-training INFO: iter: 71125/300480  CE: 6.9359  
+[04/13 00:21:59] Re-training INFO: iter: 71250/300480  CE: 7.0429  
+[04/13 00:22:59] Re-training INFO: --> epoch:  57/240  avg CE: 6.9756  lr: 0.033845122341780644  
+[04/13 00:23:23] Re-training INFO: iter: 71375/300480  CE: 7.0035  
+[04/13 00:24:29] Re-training INFO: iter: 71500/300480  CE: 7.0204  
+[04/13 00:25:36] Re-training INFO: iter: 71625/300480  CE: 7.0189  
+[04/13 00:26:43] Re-training INFO: iter: 71750/300480  CE: 6.9782  
+[04/13 00:27:51] Re-training INFO: iter: 71875/300480  CE: 7.0085  
+[04/13 00:28:58] Re-training INFO: iter: 72000/300480  CE: 6.9188  
+[04/13 00:30:05] Re-training INFO: iter: 72125/300480  CE: 6.9370  
+[04/13 00:31:13] Re-training INFO: iter: 72250/300480  CE: 6.9803  
+[04/13 00:32:20] Re-training INFO: iter: 72375/300480  CE: 6.9245  
+[04/13 00:33:27] Re-training INFO: iter: 72500/300480  CE: 6.9513  
+[04/13 00:34:28] Re-training INFO: --> epoch:  58/240  avg CE: 6.9747  lr: 0.03282976867152722  
+[04/13 00:34:52] Re-training INFO: iter: 72625/300480  CE: 6.9573  
+[04/13 00:35:58] Re-training INFO: iter: 72750/300480  CE: 6.9429  
+[04/13 00:37:05] Re-training INFO: iter: 72875/300480  CE: 6.9304  
+[04/13 00:38:13] Re-training INFO: iter: 73000/300480  CE: 6.9407  
+[04/13 00:39:17] Re-training INFO: iter: 73125/300480  CE: 7.0151  
+[04/13 00:40:24] Re-training INFO: iter: 73250/300480  CE: 6.9957  
+[04/13 00:41:30] Re-training INFO: iter: 73375/300480  CE: 6.9654  
+[04/13 00:42:38] Re-training INFO: iter: 73500/300480  CE: 6.9894  
+[04/13 00:43:45] Re-training INFO: iter: 73625/300480  CE: 6.9409  
+[04/13 00:44:52] Re-training INFO: iter: 73750/300480  CE: 7.0622  
+[04/13 00:45:53] Re-training INFO: --> epoch:  59/240  avg CE: 6.9725  lr: 0.03282976867152722  
+[04/13 00:46:16] Re-training INFO: iter: 73875/300480  CE: 6.9732  
+[04/13 00:47:23] Re-training INFO: iter: 74000/300480  CE: 6.9711  
+[04/13 00:48:30] Re-training INFO: iter: 74125/300480  CE: 6.9421  
+[04/13 00:49:38] Re-training INFO: iter: 74250/300480  CE: 6.9643  
+[04/13 00:50:45] Re-training INFO: iter: 74375/300480  CE: 6.9685  
+[04/13 00:51:53] Re-training INFO: iter: 74500/300480  CE: 7.0178  
+[04/13 00:53:00] Re-training INFO: iter: 74625/300480  CE: 6.9659  
+[04/13 00:54:07] Re-training INFO: iter: 74750/300480  CE: 6.9584  
+[04/13 00:55:13] Re-training INFO: iter: 74875/300480  CE: 6.9668  
+[04/13 00:56:20] Re-training INFO: iter: 75000/300480  CE: 6.9689  
+[04/13 00:57:23] Re-training INFO: --> epoch:  60/240  avg CE: 6.9737  lr: 0.031844875611381405  
+[04/13 00:57:59] Re-training INFO: # of Test Samples: 50000.0
+[04/13 00:57:59] Re-training INFO: Top-1/-5 acc:  0.10 /  0.50
+[04/13 00:57:59] Re-training INFO: Top-1/-5 acc: 99.90 / 99.50
+[04/13 00:57:59] Re-training INFO: 
+
+[04/13 00:58:20] Re-training INFO: iter: 75125/300480  CE: 6.9777  
+[04/13 00:59:27] Re-training INFO: iter: 75250/300480  CE: 6.9924  
+[04/13 01:00:33] Re-training INFO: iter: 75375/300480  CE: 6.9338  
+[04/13 01:01:39] Re-training INFO: iter: 75500/300480  CE: 6.9878  
+[04/13 01:02:45] Re-training INFO: iter: 75625/300480  CE: 6.9857  
+[04/13 01:03:52] Re-training INFO: iter: 75750/300480  CE: 6.9763  
+[04/13 01:04:59] Re-training INFO: iter: 75875/300480  CE: 6.9642  
+[04/13 01:06:05] Re-training INFO: iter: 76000/300480  CE: 6.9653  
+[04/13 01:07:10] Re-training INFO: iter: 76125/300480  CE: 6.9842  
+[04/13 01:08:17] Re-training INFO: iter: 76250/300480  CE: 6.9942  
+[04/13 01:09:20] Re-training INFO: --> epoch:  61/240  avg CE: 6.9694  lr: 0.031844875611381405  
+[04/13 01:09:40] Re-training INFO: iter: 76375/300480  CE: 7.0157  
+[04/13 01:10:49] Re-training INFO: iter: 76500/300480  CE: 6.9894  
+[04/13 01:11:56] Re-training INFO: iter: 76625/300480  CE: 6.9985  
+[04/13 01:13:03] Re-training INFO: iter: 76750/300480  CE: 6.9521  
+[04/13 01:14:10] Re-training INFO: iter: 76875/300480  CE: 6.9565  
+[04/13 01:15:18] Re-training INFO: iter: 77000/300480  CE: 7.0393  
+[04/13 01:16:27] Re-training INFO: iter: 77125/300480  CE: 6.9474  
+[04/13 01:17:34] Re-training INFO: iter: 77250/300480  CE: 6.9427  
+[04/13 01:18:42] Re-training INFO: iter: 77375/300480  CE: 7.0163  
+[04/13 01:19:49] Re-training INFO: iter: 77500/300480  CE: 6.9896  
+[04/13 01:20:55] Re-training INFO: --> epoch:  62/240  avg CE: 6.9707  lr: 0.031844875611381405  
+[04/13 01:21:14] Re-training INFO: iter: 77625/300480  CE: 6.9722  
+[04/13 01:22:22] Re-training INFO: iter: 77750/300480  CE: 6.9950  
+[04/13 01:23:28] Re-training INFO: iter: 77875/300480  CE: 6.9800  
+[04/13 01:24:35] Re-training INFO: iter: 78000/300480  CE: 6.9679  
+[04/13 01:25:43] Re-training INFO: iter: 78125/300480  CE: 6.9602  
+[04/13 01:26:50] Re-training INFO: iter: 78250/300480  CE: 6.9280  
+[04/13 01:27:57] Re-training INFO: iter: 78375/300480  CE: 6.9607  
+[04/13 01:29:03] Re-training INFO: iter: 78500/300480  CE: 6.9816  
+[04/13 01:30:11] Re-training INFO: iter: 78625/300480  CE: 6.9752  
+[04/13 01:31:18] Re-training INFO: iter: 78750/300480  CE: 6.9331  
+[04/13 01:32:24] Re-training INFO: iter: 78875/300480  CE: 6.9474  
+[04/13 01:32:24] Re-training INFO: --> epoch:  63/240  avg CE: 6.9703  lr: 0.03088952934303996  
+[04/13 01:33:49] Re-training INFO: iter: 79000/300480  CE: 6.9698  
+[04/13 01:34:55] Re-training INFO: iter: 79125/300480  CE: 7.0001  
+[04/13 01:36:02] Re-training INFO: iter: 79250/300480  CE: 6.9893  
+[04/13 01:37:09] Re-training INFO: iter: 79375/300480  CE: 6.9238  
+[04/13 01:38:15] Re-training INFO: iter: 79500/300480  CE: 6.9487  
+[04/13 01:39:21] Re-training INFO: iter: 79625/300480  CE: 6.9902  
+[04/13 01:40:30] Re-training INFO: iter: 79750/300480  CE: 6.9511  
+[04/13 01:41:36] Re-training INFO: iter: 79875/300480  CE: 6.9411  
+[04/13 01:42:43] Re-training INFO: iter: 80000/300480  CE: 6.9888  
+[04/13 01:43:49] Re-training INFO: iter: 80125/300480  CE: 6.9905  
+[04/13 01:43:50] Re-training INFO: --> epoch:  64/240  avg CE: 6.9700  lr: 0.03088952934303996  
+[04/13 01:45:13] Re-training INFO: iter: 80250/300480  CE: 6.9592  
+[04/13 01:46:19] Re-training INFO: iter: 80375/300480  CE: 6.9754  
+[04/13 01:47:27] Re-training INFO: iter: 80500/300480  CE: 6.9663  
+[04/13 01:48:34] Re-training INFO: iter: 80625/300480  CE: 6.9727  
+[04/13 01:49:40] Re-training INFO: iter: 80750/300480  CE: 6.9649  
+[04/13 01:50:47] Re-training INFO: iter: 80875/300480  CE: 6.9522  
+[04/13 01:51:53] Re-training INFO: iter: 81000/300480  CE: 6.9262  
+[04/13 01:53:01] Re-training INFO: iter: 81125/300480  CE: 7.0162  
+[04/13 01:54:07] Re-training INFO: iter: 81250/300480  CE: 6.9228  
+[04/13 01:55:14] Re-training INFO: iter: 81375/300480  CE: 6.9683  
+[04/13 01:55:16] Re-training INFO: --> epoch:  65/240  avg CE: 6.9695  lr: 0.029962843462748762  
+[04/13 01:56:37] Re-training INFO: iter: 81500/300480  CE: 6.9787  
+[04/13 01:57:42] Re-training INFO: iter: 81625/300480  CE: 6.9413  
+[04/13 01:58:52] Re-training INFO: iter: 81750/300480  CE: 6.9462  
+[04/13 01:59:58] Re-training INFO: iter: 81875/300480  CE: 6.9722  
+[04/13 02:01:07] Re-training INFO: iter: 82000/300480  CE: 6.9651  
+[04/13 02:02:14] Re-training INFO: iter: 82125/300480  CE: 7.0154  
+[04/13 02:03:21] Re-training INFO: iter: 82250/300480  CE: 6.9906  
+[04/13 02:04:29] Re-training INFO: iter: 82375/300480  CE: 6.9482  

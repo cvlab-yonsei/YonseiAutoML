@@ -1,0 +1,1472 @@
+[03/02 01:40:26] SuperNet Training INFO: tag                 : val6-2
+[03/02 01:40:26] SuperNet Training INFO: seed                : 0
+[03/02 01:40:26] SuperNet Training INFO: data_path           : ../../data/imagenet
+[03/02 01:40:26] SuperNet Training INFO: save_path           : ./SuperNet
+[03/02 01:40:26] SuperNet Training INFO: search_space        : proxyless
+[03/02 01:40:26] SuperNet Training INFO: valid_size          : 50000
+[03/02 01:40:26] SuperNet Training INFO: num_gpus            : 8
+[03/02 01:40:26] SuperNet Training INFO: workers             : 3
+[03/02 01:40:26] SuperNet Training INFO: interval_ep_eval    : 8
+[03/02 01:40:26] SuperNet Training INFO: train_batch_size    : 1024
+[03/02 01:40:26] SuperNet Training INFO: test_batch_size     : 256
+[03/02 01:40:26] SuperNet Training INFO: max_epoch           : 120
+[03/02 01:40:26] SuperNet Training INFO: learning_rate       : 0.045
+[03/02 01:40:26] SuperNet Training INFO: momentum            : 0.9
+[03/02 01:40:26] SuperNet Training INFO: weight_decay        : 4e-05
+[03/02 01:40:26] SuperNet Training INFO: nesterov            : True
+[03/02 01:40:26] SuperNet Training INFO: lr_schedule_type    : cosine
+[03/02 01:40:26] SuperNet Training INFO: freeze_bn           : False
+[03/02 01:40:26] SuperNet Training INFO: label_smooth        : 0.1
+[03/02 01:40:26] SuperNet Training INFO: rank                : 0
+[03/02 01:40:26] SuperNet Training INFO: gpu                 : 0
+[03/02 01:40:26] SuperNet Training INFO: save_name           : val6-2-seed-0
+[03/02 01:40:26] SuperNet Training INFO: log_path            : ./SuperNet/logs/val6-2-seed-0.txt
+[03/02 01:40:26] SuperNet Training INFO: ckpt_path           : ./SuperNet/checkpoint/val6-2-seed-0.pt
+[03/02 01:40:26] SuperNet Training INFO: dist_url            : tcp://127.0.0.1:23456
+[03/02 01:40:26] SuperNet Training INFO: world_size          : 8
+[03/02 01:40:26] SuperNet Training INFO: distributed         : True
+[03/02 01:40:52] SuperNet Training INFO: Trainset Size: 1231167
+[03/02 01:40:52] SuperNet Training INFO: Validset Size:   50000
+[03/02 01:40:52] SuperNet Training INFO: --> START val6-2-seed-0
+[03/02 01:40:59] SuperNet Training INFO: iter:     0/  195  CE: 6.9491  
+[03/02 01:41:09] SuperNet Training INFO: iter:    19/  195  CE: 6.9235  
+[03/02 01:41:15] SuperNet Training INFO: iter:    38/  195  CE: 6.8869  
+[03/02 01:41:19] SuperNet Training INFO: iter:    57/  195  CE: 6.9511  
+[03/02 01:41:24] SuperNet Training INFO: iter:    76/  195  CE: 6.9203  
+[03/02 01:41:29] SuperNet Training INFO: iter:    95/  195  CE: 6.9523  
+[03/02 01:41:34] SuperNet Training INFO: iter:   114/  195  CE: 7.0159  
+[03/02 01:41:39] SuperNet Training INFO: iter:   133/  195  CE: 6.9861  
+[03/02 01:41:44] SuperNet Training INFO: iter:   152/  195  CE: 6.9734  
+[03/02 01:41:48] SuperNet Training INFO: iter:   171/  195  CE: 6.8189  
+[03/02 01:41:53] SuperNet Training INFO: iter:   190/  195  CE: 6.6343  
+[03/02 01:41:55] SuperNet Training INFO: --> epoch:   1/120  avg CE: 6.9767  lr: 0.044992210534906735  
+[03/02 01:42:01] SuperNet Training INFO: iter:     0/  195  CE: 7.3536  
+[03/02 01:42:06] SuperNet Training INFO: iter:    19/  195  CE: 7.0512  
+[03/02 01:42:11] SuperNet Training INFO: iter:    38/  195  CE: 6.9099  
+[03/02 01:42:16] SuperNet Training INFO: iter:    57/  195  CE: 6.9075  
+[03/02 01:42:21] SuperNet Training INFO: iter:    76/  195  CE: 6.8239  
+[03/02 01:42:26] SuperNet Training INFO: iter:    95/  195  CE: 6.8016  
+[03/02 01:42:31] SuperNet Training INFO: iter:   114/  195  CE: 6.9072  
+[03/02 01:42:36] SuperNet Training INFO: iter:   133/  195  CE: 6.9468  
+[03/02 01:42:41] SuperNet Training INFO: iter:   152/  195  CE: 6.9495  
+[03/02 01:42:46] SuperNet Training INFO: iter:   171/  195  CE: 6.8919  
+[03/02 01:42:51] SuperNet Training INFO: iter:   190/  195  CE: 6.5851  
+[03/02 01:42:53] SuperNet Training INFO: --> epoch:   2/120  avg CE: 7.0003  lr: 0.044968847533028676  
+[03/02 01:42:59] SuperNet Training INFO: iter:     0/  195  CE: 7.2689  
+[03/02 01:43:04] SuperNet Training INFO: iter:    19/  195  CE: 6.9988  
+[03/02 01:43:09] SuperNet Training INFO: iter:    38/  195  CE: 6.8468  
+[03/02 01:43:14] SuperNet Training INFO: iter:    57/  195  CE: 6.9094  
+[03/02 01:43:19] SuperNet Training INFO: iter:    76/  195  CE: 6.8194  
+[03/02 01:43:24] SuperNet Training INFO: iter:    95/  195  CE: 6.8109  
+[03/02 01:43:29] SuperNet Training INFO: iter:   114/  195  CE: 6.9342  
+[03/02 01:43:34] SuperNet Training INFO: iter:   133/  195  CE: 6.9118  
+[03/02 01:43:39] SuperNet Training INFO: iter:   152/  195  CE: 6.9574  
+[03/02 01:43:44] SuperNet Training INFO: iter:   171/  195  CE: 6.8906  
+[03/02 01:43:49] SuperNet Training INFO: iter:   190/  195  CE: 6.5759  
+[03/02 01:43:51] SuperNet Training INFO: --> epoch:   3/120  avg CE: 6.9871  lr: 0.04492992717083559  
+[03/02 01:43:57] SuperNet Training INFO: iter:     0/  195  CE: 7.3137  
+[03/02 01:44:02] SuperNet Training INFO: iter:    19/  195  CE: 7.0846  
+[03/02 01:44:07] SuperNet Training INFO: iter:    38/  195  CE: 6.8570  
+[03/02 01:44:12] SuperNet Training INFO: iter:    57/  195  CE: 6.9350  
+[03/02 01:44:17] SuperNet Training INFO: iter:    76/  195  CE: 6.7921  
+[03/02 01:44:22] SuperNet Training INFO: iter:    95/  195  CE: 6.7773  
+[03/02 01:44:27] SuperNet Training INFO: iter:   114/  195  CE: 6.8805  
+[03/02 01:44:32] SuperNet Training INFO: iter:   133/  195  CE: 6.9367  
+[03/02 01:44:37] SuperNet Training INFO: iter:   152/  195  CE: 6.9243  
+[03/02 01:44:42] SuperNet Training INFO: iter:   171/  195  CE: 6.8670  
+[03/02 01:44:47] SuperNet Training INFO: iter:   190/  195  CE: 6.6876  
+[03/02 01:44:48] SuperNet Training INFO: --> epoch:   4/120  avg CE: 6.9770  lr: 0.04487547639666564  
+[03/02 01:44:55] SuperNet Training INFO: iter:     0/  195  CE: 7.3000  
+[03/02 01:44:59] SuperNet Training INFO: iter:    19/  195  CE: 6.9258  
+[03/02 01:45:04] SuperNet Training INFO: iter:    38/  195  CE: 6.8637  
+[03/02 01:45:09] SuperNet Training INFO: iter:    57/  195  CE: 6.9219  
+[03/02 01:45:14] SuperNet Training INFO: iter:    76/  195  CE: 6.7907  
+[03/02 01:45:19] SuperNet Training INFO: iter:    95/  195  CE: 6.8356  
+[03/02 01:45:24] SuperNet Training INFO: iter:   114/  195  CE: 6.9371  
+[03/02 01:45:29] SuperNet Training INFO: iter:   133/  195  CE: 6.9640  
+[03/02 01:45:34] SuperNet Training INFO: iter:   152/  195  CE: 6.8934  
+[03/02 01:45:38] SuperNet Training INFO: iter:   171/  195  CE: 6.7893  
+[03/02 01:45:43] SuperNet Training INFO: iter:   190/  195  CE: 6.6492  
+[03/02 01:45:45] SuperNet Training INFO: --> epoch:   5/120  avg CE: 6.9745  lr: 0.044805532912065876  
+[03/02 01:45:51] SuperNet Training INFO: iter:     0/  195  CE: 7.2438  
+[03/02 01:45:56] SuperNet Training INFO: iter:    19/  195  CE: 7.1236  
+[03/02 01:46:01] SuperNet Training INFO: iter:    38/  195  CE: 6.7988  
+[03/02 01:46:06] SuperNet Training INFO: iter:    57/  195  CE: 6.9508  
+[03/02 01:46:11] SuperNet Training INFO: iter:    76/  195  CE: 6.7537  
+[03/02 01:46:16] SuperNet Training INFO: iter:    95/  195  CE: 6.8566  
+[03/02 01:46:21] SuperNet Training INFO: iter:   114/  195  CE: 6.9004  
+[03/02 01:46:26] SuperNet Training INFO: iter:   133/  195  CE: 6.9112  
+[03/02 01:46:31] SuperNet Training INFO: iter:   152/  195  CE: 6.9251  
+[03/02 01:46:36] SuperNet Training INFO: iter:   171/  195  CE: 6.8516  
+[03/02 01:46:41] SuperNet Training INFO: iter:   190/  195  CE: 6.6523  
+[03/02 01:46:43] SuperNet Training INFO: --> epoch:   6/120  avg CE: 6.9663  lr: 0.044720145145687985  
+[03/02 01:46:49] SuperNet Training INFO: iter:     0/  195  CE: 7.2673  
+[03/02 01:46:54] SuperNet Training INFO: iter:    19/  195  CE: 6.9817  
+[03/02 01:46:59] SuperNet Training INFO: iter:    38/  195  CE: 6.8405  
+[03/02 01:47:04] SuperNet Training INFO: iter:    57/  195  CE: 6.8829  
+[03/02 01:47:09] SuperNet Training INFO: iter:    76/  195  CE: 6.7254  
+[03/02 01:47:14] SuperNet Training INFO: iter:    95/  195  CE: 6.8822  
+[03/02 01:47:19] SuperNet Training INFO: iter:   114/  195  CE: 6.9104  
+[03/02 01:47:24] SuperNet Training INFO: iter:   133/  195  CE: 6.9021  
+[03/02 01:47:29] SuperNet Training INFO: iter:   152/  195  CE: 6.8655  
+[03/02 01:47:34] SuperNet Training INFO: iter:   171/  195  CE: 6.8092  
+[03/02 01:47:39] SuperNet Training INFO: iter:   190/  195  CE: 6.5965  
+[03/02 01:47:40] SuperNet Training INFO: --> epoch:   7/120  avg CE: 6.9556  lr: 0.04461937221975654  
+[03/02 01:47:46] SuperNet Training INFO: iter:     0/  195  CE: 7.2284  
+[03/02 01:47:52] SuperNet Training INFO: iter:    19/  195  CE: 7.0596  
+[03/02 01:47:57] SuperNet Training INFO: iter:    38/  195  CE: 6.9325  
+[03/02 01:48:01] SuperNet Training INFO: iter:    57/  195  CE: 6.9081  
+[03/02 01:48:06] SuperNet Training INFO: iter:    76/  195  CE: 6.7852  
+[03/02 01:48:11] SuperNet Training INFO: iter:    95/  195  CE: 6.8326  
+[03/02 01:48:16] SuperNet Training INFO: iter:   114/  195  CE: 6.9982  
+[03/02 01:48:21] SuperNet Training INFO: iter:   133/  195  CE: 6.9138  
+[03/02 01:48:25] SuperNet Training INFO: iter:   152/  195  CE: 6.8311  
+[03/02 01:48:30] SuperNet Training INFO: iter:   171/  195  CE: 6.8514  
+[03/02 01:48:35] SuperNet Training INFO: iter:   190/  195  CE: 6.6457  
+[03/02 01:48:36] SuperNet Training INFO: --> epoch:   8/120  avg CE: 6.9503  lr: 0.04450328390913269  
+[03/02 01:48:43] SuperNet Training INFO: iter:     0/  195  CE: 7.1259  
+[03/02 01:48:48] SuperNet Training INFO: iter:    19/  195  CE: 6.9436  
+[03/02 01:48:53] SuperNet Training INFO: iter:    38/  195  CE: 6.7914  
+[03/02 01:48:58] SuperNet Training INFO: iter:    57/  195  CE: 6.8800  
+[03/02 01:49:02] SuperNet Training INFO: iter:    76/  195  CE: 6.8652  
+[03/02 01:49:08] SuperNet Training INFO: iter:    95/  195  CE: 6.8484  
+[03/02 01:49:13] SuperNet Training INFO: iter:   114/  195  CE: 6.8938  
+[03/02 01:49:17] SuperNet Training INFO: iter:   133/  195  CE: 6.8538  
+[03/02 01:49:23] SuperNet Training INFO: iter:   152/  195  CE: 6.8534  
+[03/02 01:49:27] SuperNet Training INFO: iter:   171/  195  CE: 6.7832  
+[03/02 01:49:32] SuperNet Training INFO: iter:   190/  195  CE: 6.6185  
+[03/02 01:49:34] SuperNet Training INFO: --> epoch:   9/120  avg CE: 6.9354  lr: 0.04437196059300247  
+[03/02 01:49:40] SuperNet Training INFO: iter:     0/  195  CE: 7.1139  
+[03/02 01:49:46] SuperNet Training INFO: iter:    19/  195  CE: 6.9588  
+[03/02 01:49:50] SuperNet Training INFO: iter:    38/  195  CE: 6.7846  
+[03/02 01:49:56] SuperNet Training INFO: iter:    57/  195  CE: 6.8989  
+[03/02 01:50:00] SuperNet Training INFO: iter:    76/  195  CE: 6.7506  
+[03/02 01:50:06] SuperNet Training INFO: iter:    95/  195  CE: 6.8523  
+[03/02 01:50:11] SuperNet Training INFO: iter:   114/  195  CE: 6.9278  
+[03/02 01:50:15] SuperNet Training INFO: iter:   133/  195  CE: 6.8772  
+[03/02 01:50:20] SuperNet Training INFO: iter:   152/  195  CE: 6.7784  
+[03/02 01:50:25] SuperNet Training INFO: iter:   171/  195  CE: 6.7730  
+[03/02 01:50:30] SuperNet Training INFO: iter:   190/  195  CE: 6.6032  
+[03/02 01:50:32] SuperNet Training INFO: --> epoch:  10/120  avg CE: 6.9256  lr: 0.044225493199222615  
+[03/02 01:50:38] SuperNet Training INFO: iter:     0/  195  CE: 7.0872  
+[03/02 01:50:44] SuperNet Training INFO: iter:    19/  195  CE: 7.0029  
+[03/02 01:50:49] SuperNet Training INFO: iter:    38/  195  CE: 6.7710  
+[03/02 01:50:54] SuperNet Training INFO: iter:    57/  195  CE: 6.8636  
+[03/02 01:50:59] SuperNet Training INFO: iter:    76/  195  CE: 6.7112  
+[03/02 01:51:04] SuperNet Training INFO: iter:    95/  195  CE: 6.8167  
+[03/02 01:51:08] SuperNet Training INFO: iter:   114/  195  CE: 6.8944  
+[03/02 01:51:13] SuperNet Training INFO: iter:   133/  195  CE: 6.8738  
+[03/02 01:51:19] SuperNet Training INFO: iter:   152/  195  CE: 6.8295  
+[03/02 01:51:24] SuperNet Training INFO: iter:   171/  195  CE: 6.7606  
+[03/02 01:51:28] SuperNet Training INFO: iter:   190/  195  CE: 6.5250  
+[03/02 01:51:30] SuperNet Training INFO: --> epoch:  11/120  avg CE: 6.9071  lr: 0.044063983141362034  
+[03/02 01:51:36] SuperNet Training INFO: iter:     0/  195  CE: 7.0112  
+[03/02 01:51:41] SuperNet Training INFO: iter:    19/  195  CE: 7.0463  
+[03/02 01:51:46] SuperNet Training INFO: iter:    38/  195  CE: 6.7724  
+[03/02 01:51:51] SuperNet Training INFO: iter:    57/  195  CE: 6.7934  
+[03/02 01:51:56] SuperNet Training INFO: iter:    76/  195  CE: 6.6616  
+[03/02 01:52:01] SuperNet Training INFO: iter:    95/  195  CE: 6.8005  
+[03/02 01:52:06] SuperNet Training INFO: iter:   114/  195  CE: 6.8698  
+[03/02 01:52:11] SuperNet Training INFO: iter:   133/  195  CE: 6.8263  
+[03/02 01:52:16] SuperNet Training INFO: iter:   152/  195  CE: 6.7952  
+[03/02 01:52:21] SuperNet Training INFO: iter:   171/  195  CE: 6.7964  
+[03/02 01:52:26] SuperNet Training INFO: iter:   190/  195  CE: 6.5689  
+[03/02 01:52:28] SuperNet Training INFO: --> epoch:  12/120  avg CE: 6.9026  lr: 0.043887542248483624  
+[03/02 01:52:34] SuperNet Training INFO: iter:     0/  195  CE: 7.0074  
+[03/02 01:52:39] SuperNet Training INFO: iter:    19/  195  CE: 7.0244  
+[03/02 01:52:44] SuperNet Training INFO: iter:    38/  195  CE: 6.8230  
+[03/02 01:52:49] SuperNet Training INFO: iter:    57/  195  CE: 6.8548  
+[03/02 01:52:54] SuperNet Training INFO: iter:    76/  195  CE: 6.6658  
+[03/02 01:52:59] SuperNet Training INFO: iter:    95/  195  CE: 6.8113  
+[03/02 01:53:03] SuperNet Training INFO: iter:   114/  195  CE: 6.9375  
+[03/02 01:53:08] SuperNet Training INFO: iter:   133/  195  CE: 6.8197  
+[03/02 01:53:13] SuperNet Training INFO: iter:   152/  195  CE: 6.7844  
+[03/02 01:53:18] SuperNet Training INFO: iter:   171/  195  CE: 6.7408  
+[03/02 01:53:23] SuperNet Training INFO: iter:   190/  195  CE: 6.6736  
+[03/02 01:53:25] SuperNet Training INFO: --> epoch:  13/120  avg CE: 6.8832  lr: 0.04369629268771429  
+[03/02 01:53:31] SuperNet Training INFO: iter:     0/  195  CE: 6.9825  
+[03/02 01:53:36] SuperNet Training INFO: iter:    19/  195  CE: 6.9956  
+[03/02 01:53:40] SuperNet Training INFO: iter:    38/  195  CE: 6.7429  
+[03/02 01:53:46] SuperNet Training INFO: iter:    57/  195  CE: 6.8675  
+[03/02 01:53:51] SuperNet Training INFO: iter:    76/  195  CE: 6.6591  
+[03/02 01:53:56] SuperNet Training INFO: iter:    95/  195  CE: 6.8537  
+[03/02 01:54:01] SuperNet Training INFO: iter:   114/  195  CE: 6.9068  
+[03/02 01:54:05] SuperNet Training INFO: iter:   133/  195  CE: 6.8054  
+[03/02 01:54:10] SuperNet Training INFO: iter:   152/  195  CE: 6.7119  
+[03/02 01:54:15] SuperNet Training INFO: iter:   171/  195  CE: 6.8477  
+[03/02 01:54:20] SuperNet Training INFO: iter:   190/  195  CE: 6.5693  
+[03/02 01:54:21] SuperNet Training INFO: --> epoch:  14/120  avg CE: 6.8735  lr: 0.04349036687965641  
+[03/02 01:54:28] SuperNet Training INFO: iter:     0/  195  CE: 6.9425  
+[03/02 01:54:33] SuperNet Training INFO: iter:    19/  195  CE: 6.9669  
+[03/02 01:54:37] SuperNet Training INFO: iter:    38/  195  CE: 6.7393  
+[03/02 01:54:42] SuperNet Training INFO: iter:    57/  195  CE: 6.7925  
+[03/02 01:54:47] SuperNet Training INFO: iter:    76/  195  CE: 6.5878  
+[03/02 01:54:52] SuperNet Training INFO: iter:    95/  195  CE: 6.8334  
+[03/02 01:54:57] SuperNet Training INFO: iter:   114/  195  CE: 6.9702  
+[03/02 01:55:02] SuperNet Training INFO: iter:   133/  195  CE: 6.7616  
+[03/02 01:55:06] SuperNet Training INFO: iter:   152/  195  CE: 6.7785  
+[03/02 01:55:11] SuperNet Training INFO: iter:   171/  195  CE: 6.7764  
+[03/02 01:55:16] SuperNet Training INFO: iter:   190/  195  CE: 6.5679  
+[03/02 01:55:18] SuperNet Training INFO: --> epoch:  15/120  avg CE: 6.8596  lr: 0.04326990740670047  
+[03/02 01:55:24] SuperNet Training INFO: iter:     0/  195  CE: 6.9534  
+[03/02 01:55:28] SuperNet Training INFO: iter:    19/  195  CE: 6.9811  
+[03/02 01:55:33] SuperNet Training INFO: iter:    38/  195  CE: 6.7443  
+[03/02 01:55:38] SuperNet Training INFO: iter:    57/  195  CE: 6.8843  
+[03/02 01:55:43] SuperNet Training INFO: iter:    76/  195  CE: 6.6088  
+[03/02 01:55:48] SuperNet Training INFO: iter:    95/  195  CE: 6.7671  
+[03/02 01:55:53] SuperNet Training INFO: iter:   114/  195  CE: 6.8710  
+[03/02 01:55:58] SuperNet Training INFO: iter:   133/  195  CE: 6.7056  
+[03/02 01:56:03] SuperNet Training INFO: iter:   152/  195  CE: 6.6598  
+[03/02 01:56:08] SuperNet Training INFO: iter:   171/  195  CE: 6.8160  
+[03/02 01:56:13] SuperNet Training INFO: iter:   190/  195  CE: 6.5220  
+[03/02 01:56:15] SuperNet Training INFO: --> epoch:  16/120  avg CE: 6.8508  lr: 0.04303506691430163  
+[03/02 01:56:21] SuperNet Training INFO: iter:     0/  195  CE: 6.8848  
+[03/02 01:56:26] SuperNet Training INFO: iter:    19/  195  CE: 6.9434  
+[03/02 01:56:30] SuperNet Training INFO: iter:    38/  195  CE: 6.7471  
+[03/02 01:56:35] SuperNet Training INFO: iter:    57/  195  CE: 6.7748  
+[03/02 01:56:40] SuperNet Training INFO: iter:    76/  195  CE: 6.6249  
+[03/02 01:56:45] SuperNet Training INFO: iter:    95/  195  CE: 6.6872  
+[03/02 01:56:50] SuperNet Training INFO: iter:   114/  195  CE: 6.8816  
+[03/02 01:56:55] SuperNet Training INFO: iter:   133/  195  CE: 6.8300  
+[03/02 01:57:00] SuperNet Training INFO: iter:   152/  195  CE: 6.7719  
+[03/02 01:57:05] SuperNet Training INFO: iter:   171/  195  CE: 6.7501  
+[03/02 01:57:10] SuperNet Training INFO: iter:   190/  195  CE: 6.5451  
+[03/02 01:57:12] SuperNet Training INFO: --> epoch:  17/120  avg CE: 6.8358  lr: 0.042786008005288055  
+[03/02 01:57:18] SuperNet Training INFO: iter:     0/  195  CE: 6.9635  
+[03/02 01:57:23] SuperNet Training INFO: iter:    19/  195  CE: 6.9624  
+[03/02 01:57:28] SuperNet Training INFO: iter:    38/  195  CE: 6.7921  
+[03/02 01:57:34] SuperNet Training INFO: iter:    57/  195  CE: 6.7197  
+[03/02 01:57:39] SuperNet Training INFO: iter:    76/  195  CE: 6.5511  
+[03/02 01:57:44] SuperNet Training INFO: iter:    95/  195  CE: 6.7243  
+[03/02 01:57:49] SuperNet Training INFO: iter:   114/  195  CE: 6.8170  
+[03/02 01:57:54] SuperNet Training INFO: iter:   133/  195  CE: 6.6801  
+[03/02 01:57:59] SuperNet Training INFO: iter:   152/  195  CE: 6.6134  
+[03/02 01:58:04] SuperNet Training INFO: iter:   171/  195  CE: 6.9135  
+[03/02 01:58:09] SuperNet Training INFO: iter:   190/  195  CE: 6.5357  
+[03/02 01:58:11] SuperNet Training INFO: --> epoch:  18/120  avg CE: 6.8325  lr: 0.04252290312727552  
+[03/02 01:58:17] SuperNet Training INFO: iter:     0/  195  CE: 6.8378  
+[03/02 01:58:22] SuperNet Training INFO: iter:    19/  195  CE: 6.9251  
+[03/02 01:58:27] SuperNet Training INFO: iter:    38/  195  CE: 6.6755  
+[03/02 01:58:32] SuperNet Training INFO: iter:    57/  195  CE: 6.7259  
+[03/02 01:58:37] SuperNet Training INFO: iter:    76/  195  CE: 6.5630  
+[03/02 01:58:42] SuperNet Training INFO: iter:    95/  195  CE: 6.7586  
+[03/02 01:58:47] SuperNet Training INFO: iter:   114/  195  CE: 6.8910  
+[03/02 01:58:52] SuperNet Training INFO: iter:   133/  195  CE: 6.7653  
+[03/02 01:58:57] SuperNet Training INFO: iter:   152/  195  CE: 6.6856  
+[03/02 01:59:02] SuperNet Training INFO: iter:   171/  195  CE: 6.8303  
+[03/02 01:59:07] SuperNet Training INFO: iter:   190/  195  CE: 6.4859  
+[03/02 01:59:08] SuperNet Training INFO: --> epoch:  19/120  avg CE: 6.8252  lr: 0.04224593445326527  
+[03/02 01:59:15] SuperNet Training INFO: iter:     0/  195  CE: 6.9075  
+[03/02 01:59:20] SuperNet Training INFO: iter:    19/  195  CE: 6.8639  
+[03/02 01:59:24] SuperNet Training INFO: iter:    38/  195  CE: 6.7161  
+[03/02 01:59:29] SuperNet Training INFO: iter:    57/  195  CE: 6.7570  
+[03/02 01:59:34] SuperNet Training INFO: iter:    76/  195  CE: 6.5711  
+[03/02 01:59:39] SuperNet Training INFO: iter:    95/  195  CE: 6.8057  
+[03/02 01:59:44] SuperNet Training INFO: iter:   114/  195  CE: 6.8954  
+[03/02 01:59:48] SuperNet Training INFO: iter:   133/  195  CE: 6.7885  
+[03/02 01:59:53] SuperNet Training INFO: iter:   152/  195  CE: 6.7796  
+[03/02 01:59:58] SuperNet Training INFO: iter:   171/  195  CE: 6.8954  
+[03/02 02:00:02] SuperNet Training INFO: iter:   190/  195  CE: 6.5461  
+[03/02 02:00:04] SuperNet Training INFO: --> epoch:  20/120  avg CE: 6.8126  lr: 0.041955293755507855  
+[03/02 02:00:10] SuperNet Training INFO: iter:     0/  195  CE: 6.7746  
+[03/02 02:00:15] SuperNet Training INFO: iter:    19/  195  CE: 6.8744  
+[03/02 02:00:20] SuperNet Training INFO: iter:    38/  195  CE: 6.7806  
+[03/02 02:00:25] SuperNet Training INFO: iter:    57/  195  CE: 6.6879  
+[03/02 02:00:29] SuperNet Training INFO: iter:    76/  195  CE: 6.6327  
+[03/02 02:00:35] SuperNet Training INFO: iter:    95/  195  CE: 6.8028  
+[03/02 02:00:40] SuperNet Training INFO: iter:   114/  195  CE: 6.9400  
+[03/02 02:00:45] SuperNet Training INFO: iter:   133/  195  CE: 6.7646  
+[03/02 02:00:50] SuperNet Training INFO: iter:   152/  195  CE: 6.6302  
+[03/02 02:00:55] SuperNet Training INFO: iter:   171/  195  CE: 6.7921  
+[03/02 02:01:00] SuperNet Training INFO: iter:   190/  195  CE: 6.5008  
+[03/02 02:01:02] SuperNet Training INFO: --> epoch:  21/120  avg CE: 6.7994  lr: 0.04165118227272049  
+[03/02 02:01:08] SuperNet Training INFO: iter:     0/  195  CE: 6.7790  
+[03/02 02:01:13] SuperNet Training INFO: iter:    19/  195  CE: 6.9676  
+[03/02 02:01:18] SuperNet Training INFO: iter:    38/  195  CE: 6.7660  
+[03/02 02:01:23] SuperNet Training INFO: iter:    57/  195  CE: 6.6749  
+[03/02 02:01:28] SuperNet Training INFO: iter:    76/  195  CE: 6.5669  
+[03/02 02:01:33] SuperNet Training INFO: iter:    95/  195  CE: 6.7291  
+[03/02 02:01:38] SuperNet Training INFO: iter:   114/  195  CE: 6.8899  
+[03/02 02:01:43] SuperNet Training INFO: iter:   133/  195  CE: 6.7880  
+[03/02 02:01:48] SuperNet Training INFO: iter:   152/  195  CE: 6.5812  
+[03/02 02:01:53] SuperNet Training INFO: iter:   171/  195  CE: 6.7098  
+[03/02 02:01:58] SuperNet Training INFO: iter:   190/  195  CE: 6.4491  
+[03/02 02:01:59] SuperNet Training INFO: --> epoch:  22/120  avg CE: 6.7907  lr: 0.041333810570750314  
+[03/02 02:02:05] SuperNet Training INFO: iter:     0/  195  CE: 6.8214  
+[03/02 02:02:10] SuperNet Training INFO: iter:    19/  195  CE: 6.9812  
+[03/02 02:02:15] SuperNet Training INFO: iter:    38/  195  CE: 6.7721  
+[03/02 02:02:20] SuperNet Training INFO: iter:    57/  195  CE: 6.7803  
+[03/02 02:02:25] SuperNet Training INFO: iter:    76/  195  CE: 6.6215  
+[03/02 02:02:30] SuperNet Training INFO: iter:    95/  195  CE: 6.7132  
+[03/02 02:02:35] SuperNet Training INFO: iter:   114/  195  CE: 6.9230  
+[03/02 02:02:41] SuperNet Training INFO: iter:   133/  195  CE: 6.7184  
+[03/02 02:02:45] SuperNet Training INFO: iter:   152/  195  CE: 6.6593  
+[03/02 02:02:51] SuperNet Training INFO: iter:   171/  195  CE: 6.8086  
+[03/02 02:02:56] SuperNet Training INFO: iter:   190/  195  CE: 6.5569  
+[03/02 02:02:57] SuperNet Training INFO: --> epoch:  23/120  avg CE: 6.7847  lr: 0.041003398396778995  
+[03/02 02:03:04] SuperNet Training INFO: iter:     0/  195  CE: 6.8000  
+[03/02 02:03:09] SuperNet Training INFO: iter:    19/  195  CE: 6.8497  
+[03/02 02:03:14] SuperNet Training INFO: iter:    38/  195  CE: 6.6829  
+[03/02 02:03:19] SuperNet Training INFO: iter:    57/  195  CE: 6.6889  
+[03/02 02:03:24] SuperNet Training INFO: iter:    76/  195  CE: 6.5736  
+[03/02 02:03:30] SuperNet Training INFO: iter:    95/  195  CE: 6.6214  
+[03/02 02:03:35] SuperNet Training INFO: iter:   114/  195  CE: 6.8928  
+[03/02 02:03:40] SuperNet Training INFO: iter:   133/  195  CE: 6.7302  
+[03/02 02:03:45] SuperNet Training INFO: iter:   152/  195  CE: 6.6088  
+[03/02 02:03:50] SuperNet Training INFO: iter:   171/  195  CE: 6.8087  
+[03/02 02:03:55] SuperNet Training INFO: iter:   190/  195  CE: 6.4408  
+[03/02 02:03:56] SuperNet Training INFO: --> epoch:  24/120  avg CE: 6.7785  lr: 0.040660174527170564  
+[03/02 02:04:03] SuperNet Training INFO: iter:     0/  195  CE: 6.7526  
+[03/02 02:04:08] SuperNet Training INFO: iter:    19/  195  CE: 6.8856  
+[03/02 02:04:12] SuperNet Training INFO: iter:    38/  195  CE: 6.7651  
+[03/02 02:04:18] SuperNet Training INFO: iter:    57/  195  CE: 6.6882  
+[03/02 02:04:23] SuperNet Training INFO: iter:    76/  195  CE: 6.5275  
+[03/02 02:04:28] SuperNet Training INFO: iter:    95/  195  CE: 6.7570  
+[03/02 02:04:33] SuperNet Training INFO: iter:   114/  195  CE: 6.8462  
+[03/02 02:04:37] SuperNet Training INFO: iter:   133/  195  CE: 6.7291  
+[03/02 02:04:42] SuperNet Training INFO: iter:   152/  195  CE: 6.5781  
+[03/02 02:04:47] SuperNet Training INFO: iter:   171/  195  CE: 6.8252  
+[03/02 02:04:51] SuperNet Training INFO: iter:   190/  195  CE: 6.4490  
+[03/02 02:04:53] SuperNet Training INFO: --> epoch:  25/120  avg CE: 6.7742  lr: 0.0403043766090674  
+[03/02 02:04:59] SuperNet Training INFO: iter:     0/  195  CE: 6.7854  
+[03/02 02:05:04] SuperNet Training INFO: iter:    19/  195  CE: 6.9471  
+[03/02 02:05:09] SuperNet Training INFO: iter:    38/  195  CE: 6.6860  
+[03/02 02:05:14] SuperNet Training INFO: iter:    57/  195  CE: 6.7014  
+[03/02 02:05:18] SuperNet Training INFO: iter:    76/  195  CE: 6.5583  
+[03/02 02:05:23] SuperNet Training INFO: iter:    95/  195  CE: 6.7662  
+[03/02 02:05:29] SuperNet Training INFO: iter:   114/  195  CE: 6.8176  
+[03/02 02:05:34] SuperNet Training INFO: iter:   133/  195  CE: 6.7509  
+[03/02 02:05:39] SuperNet Training INFO: iter:   152/  195  CE: 6.6435  
+[03/02 02:05:45] SuperNet Training INFO: iter:   171/  195  CE: 6.7973  
+[03/02 02:05:50] SuperNet Training INFO: iter:   190/  195  CE: 6.4443  
+[03/02 02:05:51] SuperNet Training INFO: --> epoch:  26/120  avg CE: 6.7568  lr: 0.03993625099584403  
+[03/02 02:05:57] SuperNet Training INFO: iter:     0/  195  CE: 6.7817  
+[03/02 02:06:02] SuperNet Training INFO: iter:    19/  195  CE: 6.8596  
+[03/02 02:06:07] SuperNet Training INFO: iter:    38/  195  CE: 6.6541  
+[03/02 02:06:12] SuperNet Training INFO: iter:    57/  195  CE: 6.7076  
+[03/02 02:06:17] SuperNet Training INFO: iter:    76/  195  CE: 6.5429  
+[03/02 02:06:23] SuperNet Training INFO: iter:    95/  195  CE: 6.7764  
+[03/02 02:06:28] SuperNet Training INFO: iter:   114/  195  CE: 6.8437  
+[03/02 02:06:33] SuperNet Training INFO: iter:   133/  195  CE: 6.6749  
+[03/02 02:06:38] SuperNet Training INFO: iter:   152/  195  CE: 6.6366  
+[03/02 02:06:43] SuperNet Training INFO: iter:   171/  195  CE: 6.9066  
+[03/02 02:06:48] SuperNet Training INFO: iter:   190/  195  CE: 6.4412  
+[03/02 02:06:49] SuperNet Training INFO: --> epoch:  27/120  avg CE: 6.7490  lr: 0.039556052576532795  
+[03/02 02:06:56] SuperNet Training INFO: iter:     0/  195  CE: 6.6792  
+[03/02 02:07:01] SuperNet Training INFO: iter:    19/  195  CE: 6.9065  
+[03/02 02:07:06] SuperNet Training INFO: iter:    38/  195  CE: 6.6660  
+[03/02 02:07:10] SuperNet Training INFO: iter:    57/  195  CE: 6.8588  
+[03/02 02:07:15] SuperNet Training INFO: iter:    76/  195  CE: 6.5795  
+[03/02 02:07:20] SuperNet Training INFO: iter:    95/  195  CE: 6.5949  
+[03/02 02:07:25] SuperNet Training INFO: iter:   114/  195  CE: 6.8070  
+[03/02 02:07:30] SuperNet Training INFO: iter:   133/  195  CE: 6.6318  
+[03/02 02:07:34] SuperNet Training INFO: iter:   152/  195  CE: 6.5465  
+[03/02 02:07:39] SuperNet Training INFO: iter:   171/  195  CE: 6.7538  
+[03/02 02:07:44] SuperNet Training INFO: iter:   190/  195  CE: 6.5012  
+[03/02 02:07:46] SuperNet Training INFO: --> epoch:  28/120  avg CE: 6.7301  lr: 0.039164044599339594  
+[03/02 02:07:52] SuperNet Training INFO: iter:     0/  195  CE: 6.6732  
+[03/02 02:07:57] SuperNet Training INFO: iter:    19/  195  CE: 6.8904  
+[03/02 02:08:02] SuperNet Training INFO: iter:    38/  195  CE: 6.7026  
+[03/02 02:08:07] SuperNet Training INFO: iter:    57/  195  CE: 6.7057  
+[03/02 02:08:12] SuperNet Training INFO: iter:    76/  195  CE: 6.5434  
+[03/02 02:08:17] SuperNet Training INFO: iter:    95/  195  CE: 6.7002  
+[03/02 02:08:22] SuperNet Training INFO: iter:   114/  195  CE: 6.8242  
+[03/02 02:08:27] SuperNet Training INFO: iter:   133/  195  CE: 6.7826  
+[03/02 02:08:32] SuperNet Training INFO: iter:   152/  195  CE: 6.5537  
+[03/02 02:08:37] SuperNet Training INFO: iter:   171/  195  CE: 6.7065  
+[03/02 02:08:41] SuperNet Training INFO: iter:   190/  195  CE: 6.4479  
+[03/02 02:08:43] SuperNet Training INFO: --> epoch:  29/120  avg CE: 6.7295  lr: 0.03876049848937144  
+[03/02 02:08:49] SuperNet Training INFO: iter:     0/  195  CE: 6.6680  
+[03/02 02:08:55] SuperNet Training INFO: iter:    19/  195  CE: 6.9491  
+[03/02 02:09:00] SuperNet Training INFO: iter:    38/  195  CE: 6.6539  
+[03/02 02:09:05] SuperNet Training INFO: iter:    57/  195  CE: 6.6588  
+[03/02 02:09:10] SuperNet Training INFO: iter:    76/  195  CE: 6.5024  
+[03/02 02:09:15] SuperNet Training INFO: iter:    95/  195  CE: 6.6241  
+[03/02 02:09:20] SuperNet Training INFO: iter:   114/  195  CE: 6.8137  
+[03/02 02:09:25] SuperNet Training INFO: iter:   133/  195  CE: 6.5870  
+[03/02 02:09:30] SuperNet Training INFO: iter:   152/  195  CE: 6.6195  
+[03/02 02:09:35] SuperNet Training INFO: iter:   171/  195  CE: 6.7228  
+[03/02 02:09:40] SuperNet Training INFO: iter:   190/  195  CE: 6.4231  
+[03/02 02:09:41] SuperNet Training INFO: --> epoch:  30/120  avg CE: 6.7129  lr: 0.03834569366070274  
+[03/02 02:09:47] SuperNet Training INFO: iter:     0/  195  CE: 6.6325  
+[03/02 02:09:52] SuperNet Training INFO: iter:    19/  195  CE: 6.8632  
+[03/02 02:09:57] SuperNet Training INFO: iter:    38/  195  CE: 6.6986  
+[03/02 02:10:02] SuperNet Training INFO: iter:    57/  195  CE: 6.6868  
+[03/02 02:10:07] SuperNet Training INFO: iter:    76/  195  CE: 6.4081  
+[03/02 02:10:12] SuperNet Training INFO: iter:    95/  195  CE: 6.6890  
+[03/02 02:10:17] SuperNet Training INFO: iter:   114/  195  CE: 6.8207  
+[03/02 02:10:22] SuperNet Training INFO: iter:   133/  195  CE: 6.6649  
+[03/02 02:10:27] SuperNet Training INFO: iter:   152/  195  CE: 6.5819  
+[03/02 02:10:32] SuperNet Training INFO: iter:   171/  195  CE: 6.7356  
+[03/02 02:10:37] SuperNet Training INFO: iter:   190/  195  CE: 6.4184  
+[03/02 02:10:39] SuperNet Training INFO: --> epoch:  31/120  avg CE: 6.7046  lr: 0.03791991732290981  
+[03/02 02:10:45] SuperNet Training INFO: iter:     0/  195  CE: 6.7119  
+[03/02 02:10:50] SuperNet Training INFO: iter:    19/  195  CE: 6.9402  
+[03/02 02:10:55] SuperNet Training INFO: iter:    38/  195  CE: 6.6591  
+[03/02 02:11:00] SuperNet Training INFO: iter:    57/  195  CE: 6.6050  
+[03/02 02:11:05] SuperNet Training INFO: iter:    76/  195  CE: 6.4046  
+[03/02 02:11:10] SuperNet Training INFO: iter:    95/  195  CE: 6.6383  
+[03/02 02:11:15] SuperNet Training INFO: iter:   114/  195  CE: 6.8045  
+[03/02 02:11:19] SuperNet Training INFO: iter:   133/  195  CE: 6.6252  
+[03/02 02:11:24] SuperNet Training INFO: iter:   152/  195  CE: 6.5271  
+[03/02 02:11:29] SuperNet Training INFO: iter:   171/  195  CE: 6.7838  
+[03/02 02:11:34] SuperNet Training INFO: iter:   190/  195  CE: 6.4222  
+[03/02 02:11:36] SuperNet Training INFO: --> epoch:  32/120  avg CE: 6.6955  lr: 0.037483464282207744  
+[03/02 02:11:42] SuperNet Training INFO: iter:     0/  195  CE: 6.6384  
+[03/02 02:11:47] SuperNet Training INFO: iter:    19/  195  CE: 6.8343  
+[03/02 02:11:52] SuperNet Training INFO: iter:    38/  195  CE: 6.6045  
+[03/02 02:11:57] SuperNet Training INFO: iter:    57/  195  CE: 6.6340  
+[03/02 02:12:02] SuperNet Training INFO: iter:    76/  195  CE: 6.3273  
+[03/02 02:12:07] SuperNet Training INFO: iter:    95/  195  CE: 6.4989  
+[03/02 02:12:12] SuperNet Training INFO: iter:   114/  195  CE: 6.7381  
+[03/02 02:12:17] SuperNet Training INFO: iter:   133/  195  CE: 6.6546  
+[03/02 02:12:22] SuperNet Training INFO: iter:   152/  195  CE: 6.6131  
+[03/02 02:12:27] SuperNet Training INFO: iter:   171/  195  CE: 6.7547  
+[03/02 02:12:32] SuperNet Training INFO: iter:   190/  195  CE: 6.3313  
+[03/02 02:12:33] SuperNet Training INFO: --> epoch:  33/120  avg CE: 6.6816  lr: 0.03703663673732787  
+[03/02 02:12:40] SuperNet Training INFO: iter:     0/  195  CE: 6.6780  
+[03/02 02:12:44] SuperNet Training INFO: iter:    19/  195  CE: 6.8503  
+[03/02 02:12:49] SuperNet Training INFO: iter:    38/  195  CE: 6.7470  
+[03/02 02:12:54] SuperNet Training INFO: iter:    57/  195  CE: 6.5966  
+[03/02 02:12:59] SuperNet Training INFO: iter:    76/  195  CE: 6.3980  
+[03/02 02:13:04] SuperNet Training INFO: iter:    95/  195  CE: 6.5679  
+[03/02 02:13:09] SuperNet Training INFO: iter:   114/  195  CE: 6.6916  
+[03/02 02:13:13] SuperNet Training INFO: iter:   133/  195  CE: 6.5861  
+[03/02 02:13:18] SuperNet Training INFO: iter:   152/  195  CE: 6.6005  
+[03/02 02:13:23] SuperNet Training INFO: iter:   171/  195  CE: 6.6207  
+[03/02 02:13:28] SuperNet Training INFO: iter:   190/  195  CE: 6.3399  
+[03/02 02:13:30] SuperNet Training INFO: --> epoch:  34/120  avg CE: 6.6729  lr: 0.03657974407027576  
+[03/02 02:13:36] SuperNet Training INFO: iter:     0/  195  CE: 6.5538  
+[03/02 02:13:41] SuperNet Training INFO: iter:    19/  195  CE: 6.9047  
+[03/02 02:13:46] SuperNet Training INFO: iter:    38/  195  CE: 6.5799  
+[03/02 02:13:52] SuperNet Training INFO: iter:    57/  195  CE: 6.5918  
+[03/02 02:13:56] SuperNet Training INFO: iter:    76/  195  CE: 6.3422  
+[03/02 02:14:01] SuperNet Training INFO: iter:    95/  195  CE: 6.5821  
+[03/02 02:14:06] SuperNet Training INFO: iter:   114/  195  CE: 6.6521  
+[03/02 02:14:11] SuperNet Training INFO: iter:   133/  195  CE: 6.5738  
+[03/02 02:14:16] SuperNet Training INFO: iter:   152/  195  CE: 6.5366  
+[03/02 02:14:21] SuperNet Training INFO: iter:   171/  195  CE: 6.7149  
+[03/02 02:14:26] SuperNet Training INFO: iter:   190/  195  CE: 6.3220  
+[03/02 02:14:27] SuperNet Training INFO: --> epoch:  35/120  avg CE: 6.6603  lr: 0.03611310263211641  
+[03/02 02:14:34] SuperNet Training INFO: iter:     0/  195  CE: 6.6749  
+[03/02 02:14:39] SuperNet Training INFO: iter:    19/  195  CE: 6.9473  
+[03/02 02:14:44] SuperNet Training INFO: iter:    38/  195  CE: 6.5897  
+[03/02 02:14:49] SuperNet Training INFO: iter:    57/  195  CE: 6.5921  
+[03/02 02:14:54] SuperNet Training INFO: iter:    76/  195  CE: 6.3938  
+[03/02 02:14:59] SuperNet Training INFO: iter:    95/  195  CE: 6.5620  
+[03/02 02:15:04] SuperNet Training INFO: iter:   114/  195  CE: 6.6430  
+[03/02 02:15:09] SuperNet Training INFO: iter:   133/  195  CE: 6.4888  
+[03/02 02:15:14] SuperNet Training INFO: iter:   152/  195  CE: 6.5855  
+[03/02 02:15:19] SuperNet Training INFO: iter:   171/  195  CE: 6.7383  
+[03/02 02:15:24] SuperNet Training INFO: iter:   190/  195  CE: 6.3241  
+[03/02 02:15:26] SuperNet Training INFO: --> epoch:  36/120  avg CE: 6.6481  lr: 0.03563703552393363  
+[03/02 02:15:32] SuperNet Training INFO: iter:     0/  195  CE: 6.6250  
+[03/02 02:15:37] SuperNet Training INFO: iter:    19/  195  CE: 6.8563  
+[03/02 02:15:42] SuperNet Training INFO: iter:    38/  195  CE: 6.6730  
+[03/02 02:15:47] SuperNet Training INFO: iter:    57/  195  CE: 6.7113  
+[03/02 02:15:52] SuperNet Training INFO: iter:    76/  195  CE: 6.3568  
+[03/02 02:15:57] SuperNet Training INFO: iter:    95/  195  CE: 6.7008  
+[03/02 02:16:01] SuperNet Training INFO: iter:   114/  195  CE: 6.6750  
+[03/02 02:16:06] SuperNet Training INFO: iter:   133/  195  CE: 6.5719  
+[03/02 02:16:11] SuperNet Training INFO: iter:   152/  195  CE: 6.5786  
+[03/02 02:16:16] SuperNet Training INFO: iter:   171/  195  CE: 6.6575  
+[03/02 02:16:20] SuperNet Training INFO: iter:   190/  195  CE: 6.3084  
+[03/02 02:16:22] SuperNet Training INFO: --> epoch:  37/120  avg CE: 6.6407  lr: 0.03515187237311605  
+[03/02 02:16:28] SuperNet Training INFO: iter:     0/  195  CE: 6.5706  
+[03/02 02:16:33] SuperNet Training INFO: iter:    19/  195  CE: 6.7819  
+[03/02 02:16:38] SuperNet Training INFO: iter:    38/  195  CE: 6.6146  
+[03/02 02:16:44] SuperNet Training INFO: iter:    57/  195  CE: 6.6396  
+[03/02 02:16:49] SuperNet Training INFO: iter:    76/  195  CE: 6.2934  
+[03/02 02:16:54] SuperNet Training INFO: iter:    95/  195  CE: 6.5292  
+[03/02 02:16:59] SuperNet Training INFO: iter:   114/  195  CE: 6.6478  
+[03/02 02:17:04] SuperNet Training INFO: iter:   133/  195  CE: 6.6058  
+[03/02 02:17:10] SuperNet Training INFO: iter:   152/  195  CE: 6.5520  
+[03/02 02:17:14] SuperNet Training INFO: iter:   171/  195  CE: 6.5630  
+[03/02 02:17:19] SuperNet Training INFO: iter:   190/  195  CE: 6.4353  
+[03/02 02:17:21] SuperNet Training INFO: --> epoch:  38/120  avg CE: 6.6285  lr: 0.03465794910512391  
+[03/02 02:17:27] SuperNet Training INFO: iter:     0/  195  CE: 6.6548  
+[03/02 02:17:32] SuperNet Training INFO: iter:    19/  195  CE: 6.7473  
+[03/02 02:17:37] SuperNet Training INFO: iter:    38/  195  CE: 6.6368  
+[03/02 02:17:41] SuperNet Training INFO: iter:    57/  195  CE: 6.6210  
+[03/02 02:17:46] SuperNet Training INFO: iter:    76/  195  CE: 6.2747  
+[03/02 02:17:51] SuperNet Training INFO: iter:    95/  195  CE: 6.6997  
+[03/02 02:17:57] SuperNet Training INFO: iter:   114/  195  CE: 6.6772  
+[03/02 02:18:02] SuperNet Training INFO: iter:   133/  195  CE: 6.5819  
+[03/02 02:18:07] SuperNet Training INFO: iter:   152/  195  CE: 6.5092  
+[03/02 02:18:12] SuperNet Training INFO: iter:   171/  195  CE: 6.5518  
+[03/02 02:18:17] SuperNet Training INFO: iter:   190/  195  CE: 6.3111  
+[03/02 02:18:19] SuperNet Training INFO: --> epoch:  39/120  avg CE: 6.6065  lr: 0.034155607710895375  
+[03/02 02:18:25] SuperNet Training INFO: iter:     0/  195  CE: 6.6267  
+[03/02 02:18:30] SuperNet Training INFO: iter:    19/  195  CE: 6.7489  
+[03/02 02:18:35] SuperNet Training INFO: iter:    38/  195  CE: 6.5616  
+[03/02 02:18:39] SuperNet Training INFO: iter:    57/  195  CE: 6.5816  
+[03/02 02:18:44] SuperNet Training INFO: iter:    76/  195  CE: 6.2667  
+[03/02 02:18:49] SuperNet Training INFO: iter:    95/  195  CE: 6.6327  
+[03/02 02:18:54] SuperNet Training INFO: iter:   114/  195  CE: 6.6589  
+[03/02 02:18:59] SuperNet Training INFO: iter:   133/  195  CE: 6.5089  
+[03/02 02:19:04] SuperNet Training INFO: iter:   152/  195  CE: 6.5157  
+[03/02 02:19:09] SuperNet Training INFO: iter:   171/  195  CE: 6.6353  
+[03/02 02:19:14] SuperNet Training INFO: iter:   190/  195  CE: 6.3540  
+[03/02 02:19:16] SuperNet Training INFO: --> epoch:  40/120  avg CE: 6.6043  lr: 0.033645196010053155  
+[03/02 02:19:22] SuperNet Training INFO: iter:     0/  195  CE: 6.5859  
+[03/02 02:19:27] SuperNet Training INFO: iter:    19/  195  CE: 6.8139  
+[03/02 02:19:32] SuperNet Training INFO: iter:    38/  195  CE: 6.5331  
+[03/02 02:19:36] SuperNet Training INFO: iter:    57/  195  CE: 6.6485  
+[03/02 02:19:41] SuperNet Training INFO: iter:    76/  195  CE: 6.3665  
+[03/02 02:19:46] SuperNet Training INFO: iter:    95/  195  CE: 6.5302  
+[03/02 02:19:51] SuperNet Training INFO: iter:   114/  195  CE: 6.5663  
+[03/02 02:19:56] SuperNet Training INFO: iter:   133/  195  CE: 6.4603  
+[03/02 02:20:01] SuperNet Training INFO: iter:   152/  195  CE: 6.5616  
+[03/02 02:20:06] SuperNet Training INFO: iter:   171/  195  CE: 6.6513  
+[03/02 02:20:11] SuperNet Training INFO: iter:   190/  195  CE: 6.3380  
+[03/02 02:20:13] SuperNet Training INFO: --> epoch:  41/120  avg CE: 6.5958  lr: 0.03312706741007515  
+[03/02 02:20:19] SuperNet Training INFO: iter:     0/  195  CE: 6.5967  
+[03/02 02:20:24] SuperNet Training INFO: iter:    19/  195  CE: 6.7466  
+[03/02 02:20:29] SuperNet Training INFO: iter:    38/  195  CE: 6.5599  
+[03/02 02:20:34] SuperNet Training INFO: iter:    57/  195  CE: 6.6084  
+[03/02 02:20:39] SuperNet Training INFO: iter:    76/  195  CE: 6.3266  
+[03/02 02:20:44] SuperNet Training INFO: iter:    95/  195  CE: 6.4808  
+[03/02 02:20:49] SuperNet Training INFO: iter:   114/  195  CE: 6.6605  
+[03/02 02:20:54] SuperNet Training INFO: iter:   133/  195  CE: 6.5443  
+[03/02 02:20:59] SuperNet Training INFO: iter:   152/  195  CE: 6.5419  
+[03/02 02:21:03] SuperNet Training INFO: iter:   171/  195  CE: 6.6421  
+[03/02 02:21:08] SuperNet Training INFO: iter:   190/  195  CE: 6.3664  
+[03/02 02:21:10] SuperNet Training INFO: --> epoch:  42/120  avg CE: 6.5800  lr: 0.03260158066159643  
+[03/02 02:21:16] SuperNet Training INFO: iter:     0/  195  CE: 6.5364  
+[03/02 02:21:21] SuperNet Training INFO: iter:    19/  195  CE: 6.7074  
+[03/02 02:21:26] SuperNet Training INFO: iter:    38/  195  CE: 6.5039  
+[03/02 02:21:31] SuperNet Training INFO: iter:    57/  195  CE: 6.5742  
+[03/02 02:21:35] SuperNet Training INFO: iter:    76/  195  CE: 6.2416  
+[03/02 02:21:40] SuperNet Training INFO: iter:    95/  195  CE: 6.4911  
+[03/02 02:21:45] SuperNet Training INFO: iter:   114/  195  CE: 6.6563  
+[03/02 02:21:50] SuperNet Training INFO: iter:   133/  195  CE: 6.4617  
+[03/02 02:21:55] SuperNet Training INFO: iter:   152/  195  CE: 6.6280  
+[03/02 02:22:00] SuperNet Training INFO: iter:   171/  195  CE: 6.4773  
+[03/02 02:22:05] SuperNet Training INFO: iter:   190/  195  CE: 6.2349  
+[03/02 02:22:06] SuperNet Training INFO: --> epoch:  43/120  avg CE: 6.5710  lr: 0.03206909961001101  
+[03/02 02:22:13] SuperNet Training INFO: iter:     0/  195  CE: 6.6315  
+[03/02 02:22:18] SuperNet Training INFO: iter:    19/  195  CE: 6.8965  
+[03/02 02:22:23] SuperNet Training INFO: iter:    38/  195  CE: 6.5117  
+[03/02 02:22:27] SuperNet Training INFO: iter:    57/  195  CE: 6.6085  
+[03/02 02:22:32] SuperNet Training INFO: iter:    76/  195  CE: 6.3201  
+[03/02 02:22:38] SuperNet Training INFO: iter:    95/  195  CE: 6.4317  
+[03/02 02:22:42] SuperNet Training INFO: iter:   114/  195  CE: 6.5302  
+[03/02 02:22:47] SuperNet Training INFO: iter:   133/  195  CE: 6.5116  
+[03/02 02:22:52] SuperNet Training INFO: iter:   152/  195  CE: 6.5773  
+[03/02 02:22:57] SuperNet Training INFO: iter:   171/  195  CE: 6.5938  
+[03/02 02:23:01] SuperNet Training INFO: iter:   190/  195  CE: 6.2733  
+[03/02 02:23:03] SuperNet Training INFO: --> epoch:  44/120  avg CE: 6.5551  lr: 0.03152999294354688  
+[03/02 02:23:09] SuperNet Training INFO: iter:     0/  195  CE: 6.6505  
+[03/02 02:23:15] SuperNet Training INFO: iter:    19/  195  CE: 6.6930  
+[03/02 02:23:19] SuperNet Training INFO: iter:    38/  195  CE: 6.4718  
+[03/02 02:23:24] SuperNet Training INFO: iter:    57/  195  CE: 6.5460  
+[03/02 02:23:29] SuperNet Training INFO: iter:    76/  195  CE: 6.3599  
+[03/02 02:23:34] SuperNet Training INFO: iter:    95/  195  CE: 6.4045  
+[03/02 02:23:39] SuperNet Training INFO: iter:   114/  195  CE: 6.6394  
+[03/02 02:23:44] SuperNet Training INFO: iter:   133/  195  CE: 6.5771  
+[03/02 02:23:49] SuperNet Training INFO: iter:   152/  195  CE: 6.6688  
+[03/02 02:23:54] SuperNet Training INFO: iter:   171/  195  CE: 6.5840  
+[03/02 02:23:59] SuperNet Training INFO: iter:   190/  195  CE: 6.3085  
+[03/02 02:24:01] SuperNet Training INFO: --> epoch:  45/120  avg CE: 6.5494  lr: 0.030984633937987196  
+[03/02 02:24:07] SuperNet Training INFO: iter:     0/  195  CE: 6.6849  
+[03/02 02:24:12] SuperNet Training INFO: iter:    19/  195  CE: 6.5813  
+[03/02 02:24:17] SuperNet Training INFO: iter:    38/  195  CE: 6.3710  
+[03/02 02:24:22] SuperNet Training INFO: iter:    57/  195  CE: 6.5435  
+[03/02 02:24:26] SuperNet Training INFO: iter:    76/  195  CE: 6.2787  
+[03/02 02:24:31] SuperNet Training INFO: iter:    95/  195  CE: 6.4440  
+[03/02 02:24:35] SuperNet Training INFO: iter:   114/  195  CE: 6.6459  
+[03/02 02:24:41] SuperNet Training INFO: iter:   133/  195  CE: 6.5550  
+[03/02 02:24:45] SuperNet Training INFO: iter:   152/  195  CE: 6.5714  
+[03/02 02:24:51] SuperNet Training INFO: iter:   171/  195  CE: 6.4527  
+[03/02 02:24:56] SuperNet Training INFO: iter:   190/  195  CE: 6.2487  
+[03/02 02:24:57] SuperNet Training INFO: --> epoch:  46/120  avg CE: 6.5293  lr: 0.03043340019821516  
+[03/02 02:25:03] SuperNet Training INFO: iter:     0/  195  CE: 6.5593  
+[03/02 02:25:09] SuperNet Training INFO: iter:    19/  195  CE: 6.6657  
+[03/02 02:25:14] SuperNet Training INFO: iter:    38/  195  CE: 6.4558  
+[03/02 02:25:19] SuperNet Training INFO: iter:    57/  195  CE: 6.5671  
+[03/02 02:25:24] SuperNet Training INFO: iter:    76/  195  CE: 6.2653  
+[03/02 02:25:29] SuperNet Training INFO: iter:    95/  195  CE: 6.4147  
+[03/02 02:25:34] SuperNet Training INFO: iter:   114/  195  CE: 6.5277  
+[03/02 02:25:38] SuperNet Training INFO: iter:   133/  195  CE: 6.4760  
+[03/02 02:25:43] SuperNet Training INFO: iter:   152/  195  CE: 6.5195  
+[03/02 02:25:48] SuperNet Training INFO: iter:   171/  195  CE: 6.5167  
+[03/02 02:25:52] SuperNet Training INFO: iter:   190/  195  CE: 6.2460  
+[03/02 02:25:54] SuperNet Training INFO: --> epoch:  47/120  avg CE: 6.5146  lr: 0.029876673396761855  
+[03/02 02:26:00] SuperNet Training INFO: iter:     0/  195  CE: 6.6178  
+[03/02 02:26:05] SuperNet Training INFO: iter:    19/  195  CE: 6.6306  
+[03/02 02:26:10] SuperNet Training INFO: iter:    38/  195  CE: 6.5364  
+[03/02 02:26:16] SuperNet Training INFO: iter:    57/  195  CE: 6.4960  
+[03/02 02:26:20] SuperNet Training INFO: iter:    76/  195  CE: 6.2374  
+[03/02 02:26:25] SuperNet Training INFO: iter:    95/  195  CE: 6.3749  
+[03/02 02:26:30] SuperNet Training INFO: iter:   114/  195  CE: 6.4855  
+[03/02 02:26:35] SuperNet Training INFO: iter:   133/  195  CE: 6.4216  
+[03/02 02:26:40] SuperNet Training INFO: iter:   152/  195  CE: 6.6547  
+[03/02 02:26:45] SuperNet Training INFO: iter:   171/  195  CE: 6.3414  
+[03/02 02:26:50] SuperNet Training INFO: iter:   190/  195  CE: 6.2751  
+[03/02 02:26:51] SuperNet Training INFO: --> epoch:  48/120  avg CE: 6.5012  lr: 0.029314839009537175  
+[03/02 02:26:57] SuperNet Training INFO: iter:     0/  195  CE: 6.5804  
+[03/02 02:27:03] SuperNet Training INFO: iter:    19/  195  CE: 6.5680  
+[03/02 02:27:07] SuperNet Training INFO: iter:    38/  195  CE: 6.4401  
+[03/02 02:27:12] SuperNet Training INFO: iter:    57/  195  CE: 6.4815  
+[03/02 02:27:17] SuperNet Training INFO: iter:    76/  195  CE: 6.2074  
+[03/02 02:27:22] SuperNet Training INFO: iter:    95/  195  CE: 6.3465  
+[03/02 02:27:27] SuperNet Training INFO: iter:   114/  195  CE: 6.5350  
+[03/02 02:27:31] SuperNet Training INFO: iter:   133/  195  CE: 6.3240  
+[03/02 02:27:36] SuperNet Training INFO: iter:   152/  195  CE: 6.5132  
+[03/02 02:27:41] SuperNet Training INFO: iter:   171/  195  CE: 6.3639  
+[03/02 02:27:45] SuperNet Training INFO: iter:   190/  195  CE: 6.2327  
+[03/02 02:27:47] SuperNet Training INFO: --> epoch:  49/120  avg CE: 6.4775  lr: 0.02874828604892754  
+[03/02 02:27:53] SuperNet Training INFO: iter:     0/  195  CE: 6.5238  
+[03/02 02:27:58] SuperNet Training INFO: iter:    19/  195  CE: 6.4850  
+[03/02 02:28:03] SuperNet Training INFO: iter:    38/  195  CE: 6.3180  
+[03/02 02:28:08] SuperNet Training INFO: iter:    57/  195  CE: 6.4513  
+[03/02 02:28:13] SuperNet Training INFO: iter:    76/  195  CE: 6.1555  
+[03/02 02:28:18] SuperNet Training INFO: iter:    95/  195  CE: 6.4514  
+[03/02 02:28:22] SuperNet Training INFO: iter:   114/  195  CE: 6.4186  
+[03/02 02:28:27] SuperNet Training INFO: iter:   133/  195  CE: 6.4162  
+[03/02 02:28:32] SuperNet Training INFO: iter:   152/  195  CE: 6.4993  
+[03/02 02:28:37] SuperNet Training INFO: iter:   171/  195  CE: 6.3587  
+[03/02 02:28:42] SuperNet Training INFO: iter:   190/  195  CE: 6.2041  
+[03/02 02:28:44] SuperNet Training INFO: --> epoch:  50/120  avg CE: 6.4525  lr: 0.028177406794444956  
+[03/02 02:28:50] SuperNet Training INFO: iter:     0/  195  CE: 6.5052  
+[03/02 02:28:55] SuperNet Training INFO: iter:    19/  195  CE: 6.5730  
+[03/02 02:29:00] SuperNet Training INFO: iter:    38/  195  CE: 6.4419  
+[03/02 02:29:05] SuperNet Training INFO: iter:    57/  195  CE: 6.5208  
+[03/02 02:29:10] SuperNet Training INFO: iter:    76/  195  CE: 6.1361  
+[03/02 02:29:15] SuperNet Training INFO: iter:    95/  195  CE: 6.2941  
+[03/02 02:29:20] SuperNet Training INFO: iter:   114/  195  CE: 6.4964  
+[03/02 02:29:25] SuperNet Training INFO: iter:   133/  195  CE: 6.4022  
+[03/02 02:29:30] SuperNet Training INFO: iter:   152/  195  CE: 6.3702  
+[03/02 02:29:35] SuperNet Training INFO: iter:   171/  195  CE: 6.3960  
+[03/02 02:29:39] SuperNet Training INFO: iter:   190/  195  CE: 6.3071  
+[03/02 02:29:41] SuperNet Training INFO: --> epoch:  51/120  avg CE: 6.4241  lr: 0.02760259652111395  
+[03/02 02:29:48] SuperNet Training INFO: iter:     0/  195  CE: 6.5387  
+[03/02 02:29:52] SuperNet Training INFO: iter:    19/  195  CE: 6.5500  
+[03/02 02:29:57] SuperNet Training INFO: iter:    38/  195  CE: 6.2955  
+[03/02 02:30:02] SuperNet Training INFO: iter:    57/  195  CE: 6.4555  
+[03/02 02:30:08] SuperNet Training INFO: iter:    76/  195  CE: 6.1275  
+[03/02 02:30:13] SuperNet Training INFO: iter:    95/  195  CE: 6.3506  
+[03/02 02:30:17] SuperNet Training INFO: iter:   114/  195  CE: 6.3661  
+[03/02 02:30:22] SuperNet Training INFO: iter:   133/  195  CE: 6.4762  
+[03/02 02:30:27] SuperNet Training INFO: iter:   152/  195  CE: 6.4476  
+[03/02 02:30:32] SuperNet Training INFO: iter:   171/  195  CE: 6.4387  
+[03/02 02:30:38] SuperNet Training INFO: iter:   190/  195  CE: 6.2083  
+[03/02 02:30:39] SuperNet Training INFO: --> epoch:  52/120  avg CE: 6.4086  lr: 0.027024253225784205  
+[03/02 02:30:45] SuperNet Training INFO: iter:     0/  195  CE: 6.4328  
+[03/02 02:30:50] SuperNet Training INFO: iter:    19/  195  CE: 6.4644  
+[03/02 02:30:55] SuperNet Training INFO: iter:    38/  195  CE: 6.3052  
+[03/02 02:31:00] SuperNet Training INFO: iter:    57/  195  CE: 6.4527  
+[03/02 02:31:05] SuperNet Training INFO: iter:    76/  195  CE: 6.0695  
+[03/02 02:31:10] SuperNet Training INFO: iter:    95/  195  CE: 6.3104  
+[03/02 02:31:14] SuperNet Training INFO: iter:   114/  195  CE: 6.4899  
+[03/02 02:31:19] SuperNet Training INFO: iter:   133/  195  CE: 6.4188  
+[03/02 02:31:24] SuperNet Training INFO: iter:   152/  195  CE: 6.4380  
+[03/02 02:31:29] SuperNet Training INFO: iter:   171/  195  CE: 6.4074  
+[03/02 02:31:34] SuperNet Training INFO: iter:   190/  195  CE: 6.0759  
+[03/02 02:31:35] SuperNet Training INFO: --> epoch:  53/120  avg CE: 6.3835  lr: 0.026442777351558873  
+[03/02 02:31:42] SuperNet Training INFO: iter:     0/  195  CE: 6.4833  
+[03/02 02:31:47] SuperNet Training INFO: iter:    19/  195  CE: 6.5090  
+[03/02 02:31:52] SuperNet Training INFO: iter:    38/  195  CE: 6.3342  
+[03/02 02:31:57] SuperNet Training INFO: iter:    57/  195  CE: 6.4916  
+[03/02 02:32:01] SuperNet Training INFO: iter:    76/  195  CE: 6.0660  
+[03/02 02:32:06] SuperNet Training INFO: iter:    95/  195  CE: 6.2268  
+[03/02 02:32:11] SuperNet Training INFO: iter:   114/  195  CE: 6.3637  
+[03/02 02:32:16] SuperNet Training INFO: iter:   133/  195  CE: 6.3728  
+[03/02 02:32:22] SuperNet Training INFO: iter:   152/  195  CE: 6.3558  
+[03/02 02:32:27] SuperNet Training INFO: iter:   171/  195  CE: 6.3736  
+[03/02 02:32:31] SuperNet Training INFO: iter:   190/  195  CE: 6.2038  
+[03/02 02:32:33] SuperNet Training INFO: --> epoch:  54/120  avg CE: 6.3724  lr: 0.025858571510529088  
+[03/02 02:32:39] SuperNet Training INFO: iter:     0/  195  CE: 6.4440  
+[03/02 02:32:44] SuperNet Training INFO: iter:    19/  195  CE: 6.6007  
+[03/02 02:32:49] SuperNet Training INFO: iter:    38/  195  CE: 6.2647  
+[03/02 02:32:54] SuperNet Training INFO: iter:    57/  195  CE: 6.3660  
+[03/02 02:32:59] SuperNet Training INFO: iter:    76/  195  CE: 5.9009  
+[03/02 02:33:04] SuperNet Training INFO: iter:    95/  195  CE: 6.1735  
+[03/02 02:33:09] SuperNet Training INFO: iter:   114/  195  CE: 6.3419  
+[03/02 02:33:14] SuperNet Training INFO: iter:   133/  195  CE: 6.2783  
+[03/02 02:33:20] SuperNet Training INFO: iter:   152/  195  CE: 6.3956  
+[03/02 02:33:25] SuperNet Training INFO: iter:   171/  195  CE: 6.4189  
+[03/02 02:33:29] SuperNet Training INFO: iter:   190/  195  CE: 6.1836  
+[03/02 02:33:31] SuperNet Training INFO: --> epoch:  55/120  avg CE: 6.3460  lr: 0.025272040205006487  
+[03/02 02:33:37] SuperNet Training INFO: iter:     0/  195  CE: 6.4303  
+[03/02 02:33:42] SuperNet Training INFO: iter:    19/  195  CE: 6.4463  
+[03/02 02:33:47] SuperNet Training INFO: iter:    38/  195  CE: 6.3386  
+[03/02 02:33:52] SuperNet Training INFO: iter:    57/  195  CE: 6.3103  
+[03/02 02:33:57] SuperNet Training INFO: iter:    76/  195  CE: 5.9925  
+[03/02 02:34:01] SuperNet Training INFO: iter:    95/  195  CE: 6.1707  
+[03/02 02:34:06] SuperNet Training INFO: iter:   114/  195  CE: 6.3253  
+[03/02 02:34:11] SuperNet Training INFO: iter:   133/  195  CE: 6.2425  
+[03/02 02:34:16] SuperNet Training INFO: iter:   152/  195  CE: 6.5115  
+[03/02 02:34:20] SuperNet Training INFO: iter:   171/  195  CE: 6.3363  
+[03/02 02:34:25] SuperNet Training INFO: iter:   190/  195  CE: 6.0822  
+[03/02 02:34:27] SuperNet Training INFO: --> epoch:  56/120  avg CE: 6.3279  lr: 0.02468358954744708  
+[03/02 02:34:33] SuperNet Training INFO: iter:     0/  195  CE: 6.4271  
+[03/02 02:34:38] SuperNet Training INFO: iter:    19/  195  CE: 6.4602  
+[03/02 02:34:43] SuperNet Training INFO: iter:    38/  195  CE: 6.1405  
+[03/02 02:34:48] SuperNet Training INFO: iter:    57/  195  CE: 6.3581  
+[03/02 02:34:53] SuperNet Training INFO: iter:    76/  195  CE: 5.9638  
+[03/02 02:34:58] SuperNet Training INFO: iter:    95/  195  CE: 6.1522  
+[03/02 02:35:03] SuperNet Training INFO: iter:   114/  195  CE: 6.3013  
+[03/02 02:35:08] SuperNet Training INFO: iter:   133/  195  CE: 6.2283  
+[03/02 02:35:13] SuperNet Training INFO: iter:   152/  195  CE: 6.4729  
+[03/02 02:35:18] SuperNet Training INFO: iter:   171/  195  CE: 6.4743  
+[03/02 02:35:23] SuperNet Training INFO: iter:   190/  195  CE: 5.9653  
+[03/02 02:35:25] SuperNet Training INFO: --> epoch:  57/120  avg CE: 6.3106  lr: 0.024093626979260336  
+[03/02 02:35:31] SuperNet Training INFO: iter:     0/  195  CE: 6.2974  
+[03/02 02:35:36] SuperNet Training INFO: iter:    19/  195  CE: 6.5073  
+[03/02 02:35:41] SuperNet Training INFO: iter:    38/  195  CE: 6.2480  
+[03/02 02:35:46] SuperNet Training INFO: iter:    57/  195  CE: 6.3727  
+[03/02 02:35:51] SuperNet Training INFO: iter:    76/  195  CE: 6.0016  
+[03/02 02:35:56] SuperNet Training INFO: iter:    95/  195  CE: 6.0714  
+[03/02 02:36:01] SuperNet Training INFO: iter:   114/  195  CE: 6.2545  
+[03/02 02:36:06] SuperNet Training INFO: iter:   133/  195  CE: 6.2324  
+[03/02 02:36:11] SuperNet Training INFO: iter:   152/  195  CE: 6.4276  
+[03/02 02:36:16] SuperNet Training INFO: iter:   171/  195  CE: 6.3911  
+[03/02 02:36:20] SuperNet Training INFO: iter:   190/  195  CE: 6.0164  
+[03/02 02:36:22] SuperNet Training INFO: --> epoch:  58/120  avg CE: 6.2863  lr: 0.023502560988697862  
+[03/02 02:36:28] SuperNet Training INFO: iter:     0/  195  CE: 6.4275  
+[03/02 02:36:33] SuperNet Training INFO: iter:    19/  195  CE: 6.3961  
+[03/02 02:36:38] SuperNet Training INFO: iter:    38/  195  CE: 6.2179  
+[03/02 02:36:43] SuperNet Training INFO: iter:    57/  195  CE: 6.3726  
+[03/02 02:36:48] SuperNet Training INFO: iter:    76/  195  CE: 5.9145  
+[03/02 02:36:53] SuperNet Training INFO: iter:    95/  195  CE: 6.0790  
+[03/02 02:36:58] SuperNet Training INFO: iter:   114/  195  CE: 6.2930  
+[03/02 02:37:03] SuperNet Training INFO: iter:   133/  195  CE: 6.0796  
+[03/02 02:37:07] SuperNet Training INFO: iter:   152/  195  CE: 6.4878  
+[03/02 02:37:12] SuperNet Training INFO: iter:   171/  195  CE: 6.3522  
+[03/02 02:37:17] SuperNet Training INFO: iter:   190/  195  CE: 5.9172  
+[03/02 02:37:18] SuperNet Training INFO: --> epoch:  59/120  avg CE: 6.2682  lr: 0.02291080082801764  
+[03/02 02:37:25] SuperNet Training INFO: iter:     0/  195  CE: 6.1483  
+[03/02 02:37:30] SuperNet Training INFO: iter:    19/  195  CE: 6.4684  
+[03/02 02:37:35] SuperNet Training INFO: iter:    38/  195  CE: 6.3154  
+[03/02 02:37:40] SuperNet Training INFO: iter:    57/  195  CE: 6.3680  
+[03/02 02:37:45] SuperNet Training INFO: iter:    76/  195  CE: 5.8769  
+[03/02 02:37:50] SuperNet Training INFO: iter:    95/  195  CE: 6.0246  
+[03/02 02:37:55] SuperNet Training INFO: iter:   114/  195  CE: 6.3084  
+[03/02 02:38:00] SuperNet Training INFO: iter:   133/  195  CE: 6.1433  
+[03/02 02:38:05] SuperNet Training INFO: iter:   152/  195  CE: 6.4116  
+[03/02 02:38:10] SuperNet Training INFO: iter:   171/  195  CE: 6.3319  
+[03/02 02:38:15] SuperNet Training INFO: iter:   190/  195  CE: 5.9057  
+[03/02 02:38:17] SuperNet Training INFO: --> epoch:  60/120  avg CE: 6.2542  lr: 0.02231875623011871  
+[03/02 02:38:23] SuperNet Training INFO: iter:     0/  195  CE: 6.1768  
+[03/02 02:38:28] SuperNet Training INFO: iter:    19/  195  CE: 6.4060  
+[03/02 02:38:33] SuperNet Training INFO: iter:    38/  195  CE: 6.1967  
+[03/02 02:38:38] SuperNet Training INFO: iter:    57/  195  CE: 6.3304  
+[03/02 02:38:43] SuperNet Training INFO: iter:    76/  195  CE: 5.8684  
+[03/02 02:38:48] SuperNet Training INFO: iter:    95/  195  CE: 5.9410  
+[03/02 02:38:53] SuperNet Training INFO: iter:   114/  195  CE: 6.2646  
+[03/02 02:38:58] SuperNet Training INFO: iter:   133/  195  CE: 6.1584  
+[03/02 02:39:03] SuperNet Training INFO: iter:   152/  195  CE: 6.4693  
+[03/02 02:39:08] SuperNet Training INFO: iter:   171/  195  CE: 6.3396  
+[03/02 02:39:12] SuperNet Training INFO: iter:   190/  195  CE: 6.0065  
+[03/02 02:39:14] SuperNet Training INFO: --> epoch:  61/120  avg CE: 6.2366  lr: 0.021726837124843697  
+[03/02 02:39:20] SuperNet Training INFO: iter:     0/  195  CE: 6.1401  
+[03/02 02:39:25] SuperNet Training INFO: iter:    19/  195  CE: 6.4273  
+[03/02 02:39:30] SuperNet Training INFO: iter:    38/  195  CE: 6.1835  
+[03/02 02:39:35] SuperNet Training INFO: iter:    57/  195  CE: 6.3221  
+[03/02 02:39:40] SuperNet Training INFO: iter:    76/  195  CE: 5.8571  
+[03/02 02:39:45] SuperNet Training INFO: iter:    95/  195  CE: 5.9966  
+[03/02 02:39:49] SuperNet Training INFO: iter:   114/  195  CE: 6.1163  
+[03/02 02:39:54] SuperNet Training INFO: iter:   133/  195  CE: 6.1032  
+[03/02 02:39:59] SuperNet Training INFO: iter:   152/  195  CE: 6.3723  
+[03/02 02:40:04] SuperNet Training INFO: iter:   171/  195  CE: 6.2120  
+[03/02 02:40:09] SuperNet Training INFO: iter:   190/  195  CE: 5.8622  
+[03/02 02:40:10] SuperNet Training INFO: --> epoch:  62/120  avg CE: 6.2112  lr: 0.021135453355144426  
+[03/02 02:40:17] SuperNet Training INFO: iter:     0/  195  CE: 6.1239  
+[03/02 02:40:22] SuperNet Training INFO: iter:    19/  195  CE: 6.3743  
+[03/02 02:40:27] SuperNet Training INFO: iter:    38/  195  CE: 6.0414  
+[03/02 02:40:32] SuperNet Training INFO: iter:    57/  195  CE: 6.2621  
+[03/02 02:40:37] SuperNet Training INFO: iter:    76/  195  CE: 5.8935  
+[03/02 02:40:42] SuperNet Training INFO: iter:    95/  195  CE: 6.0707  
+[03/02 02:40:47] SuperNet Training INFO: iter:   114/  195  CE: 6.1734  
+[03/02 02:40:52] SuperNet Training INFO: iter:   133/  195  CE: 6.1082  
+[03/02 02:40:57] SuperNet Training INFO: iter:   152/  195  CE: 6.3375  
+[03/02 02:41:01] SuperNet Training INFO: iter:   171/  195  CE: 6.2752  
+[03/02 02:41:07] SuperNet Training INFO: iter:   190/  195  CE: 5.8517  
+[03/02 02:41:08] SuperNet Training INFO: --> epoch:  63/120  avg CE: 6.1990  lr: 0.020545014393308116  
+[03/02 02:41:15] SuperNet Training INFO: iter:     0/  195  CE: 6.1771  
+[03/02 02:41:20] SuperNet Training INFO: iter:    19/  195  CE: 6.3613  
+[03/02 02:41:25] SuperNet Training INFO: iter:    38/  195  CE: 6.0914  
+[03/02 02:41:30] SuperNet Training INFO: iter:    57/  195  CE: 6.2223  
+[03/02 02:41:35] SuperNet Training INFO: iter:    76/  195  CE: 5.8125  
+[03/02 02:41:40] SuperNet Training INFO: iter:    95/  195  CE: 6.0106  
+[03/02 02:41:45] SuperNet Training INFO: iter:   114/  195  CE: 6.0935  
+[03/02 02:41:50] SuperNet Training INFO: iter:   133/  195  CE: 6.1610  
+[03/02 02:41:55] SuperNet Training INFO: iter:   152/  195  CE: 6.3513  
+[03/02 02:42:00] SuperNet Training INFO: iter:   171/  195  CE: 6.2645  
+[03/02 02:42:05] SuperNet Training INFO: iter:   190/  195  CE: 5.7035  
+[03/02 02:42:07] SuperNet Training INFO: --> epoch:  64/120  avg CE: 6.1779  lr: 0.019955929057439897  
+[03/02 02:42:13] SuperNet Training INFO: iter:     0/  195  CE: 6.0764  
+[03/02 02:42:18] SuperNet Training INFO: iter:    19/  195  CE: 6.4072  
+[03/02 02:42:23] SuperNet Training INFO: iter:    38/  195  CE: 6.0074  
+[03/02 02:42:28] SuperNet Training INFO: iter:    57/  195  CE: 6.3312  
+[03/02 02:42:32] SuperNet Training INFO: iter:    76/  195  CE: 5.8694  
+[03/02 02:42:37] SuperNet Training INFO: iter:    95/  195  CE: 6.0268  
+[03/02 02:42:43] SuperNet Training INFO: iter:   114/  195  CE: 6.0067  
+[03/02 02:42:48] SuperNet Training INFO: iter:   133/  195  CE: 6.0592  
+[03/02 02:42:53] SuperNet Training INFO: iter:   152/  195  CE: 6.2832  
+[03/02 02:42:57] SuperNet Training INFO: iter:   171/  195  CE: 6.1780  
+[03/02 02:43:03] SuperNet Training INFO: iter:   190/  195  CE: 5.7744  
+[03/02 02:43:04] SuperNet Training INFO: --> epoch:  65/120  avg CE: 6.1686  lr: 0.019368605228398523  
+[03/02 02:43:10] SuperNet Training INFO: iter:     0/  195  CE: 6.1688  
+[03/02 02:43:16] SuperNet Training INFO: iter:    19/  195  CE: 6.3633  
+[03/02 02:43:21] SuperNet Training INFO: iter:    38/  195  CE: 6.0361  
+[03/02 02:43:26] SuperNet Training INFO: iter:    57/  195  CE: 6.2288  
+[03/02 02:43:31] SuperNet Training INFO: iter:    76/  195  CE: 5.8424  
+[03/02 02:43:36] SuperNet Training INFO: iter:    95/  195  CE: 5.9492  
+[03/02 02:43:41] SuperNet Training INFO: iter:   114/  195  CE: 6.0403  
+[03/02 02:43:46] SuperNet Training INFO: iter:   133/  195  CE: 6.1127  
+[03/02 02:43:51] SuperNet Training INFO: iter:   152/  195  CE: 6.2959  
+[03/02 02:43:56] SuperNet Training INFO: iter:   171/  195  CE: 6.1778  
+[03/02 02:44:01] SuperNet Training INFO: iter:   190/  195  CE: 5.7162  
+[03/02 02:44:03] SuperNet Training INFO: --> epoch:  66/120  avg CE: 6.1467  lr: 0.01878344956738076  
+[03/02 02:44:09] SuperNet Training INFO: iter:     0/  195  CE: 6.1499  
+[03/02 02:44:14] SuperNet Training INFO: iter:    19/  195  CE: 6.3588  
+[03/02 02:44:19] SuperNet Training INFO: iter:    38/  195  CE: 6.0988  
+[03/02 02:44:24] SuperNet Training INFO: iter:    57/  195  CE: 6.1010  
+[03/02 02:44:29] SuperNet Training INFO: iter:    76/  195  CE: 5.8856  
+[03/02 02:44:34] SuperNet Training INFO: iter:    95/  195  CE: 5.9117  
+[03/02 02:44:39] SuperNet Training INFO: iter:   114/  195  CE: 6.2346  
+[03/02 02:44:44] SuperNet Training INFO: iter:   133/  195  CE: 6.0483  
+[03/02 02:44:49] SuperNet Training INFO: iter:   152/  195  CE: 6.2975  
+[03/02 02:44:54] SuperNet Training INFO: iter:   171/  195  CE: 6.1848  
+[03/02 02:44:59] SuperNet Training INFO: iter:   190/  195  CE: 6.0132  
+[03/02 02:45:01] SuperNet Training INFO: --> epoch:  67/120  avg CE: 6.1420  lr: 0.0182008672343508  
+[03/02 02:45:07] SuperNet Training INFO: iter:     0/  195  CE: 6.1191  
+[03/02 02:45:12] SuperNet Training INFO: iter:    19/  195  CE: 6.2329  
+[03/02 02:45:17] SuperNet Training INFO: iter:    38/  195  CE: 5.8768  
+[03/02 02:45:22] SuperNet Training INFO: iter:    57/  195  CE: 6.1150  
+[03/02 02:45:27] SuperNet Training INFO: iter:    76/  195  CE: 5.7537  
+[03/02 02:45:32] SuperNet Training INFO: iter:    95/  195  CE: 5.8791  
+[03/02 02:45:37] SuperNet Training INFO: iter:   114/  195  CE: 6.1037  
+[03/02 02:45:42] SuperNet Training INFO: iter:   133/  195  CE: 6.0688  
+[03/02 02:45:46] SuperNet Training INFO: iter:   152/  195  CE: 6.3390  
+[03/02 02:45:51] SuperNet Training INFO: iter:   171/  195  CE: 6.1954  
+[03/02 02:45:56] SuperNet Training INFO: iter:   190/  195  CE: 5.6755  
+[03/02 02:45:58] SuperNet Training INFO: --> epoch:  68/120  avg CE: 6.1160  lr: 0.017621261607508293  
+[03/02 02:46:04] SuperNet Training INFO: iter:     0/  195  CE: 6.0137  
+[03/02 02:46:09] SuperNet Training INFO: iter:    19/  195  CE: 6.2028  
+[03/02 02:46:14] SuperNet Training INFO: iter:    38/  195  CE: 5.9903  
+[03/02 02:46:19] SuperNet Training INFO: iter:    57/  195  CE: 6.1481  
+[03/02 02:46:23] SuperNet Training INFO: iter:    76/  195  CE: 5.8762  
+[03/02 02:46:28] SuperNet Training INFO: iter:    95/  195  CE: 5.8373  
+[03/02 02:46:34] SuperNet Training INFO: iter:   114/  195  CE: 6.0554  
+[03/02 02:46:38] SuperNet Training INFO: iter:   133/  195  CE: 6.0647  
+[03/02 02:46:43] SuperNet Training INFO: iter:   152/  195  CE: 6.2327  
+[03/02 02:46:48] SuperNet Training INFO: iter:   171/  195  CE: 6.0330  
+[03/02 02:46:54] SuperNet Training INFO: iter:   190/  195  CE: 5.9983  
+[03/02 02:46:55] SuperNet Training INFO: --> epoch:  69/120  avg CE: 6.1133  lr: 0.017045034003990826  
+[03/02 02:47:02] SuperNet Training INFO: iter:     0/  195  CE: 6.1372  
+[03/02 02:47:06] SuperNet Training INFO: iter:    19/  195  CE: 6.2868  
+[03/02 02:47:11] SuperNet Training INFO: iter:    38/  195  CE: 5.9979  
+[03/02 02:47:16] SuperNet Training INFO: iter:    57/  195  CE: 6.1603  
+[03/02 02:47:21] SuperNet Training INFO: iter:    76/  195  CE: 5.7287  
+[03/02 02:47:26] SuperNet Training INFO: iter:    95/  195  CE: 5.9150  
+[03/02 02:47:31] SuperNet Training INFO: iter:   114/  195  CE: 5.9596  
+[03/02 02:47:36] SuperNet Training INFO: iter:   133/  195  CE: 6.0201  
+[03/02 02:47:41] SuperNet Training INFO: iter:   152/  195  CE: 6.2669  
+[03/02 02:47:46] SuperNet Training INFO: iter:   171/  195  CE: 6.0790  
+[03/02 02:47:50] SuperNet Training INFO: iter:   190/  195  CE: 5.7275  
+[03/02 02:47:52] SuperNet Training INFO: --> epoch:  70/120  avg CE: 6.0839  lr: 0.016472583402003218  
+[03/02 02:47:59] SuperNet Training INFO: iter:     0/  195  CE: 5.9694  
+[03/02 02:48:03] SuperNet Training INFO: iter:    19/  195  CE: 6.1460  
+[03/02 02:48:08] SuperNet Training INFO: iter:    38/  195  CE: 5.8190  
+[03/02 02:48:13] SuperNet Training INFO: iter:    57/  195  CE: 6.0749  
+[03/02 02:48:18] SuperNet Training INFO: iter:    76/  195  CE: 5.6919  
+[03/02 02:48:22] SuperNet Training INFO: iter:    95/  195  CE: 5.8108  
+[03/02 02:48:27] SuperNet Training INFO: iter:   114/  195  CE: 6.0394  
+[03/02 02:48:32] SuperNet Training INFO: iter:   133/  195  CE: 6.0358  
+[03/02 02:48:37] SuperNet Training INFO: iter:   152/  195  CE: 6.2990  
+[03/02 02:48:42] SuperNet Training INFO: iter:   171/  195  CE: 6.0699  
+[03/02 02:48:47] SuperNet Training INFO: iter:   190/  195  CE: 5.7602  
+[03/02 02:48:49] SuperNet Training INFO: --> epoch:  71/120  avg CE: 6.0682  lr: 0.01590430616456604  
+[03/02 02:48:55] SuperNet Training INFO: iter:     0/  195  CE: 6.0121  
+[03/02 02:49:00] SuperNet Training INFO: iter:    19/  195  CE: 6.2678  
+[03/02 02:49:04] SuperNet Training INFO: iter:    38/  195  CE: 5.8402  
+[03/02 02:49:10] SuperNet Training INFO: iter:    57/  195  CE: 6.1127  
+[03/02 02:49:14] SuperNet Training INFO: iter:    76/  195  CE: 5.6799  
+[03/02 02:49:19] SuperNet Training INFO: iter:    95/  195  CE: 5.7913  
+[03/02 02:49:24] SuperNet Training INFO: iter:   114/  195  CE: 5.9681  
+[03/02 02:49:28] SuperNet Training INFO: iter:   133/  195  CE: 6.1054  
+[03/02 02:49:33] SuperNet Training INFO: iter:   152/  195  CE: 6.2554  
+[03/02 02:49:38] SuperNet Training INFO: iter:   171/  195  CE: 6.0889  
+[03/02 02:49:42] SuperNet Training INFO: iter:   190/  195  CE: 5.6290  
+[03/02 02:49:44] SuperNet Training INFO: --> epoch:  72/120  avg CE: 6.0675  lr: 0.01534059576507521  
+[03/02 02:49:50] SuperNet Training INFO: iter:     0/  195  CE: 5.9860  
+[03/02 02:49:55] SuperNet Training INFO: iter:    19/  195  CE: 6.2406  
+[03/02 02:50:00] SuperNet Training INFO: iter:    38/  195  CE: 5.8563  
+[03/02 02:50:05] SuperNet Training INFO: iter:    57/  195  CE: 6.0685  
+[03/02 02:50:10] SuperNet Training INFO: iter:    76/  195  CE: 5.6353  
+[03/02 02:50:15] SuperNet Training INFO: iter:    95/  195  CE: 5.6930  
+[03/02 02:50:20] SuperNet Training INFO: iter:   114/  195  CE: 5.9048  
+[03/02 02:50:25] SuperNet Training INFO: iter:   133/  195  CE: 6.0357  
+[03/02 02:50:30] SuperNet Training INFO: iter:   152/  195  CE: 6.2642  
+[03/02 02:50:35] SuperNet Training INFO: iter:   171/  195  CE: 6.0614  
+[03/02 02:50:40] SuperNet Training INFO: iter:   190/  195  CE: 5.6333  
+[03/02 02:50:42] SuperNet Training INFO: --> epoch:  73/120  avg CE: 6.0472  lr: 0.01478184251486226  
+[03/02 02:50:48] SuperNet Training INFO: iter:     0/  195  CE: 5.9655  
+[03/02 02:50:52] SuperNet Training INFO: iter:    19/  195  CE: 6.2185  
+[03/02 02:50:57] SuperNet Training INFO: iter:    38/  195  CE: 5.8244  
+[03/02 02:51:02] SuperNet Training INFO: iter:    57/  195  CE: 6.0836  
+[03/02 02:51:07] SuperNet Training INFO: iter:    76/  195  CE: 5.7322  
+[03/02 02:51:12] SuperNet Training INFO: iter:    95/  195  CE: 5.8373  
+[03/02 02:51:16] SuperNet Training INFO: iter:   114/  195  CE: 5.9537  
+[03/02 02:51:21] SuperNet Training INFO: iter:   133/  195  CE: 6.0679  
+[03/02 02:51:26] SuperNet Training INFO: iter:   152/  195  CE: 6.4182  
+[03/02 02:51:32] SuperNet Training INFO: iter:   171/  195  CE: 6.0379  
+[03/02 02:51:36] SuperNet Training INFO: iter:   190/  195  CE: 5.6851  
+[03/02 02:51:38] SuperNet Training INFO: --> epoch:  74/120  avg CE: 6.0333  lr: 0.014228433292943921  
+[03/02 02:51:44] SuperNet Training INFO: iter:     0/  195  CE: 6.0897  
+[03/02 02:51:49] SuperNet Training INFO: iter:    19/  195  CE: 6.2052  
+[03/02 02:51:54] SuperNet Training INFO: iter:    38/  195  CE: 5.8604  
+[03/02 02:51:59] SuperNet Training INFO: iter:    57/  195  CE: 6.0834  
+[03/02 02:52:04] SuperNet Training INFO: iter:    76/  195  CE: 5.6595  
+[03/02 02:52:09] SuperNet Training INFO: iter:    95/  195  CE: 5.7546  
+[03/02 02:52:14] SuperNet Training INFO: iter:   114/  195  CE: 5.9197  
+[03/02 02:52:20] SuperNet Training INFO: iter:   133/  195  CE: 5.9589  
+[03/02 02:52:24] SuperNet Training INFO: iter:   152/  195  CE: 6.2241  
+[03/02 02:52:29] SuperNet Training INFO: iter:   171/  195  CE: 6.0646  
+[03/02 02:52:34] SuperNet Training INFO: iter:   190/  195  CE: 5.6500  
+[03/02 02:52:36] SuperNet Training INFO: --> epoch:  75/120  avg CE: 6.0236  lr: 0.01368075127814829  
+[03/02 02:52:42] SuperNet Training INFO: iter:     0/  195  CE: 6.0166  
+[03/02 02:52:47] SuperNet Training INFO: iter:    19/  195  CE: 6.2584  
+[03/02 02:52:52] SuperNet Training INFO: iter:    38/  195  CE: 5.8346  
+[03/02 02:52:57] SuperNet Training INFO: iter:    57/  195  CE: 5.9693  
+[03/02 02:53:02] SuperNet Training INFO: iter:    76/  195  CE: 5.6806  
+[03/02 02:53:07] SuperNet Training INFO: iter:    95/  195  CE: 5.8730  
+[03/02 02:53:12] SuperNet Training INFO: iter:   114/  195  CE: 5.8541  
+[03/02 02:53:17] SuperNet Training INFO: iter:   133/  195  CE: 5.9960  
+[03/02 02:53:22] SuperNet Training INFO: iter:   152/  195  CE: 6.2074  
+[03/02 02:53:27] SuperNet Training INFO: iter:   171/  195  CE: 5.9943  
+[03/02 02:53:32] SuperNet Training INFO: iter:   190/  195  CE: 5.7055  
+[03/02 02:53:34] SuperNet Training INFO: --> epoch:  76/120  avg CE: 6.0081  lr: 0.01313917568380307  
+[03/02 02:53:40] SuperNet Training INFO: iter:     0/  195  CE: 5.8695  
+[03/02 02:53:45] SuperNet Training INFO: iter:    19/  195  CE: 6.1126  
+[03/02 02:53:49] SuperNet Training INFO: iter:    38/  195  CE: 5.8690  
+[03/02 02:53:54] SuperNet Training INFO: iter:    57/  195  CE: 6.0800  
+[03/02 02:53:59] SuperNet Training INFO: iter:    76/  195  CE: 5.5462  
+[03/02 02:54:04] SuperNet Training INFO: iter:    95/  195  CE: 5.7016  
+[03/02 02:54:09] SuperNet Training INFO: iter:   114/  195  CE: 5.8595  
+[03/02 02:54:14] SuperNet Training INFO: iter:   133/  195  CE: 5.9826  
+[03/02 02:54:19] SuperNet Training INFO: iter:   152/  195  CE: 6.1102  
+[03/02 02:54:24] SuperNet Training INFO: iter:   171/  195  CE: 5.9916  
+[03/02 02:54:29] SuperNet Training INFO: iter:   190/  195  CE: 5.7636  
+[03/02 02:54:31] SuperNet Training INFO: --> epoch:  77/120  avg CE: 5.9841  lr: 0.01260408149516937  
+[03/02 02:54:37] SuperNet Training INFO: iter:     0/  195  CE: 5.9589  
+[03/02 02:54:41] SuperNet Training INFO: iter:    19/  195  CE: 6.2031  
+[03/02 02:54:47] SuperNet Training INFO: iter:    38/  195  CE: 5.9679  
+[03/02 02:54:52] SuperNet Training INFO: iter:    57/  195  CE: 5.9602  
+[03/02 02:54:57] SuperNet Training INFO: iter:    76/  195  CE: 5.5604  
+[03/02 02:55:02] SuperNet Training INFO: iter:    95/  195  CE: 5.8425  
+[03/02 02:55:07] SuperNet Training INFO: iter:   114/  195  CE: 5.8207  
+[03/02 02:55:12] SuperNet Training INFO: iter:   133/  195  CE: 6.0438  
+[03/02 02:55:17] SuperNet Training INFO: iter:   152/  195  CE: 6.1716  
+[03/02 02:55:22] SuperNet Training INFO: iter:   171/  195  CE: 6.0475  
+[03/02 02:55:26] SuperNet Training INFO: iter:   190/  195  CE: 5.6346  
+[03/02 02:55:28] SuperNet Training INFO: --> epoch:  78/120  avg CE: 5.9726  lr: 0.012075839209803098  
+[03/02 02:55:34] SuperNet Training INFO: iter:     0/  195  CE: 5.9225  
+[03/02 02:55:39] SuperNet Training INFO: iter:    19/  195  CE: 6.1449  
+[03/02 02:55:44] SuperNet Training INFO: iter:    38/  195  CE: 5.7207  
+[03/02 02:55:49] SuperNet Training INFO: iter:    57/  195  CE: 5.9561  
+[03/02 02:55:55] SuperNet Training INFO: iter:    76/  195  CE: 5.6875  
+[03/02 02:56:00] SuperNet Training INFO: iter:    95/  195  CE: 5.8308  
+[03/02 02:56:04] SuperNet Training INFO: iter:   114/  195  CE: 5.8187  
+[03/02 02:56:09] SuperNet Training INFO: iter:   133/  195  CE: 5.9628  
+[03/02 02:56:15] SuperNet Training INFO: iter:   152/  195  CE: 6.1581  
+[03/02 02:56:20] SuperNet Training INFO: iter:   171/  195  CE: 5.9746  
+[03/02 02:56:25] SuperNet Training INFO: iter:   190/  195  CE: 5.5833  
+[03/02 02:56:27] SuperNet Training INFO: --> epoch:  79/120  avg CE: 5.9672  lr: 0.011554814581023604  
+[03/02 02:56:33] SuperNet Training INFO: iter:     0/  195  CE: 5.9136  
+[03/02 02:56:38] SuperNet Training INFO: iter:    19/  195  CE: 6.0891  
+[03/02 02:56:43] SuperNet Training INFO: iter:    38/  195  CE: 5.8533  
+[03/02 02:56:48] SuperNet Training INFO: iter:    57/  195  CE: 5.9168  
+[03/02 02:56:53] SuperNet Training INFO: iter:    76/  195  CE: 5.6751  
+[03/02 02:56:58] SuperNet Training INFO: iter:    95/  195  CE: 5.7480  
+[03/02 02:57:03] SuperNet Training INFO: iter:   114/  195  CE: 5.7536  
+[03/02 02:57:08] SuperNet Training INFO: iter:   133/  195  CE: 5.9308  
+[03/02 02:57:13] SuperNet Training INFO: iter:   152/  195  CE: 6.2188  
+[03/02 02:57:18] SuperNet Training INFO: iter:   171/  195  CE: 5.9393  
+[03/02 02:57:23] SuperNet Training INFO: iter:   190/  195  CE: 5.6337  
+[03/02 02:57:25] SuperNet Training INFO: --> epoch:  80/120  avg CE: 5.9602  lr: 0.01104136836466717  
+[03/02 02:57:31] SuperNet Training INFO: iter:     0/  195  CE: 5.8128  
+[03/02 02:57:36] SuperNet Training INFO: iter:    19/  195  CE: 6.1265  
+[03/02 02:57:41] SuperNet Training INFO: iter:    38/  195  CE: 5.7629  
+[03/02 02:57:46] SuperNet Training INFO: iter:    57/  195  CE: 5.9350  
+[03/02 02:57:51] SuperNet Training INFO: iter:    76/  195  CE: 5.5911  
+[03/02 02:57:56] SuperNet Training INFO: iter:    95/  195  CE: 5.6437  
+[03/02 02:58:01] SuperNet Training INFO: iter:   114/  195  CE: 5.7025  
+[03/02 02:58:06] SuperNet Training INFO: iter:   133/  195  CE: 5.8370  
+[03/02 02:58:11] SuperNet Training INFO: iter:   152/  195  CE: 6.1012  
+[03/02 02:58:16] SuperNet Training INFO: iter:   171/  195  CE: 5.9328  
+[03/02 02:58:21] SuperNet Training INFO: iter:   190/  195  CE: 5.5899  
+[03/02 02:58:23] SuperNet Training INFO: --> epoch:  81/120  avg CE: 5.9401  lr: 0.010535856069300903  
+[03/02 02:58:29] SuperNet Training INFO: iter:     0/  195  CE: 5.9081  
+[03/02 02:58:34] SuperNet Training INFO: iter:    19/  195  CE: 6.1555  
+[03/02 02:58:39] SuperNet Training INFO: iter:    38/  195  CE: 5.7764  
+[03/02 02:58:44] SuperNet Training INFO: iter:    57/  195  CE: 5.9582  
+[03/02 02:58:49] SuperNet Training INFO: iter:    76/  195  CE: 5.6000  
+[03/02 02:58:54] SuperNet Training INFO: iter:    95/  195  CE: 5.6126  
+[03/02 02:58:59] SuperNet Training INFO: iter:   114/  195  CE: 5.7258  
+[03/02 02:59:04] SuperNet Training INFO: iter:   133/  195  CE: 5.9876  
+[03/02 02:59:08] SuperNet Training INFO: iter:   152/  195  CE: 6.0783  
+[03/02 02:59:13] SuperNet Training INFO: iter:   171/  195  CE: 5.9050  
+[03/02 02:59:19] SuperNet Training INFO: iter:   190/  195  CE: 5.6469  
+[03/02 02:59:20] SuperNet Training INFO: --> epoch:  82/120  avg CE: 5.9319  lr: 0.010038627710069586  
+[03/02 02:59:26] SuperNet Training INFO: iter:     0/  195  CE: 5.9404  
+[03/02 02:59:31] SuperNet Training INFO: iter:    19/  195  CE: 6.1704  
+[03/02 02:59:36] SuperNet Training INFO: iter:    38/  195  CE: 5.6051  
+[03/02 02:59:41] SuperNet Training INFO: iter:    57/  195  CE: 5.9287  
+[03/02 02:59:46] SuperNet Training INFO: iter:    76/  195  CE: 5.4805  
+[03/02 02:59:51] SuperNet Training INFO: iter:    95/  195  CE: 5.6183  
+[03/02 02:59:56] SuperNet Training INFO: iter:   114/  195  CE: 5.7729  
+[03/02 03:00:01] SuperNet Training INFO: iter:   133/  195  CE: 6.0012  
+[03/02 03:00:06] SuperNet Training INFO: iter:   152/  195  CE: 6.1725  
+[03/02 03:00:11] SuperNet Training INFO: iter:   171/  195  CE: 5.9916  
+[03/02 03:00:16] SuperNet Training INFO: iter:   190/  195  CE: 5.6536  
+[03/02 03:00:17] SuperNet Training INFO: --> epoch:  83/120  avg CE: 5.9188  lr: 0.009550027566346325  
+[03/02 03:00:24] SuperNet Training INFO: iter:     0/  195  CE: 5.8106  
+[03/02 03:00:29] SuperNet Training INFO: iter:    19/  195  CE: 6.1815  
+[03/02 03:00:33] SuperNet Training INFO: iter:    38/  195  CE: 5.6238  
+[03/02 03:00:38] SuperNet Training INFO: iter:    57/  195  CE: 5.9856  
+[03/02 03:00:43] SuperNet Training INFO: iter:    76/  195  CE: 5.4585  
+[03/02 03:00:48] SuperNet Training INFO: iter:    95/  195  CE: 5.6811  
+[03/02 03:00:53] SuperNet Training INFO: iter:   114/  195  CE: 5.7423  
+[03/02 03:00:58] SuperNet Training INFO: iter:   133/  195  CE: 5.8056  
+[03/02 03:01:03] SuperNet Training INFO: iter:   152/  195  CE: 6.0993  
+[03/02 03:01:08] SuperNet Training INFO: iter:   171/  195  CE: 5.9068  
+[03/02 03:01:13] SuperNet Training INFO: iter:   190/  195  CE: 5.5882  
+[03/02 03:01:15] SuperNet Training INFO: --> epoch:  84/120  avg CE: 5.9149  lr: 0.009070393943354604  
+[03/02 03:01:21] SuperNet Training INFO: iter:     0/  195  CE: 5.9159  
+[03/02 03:01:26] SuperNet Training INFO: iter:    19/  195  CE: 6.1318  
+[03/02 03:01:31] SuperNet Training INFO: iter:    38/  195  CE: 5.6629  
+[03/02 03:01:36] SuperNet Training INFO: iter:    57/  195  CE: 5.9373  
+[03/02 03:01:41] SuperNet Training INFO: iter:    76/  195  CE: 5.5052  
+[03/02 03:01:46] SuperNet Training INFO: iter:    95/  195  CE: 5.6937  
+[03/02 03:01:51] SuperNet Training INFO: iter:   114/  195  CE: 5.6936  
+[03/02 03:01:56] SuperNet Training INFO: iter:   133/  195  CE: 5.9179  
+[03/02 03:02:00] SuperNet Training INFO: iter:   152/  195  CE: 6.1252  
+[03/02 03:02:05] SuperNet Training INFO: iter:   171/  195  CE: 5.8492  
+[03/02 03:02:10] SuperNet Training INFO: iter:   190/  195  CE: 5.5346  
+[03/02 03:02:12] SuperNet Training INFO: --> epoch:  85/120  avg CE: 5.8966  lr: 0.008600058937926766  
+[03/02 03:02:18] SuperNet Training INFO: iter:     0/  195  CE: 5.8890  
+[03/02 03:02:23] SuperNet Training INFO: iter:    19/  195  CE: 6.1837  
+[03/02 03:02:28] SuperNet Training INFO: iter:    38/  195  CE: 5.6364  
+[03/02 03:02:33] SuperNet Training INFO: iter:    57/  195  CE: 5.8310  
+[03/02 03:02:37] SuperNet Training INFO: iter:    76/  195  CE: 5.6412  
+[03/02 03:02:42] SuperNet Training INFO: iter:    95/  195  CE: 5.7826  
+[03/02 03:02:47] SuperNet Training INFO: iter:   114/  195  CE: 5.7304  
+[03/02 03:02:52] SuperNet Training INFO: iter:   133/  195  CE: 5.8882  
+[03/02 03:02:57] SuperNet Training INFO: iter:   152/  195  CE: 6.1003  
+[03/02 03:03:02] SuperNet Training INFO: iter:   171/  195  CE: 5.8526  
+[03/02 03:03:07] SuperNet Training INFO: iter:   190/  195  CE: 5.6308  
+[03/02 03:03:08] SuperNet Training INFO: --> epoch:  86/120  avg CE: 5.8934  lr: 0.008139348208561189  
+[03/02 03:03:14] SuperNet Training INFO: iter:     0/  195  CE: 5.8851  
+[03/02 03:03:19] SuperNet Training INFO: iter:    19/  195  CE: 6.1105  
+[03/02 03:03:24] SuperNet Training INFO: iter:    38/  195  CE: 5.5548  
+[03/02 03:03:29] SuperNet Training INFO: iter:    57/  195  CE: 5.8285  
+[03/02 03:03:34] SuperNet Training INFO: iter:    76/  195  CE: 5.6026  
+[03/02 03:03:39] SuperNet Training INFO: iter:    95/  195  CE: 5.5874  
+[03/02 03:03:44] SuperNet Training INFO: iter:   114/  195  CE: 5.7242  
+[03/02 03:03:49] SuperNet Training INFO: iter:   133/  195  CE: 5.9283  
+[03/02 03:03:54] SuperNet Training INFO: iter:   152/  195  CE: 6.1005  
+[03/02 03:03:59] SuperNet Training INFO: iter:   171/  195  CE: 5.8830  
+[03/02 03:04:04] SuperNet Training INFO: iter:   190/  195  CE: 5.6034  
+[03/02 03:04:06] SuperNet Training INFO: --> epoch:  87/120  avg CE: 5.8830  lr: 0.007688580749937393  
+[03/02 03:04:12] SuperNet Training INFO: iter:     0/  195  CE: 5.8296  
+[03/02 03:04:17] SuperNet Training INFO: iter:    19/  195  CE: 6.0863  
+[03/02 03:04:22] SuperNet Training INFO: iter:    38/  195  CE: 5.6277  
+[03/02 03:04:27] SuperNet Training INFO: iter:    57/  195  CE: 5.8173  
+[03/02 03:04:33] SuperNet Training INFO: iter:    76/  195  CE: 5.4457  
+[03/02 03:04:38] SuperNet Training INFO: iter:    95/  195  CE: 5.5670  
+[03/02 03:04:42] SuperNet Training INFO: iter:   114/  195  CE: 5.6033  
+[03/02 03:04:47] SuperNet Training INFO: iter:   133/  195  CE: 5.9553  
+[03/02 03:04:52] SuperNet Training INFO: iter:   152/  195  CE: 6.0754  
+[03/02 03:04:57] SuperNet Training INFO: iter:   171/  195  CE: 5.9516  
+[03/02 03:05:01] SuperNet Training INFO: iter:   190/  195  CE: 5.6145  
+[03/02 03:05:03] SuperNet Training INFO: --> epoch:  88/120  avg CE: 5.8728  lr: 0.007248068672045073  
+[03/02 03:05:09] SuperNet Training INFO: iter:     0/  195  CE: 5.7360  
+[03/02 03:05:14] SuperNet Training INFO: iter:    19/  195  CE: 6.0489  
+[03/02 03:05:19] SuperNet Training INFO: iter:    38/  195  CE: 5.6179  
+[03/02 03:05:24] SuperNet Training INFO: iter:    57/  195  CE: 5.8413  
+[03/02 03:05:29] SuperNet Training INFO: iter:    76/  195  CE: 5.5576  
+[03/02 03:05:34] SuperNet Training INFO: iter:    95/  195  CE: 5.6203  
+[03/02 03:05:39] SuperNet Training INFO: iter:   114/  195  CE: 5.7650  
+[03/02 03:05:44] SuperNet Training INFO: iter:   133/  195  CE: 5.9028  
+[03/02 03:05:49] SuperNet Training INFO: iter:   152/  195  CE: 6.0802  
+[03/02 03:05:53] SuperNet Training INFO: iter:   171/  195  CE: 5.8932  
+[03/02 03:05:58] SuperNet Training INFO: iter:   190/  195  CE: 5.5589  
+[03/02 03:06:00] SuperNet Training INFO: --> epoch:  89/120  avg CE: 5.8656  lr: 0.006818116984080133  
+[03/02 03:06:06] SuperNet Training INFO: iter:     0/  195  CE: 5.8667  
+[03/02 03:06:10] SuperNet Training INFO: iter:    19/  195  CE: 6.0634  
+[03/02 03:06:15] SuperNet Training INFO: iter:    38/  195  CE: 5.5628  
+[03/02 03:06:20] SuperNet Training INFO: iter:    57/  195  CE: 5.8191  
+[03/02 03:06:25] SuperNet Training INFO: iter:    76/  195  CE: 5.5047  
+[03/02 03:06:30] SuperNet Training INFO: iter:    95/  195  CE: 5.6020  
+[03/02 03:06:35] SuperNet Training INFO: iter:   114/  195  CE: 5.6618  
+[03/02 03:06:40] SuperNet Training INFO: iter:   133/  195  CE: 5.8689  
+[03/02 03:06:45] SuperNet Training INFO: iter:   152/  195  CE: 6.0573  
+[03/02 03:06:50] SuperNet Training INFO: iter:   171/  195  CE: 6.0392  
+[03/02 03:06:54] SuperNet Training INFO: iter:   190/  195  CE: 5.5155  
+[03/02 03:06:56] SuperNet Training INFO: --> epoch:  90/120  avg CE: 5.8499  lr: 0.00639902338325725  
+[03/02 03:07:02] SuperNet Training INFO: iter:     0/  195  CE: 5.8816  
+[03/02 03:07:08] SuperNet Training INFO: iter:    19/  195  CE: 6.0007  
+[03/02 03:07:12] SuperNet Training INFO: iter:    38/  195  CE: 5.6810  
+[03/02 03:07:17] SuperNet Training INFO: iter:    57/  195  CE: 5.7916  
+[03/02 03:07:23] SuperNet Training INFO: iter:    76/  195  CE: 5.3603  
+[03/02 03:07:28] SuperNet Training INFO: iter:    95/  195  CE: 5.5522  
+[03/02 03:07:33] SuperNet Training INFO: iter:   114/  195  CE: 5.8222  
+[03/02 03:07:38] SuperNet Training INFO: iter:   133/  195  CE: 5.7914  
+[03/02 03:07:43] SuperNet Training INFO: iter:   152/  195  CE: 6.0088  
+[03/02 03:07:48] SuperNet Training INFO: iter:   171/  195  CE: 5.8863  
+[03/02 03:07:53] SuperNet Training INFO: iter:   190/  195  CE: 5.6027  
+[03/02 03:07:54] SuperNet Training INFO: --> epoch:  91/120  avg CE: 5.8459  lr: 0.0059910780486852585  
+[03/02 03:08:01] SuperNet Training INFO: iter:     0/  195  CE: 5.8701  
+[03/02 03:08:06] SuperNet Training INFO: iter:    19/  195  CE: 5.9875  
+[03/02 03:08:11] SuperNet Training INFO: iter:    38/  195  CE: 5.6051  
+[03/02 03:08:15] SuperNet Training INFO: iter:    57/  195  CE: 5.8942  
+[03/02 03:08:20] SuperNet Training INFO: iter:    76/  195  CE: 5.4069  
+[03/02 03:08:25] SuperNet Training INFO: iter:    95/  195  CE: 5.6199  
+[03/02 03:08:30] SuperNet Training INFO: iter:   114/  195  CE: 5.7441  
+[03/02 03:08:36] SuperNet Training INFO: iter:   133/  195  CE: 5.8609  
+[03/02 03:08:40] SuperNet Training INFO: iter:   152/  195  CE: 6.0318  
+[03/02 03:08:45] SuperNet Training INFO: iter:   171/  195  CE: 5.8222  
+[03/02 03:08:50] SuperNet Training INFO: iter:   190/  195  CE: 5.5213  
+[03/02 03:08:51] SuperNet Training INFO: --> epoch:  92/120  avg CE: 5.8488  lr: 0.005594563440448031  
+[03/02 03:08:58] SuperNet Training INFO: iter:     0/  195  CE: 5.7590  
+[03/02 03:09:03] SuperNet Training INFO: iter:    19/  195  CE: 6.0482  
+[03/02 03:09:07] SuperNet Training INFO: iter:    38/  195  CE: 5.6885  
+[03/02 03:09:13] SuperNet Training INFO: iter:    57/  195  CE: 5.7596  
+[03/02 03:09:18] SuperNet Training INFO: iter:    76/  195  CE: 5.5139  
+[03/02 03:09:23] SuperNet Training INFO: iter:    95/  195  CE: 5.7084  
+[03/02 03:09:28] SuperNet Training INFO: iter:   114/  195  CE: 5.6550  
+[03/02 03:09:33] SuperNet Training INFO: iter:   133/  195  CE: 5.8312  
+[03/02 03:09:38] SuperNet Training INFO: iter:   152/  195  CE: 6.0272  
+[03/02 03:09:43] SuperNet Training INFO: iter:   171/  195  CE: 5.8672  
+[03/02 03:09:48] SuperNet Training INFO: iter:   190/  195  CE: 5.6070  
+[03/02 03:09:50] SuperNet Training INFO: --> epoch:  93/120  avg CE: 5.8272  lr: 0.005209754104030004  
+[03/02 03:09:56] SuperNet Training INFO: iter:     0/  195  CE: 5.8001  
+[03/02 03:10:01] SuperNet Training INFO: iter:    19/  195  CE: 6.0767  
+[03/02 03:10:06] SuperNet Training INFO: iter:    38/  195  CE: 5.6993  
+[03/02 03:10:10] SuperNet Training INFO: iter:    57/  195  CE: 5.8842  
+[03/02 03:10:16] SuperNet Training INFO: iter:    76/  195  CE: 5.3617  
+[03/02 03:10:20] SuperNet Training INFO: iter:    95/  195  CE: 5.4854  
+[03/02 03:10:25] SuperNet Training INFO: iter:   114/  195  CE: 5.7501  
+[03/02 03:10:29] SuperNet Training INFO: iter:   133/  195  CE: 5.8198  
+[03/02 03:10:34] SuperNet Training INFO: iter:   152/  195  CE: 6.1283  
+[03/02 03:10:39] SuperNet Training INFO: iter:   171/  195  CE: 5.8660  
+[03/02 03:10:44] SuperNet Training INFO: iter:   190/  195  CE: 5.5355  
+[03/02 03:10:45] SuperNet Training INFO: --> epoch:  94/120  avg CE: 5.8254  lr: 0.004836916480221698  
+[03/02 03:10:52] SuperNet Training INFO: iter:     0/  195  CE: 5.7909  
+[03/02 03:10:56] SuperNet Training INFO: iter:    19/  195  CE: 6.0910  
+[03/02 03:11:01] SuperNet Training INFO: iter:    38/  195  CE: 5.5706  
+[03/02 03:11:06] SuperNet Training INFO: iter:    57/  195  CE: 5.8405  
+[03/02 03:11:11] SuperNet Training INFO: iter:    76/  195  CE: 5.5066  
+[03/02 03:11:16] SuperNet Training INFO: iter:    95/  195  CE: 5.5877  
+[03/02 03:11:21] SuperNet Training INFO: iter:   114/  195  CE: 5.6657  
+[03/02 03:11:26] SuperNet Training INFO: iter:   133/  195  CE: 5.7803  
+[03/02 03:11:30] SuperNet Training INFO: iter:   152/  195  CE: 6.0332  
+[03/02 03:11:35] SuperNet Training INFO: iter:   171/  195  CE: 5.9935  
+[03/02 03:11:40] SuperNet Training INFO: iter:   190/  195  CE: 5.5019  
+[03/02 03:11:41] SuperNet Training INFO: --> epoch:  95/120  avg CE: 5.8145  lr: 0.00447630872063699  
+[03/02 03:11:47] SuperNet Training INFO: iter:     0/  195  CE: 5.8810  
+[03/02 03:11:52] SuperNet Training INFO: iter:    19/  195  CE: 6.0370  
+[03/02 03:11:57] SuperNet Training INFO: iter:    38/  195  CE: 5.6132  
+[03/02 03:12:02] SuperNet Training INFO: iter:    57/  195  CE: 5.8022  
+[03/02 03:12:07] SuperNet Training INFO: iter:    76/  195  CE: 5.4975  
+[03/02 03:12:11] SuperNet Training INFO: iter:    95/  195  CE: 5.5469  
+[03/02 03:12:16] SuperNet Training INFO: iter:   114/  195  CE: 5.5967  
+[03/02 03:12:21] SuperNet Training INFO: iter:   133/  195  CE: 5.7776  
+[03/02 03:12:26] SuperNet Training INFO: iter:   152/  195  CE: 5.9231  
+[03/02 03:12:31] SuperNet Training INFO: iter:   171/  195  CE: 5.9736  
+[03/02 03:12:36] SuperNet Training INFO: iter:   190/  195  CE: 5.5564  
+[03/02 03:12:38] SuperNet Training INFO: --> epoch:  96/120  avg CE: 5.8139  lr: 0.004128180508969724  
+[03/02 03:12:44] SuperNet Training INFO: iter:     0/  195  CE: 5.7267  
+[03/02 03:12:49] SuperNet Training INFO: iter:    19/  195  CE: 6.0455  
+[03/02 03:12:54] SuperNet Training INFO: iter:    38/  195  CE: 5.6068  
+[03/02 03:12:59] SuperNet Training INFO: iter:    57/  195  CE: 5.7447  
+[03/02 03:13:04] SuperNet Training INFO: iter:    76/  195  CE: 5.4173  
+[03/02 03:13:09] SuperNet Training INFO: iter:    95/  195  CE: 5.5894  
+[03/02 03:13:14] SuperNet Training INFO: iter:   114/  195  CE: 5.6773  
+[03/02 03:13:19] SuperNet Training INFO: iter:   133/  195  CE: 5.8898  
+[03/02 03:13:23] SuperNet Training INFO: iter:   152/  195  CE: 6.1253  
+[03/02 03:13:28] SuperNet Training INFO: iter:   171/  195  CE: 5.9266  
+[03/02 03:13:33] SuperNet Training INFO: iter:   190/  195  CE: 5.6143  
+[03/02 03:13:35] SuperNet Training INFO: --> epoch:  97/120  avg CE: 5.8073  lr: 0.0037927728881134793  
+[03/02 03:13:41] SuperNet Training INFO: iter:     0/  195  CE: 5.7448  
+[03/02 03:13:46] SuperNet Training INFO: iter:    19/  195  CE: 6.0158  
+[03/02 03:13:50] SuperNet Training INFO: iter:    38/  195  CE: 5.5032  
+[03/02 03:13:55] SuperNet Training INFO: iter:    57/  195  CE: 5.7812  
+[03/02 03:14:00] SuperNet Training INFO: iter:    76/  195  CE: 5.2947  
+[03/02 03:14:06] SuperNet Training INFO: iter:    95/  195  CE: 5.6795  
+[03/02 03:14:11] SuperNet Training INFO: iter:   114/  195  CE: 5.5380  
+[03/02 03:14:16] SuperNet Training INFO: iter:   133/  195  CE: 5.8399  
+[03/02 03:14:21] SuperNet Training INFO: iter:   152/  195  CE: 6.0686  
+[03/02 03:14:26] SuperNet Training INFO: iter:   171/  195  CE: 5.8696  
+[03/02 03:14:31] SuperNet Training INFO: iter:   190/  195  CE: 5.5034  
+[03/02 03:14:32] SuperNet Training INFO: --> epoch:  98/120  avg CE: 5.7977  lr: 0.003470318093264213  
+[03/02 03:14:38] SuperNet Training INFO: iter:     0/  195  CE: 5.8500  
+[03/02 03:14:44] SuperNet Training INFO: iter:    19/  195  CE: 5.9568  
+[03/02 03:14:49] SuperNet Training INFO: iter:    38/  195  CE: 5.5828  
+[03/02 03:14:53] SuperNet Training INFO: iter:    57/  195  CE: 5.7922  
+[03/02 03:14:59] SuperNet Training INFO: iter:    76/  195  CE: 5.3206  
+[03/02 03:15:03] SuperNet Training INFO: iter:    95/  195  CE: 5.5628  
+[03/02 03:15:09] SuperNet Training INFO: iter:   114/  195  CE: 5.5403  
+[03/02 03:15:14] SuperNet Training INFO: iter:   133/  195  CE: 5.8816  
+[03/02 03:15:18] SuperNet Training INFO: iter:   152/  195  CE: 6.0912  
+[03/02 03:15:23] SuperNet Training INFO: iter:   171/  195  CE: 5.8449  
+[03/02 03:15:28] SuperNet Training INFO: iter:   190/  195  CE: 5.5038  
+[03/02 03:15:30] SuperNet Training INFO: --> epoch:  99/120  avg CE: 5.7990  lr: 0.00316103939112137  
+[03/02 03:15:36] SuperNet Training INFO: iter:     0/  195  CE: 5.8959  
+[03/02 03:15:41] SuperNet Training INFO: iter:    19/  195  CE: 5.9747  
+[03/02 03:15:46] SuperNet Training INFO: iter:    38/  195  CE: 5.4872  
+[03/02 03:15:51] SuperNet Training INFO: iter:    57/  195  CE: 5.7934  
+[03/02 03:15:56] SuperNet Training INFO: iter:    76/  195  CE: 5.4033  
+[03/02 03:16:01] SuperNet Training INFO: iter:    95/  195  CE: 5.5479  
+[03/02 03:16:05] SuperNet Training INFO: iter:   114/  195  CE: 5.5783  
+[03/02 03:16:10] SuperNet Training INFO: iter:   133/  195  CE: 5.8661  
+[03/02 03:16:15] SuperNet Training INFO: iter:   152/  195  CE: 6.0664  
+[03/02 03:16:20] SuperNet Training INFO: iter:   171/  195  CE: 5.7559  
+[03/02 03:16:25] SuperNet Training INFO: iter:   190/  195  CE: 5.5362  
+[03/02 03:16:26] SuperNet Training INFO: --> epoch: 100/120  avg CE: 5.7921  lr: 0.002865150925298668  
+[03/02 03:16:33] SuperNet Training INFO: iter:     0/  195  CE: 5.7468  
+[03/02 03:16:38] SuperNet Training INFO: iter:    19/  195  CE: 5.8884  
+[03/02 03:16:43] SuperNet Training INFO: iter:    38/  195  CE: 5.6794  
+[03/02 03:16:48] SuperNet Training INFO: iter:    57/  195  CE: 5.8059  
+[03/02 03:16:53] SuperNet Training INFO: iter:    76/  195  CE: 5.5289  
+[03/02 03:16:57] SuperNet Training INFO: iter:    95/  195  CE: 5.5206  
+[03/02 03:17:03] SuperNet Training INFO: iter:   114/  195  CE: 5.7113  
+[03/02 03:17:08] SuperNet Training INFO: iter:   133/  195  CE: 5.8296  
+[03/02 03:17:13] SuperNet Training INFO: iter:   152/  195  CE: 5.9139  
+[03/02 03:17:17] SuperNet Training INFO: iter:   171/  195  CE: 5.8720  
+[03/02 03:17:23] SuperNet Training INFO: iter:   190/  195  CE: 5.5445  
+[03/02 03:17:24] SuperNet Training INFO: --> epoch: 101/120  avg CE: 5.7930  lr: 0.0025828575680517467  
+[03/02 03:17:30] SuperNet Training INFO: iter:     0/  195  CE: 5.8401  
+[03/02 03:17:35] SuperNet Training INFO: iter:    19/  195  CE: 5.9330  
+[03/02 03:17:40] SuperNet Training INFO: iter:    38/  195  CE: 5.4522  
+[03/02 03:17:45] SuperNet Training INFO: iter:    57/  195  CE: 5.7708  
+[03/02 03:17:50] SuperNet Training INFO: iter:    76/  195  CE: 5.2986  
+[03/02 03:17:55] SuperNet Training INFO: iter:    95/  195  CE: 5.6432  
+[03/02 03:18:00] SuperNet Training INFO: iter:   114/  195  CE: 5.5936  
+[03/02 03:18:04] SuperNet Training INFO: iter:   133/  195  CE: 5.7610  
+[03/02 03:18:09] SuperNet Training INFO: iter:   152/  195  CE: 6.0564  
+[03/02 03:18:14] SuperNet Training INFO: iter:   171/  195  CE: 5.8119  
+[03/02 03:18:19] SuperNet Training INFO: iter:   190/  195  CE: 5.6110  
+[03/02 03:18:21] SuperNet Training INFO: --> epoch: 102/120  avg CE: 5.7696  lr: 0.002314354778425268  
+[03/02 03:18:27] SuperNet Training INFO: iter:     0/  195  CE: 5.6463  
+[03/02 03:18:33] SuperNet Training INFO: iter:    19/  195  CE: 5.9380  
+[03/02 03:18:38] SuperNet Training INFO: iter:    38/  195  CE: 5.5834  
+[03/02 03:18:43] SuperNet Training INFO: iter:    57/  195  CE: 5.8506  
+[03/02 03:18:47] SuperNet Training INFO: iter:    76/  195  CE: 5.3935  
+[03/02 03:18:52] SuperNet Training INFO: iter:    95/  195  CE: 5.5216  
+[03/02 03:18:57] SuperNet Training INFO: iter:   114/  195  CE: 5.5994  
+[03/02 03:19:02] SuperNet Training INFO: iter:   133/  195  CE: 5.7970  
+[03/02 03:19:07] SuperNet Training INFO: iter:   152/  195  CE: 5.9624  
+[03/02 03:19:12] SuperNet Training INFO: iter:   171/  195  CE: 5.9060  
+[03/02 03:19:17] SuperNet Training INFO: iter:   190/  195  CE: 5.5337  
+[03/02 03:19:19] SuperNet Training INFO: --> epoch: 103/120  avg CE: 5.7791  lr: 0.0020598284669176435  
+[03/02 03:19:25] SuperNet Training INFO: iter:     0/  195  CE: 5.8305  
+[03/02 03:19:30] SuperNet Training INFO: iter:    19/  195  CE: 5.9327  
+[03/02 03:19:34] SuperNet Training INFO: iter:    38/  195  CE: 5.4910  
+[03/02 03:19:40] SuperNet Training INFO: iter:    57/  195  CE: 5.7426  
+[03/02 03:19:45] SuperNet Training INFO: iter:    76/  195  CE: 5.2679  
+[03/02 03:19:50] SuperNet Training INFO: iter:    95/  195  CE: 5.5310  
+[03/02 03:19:54] SuperNet Training INFO: iter:   114/  195  CE: 5.6307  
+[03/02 03:19:59] SuperNet Training INFO: iter:   133/  195  CE: 5.7427  
+[03/02 03:20:04] SuperNet Training INFO: iter:   152/  195  CE: 5.9244  
+[03/02 03:20:09] SuperNet Training INFO: iter:   171/  195  CE: 5.7934  
+[03/02 03:20:14] SuperNet Training INFO: iter:   190/  195  CE: 5.5205  
+[03/02 03:20:16] SuperNet Training INFO: --> epoch: 104/120  avg CE: 5.7701  lr: 0.0018194548667572173  
+[03/02 03:20:22] SuperNet Training INFO: iter:     0/  195  CE: 5.8353  
+[03/02 03:20:27] SuperNet Training INFO: iter:    19/  195  CE: 5.8746  
+[03/02 03:20:31] SuperNet Training INFO: iter:    38/  195  CE: 5.4994  
+[03/02 03:20:36] SuperNet Training INFO: iter:    57/  195  CE: 5.8272  
+[03/02 03:20:41] SuperNet Training INFO: iter:    76/  195  CE: 5.3191  
+[03/02 03:20:46] SuperNet Training INFO: iter:    95/  195  CE: 5.6107  
+[03/02 03:20:51] SuperNet Training INFO: iter:   114/  195  CE: 5.6113  
+[03/02 03:20:56] SuperNet Training INFO: iter:   133/  195  CE: 5.8823  
+[03/02 03:21:01] SuperNet Training INFO: iter:   152/  195  CE: 6.0367  
+[03/02 03:21:06] SuperNet Training INFO: iter:   171/  195  CE: 5.8397  
+[03/02 03:21:11] SuperNet Training INFO: iter:   190/  195  CE: 5.5914  
+[03/02 03:21:12] SuperNet Training INFO: --> epoch: 105/120  avg CE: 5.7703  lr: 0.0015934004118788989  
+[03/02 03:21:19] SuperNet Training INFO: iter:     0/  195  CE: 5.6680  
+[03/02 03:21:24] SuperNet Training INFO: iter:    19/  195  CE: 5.9069  
+[03/02 03:21:29] SuperNet Training INFO: iter:    38/  195  CE: 5.5999  
+[03/02 03:21:34] SuperNet Training INFO: iter:    57/  195  CE: 5.7674  
+[03/02 03:21:39] SuperNet Training INFO: iter:    76/  195  CE: 5.3567  
+[03/02 03:21:45] SuperNet Training INFO: iter:    95/  195  CE: 5.6051  
+[03/02 03:21:50] SuperNet Training INFO: iter:   114/  195  CE: 5.6858  
+[03/02 03:21:55] SuperNet Training INFO: iter:   133/  195  CE: 5.7533  
+[03/02 03:22:00] SuperNet Training INFO: iter:   152/  195  CE: 6.0621  
+[03/02 03:22:05] SuperNet Training INFO: iter:   171/  195  CE: 5.8818  
+[03/02 03:22:10] SuperNet Training INFO: iter:   190/  195  CE: 5.5187  
+[03/02 03:22:11] SuperNet Training INFO: --> epoch: 106/120  avg CE: 5.7674  lr: 0.0013818216216858277  
+[03/02 03:22:18] SuperNet Training INFO: iter:     0/  195  CE: 5.8215  
+[03/02 03:22:23] SuperNet Training INFO: iter:    19/  195  CE: 6.0105  
+[03/02 03:22:28] SuperNet Training INFO: iter:    38/  195  CE: 5.5838  
+[03/02 03:22:33] SuperNet Training INFO: iter:    57/  195  CE: 5.8219  
+[03/02 03:22:38] SuperNet Training INFO: iter:    76/  195  CE: 5.2530  
+[03/02 03:22:43] SuperNet Training INFO: iter:    95/  195  CE: 5.5166  
+[03/02 03:22:48] SuperNet Training INFO: iter:   114/  195  CE: 5.5728  
+[03/02 03:22:53] SuperNet Training INFO: iter:   133/  195  CE: 5.7483  
+[03/02 03:22:58] SuperNet Training INFO: iter:   152/  195  CE: 5.9318  
+[03/02 03:23:02] SuperNet Training INFO: iter:   171/  195  CE: 5.8720  
+[03/02 03:23:07] SuperNet Training INFO: iter:   190/  195  CE: 5.5546  
+[03/02 03:23:09] SuperNet Training INFO: --> epoch: 107/120  avg CE: 5.7670  lr: 0.0011848649926758644  
+[03/02 03:23:15] SuperNet Training INFO: iter:     0/  195  CE: 5.6969  
+[03/02 03:23:19] SuperNet Training INFO: iter:    19/  195  CE: 5.9649  
+[03/02 03:23:24] SuperNet Training INFO: iter:    38/  195  CE: 5.6287  
+[03/02 03:23:29] SuperNet Training INFO: iter:    57/  195  CE: 5.8245  
+[03/02 03:23:34] SuperNet Training INFO: iter:    76/  195  CE: 5.4238  
+[03/02 03:23:39] SuperNet Training INFO: iter:    95/  195  CE: 5.4877  
+[03/02 03:23:44] SuperNet Training INFO: iter:   114/  195  CE: 5.6011  
+[03/02 03:23:49] SuperNet Training INFO: iter:   133/  195  CE: 5.7941  
+[03/02 03:23:54] SuperNet Training INFO: iter:   152/  195  CE: 5.9823  
+[03/02 03:23:59] SuperNet Training INFO: iter:   171/  195  CE: 5.8775  
+[03/02 03:24:04] SuperNet Training INFO: iter:   190/  195  CE: 5.5799  
+[03/02 03:24:06] SuperNet Training INFO: --> epoch: 108/120  avg CE: 5.7553  lr: 0.0010026668970077911  
+[03/02 03:24:12] SuperNet Training INFO: iter:     0/  195  CE: 5.8442  
+[03/02 03:24:17] SuperNet Training INFO: iter:    19/  195  CE: 5.8531  
+[03/02 03:24:21] SuperNet Training INFO: iter:    38/  195  CE: 5.5345  
+[03/02 03:24:27] SuperNet Training INFO: iter:    57/  195  CE: 5.7511  
+[03/02 03:24:31] SuperNet Training INFO: iter:    76/  195  CE: 5.4524  
+[03/02 03:24:36] SuperNet Training INFO: iter:    95/  195  CE: 5.4425  
+[03/02 03:24:41] SuperNet Training INFO: iter:   114/  195  CE: 5.5578  
+[03/02 03:24:46] SuperNet Training INFO: iter:   133/  195  CE: 5.7837  
+[03/02 03:24:51] SuperNet Training INFO: iter:   152/  195  CE: 5.9198  
+[03/02 03:24:56] SuperNet Training INFO: iter:   171/  195  CE: 5.9160  
+[03/02 03:25:01] SuperNet Training INFO: iter:   190/  195  CE: 5.6539  
+[03/02 03:25:03] SuperNet Training INFO: --> epoch: 109/120  avg CE: 5.7583  lr: 0.0008353534880777312  
+[03/02 03:25:09] SuperNet Training INFO: iter:     0/  195  CE: 5.8172  
+[03/02 03:25:14] SuperNet Training INFO: iter:    19/  195  CE: 5.9402  
+[03/02 03:25:19] SuperNet Training INFO: iter:    38/  195  CE: 5.4233  
+[03/02 03:25:24] SuperNet Training INFO: iter:    57/  195  CE: 5.6788  
+[03/02 03:25:29] SuperNet Training INFO: iter:    76/  195  CE: 5.4079  
+[03/02 03:25:34] SuperNet Training INFO: iter:    95/  195  CE: 5.6236  
+[03/02 03:25:39] SuperNet Training INFO: iter:   114/  195  CE: 5.5781  
+[03/02 03:25:44] SuperNet Training INFO: iter:   133/  195  CE: 5.8194  
+[03/02 03:25:49] SuperNet Training INFO: iter:   152/  195  CE: 6.0430  
+[03/02 03:25:54] SuperNet Training INFO: iter:   171/  195  CE: 5.8869  
+[03/02 03:25:59] SuperNet Training INFO: iter:   190/  195  CE: 5.6677  
+[03/02 03:26:01] SuperNet Training INFO: --> epoch: 110/120  avg CE: 5.7619  lr: 0.000683040613170877  
+[03/02 03:26:07] SuperNet Training INFO: iter:     0/  195  CE: 5.6724  
+[03/02 03:26:12] SuperNet Training INFO: iter:    19/  195  CE: 5.9197  
+[03/02 03:26:17] SuperNet Training INFO: iter:    38/  195  CE: 5.5684  
+[03/02 03:26:22] SuperNet Training INFO: iter:    57/  195  CE: 5.6871  
+[03/02 03:26:28] SuperNet Training INFO: iter:    76/  195  CE: 5.4716  
+[03/02 03:26:33] SuperNet Training INFO: iter:    95/  195  CE: 5.6019  
+[03/02 03:26:37] SuperNet Training INFO: iter:   114/  195  CE: 5.6517  
+[03/02 03:26:42] SuperNet Training INFO: iter:   133/  195  CE: 5.7848  
+[03/02 03:26:47] SuperNet Training INFO: iter:   152/  195  CE: 6.0527  
+[03/02 03:26:52] SuperNet Training INFO: iter:   171/  195  CE: 5.8080  
+[03/02 03:26:57] SuperNet Training INFO: iter:   190/  195  CE: 5.5179  
+[03/02 03:26:58] SuperNet Training INFO: --> epoch: 111/120  avg CE: 5.7506  lr: 0.0005458337332492156  
+[03/02 03:27:04] SuperNet Training INFO: iter:     0/  195  CE: 5.7899  
+[03/02 03:27:09] SuperNet Training INFO: iter:    19/  195  CE: 5.9603  
+[03/02 03:27:14] SuperNet Training INFO: iter:    38/  195  CE: 5.5497  
+[03/02 03:27:19] SuperNet Training INFO: iter:    57/  195  CE: 5.7194  
+[03/02 03:27:24] SuperNet Training INFO: iter:    76/  195  CE: 5.3266  
+[03/02 03:27:29] SuperNet Training INFO: iter:    95/  195  CE: 5.6349  
+[03/02 03:27:33] SuperNet Training INFO: iter:   114/  195  CE: 5.5522  
+[03/02 03:27:38] SuperNet Training INFO: iter:   133/  195  CE: 5.6631  
+[03/02 03:27:43] SuperNet Training INFO: iter:   152/  195  CE: 6.0915  
+[03/02 03:27:48] SuperNet Training INFO: iter:   171/  195  CE: 5.8406  
+[03/02 03:27:53] SuperNet Training INFO: iter:   190/  195  CE: 5.5313  
+[03/02 03:27:55] SuperNet Training INFO: --> epoch: 112/120  avg CE: 5.7530  lr: 0.0004238278499306763  
+[03/02 03:28:01] SuperNet Training INFO: iter:     0/  195  CE: 5.6620  
+[03/02 03:28:06] SuperNet Training INFO: iter:    19/  195  CE: 5.8706  
+[03/02 03:28:11] SuperNet Training INFO: iter:    38/  195  CE: 5.5827  
+[03/02 03:28:16] SuperNet Training INFO: iter:    57/  195  CE: 5.7479  
+[03/02 03:28:21] SuperNet Training INFO: iter:    76/  195  CE: 5.3781  
+[03/02 03:28:26] SuperNet Training INFO: iter:    95/  195  CE: 5.4756  
+[03/02 03:28:30] SuperNet Training INFO: iter:   114/  195  CE: 5.5530  
+[03/02 03:28:35] SuperNet Training INFO: iter:   133/  195  CE: 5.7967  
+[03/02 03:28:40] SuperNet Training INFO: iter:   152/  195  CE: 6.0015  
+[03/02 03:28:45] SuperNet Training INFO: iter:   171/  195  CE: 5.8823  
+[03/02 03:28:50] SuperNet Training INFO: iter:   190/  195  CE: 5.4577  
+[03/02 03:28:52] SuperNet Training INFO: --> epoch: 113/120  avg CE: 5.7514  lr: 0.0003171074397103109  
+[03/02 03:28:58] SuperNet Training INFO: iter:     0/  195  CE: 5.8190  
+[03/02 03:29:03] SuperNet Training INFO: iter:    19/  195  CE: 5.9294  
+[03/02 03:29:08] SuperNet Training INFO: iter:    38/  195  CE: 5.7083  
+[03/02 03:29:13] SuperNet Training INFO: iter:    57/  195  CE: 5.6517  
+[03/02 03:29:18] SuperNet Training INFO: iter:    76/  195  CE: 5.4284  
+[03/02 03:29:23] SuperNet Training INFO: iter:    95/  195  CE: 5.5587  
+[03/02 03:29:28] SuperNet Training INFO: iter:   114/  195  CE: 5.5880  
+[03/02 03:29:33] SuperNet Training INFO: iter:   133/  195  CE: 5.8068  
+[03/02 03:29:38] SuperNet Training INFO: iter:   152/  195  CE: 6.0077  
+[03/02 03:29:43] SuperNet Training INFO: iter:   171/  195  CE: 5.8371  
+[03/02 03:29:48] SuperNet Training INFO: iter:   190/  195  CE: 5.5611  
+[03/02 03:29:50] SuperNet Training INFO: --> epoch: 114/120  avg CE: 5.7441  lr: 0.0002257463954690131  
+[03/02 03:29:56] SuperNet Training INFO: iter:     0/  195  CE: 5.6922  
+[03/02 03:30:01] SuperNet Training INFO: iter:    19/  195  CE: 5.9370  
+[03/02 03:30:06] SuperNet Training INFO: iter:    38/  195  CE: 5.5665  
+[03/02 03:30:11] SuperNet Training INFO: iter:    57/  195  CE: 5.8422  
+[03/02 03:30:16] SuperNet Training INFO: iter:    76/  195  CE: 5.3683  
+[03/02 03:30:21] SuperNet Training INFO: iter:    95/  195  CE: 5.5511  
+[03/02 03:30:26] SuperNet Training INFO: iter:   114/  195  CE: 5.5833  
+[03/02 03:30:31] SuperNet Training INFO: iter:   133/  195  CE: 5.7723  
+[03/02 03:30:36] SuperNet Training INFO: iter:   152/  195  CE: 6.1017  
+[03/02 03:30:41] SuperNet Training INFO: iter:   171/  195  CE: 5.8316  
+[03/02 03:30:46] SuperNet Training INFO: iter:   190/  195  CE: 5.4462  
+[03/02 03:30:48] SuperNet Training INFO: --> epoch: 115/120  avg CE: 5.7446  lr: 0.00014980797531034126  
+[03/02 03:30:54] SuperNet Training INFO: iter:     0/  195  CE: 5.6839  
+[03/02 03:30:59] SuperNet Training INFO: iter:    19/  195  CE: 5.8175  
+[03/02 03:31:04] SuperNet Training INFO: iter:    38/  195  CE: 5.5306  
+[03/02 03:31:10] SuperNet Training INFO: iter:    57/  195  CE: 5.7314  
+[03/02 03:31:15] SuperNet Training INFO: iter:    76/  195  CE: 5.4668  
+[03/02 03:31:20] SuperNet Training INFO: iter:    95/  195  CE: 5.4523  
+[03/02 03:31:25] SuperNet Training INFO: iter:   114/  195  CE: 5.4698  
+[03/02 03:31:30] SuperNet Training INFO: iter:   133/  195  CE: 5.7645  
+[03/02 03:31:35] SuperNet Training INFO: iter:   152/  195  CE: 6.1123  
+[03/02 03:31:40] SuperNet Training INFO: iter:   171/  195  CE: 5.8644  
+[03/02 03:31:45] SuperNet Training INFO: iter:   190/  195  CE: 5.5215  
+[03/02 03:31:46] SuperNet Training INFO: --> epoch: 116/120  avg CE: 5.7465  lr: 8.934475876079026e-05  
+[03/02 03:31:52] SuperNet Training INFO: iter:     0/  195  CE: 5.7946  
+[03/02 03:31:57] SuperNet Training INFO: iter:    19/  195  CE: 5.9348  
+[03/02 03:32:02] SuperNet Training INFO: iter:    38/  195  CE: 5.5598  
+[03/02 03:32:07] SuperNet Training INFO: iter:    57/  195  CE: 5.7275  
+[03/02 03:32:11] SuperNet Training INFO: iter:    76/  195  CE: 5.5151  
+[03/02 03:32:16] SuperNet Training INFO: iter:    95/  195  CE: 5.6165  
+[03/02 03:32:21] SuperNet Training INFO: iter:   114/  195  CE: 5.4422  
+[03/02 03:32:26] SuperNet Training INFO: iter:   133/  195  CE: 5.8235  
+[03/02 03:32:31] SuperNet Training INFO: iter:   152/  195  CE: 5.8541  
+[03/02 03:32:36] SuperNet Training INFO: iter:   171/  195  CE: 5.8425  
+[03/02 03:32:41] SuperNet Training INFO: iter:   190/  195  CE: 5.5531  
+[03/02 03:32:42] SuperNet Training INFO: --> epoch: 117/120  avg CE: 5.7466  lr: 4.439861036388968e-05  
+[03/02 03:32:48] SuperNet Training INFO: iter:     0/  195  CE: 5.7221  
+[03/02 03:32:54] SuperNet Training INFO: iter:    19/  195  CE: 5.9546  
+[03/02 03:32:59] SuperNet Training INFO: iter:    38/  195  CE: 5.4799  
+[03/02 03:33:04] SuperNet Training INFO: iter:    57/  195  CE: 5.7784  
+[03/02 03:33:09] SuperNet Training INFO: iter:    76/  195  CE: 5.3530  
+[03/02 03:33:14] SuperNet Training INFO: iter:    95/  195  CE: 5.4855  
+[03/02 03:33:19] SuperNet Training INFO: iter:   114/  195  CE: 5.4606  
+[03/02 03:33:24] SuperNet Training INFO: iter:   133/  195  CE: 5.7997  
+[03/02 03:33:29] SuperNet Training INFO: iter:   152/  195  CE: 6.0175  
+[03/02 03:33:34] SuperNet Training INFO: iter:   171/  195  CE: 5.8997  
+[03/02 03:33:39] SuperNet Training INFO: iter:   190/  195  CE: 5.5541  
+[03/02 03:33:41] SuperNet Training INFO: --> epoch: 118/120  avg CE: 5.7467  lr: 1.5000650693332483e-05  
+[03/02 03:33:47] SuperNet Training INFO: iter:     0/  195  CE: 5.9120  
+[03/02 03:33:52] SuperNet Training INFO: iter:    19/  195  CE: 5.8568  
+[03/02 03:33:57] SuperNet Training INFO: iter:    38/  195  CE: 5.5059  
+[03/02 03:34:02] SuperNet Training INFO: iter:    57/  195  CE: 5.7295  
+[03/02 03:34:07] SuperNet Training INFO: iter:    76/  195  CE: 5.3808  
+[03/02 03:34:12] SuperNet Training INFO: iter:    95/  195  CE: 5.5937  
+[03/02 03:34:17] SuperNet Training INFO: iter:   114/  195  CE: 5.5849  
+[03/02 03:34:22] SuperNet Training INFO: iter:   133/  195  CE: 5.8159  
+[03/02 03:34:27] SuperNet Training INFO: iter:   152/  195  CE: 5.8602  
+[03/02 03:34:32] SuperNet Training INFO: iter:   171/  195  CE: 5.7321  
+[03/02 03:34:37] SuperNet Training INFO: iter:   190/  195  CE: 5.4561  
+[03/02 03:34:39] SuperNet Training INFO: --> epoch: 119/120  avg CE: 5.7461  lr: 1.1712348051742762e-06  
+[03/02 03:34:45] SuperNet Training INFO: iter:     0/  195  CE: 5.7451  
+[03/02 03:34:49] SuperNet Training INFO: iter:    19/  195  CE: 5.8815  
+[03/02 03:34:54] SuperNet Training INFO: iter:    38/  195  CE: 5.4223  
+[03/02 03:34:59] SuperNet Training INFO: iter:    57/  195  CE: 5.7414  
+[03/02 03:35:04] SuperNet Training INFO: iter:    76/  195  CE: 5.4142  
+[03/02 03:35:09] SuperNet Training INFO: iter:    95/  195  CE: 5.5573  
+[03/02 03:35:13] SuperNet Training INFO: iter:   114/  195  CE: 5.4918  
+[03/02 03:35:18] SuperNet Training INFO: iter:   133/  195  CE: 5.9129  
+[03/02 03:35:23] SuperNet Training INFO: iter:   152/  195  CE: 6.0281  
+[03/02 03:35:28] SuperNet Training INFO: iter:   171/  195  CE: 5.8151  
+[03/02 03:35:34] SuperNet Training INFO: iter:   190/  195  CE: 5.5054  
+[03/02 03:35:35] SuperNet Training INFO: --> epoch: 120/120  avg CE: 5.7433  lr: 2.919938144069769e-06  
+[03/02 03:35:35] SuperNet Training INFO: --> END val6-2-seed-0
+[03/02 03:35:36] SuperNet Training INFO: ELAPSED TIME: 6906.0(s) = 01(h) 55(m)
