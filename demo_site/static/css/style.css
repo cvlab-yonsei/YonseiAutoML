@@ -1,0 +1,128 @@
+:root {
+  --color-blue-light: #4759FF;
+  --color-blue: #1F53FF;
+  --color-cream: #FAF1E4;
+  --color-white: #FFFFFF;
+  --color-dark: #262626;
+  --color-darkest: #1B1B1B;
+
+  --font-main: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.button {
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 8px 16px;
+  margin: 6px;
+  border-radius: 8px;
+
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+/* === Primary Button === */
+.button-primary {
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  border-color: var(--color-blue);
+}
+.button-primary:hover {
+  background-color: var(--color-blue-light);
+  border-color: var(--color-blue-light);
+}
+.button-primary:active {
+  background-color: #163FFF;
+}
+
+/* === Ghost Button === */
+.button-ghost {
+  background-color: transparent;
+  border-color: var(--color-blue);
+  color: var(--color-blue);
+}
+.button-ghost:hover {
+  background-color: rgba(31, 83, 255, 0.1);
+}
+.button-ghost:active {
+  background-color: rgba(31, 83, 255, 0.2);
+}
+
+/* === Disabled Button === */
+.button-disabled,
+.button:disabled {
+  background-color: #F2F2F2;
+  color: #A0A0A0;
+  border-color: #D0D0D0;
+  cursor: not-allowed;
+}
+
+
+
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: max-content;
+  background-color: var(--color-darkest);
+  color: var(--color-white);
+  text-align: center;
+  border-radius: 6px;
+  padding: 6px 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* 위쪽에 뜨도록 */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 12px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--color-darkest);
+  color: var(--color-white);
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: var(--color-dark);
+  padding: 20px;
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+  background-color: var(--color-darkest);
+}

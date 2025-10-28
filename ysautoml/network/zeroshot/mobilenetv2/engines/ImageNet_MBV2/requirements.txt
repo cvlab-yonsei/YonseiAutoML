@@ -1,0 +1,11 @@
+apex==0.1
+horovod==0.28.0
+matplotlib==3.7.1
+numpy==1.23.5
+pandas==2.0.2
+ptflops==0.7
+scikit_learn==1.2.2
+tensorflow==2.12.0
+torch==2.0.1
+torchvision==0.15.2
+tqdm==4.65.0

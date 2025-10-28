@@ -30,11 +30,11 @@ if __name__ == "__main__":
 #######################
 
 
-# ## ysautoml.data.fyi ##
-# from ysautoml.data.fyi import run_dsa, run_dm
+## ysautoml.data.fyi ##
+from ysautoml.data.fyi import run_dsa, run_dm
 
-# # Dataset condensation
-# run_dsa(dataset="CIFAR10", model="ConvNet", ipc=10, device="0")
+# Dataset condensation
+run_dsa(dataset="CIFAR10", model="ConvNet", ipc=10, device="0")
 
 # ########################
 

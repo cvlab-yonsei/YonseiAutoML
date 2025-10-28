@@ -1,0 +1,251 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YSAutoML Data Utility</title>
+  <style>
+    body { margin:0; font-family: Inter, sans-serif; background:#1B1B1B; color:#FAF1E4; display:flex; }
+    
+    /* --- Sidebar --- */
+    .sidebar { width:250px; background:#111; padding:20px; height:100vh; }
+    .sidebar h1 { font-size:22px; margin-bottom:5px; }
+    .sidebar p { font-size:12px; color:#aaa; margin-bottom:30px; }
+    .menu { margin-top:20px; }
+    .menu-item {
+        display: flex;               /* 가로 배치 */
+        justify-content: space-between; /* 좌우 끝으로 분리 */
+        align-items: center;         /* 세로 정렬 */
+        padding: 10px 15px;
+        margin-bottom: 5px;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: background 0.2s;
+        }
+
+    .menu-item:hover { background:#1F1F1F; }
+    .menu-item.active { background:#1F53FF; color:white; }
+
+    .submenu { 
+      margin-left:15px; 
+      display:none; 
+      flex-direction:column;
+    }
+    .submenu .submenu-item { 
+      padding:8px 15px; 
+      cursor:pointer; 
+      border-radius:6px;
+      margin-top:3px;
+    }
+    .submenu .submenu-item:hover { background:#1F1F1F; }
+    .submenu .submenu-item.active { background:#1F53FF; color:white; }
+
+    /* --- Content --- */
+    .content { flex:1; padding:20px; }
+    .topbar { display:flex; justify-content:flex-end; }
+    .btn-train { background:#1F53FF; border:none; padding:10px 20px; color:#fff; border-radius:6px; cursor:pointer; }
+
+    /* --- Form 카드 스타일 --- */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .form-card {
+      background: #1F1F1F;
+      padding: 16px;
+      border-radius: 10px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.3);
+    }
+    .form-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #EAEAEA;
+    }
+    .form-card select,
+    .form-card input {
+      width: 100%;
+      padding: 10px;
+      background: #262626;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: #FAF1E4;
+      font-size: 14px;
+    }
+    .logbox { background:#000; color:#0f0; font-family:monospace; height:200px; overflow-y:scroll; margin-top:20px; padding:10px; border-radius:8px; }
+    table { width:100%; border-collapse:collapse; margin-top:20px; background:#262626; border-radius:8px; overflow:hidden; }
+    th, td { padding:10px; border-bottom:1px solid #333; text-align:left; }
+    th { background:#333; }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h1>YSAutoML</h1>
+    <p>An open-source library for automated AI system construction</p>
+    <div class="menu">
+      <div class="menu-item active" data-section="fyi">FYI</div>
+      <div class="menu-item" id="dsbn-toggle">
+        <span>DSBN</span>
+        <span id="dsbn-arrow">▼</span>
+    </div>
+
+      <div class="submenu" id="dsbn-submenu">
+        <div class="submenu-item" data-section="convert">Convert</div>
+        <div class="submenu-item" data-section="train">Train</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- FYI Section -->
+    <div id="section-fyi" class="section">
+      <div class="topbar">
+        <button class="btn-train" id="trainBtn">Train</button>
+      </div>
+      <form id="dsaForm" class="form-grid">
+        <div class="form-card">
+          <h3>Dataset</h3>
+          <select name="dataset">
+            <option value="CIFAR10">CIFAR10</option>
+            <option value="CIFAR100">CIFAR100</option>
+            <option value="MNIST">MNIST</option>
+          </select>
+        </div>
+        <div class="form-card">
+          <h3>Model</h3>
+          <select name="model">
+            <option value="ConvNet">ConvNet</option>
+            <option value="ResNet18">ResNet18</option>
+          </select>
+        </div>
+        <div class="form-card">
+          <h3>IPC</h3>
+          <input type="number" name="ipc" value="10">
+        </div>
+        <div class="form-card">
+          <h3>DSA Strategy</h3>
+          <select name="dsa_strategy">
+            <option value="None">None</option>
+            <option value="color_crop_cutout_flip_scale_rotate">color_crop_cutout_flip_scale_rotate</option>
+          </select>
+        </div>
+        <div class="form-card">
+          <h3>Learning Rate (lr_img)</h3>
+          <input type="number" step="0.01" name="lr_img" value="1.0">
+        </div>
+        <div class="form-card">
+          <h3>Num Exp</h3>
+          <input type="number" name="num_exp" value="5">
+        </div>
+        <div class="form-card">
+          <h3>Device</h3>
+          <input type="text" name="device" value="0">
+        </div>
+      </form>
+      <div class="logbox" id="logBox"></div>
+      <table id="resultTable" style="display:none;">
+        <thead>
+          <tr>
+            <th>Save Path</th>
+            <th>Num Exp</th>
+            <th>Eval Pool</th>
+            <th>Accs (per model)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Convert Section -->
+    <div id="section-convert" class="section" style="display:none;">
+      <h2>DSBN - Convert</h2>
+      <p>아직 빈 대시보드입니다.</p>
+    </div>
+
+    <!-- Train Section -->
+    <div id="section-train" class="section" style="display:none;">
+      <h2>DSBN - Train</h2>
+      <p>아직 빈 대시보드입니다.</p>
+    </div>
+
+  </div>
+
+  <script>
+    // Sidebar menu toggle
+    const dsbnToggle = document.getElementById("dsbn-toggle");
+    const dsbnSubmenu = document.getElementById("dsbn-submenu");
+    const dsbnArrow = document.getElementById("dsbn-arrow");
+
+    dsbnToggle.onclick = () => {
+    const isOpen = dsbnSubmenu.style.display === "flex";
+    dsbnSubmenu.style.display = isOpen ? "none" : "flex";
+    dsbnArrow.textContent = isOpen ? "▼" : "▲";  // 아래꺽새 ↔ 위꺽새 전환
+    };
+
+
+    // Section switching
+    const menuItems = document.querySelectorAll(".menu-item, .submenu-item");
+    const sections = document.querySelectorAll(".section");
+    menuItems.forEach(item => {
+      item.addEventListener("click", () => {
+        menuItems.forEach(i => i.classList.remove("active"));
+        item.classList.add("active");
+        const section = item.dataset.section;
+        sections.forEach(s => s.style.display = "none");
+        document.getElementById("section-" + section).style.display = "block";
+      });
+    });
+
+     const trainBtn = document.getElementById("trainBtn");
+  const logBox = document.getElementById("logBox");
+  const resultTable = document.getElementById("resultTable");
+  const resultBody = resultTable.querySelector("tbody");
+  const form = document.getElementById("dsaForm");
+
+  trainBtn.onclick = async () => {
+    logBox.innerHTML = "Running...\n";
+    resultBody.innerHTML = "";
+    resultTable.style.display = "none";
+
+    // 1) 로그 스트리밍 시작
+    const eventSource = new EventSource("/api/run_dsa_stream/");
+    eventSource.onmessage = function(event) {
+      logBox.innerHTML += event.data + "\n";
+      logBox.scrollTop = logBox.scrollHeight;
+    };
+
+    // 2) 실행 끝나면 SSE 닫히고 결과 가져오기
+    eventSource.onerror = async function() {
+      eventSource.close();
+
+      // 실행 끝났으니 최종 결과 JSON 가져오기
+      const formData = new FormData(form);
+      const resp = await fetch("/api/run_dsa/", { method:"POST", body: formData });
+      const data = await resp.json();
+
+      if (data.error) {
+        logBox.innerHTML += "\nError: " + data.error + "\n";
+        return;
+      }
+
+      // 결과 테이블 보여주기
+      resultTable.style.display = "table";
+      const res = data.result;
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${res.save_path}</td>
+        <td>${res.num_exp}</td>
+        <td>${res.eval_pool.join(", ")}</td>
+        <td>${JSON.stringify(res.accs_all_exps)}</td>
+      `;
+      resultBody.appendChild(row);
+    };
+  };
+  </script>
+</body>
+</html>

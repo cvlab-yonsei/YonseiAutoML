@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YSAutoML Demo</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>YSAutoML Demo</h1>
+    <form action="/run/" method="post">
+        {% csrf_token %}
+        <label>Dataset:</label>
+        <input type="text" name="dataset" value="CIFAR10"><br><br>
+
+        <label>Model:</label>
+        <input type="text" name="model" value="ConvNet"><br><br>
+
+        <label>IPC:</label>
+        <input type="number" name="ipc" value="10"><br><br>
+
+        <label>Device:</label>
+        <input type="text" name="device" value="0"><br><br>
+
+        <!-- 버튼도 class 붙여줘야 색 적용됨 -->
+        <button type="submit" class="button button-primary">Run</button>
+    </form>
+
+    <div style="background:#1B1B1B; padding:20px;">
+        <button class="button button-primary">Button</button>
+        <button class="button button-ghost">+ Button</button>
+        <button class="button button-disabled" disabled>+ Button</button>
+    </div>
+</body>
+</html>

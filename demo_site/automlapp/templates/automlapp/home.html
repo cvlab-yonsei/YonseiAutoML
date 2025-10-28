@@ -1,0 +1,234 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YSAutoML Demo</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    body {
+      margin: 0;
+      background-color: #1B1B1B;
+      font-family: 'Inter', sans-serif;
+      color: #FAF1E4;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    /* 상단 로고 */
+    header {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      color: white;
+    }
+
+    /* 우측 상단 How to use */
+    .top-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .btn-howto {
+      background: #1F53FF;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* 메인 타이틀 */
+    h1 { font-size: 40px; font-weight: 800; margin-bottom: 10px; margin-top: 200px;}
+    p.subtitle { font-size: 16px; color: #CFCFCF; margin-bottom: 40px; }
+
+    /* 버튼 영역 */
+    .btn-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-contact {
+      background-color: #FAF1E4;
+      color: #1B1B1B;
+    }
+    .btn-contact:hover { background-color: #E0DACF; }
+    .btn-launch {
+      background-color: #1F53FF;
+      color: #FFFFFF;
+    }
+    .btn-launch:hover { background-color: #4759FF; }
+
+    /* Modal */
+    .modal {
+      display: none;   /* ✅ 기본 닫힌 상태 */
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      align-items: center; justify-content: center;
+    }
+    .modal-content {
+      background: #262626;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      width: 600px;
+    }
+    .modal h2 { margin-bottom: 10px; }
+    .modal p { margin-bottom: 30px; color:#ccc; }
+
+    .options {
+        display: flex;
+        justify-content: center;     /* 중앙 정렬 */
+        align-items: flex-start;
+        gap: 60px;                   /* 좌우 동일한 간격 (원하는 값으로 조절) */
+        margin-bottom: 30px;
+        }
+
+        .option {
+        width: 120px;                /* ✅ option 폭 고정 (모든 항목 동일) */
+        text-align: center;
+        cursor: pointer;
+        }
+
+
+        .circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid transparent;  /* 기본은 투명 */
+        transition: all 0.2s;
+        margin: 0 auto;
+        }
+
+        .circle img {
+        width: 50px;
+        height: 50px;
+        }
+
+        .option span {
+        display: block;
+        margin-top: 8px;
+        color: #999;
+        font-weight: 400;
+        font-size: 14px;
+        }
+
+        /* Active 상태 */
+        .option.active .circle {
+        border: 3px solid #1F53FF;  /* ✅ 원형 테두리 */
+        }
+        .option.active span {
+        color: #1F53FF;
+        font-weight: 700;
+        }
+
+
+    .btn-confirm {
+      background:#1F53FF; color:white; padding:12px 28px;
+      border:none; border-radius:8px; cursor:pointer;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 로고 -->
+  <header>
+    YONSEI AutoML
+  </header>
+
+  <!-- 우측 상단 How to use -->
+  <div class="top-button">
+    <button class="btn-howto">How to use</button>
+  </div>
+
+  <!-- 메인 콘텐츠 -->
+  <h1>YSAutoML Demo</h1>
+  <p class="subtitle">An open-source library for automated AI system construction</p>
+  <div class="btn-container">
+    <button class="btn btn-contact">Contact us</button>
+    <button class="btn btn-launch" id="openModal">Launch App</button>
+  </div>
+
+  <!-- 모달 -->
+  <div id="moduleModal" class="modal">
+    <div class="modal-content">
+      <h2>Scope of support</h2>
+      <p>Please select the module you want to use</p>
+      <div class="options">
+        <div class="option" data-target="/data">
+            <div class="circle">
+            <img src="{% static 'img/data.png' %}" alt="Data Utility">
+            </div>
+            <span>Data Utility</span>
+        </div>
+        <div class="option" data-target="/network">
+            <div class="circle">
+            <img src="{% static 'img/network.png' %}" alt="Network Utility">
+            </div>
+            <span>Network Utility</span>
+        </div>
+        <div class="option" data-target="/optimization">
+            <div class="circle">
+            <img src="{% static 'img/optimization.png' %}" alt="Optimization Utility">
+            </div>
+            <span>Optimization Utility</span>
+        </div>
+        </div>
+      <button class="btn-confirm" id="confirmBtn">Confirm</button>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("moduleModal");
+    const openBtn = document.getElementById("openModal");
+    const confirmBtn = document.getElementById("confirmBtn");
+    let selected = null;
+
+    // Launch App → 모달 열기
+    openBtn.onclick = () => { modal.style.display = "flex"; };
+
+    // 바깥 클릭하면 닫기
+    modal.onclick = (e) => {
+      if(e.target === modal){ modal.style.display = "none"; }
+    };
+
+    // 모듈 선택
+    document.querySelectorAll(".option").forEach(opt => {
+      opt.onclick = () => {
+        document.querySelectorAll(".option").forEach(o => o.classList.remove("active"));
+        opt.classList.add("active");
+        selected = opt.dataset.target;
+      };
+    });
+
+    // Confirm → 선택된 모듈 URL 이동
+    confirmBtn.onclick = () => {
+      if(selected){
+        window.location.href = selected;
+      } else {
+        alert("Please select a module!");
+      }
+    };
+  </script>
+</body>
+</html>
