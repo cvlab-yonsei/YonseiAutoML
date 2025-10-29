@@ -19,15 +19,15 @@ if __name__ == "__main__":
         save_path="./save_dir"  # ✅ 호출 위치 기준 경로
     )
 
-# from ysautoml.network.fewshot.mobilenet import search_supernet
+from ysautoml.network.fewshot.mobilenet import search_supernet
 
-# search_supernet(
-#     ckpt="val6-2-seed-0",
-#     seed=0,
-#     gpu=0,
-#     run_calib=True,
-#     save_path="./save_dir"   # 현재 위치 기준으로 ./logs_my_search/logs/... 저장됨 # 절대 경로도 가능 
-# ) # save path 경로 안에 logs, checkpoint 폴더가 있어야 하며 각각 안에 ckpt에 해당하는 파일명의 파일들을 가지고 있어야 함.
+search_supernet(
+    ckpt="val6-2-seed-0",
+    seed=0,
+    gpu=0,
+    run_calib=True,
+    save_path="./save_dir"   # 현재 위치 기준으로 ./logs_my_search/logs/... 저장됨 # 절대 경로도 가능 
+) # save path 경로 안에 logs, checkpoint 폴더가 있어야 하며 각각 안에 ckpt에 해당하는 파일명의 파일들을 가지고 있어야 함.
 
 
 
