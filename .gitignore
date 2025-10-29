@@ -191,3 +191,5 @@ _ext
 ./ysautoml/network/fewshot/cell_based/figures*
 ./ysautoml/network/fewshot/cell_based/tb_logs
 ./ysautoml/network/fewshot/mobilenet/tb_logs
+
+/dataset
