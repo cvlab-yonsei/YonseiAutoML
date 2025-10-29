@@ -74,11 +74,21 @@
 ##########
 
 
+# from ysautoml.network.oneshot import train_dynas
+
+# train_dynas(
+#     log_dir="logs/spos_dynamic",
+#     file_name="spos_dynamic",
+#     method="dynas",
+#     save_path="./results"
+# )
+
 from ysautoml.network.oneshot import train_dynas
 
 train_dynas(
-    log_dir="logs/spos_dynamic",
+    log_dir="./logs/dynas_test",
     file_name="spos_dynamic",
-    method="dynas",
-    save_path="./results"
+    seed=42,
+    epochs=5,
+    method="dynas"
 )

@@ -3,7 +3,16 @@
 ##############################################################################
 # Random Search and Reproducibility for Neural Architecture Search, UAI 2019 #
 ##############################################################################
-import os, sys, time, glob, random, argparse
+import os, sys, time, glob, random, argparse, pickle, logging
+
+# 절대경로 기준으로 oneshot 폴더를 sys.path에 추가
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+ONESHOT_DIR = os.path.abspath(os.path.join(CURRENT_DIR, ".."))  # .../oneshot
+if ONESHOT_DIR not in sys.path:
+    sys.path.insert(0, ONESHOT_DIR)
+
+print("[DEBUG] Added to sys.path:", ONESHOT_DIR)
+
 import numpy as np
 from copy import deepcopy
 import torch
@@ -15,7 +24,7 @@ from utils.LR_scheduler import *
 from utils.get_strucs import get_struc
 from utils.get_num_params import get_num_params
 
-sys.path.insert(0, '../../')
+# sys.path.insert(0, '../../')
 
 from xautodl.config_utils import load_config, dict2config, configure2str
 from xautodl.datasets import get_datasets, get_nas_search_loaders
