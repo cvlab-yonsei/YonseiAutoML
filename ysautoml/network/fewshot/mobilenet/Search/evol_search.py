@@ -1,17 +1,36 @@
-import os, sys, tqdm, time, random, argparse
-import logging
+# --- Absolute import & re-exec fix for external API runs ---
+import os, sys, importlib.util
+
+cur_dir = os.path.dirname(os.path.abspath(__file__))      # .../Search
+mobilenet_dir = os.path.dirname(cur_dir)                  # .../mobilenet
+network_dir = os.path.dirname(mobilenet_dir)              # .../fewshot/network
+repo_root = os.path.dirname(os.path.dirname(network_dir)) # .../TempAutoML
+
+# 1. 경로 추가
+for p in [mobilenet_dir, network_dir, repo_root]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
+
+# 2. evol_search.py가 독립 실행되었을 때 패키지 인식 보정
+if __package__ is None or __package__ == "":
+    pkg_name = "ysautoml.network.fewshot.mobilenet.Search"
+    spec = importlib.util.spec_from_file_location(pkg_name, __file__)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[pkg_name] = module
+# ------------------------------------------------------------
+
+import tqdm, time, random, argparse, logging
 import numpy as np
 import torch
 import torch.backends.cudnn as cudnn
 from copy import deepcopy
 
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+# ✅ normal imports (이제 절대 깨지지 않음)
 from utils.datasets import get_datasets
 from models.OneShot import SuperNet
 from models.layers import SearchSpaceNames
 
 CHOICE = lambda x: x[np.random.randint(len(x))] if isinstance(x, tuple) else CHOICE(tuple(x))
-
 
 def obtain_accuracy(output, target, topk=(1,)):
     """Computes the precision@k for the specified values of k"""

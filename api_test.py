@@ -1,22 +1,34 @@
 #######################
 
-## ysautoml.network.fewshot 연습 ##
-from ysautoml.network.fewshot.mobilenet import train_supernet
-import torch
-print("CUDA device count:", torch.cuda.device_count())
+# ## ysautoml.network.fewshot 연습 ##
+# from ysautoml.network.fewshot.mobilenet import train_supernet
+# import torch
+# print("CUDA device count:", torch.cuda.device_count())
 
 
 # from ysautoml.network.fewshot.mobilenet import train_supernet, train_supernet_decom
+from ysautoml.network.fewshot.mobilenet import train_supernet
 
-# 1) 일반 supernet 학습
 if __name__ == "__main__":
     result = train_supernet(
         tag="exp1",
         seed=42,
         thresholds=(38, 40),
         num_gpus=2,
-        max_epoch=2
+        max_epoch=2,
+        save_path="./save_dir"  # ✅ 호출 위치 기준 경로
     )
+
+# from ysautoml.network.fewshot.mobilenet import search_supernet
+
+# search_supernet(
+#     ckpt="val6-2-seed-0",
+#     seed=0,
+#     gpu=0,
+#     run_calib=True,
+#     save_path="./save_dir"   # 현재 위치 기준으로 ./logs_my_search/logs/... 저장됨 # 절대 경로도 가능 
+# ) # save path 경로 안에 logs, checkpoint 폴더가 있어야 하며 각각 안에 ckpt에 해당하는 파일명의 파일들을 가지고 있어야 함.
+
 
 
 # # 2) decom 버전 학습

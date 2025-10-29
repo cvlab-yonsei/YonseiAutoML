@@ -1,6 +1,20 @@
 import math
 import torch.nn as nn
-from ..models.layers import OPS, Identity
+# from ..models.layers import OPS, Identity
+# --- Flexible import fix: works both as script & module ---
+try:
+    # 정상적인 패키지 실행 (python -m ...)
+    from ..models.layers import OPS, Identity
+except (ImportError, ValueError):
+    # 단독 실행 또는 API subprocess 실행 시 경로 보정
+    import os, sys
+    cur_dir = os.path.dirname(os.path.abspath(__file__))  # .../models
+    parent_dir = os.path.dirname(cur_dir)                 # .../mobilenet
+    if parent_dir not in sys.path:
+        sys.path.insert(0, parent_dir)
+    from models.layers import OPS, Identity
+# ------------------------------------------------------------
+
 
 
 class SuperNet(nn.Module):
