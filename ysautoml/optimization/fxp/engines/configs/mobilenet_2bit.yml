@@ -1,0 +1,81 @@
+data:
+ num_workers: 32
+ pin_memory: True
+
+student_model:
+  name: 'mobilenet_ste'
+  params:
+    pretrained: True
+    num_classes: 1000
+    # num_bit: 4
+  pretrain:
+    pretrained: False
+    dir: './results/cvpr_quant/resnet18_ste_mpq_act.w2a2bit_weight_2.0bit_val_0.1con_0.0osi_STE_from_2bit_express_weight_0.5_soft_T10_float_bitloss_0.0_schedule_mu5_adam/checkpoint/epoch_0029.pth'
+
+train:
+  dir: './results/cvpr_quant_resnet18'
+  batch_size: 256
+  num_epochs: 150
+  # student_dir: '.c100.4bit_grad_adam1e-5_naive_threshold1e-2_4bit_quant_ep100_ours_decay10_max_avg_real_20e-3'
+  # student_dir: '.c100.4bit_grad_adam1e-5_naive_threshold1e-2_4bit_quant_ep100_ours_decay_alpha_1'
+  # student_dir: '.8bit_grad_adam1e-5_maxratio1e-5_1e-4_gamma_ours_3.2e-5_except_first_and_last_adam1e-5_except_DW'
+  student_dir: '.5bit_grad_adam1e-5_maxratio1e-5_3e-5_gamma_base_0.6'
+  # student_dir: '.c100.4bit_grad_adam1e-5_naive_threshold1e-2_8bit_quant_ep100_gamma_0.8'
+
+eval:
+  batch_size: 500
+
+scheduler:
+  name: 'cosine'
+  params:
+    T_max: 750750
+    eta_min: 0.0
+
+q_scheduler:
+  name: 'cosine'
+  params:
+    T_max: 750750
+    eta_min: 0.0
+
+# scheduler:
+#  name: 'multi_step'
+#  params:
+#    milestones: [150150,300300,450450]
+#    gamman: 0.1
+
+# q_scheduler:
+#  name: 'multi_step'
+#  params:
+#    milestones: [150150,300300,450450]
+#    gamman: 0.1
+
+# scheduler:
+#  name: 'multi_step'
+#  params:
+#    milestones: [40545,81090,121635]
+#    gamman: 0.1
+
+# q_scheduler:
+#  name: 'multi_step'
+#  params:
+#    milestones: [40545,81090,121635]
+#    gamman: 0.1
+
+optimizer:
+  name: sgd
+  params:
+    lr: 0.05
+    weight_decay: 0.00004
+
+q_optimizer:
+  name: adam
+  params:
+    lr: 0.00001
+    weight_decay: 0.0
+
+loss:
+  name: 'cross_entropy'
+  params:
+    reduction: 'mean'
+
+gpu: 0,1,2,3

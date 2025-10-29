@@ -1,0 +1,54 @@
+data:
+ num_workers: 4
+ pin_memory: False 
+
+student_model:
+  name: 'resnet20'
+  params:
+    pretrained: False
+    num_classes: 100
+    # num_bit: 2
+  pretrain: 
+    pretrained: False
+    dir: ''
+
+train:
+  dir: './results'
+  batch_size: 128
+  num_epochs: 160
+  student_dir: '.cifar100.4bit_1'
+
+eval:
+  batch_size: 100
+
+scheduler:
+ name: 'multi_step'
+ params:
+   milestones: [80,120]
+   gamman: 0.1
+
+q_scheduler:
+ name: 'multi_step'
+ params:
+   milestones: [80,120]
+   gamman: 0.1
+
+optimizer:
+  name: sgd
+  params:
+    lr: 0.1
+    momentum: 0.9
+    weight_decay: 0.0001
+
+q_optimizer:
+  name: adam
+  params:
+    lr: 0.00001
+    weight_decay: 0.0
+
+loss:
+  name: 'cross_entropy'
+  params:
+    reduction: 'mean'
+
+gpu: 1
