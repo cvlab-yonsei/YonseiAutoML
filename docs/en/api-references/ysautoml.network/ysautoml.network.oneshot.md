@@ -4,9 +4,9 @@
 
 * `ysautoml.network.oneshot.train_dynas`
 
-#### ysautoml.network.fewshot.train\_dynas
+#### ysautoml.network.oneshot.train\_dynas
 
-> ysautoml.network.fewshot.mobilenet.train\_supernet(\*\***kwargs)**
+> ysautoml.network.oneshot.mobilenet.train\_supernet(\*\***kwargs)**
 
 Run **DYNAS** (Subnet-Aware Dynamic Supernet Training for Neural Architecture Search) or **SPOS baseline** training using the original `train_spos.py` script, integrated into the YSAutoML API system.
 
