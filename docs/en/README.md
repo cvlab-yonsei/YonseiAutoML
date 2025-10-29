@@ -19,4 +19,4 @@
 * [ysautoml.optimization](api-references/ysautoml.optimization/)
   * [ysautoml.optimization.fxp](api-references/ysautoml.optimization/ysautoml.optimization.fxp.md)
   * [ysautoml.optimization.losssearch](api-references/ysautoml.optimization/ysautoml.optimization.losssearch.md)
-  * [ysautoml.optimization.mtlloss](api-references/ysautoml.optimization/ysautoml.optimization.mtl.md)
+  * [ysautoml.optimization.mtlloss](api-references/ysautoml.optimization/ysautoml.optimization.mtlloss.md)
