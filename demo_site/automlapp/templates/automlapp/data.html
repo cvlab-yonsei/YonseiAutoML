@@ -6,6 +6,17 @@
   <title>YSAutoML Data Utility</title>
   <style>
     body { margin:0; font-family: Inter, sans-serif; background:#1B1B1B; color:#FAF1E4; display:flex; }
+
+    .logo-link {
+    color: #FAF1E4;          /* 기본 글자색 */
+    text-decoration: none;   /* 밑줄 제거 */
+    cursor: pointer;
+    }
+
+    /* hover 시 색 변화 없게 유지 */
+    .logo-link:hover {
+    color: #FAF1E4;
+    }
     
     /* --- Sidebar --- */
     .sidebar { width:250px; background:#111; padding:20px; height:100vh; }
@@ -82,8 +93,11 @@
 </head>
 <body>
   <!-- Sidebar -->
+</div>
   <div class="sidebar">
-    <h1>YSAutoML</h1>
+    <h1>
+    <a href="/" class="logo-link">YSAutoML</a>
+  </h1>
     <p>An open-source library for automated AI system construction</p>
     <div class="menu">
       <div class="menu-item active" data-section="fyi">FYI</div>
