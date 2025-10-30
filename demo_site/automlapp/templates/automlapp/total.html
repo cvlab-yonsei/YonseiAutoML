@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YSAutoML Total Pipeline</title>
+  <style>
+    body { margin:0; font-family:Inter, sans-serif; background:#1B1B1B; color:#FAF1E4; display:flex; }
+
+    /* Sidebar */
+    .sidebar { width:250px; background:#111; padding:20px; height:100vh; }
+    .sidebar h1 { font-size:22px; margin-bottom:5px; }
+    .sidebar p { font-size:12px; color:#aaa; margin-bottom:30px; }
+    .menu-item { padding:10px 15px; cursor:pointer; border-radius:6px; transition:background 0.2s; margin-bottom:5px; }
+    .menu-item:hover { background:#1F1F1F; }
+    .menu-item.active { background:#1F53FF; color:white; }
+
+    /* Content */
+    .content { flex:1; padding:20px; }
+    .topbar { display:flex; justify-content:flex-end; margin-bottom:15px; }
+    .btn-train { background:#1F53FF; border:none; padding:10px 20px; color:#fff; border-radius:6px; cursor:pointer; }
+
+    /* Form layout */
+    .form-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
+    .form-card { background:#1F1F1F; padding:16px; border-radius:10px; box-shadow:0 0 6px rgba(0,0,0,0.3); }
+    .form-card h3 { font-size:14px; font-weight:600; margin-bottom:10px; color:#EAEAEA; }
+    .form-card select, .form-card input { width:100%; padding:10px; background:#262626; border:1px solid #333; border-radius:6px; color:#FAF1E4; font-size:14px; }
+    .checkbox-group, .radio-group { display:flex; flex-direction:column; gap:6px; margin-top:8px; }
+    label { font-size:14px; cursor:pointer; }
+
+    /* Log & Result */
+    .logbox { background:#000; color:#0f0; font-family:monospace; height:220px; overflow-y:scroll; margin-top:20px; padding:10px; border-radius:8px; }
+    table { width:100%; border-collapse:collapse; margin-top:20px; background:#262626; border-radius:8px; overflow:hidden; }
+    th, td { padding:10px; border-bottom:1px solid #333; text-align:left; }
+    th { background:#333; }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h1>YSAutoML</h1>
+    <p>Total Model Pipeline</p>
+    <div class="menu">
+      <div class="menu-item active" id="total-menu">Total</div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="topbar">
+      <button class="btn-train" id="runBtn">Run Total Pipeline</button>
+    </div>
+
+    <form id="totalForm" class="form-grid">
+      <!-- Model -->
+      <div class="form-card">
+        <h3>Model</h3>
+        <select name="model">
+          <option value="AutoFormer">AutoFormer</option>
+          <option value="ResNet18">ResNet18</option>
+          <option value="MobileNetV2">MobileNetV2</option>
+        </select>
+      </div>
+
+      <!-- General Config -->
+      <div class="form-card">
+        <h3>Config</h3>
+        <label>Epochs <input type="number" name="epochs" value="50"></label>
+        <label>Learning Rate <input type="number" step="0.0001" name="lr" value="0.001"></label>
+        <label>Seed <input type="number" name="seed" value="42"></label>
+        <label>Device <input type="text" name="device" value="cuda:0"></label>
+      </div>
+
+      <!-- Data -->
+      <div class="form-card">
+        <h3>Data (multiple allowed)</h3>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="data" value="fyi"> FYI</label>
+          <label><input type="checkbox" name="data" value="dsbn"> DSBN</label>
+        </div>
+      </div>
+
+      <!-- Network -->
+      <div class="form-card">
+        <h3>Network (select one)</h3>
+        <div class="radio-group">
+          <label><input type="radio" name="network" value="fewshot" checked> Few-shot</label>
+          <label><input type="radio" name="network" value="oneshot"> One-shot</label>
+          <label><input type="radio" name="network" value="zeroshot"> Zero-shot</label>
+        </div>
+      </div>
+
+      <!-- Optimization -->
+      <div class="form-card">
+        <h3>Optimization (select one)</h3>
+        <div class="radio-group">
+          <label><input type="radio" name="optimization" value="fyi" checked> FYI</label>
+          <label><input type="radio" name="optimization" value="losssearch"> Loss Search</label>
+          <label><input type="radio" name="optimization" value="mtl"> MTL</label>
+        </div>
+      </div>
+    </form>
+
+    <div class="logbox" id="logBox"></div>
+
+    <table id="resultTable" style="display:none;">
+      <thead>
+        <tr><th>Stage</th><th>Status</th><th>Log / Checkpoint</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const runBtn = document.getElementById("runBtn");
+    const logBox = document.getElementById("logBox");
+    const resultTable = document.getElementById("resultTable");
+    const resultBody = resultTable.querySelector("tbody");
+    const form = document.getElementById("totalForm");
+
+    runBtn.onclick = async () => {
+      logBox.innerHTML = "Running YSAutoML Total Pipeline...\n";
+      resultTable.style.display = "none";
+      resultBody.innerHTML = "";
+
+      const formData = new FormData(form);
+      const selectedData = formData.getAll("data");
+      const network = formData.get("network");
+      const optimization = formData.get("optimization");
+      const model = formData.get("model");
+
+      // --- Stage 1: Network Search ---
+      logBox.innerHTML += `[Stage 1] Running ${network} search for ${model}...\n`;
+      await fakeDelay(2000);
+      logBox.innerHTML += `[Stage 1] Search complete. Found best architecture checkpoint: ckpt_best_${network}.pth\n\n`;
+      addRow("Network Search", "Done", `ckpt_best_${network}.pth`);
+
+      // --- Stage 2: Data Processing ---
+      for (const d of selectedData) {
+        logBox.innerHTML += `[Stage 2] Applying Data Method: ${d.toUpperCase()}...\n`;
+        await fakeDelay(1500);
+        logBox.innerHTML += `[Stage 2] ${d.toUpperCase()} applied successfully.\n\n`;
+        addRow(`Data: ${d.toUpperCase()}`, "Applied", `processed_${d}.json`);
+      }
+
+      // --- Stage 3: Optimization ---
+      logBox.innerHTML += `[Stage 3] Running ${optimization} optimization...\n`;
+      await fakeDelay(2500);
+      logBox.innerHTML += `[Stage 3] Optimization complete! Final checkpoint: final_${optimization}.pth\n\n`;
+      addRow("Optimization", "Done", `final_${optimization}.pth`);
+
+      // --- Complete ---
+      logBox.innerHTML += `✅ Total Pipeline Finished Successfully.\n`;
+      resultTable.style.display = "table";
+    };
+
+    function addRow(stage, status, path) {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${stage}</td><td>${status}</td><td>${path}</td>`;
+      resultBody.appendChild(row);
+    }
+
+    // Fake delay (demo)
+    function fakeDelay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+  </script>
+</body>
+</html>

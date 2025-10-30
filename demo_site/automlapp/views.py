@@ -25,6 +25,10 @@ def data_utility(request):
 def data_page(request):
     return render(request, "automlapp/data.html")
 
+def total_dashboard(request):
+    return render(request, "automlapp/total.html")
+
+
 def run_dsa_api(request):
     """
     최종 결과 dict 반환
@@ -90,3 +94,54 @@ def run_automl(request):
         return HttpResponse(result)
     else:
         return HttpResponse("잘못된 요청입니다.")
+
+# --- SSE 스트리밍 함수 ---
+def run_total_stream(request):
+    def event_stream():
+        yield "data: [Stage 1] Initializing YSAutoML total pipeline...\n\n"
+        time.sleep(1)
+        yield "data: [Stage 1] Network search started...\n\n"
+        time.sleep(2)
+        yield "data: [Stage 1] Search complete. Found best checkpoint: ckpt_best_oneshot.pth\n\n"
+
+        yield "data: [Stage 2] Applying selected data modules (FYI / DSBN)...\n\n"
+        time.sleep(2)
+        yield "data: [Stage 2] Data processing complete.\n\n"
+
+        yield "data: [Stage 3] Running optimization (Loss Search / MTL)...\n\n"
+        time.sleep(3)
+        yield "data: [Stage 3] Optimization complete. Final model: final_losssearch.pth\n\n"
+
+        yield "data: ✅ Pipeline finished successfully!\n\n"
+
+    response = StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+    response['Cache-Control'] = 'no-cache'
+    return response
+
+
+# --- 최종 실행 결과 반환 ---
+def run_total(request):
+    if request.method == "POST":
+        model = request.POST.get("model")
+        network = request.POST.get("network")
+        optimization = request.POST.get("optimization")
+        data_methods = request.POST.getlist("data")
+
+        # 실제 실행 로직을 별도의 스레드에서 처리 가능
+        # threading.Thread(target=run_pipeline, args=(model, network, optimization, data_methods)).start()
+
+        result = {
+            "model": model,
+            "network": network,
+            "optimization": optimization,
+            "data_methods": data_methods,
+            "checkpoint": f"final_{optimization}.pth",
+            "logs": [
+                f"Network search: {network} completed.",
+                f"Data applied: {', '.join(data_methods)}",
+                f"Optimization: {optimization} done.",
+            ],
+        }
+        return JsonResponse({"result": result})
+    else:
+        return JsonResponse({"error": "Invalid request method."}, status=400)
