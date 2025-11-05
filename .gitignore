@@ -191,6 +191,7 @@ _ext
 ./ysautoml/network/fewshot/cell_based/figures*
 ./ysautoml/network/fewshot/cell_based/tb_logs
 ./ysautoml/network/fewshot/mobilenet/tb_logs
+./ysautoml/network/zeroshot/mobilenetv2/engines/ImageNet_MBV2/save_dir
 
 /dataset
 ysautoml/network/dataset

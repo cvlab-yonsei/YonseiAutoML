@@ -746,10 +746,26 @@ def main(opt, argv):
     num_train_samples = DataLoader.params_dict[opt.dataset]['num_train_samples']
 
     # create model
+    # model = ModelLoader.get_model(opt, argv)
+    # model = init_model(model, opt, argv)
+    # model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model) ### Sync BN
+    # logging.info('loading model:')
+    # (main 함수 중간)
     model = ModelLoader.get_model(opt, argv)
     model = init_model(model, opt, argv)
-    model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model) ### Sync BN
+
+    # SyncBN은 torch.distributed 초기화가 되어 있어야만 동작.
+    # Horovod 모드(hvd)에서는 기본 프로세스 그룹이 없어서 에러가 납니다.
+    use_sync_bn = getattr(opt, 'sync_bn', False)
+    if use_sync_bn and torch.distributed.is_available() and torch.distributed.is_initialized():
+        model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
+    else:
+        logging.info('Skip SyncBatchNorm conversion (dist not initialized or horovod mode).')
+
     logging.info('loading model:')
+
+
+
     logging.info(str(model))
 
     if opt.load_parameters_from:

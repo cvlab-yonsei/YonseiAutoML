@@ -1,0 +1,48 @@
+pip install -r requirements_backup_20251105_2317.txt
+
+-> error, because of torch version is too old
+
+pip install torch==1.9.1+cu111 torchvision==0.10.1+cu111 torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html 
+pip install setuptools==58.2.0 
+pip install tensorboard==2.11.0
+
+================
+
+if change torch version... rebuild horovod
+
+pip uninstall -y horovod
+
+export HOROVOD_WITH_PYTORCH=1
+export HOROVOD_WITH_GLOO=1
+export HOROVOD_GPU_OPERATIONS=NCCL
+pip install --no-cache-dir --force-reinstall horovod==0.28.0
+
+================
+
+<error>
+[MBV2-TRAIN] --------------------------------------------------------------------------
+[MBV2-TRAIN] mpirun was unable to find the specified executable file, and therefore
+[MBV2-TRAIN] did not launch the job.  This error was first reported for process
+[MBV2-TRAIN] rank 0; it may have occurred for other processes as well.
+[MBV2-TRAIN] 
+[MBV2-TRAIN] NOTE: A common cause for this error is misspelling a mpirun command
+[MBV2-TRAIN]       line parameter option (remember that mpirun interprets the first
+[MBV2-TRAIN]       unrecognized command line token as the executable).
+[MBV2-TRAIN] 
+[MBV2-TRAIN] Node:       bb96eb6cbe9b
+[MBV2-TRAIN] Executable: python
+[MBV2-TRAIN] --------------------------------------------------------------------------
+[MBV2-TRAIN] 8 total processes failed to start
+Traceback (most recent call last):
+  File "api_test_network.py", line 70, in <module>
+    run_retrain_zeroshot(
+  File "/data1/hyunju/code/TempAutoML/ysautoml/network/zeroshot/mobilenetv2/api.py", line 278, in run_retrain_zeroshot
+    raise RuntimeError(f"Training failed with code {train_proc.returncode}")
+RuntimeError: Training failed with code 134
+
+<solution>
+ln -s /usr/bin/python3 /usr/bin/python
+
+
+=======
+demo start 

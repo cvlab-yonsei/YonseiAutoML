@@ -1,13 +1,13 @@
-# from ysautoml.optimization.fxp import train_fxp
+from ysautoml.optimization.fxp import train_fxp
 
-# if __name__ == "__main__":
-#     train_fxp(
-#         # config="configs/resnet20_cifar100.yml",
-#         config="configs/mobilenet_ori.yml",
-#         device="cuda:0",
-#         seed=42,
-#         save_dir="./logs/fxp_cifar100"
-#     )
+if __name__ == "__main__":
+    train_fxp(
+        # config="configs/resnet20_cifar100.yml",
+        config="configs/mobilenet_ori.yml",
+        device="cuda:0",
+        seed=42,
+        save_dir="./logs/fxp_cifar100"
+    )
 
 # ###############
 
@@ -37,15 +37,15 @@
 
 # ##############
 
-from ysautoml.optimization.mtl.examples.nyusp import train_mtl_nyusp
+# from ysautoml.optimization.mtl.examples.nyusp import train_mtl_nyusp
 
-train_mtl_nyusp(
-    gpu_id=0,
-    seed=42,
-    weighting="GeMTL",
-    arch="HPS",
-    dataset_path="/dataset/nyuv2",
-    scheduler="step",
-    mode="train",
-    save_dir="./logs/nyusp_exp1"
-)
+# train_mtl_nyusp(
+#     gpu_id=0,
+#     seed=42,
+#     weighting="GeMTL",
+#     arch="HPS",
+#     dataset_path="/dataset/nyuv2",
+#     scheduler="step",
+#     mode="train",
+#     save_dir="./logs/nyusp_exp1"
+# )
