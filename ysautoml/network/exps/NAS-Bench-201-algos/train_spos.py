@@ -3,16 +3,7 @@
 ##############################################################################
 # Random Search and Reproducibility for Neural Architecture Search, UAI 2019 #
 ##############################################################################
-import os, sys, time, glob, random, argparse, pickle, logging
-
-# 절대경로 기준으로 oneshot 폴더를 sys.path에 추가
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-ONESHOT_DIR = os.path.abspath(os.path.join(CURRENT_DIR, ".."))  # .../oneshot
-if ONESHOT_DIR not in sys.path:
-    sys.path.insert(0, ONESHOT_DIR)
-
-print("[DEBUG] Added to sys.path:", ONESHOT_DIR)
-
+import os, sys, time, glob, random, argparse
 import numpy as np
 from copy import deepcopy
 import torch
@@ -24,7 +15,7 @@ from utils.LR_scheduler import *
 from utils.get_strucs import get_struc
 from utils.get_num_params import get_num_params
 
-# sys.path.insert(0, '../../')
+sys.path.insert(0, '../../')
 
 from xautodl.config_utils import load_config, dict2config, configure2str
 from xautodl.datasets import get_datasets, get_nas_search_loaders
@@ -182,14 +173,7 @@ elif args.method == 'dynas':
                 ] 
 
     C_min = get_num_params(get_struc()[0])
-    # C_max = get_num_params(get_struc()[11718])
-
-    C_max = C_min
-    C_max_i = 0
-    for i in range(0, len(get_struc())):
-        if get_num_params(get_struc()[i]) > C_max:
-            C_max = get_num_params(get_struc()[i])
-            C_max_i = i
+    C_max = get_num_params(get_struc()[11718])
 
     r_max = args.max_coeff
     r_min = 1/r_max
@@ -243,8 +227,7 @@ for ep in range(epochs):
         input = input.cuda()
         label = label.cuda()
 
-        # net_num = random.randrange(15625) # 15625: # of subnets in the search space
-        net_num = random.randrange(64)
+        net_num = random.randrange(15625) # 15625: # of subnets in the search space
         network.arch_cache = genotype(struc[net_num]) 
 
         if args.method == 'baseline':
@@ -259,8 +242,7 @@ for ep in range(epochs):
             scheduler.step()
         
         elif args.method == 'dynas':
-            # for j in range(5):
-            for j in range(2):
+            for j in range(5):
                 if struc[net_num][split_edge,j] == 1:
                     # The subnet is in the j-th cluster
                     num_param = get_num_params(struc[net_num])
@@ -274,15 +256,13 @@ for ep in range(epochs):
                     _, pred = network(input)
                     loss = criterion(pred, label)
                     loss.backward()
-                    # nn.utils.clip_grad_norm_(network.parameters(), 5)
-                    nn.utils.clip_grad_norm_(network.parameters(), 2)
+                    nn.utils.clip_grad_norm_(network.parameters(), 5)
                     optimizers[j].step() 
 
         writer.add_scalar('train/subnet_loss', loss.item(), total_iter)
 
         base_prec1, base_prec5 = obtain_accuracy(
-            # pred.data, label.data, topk=(1, 5)
-            pred.data, label.data, topk=(1, 2)
+            pred.data, label.data, topk=(1, 5)
         )
 
         writer.add_scalar('train/subnet_top1', base_prec1, total_iter)
@@ -327,8 +307,6 @@ with open(f"./exps/NAS-Bench-201-algos/valid_accs/{args.file_name}.pkl","wb") as
     pickle.dump(valid_accs, f)        
 
 print(f'############# Kendall #############') 
-
-eval_arch_list = [i for i in eval_arch_list if i < len(valid_accs)]
 
 cifar10_valid_true_tau_320, _ = stats.kendalltau(np.array(valid_accs)[eval_arch_list], np.array(cifar10_accs)[eval_arch_list])     
 cifar100_valid_true_tau_320, _ = stats.kendalltau(np.array(valid_accs)[eval_arch_list], np.array(cifar100_accs)[eval_arch_list])   

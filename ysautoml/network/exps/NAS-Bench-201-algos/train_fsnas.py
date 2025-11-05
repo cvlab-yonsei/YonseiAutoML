@@ -3,16 +3,7 @@
 ##############################################################################
 # Random Search and Reproducibility for Neural Architecture Search, UAI 2019 #
 ##############################################################################
-import os, sys, time, glob, random, argparse, pickle, logging
-
-# 절대경로 기준으로 oneshot 폴더를 sys.path에 추가
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-ONESHOT_DIR = os.path.abspath(os.path.join(CURRENT_DIR, ".."))  # .../oneshot
-if ONESHOT_DIR not in sys.path:
-    sys.path.insert(0, ONESHOT_DIR)
-
-print("[DEBUG] Added to sys.path:", ONESHOT_DIR)
-
+import os, sys, time, glob, random, argparse
 import numpy as np
 from copy import deepcopy
 import torch
@@ -24,7 +15,7 @@ from utils.LR_scheduler import *
 from utils.get_strucs import get_struc
 from utils.get_num_params import get_num_params
 
-# sys.path.insert(0, '../../')
+sys.path.insert(0, '../../')
 
 from xautodl.config_utils import load_config, dict2config, configure2str
 from xautodl.datasets import get_datasets, get_nas_search_loaders
@@ -76,7 +67,7 @@ parser.add_argument('--log_dir', type=str, default='logs/tmp')
 parser.add_argument('--file_name', type=str, default='tmp')
 parser.add_argument('--seed', type=int, default=0)
 
-parser.add_argument('--epochs', type=int, default=250)
+parser.add_argument('--epochs', type=int, default=300)
 parser.add_argument('--lr', type=float, default= 0.025)
 parser.add_argument('--momentum', type=float, default=0.9)
 parser.add_argument('--wd', type=float, default=0.0005)
@@ -124,12 +115,8 @@ model_config = dict2config(
 )
 
 
-search_model = get_cell_based_tiny_net(model_config)
-
 criterion = torch.nn.CrossEntropyLoss()
 
-
-network = search_model.cuda()
 criterion = criterion.cuda()
 
 train_data, valid_data, _, _ = get_datasets( # train_data: trainset, valid_data: testset
@@ -148,48 +135,32 @@ search_loader, _, valid_loader = get_nas_search_loaders(
 # logger.log(f'search_loader_num: {len(search_loader)}, valid_loader_num: {len(valid_loader)}')
 
 if args.method == 'baseline':
-    optimizer = torch.optim.SGD(
-        params = search_model.parameters(),
-        lr = 0.025,
-        momentum = args.momentum,
-        weight_decay = args.wd,
-        nesterov = args.nesterov 
-    )
-    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
-        optimizer,
-        T_max = args.epochs * len(search_loader),
-        eta_min = 0
-    )
+    def get_new_model_optimizer_scheduler():
+        network = get_cell_based_tiny_net(model_config)
+        optimizer = torch.optim.SGD(
+            params = network.parameters(),
+            lr = 0.025,
+            momentum = args.momentum,
+            weight_decay = args.wd,
+            nesterov = args.nesterov 
+        #     nesterov = False
+        )
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
+            optimizer,
+            T_max = args.epochs * len(search_loader),
+            eta_min = 0
+        )
+
+        return network.cuda(), optimizer, scheduler
 
 elif args.method == 'dynas':
-    optimizers = []
-
-    for i in range(5):
-        optimizers.append(torch.optim.SGD(
-        params = search_model.parameters(),
-        lr = 0.025,
-        momentum = args.momentum,
-        weight_decay = args.wd,
-        nesterov = args.nesterov 
-    ))
+    def get_new_model():
+        network = get_cell_based_tiny_net(model_config)
         
-        
-    schedulers = [AdaptiveParamSchedule(
-        optimizer = optimizer,
-        epochs = args.epochs * 391,
-        eta_min = 0
-    ) for optimizer in optimizers
-                ] 
+        return network.cuda()
 
     C_min = get_num_params(get_struc()[0])
-    # C_max = get_num_params(get_struc()[11718])
-
-    C_max = C_min
-    C_max_i = 0
-    for i in range(0, len(get_struc())):
-        if get_num_params(get_struc()[i]) > C_max:
-            C_max = get_num_params(get_struc()[i])
-            C_max_i = i
+    C_max = get_num_params(get_struc()[11718])
 
     r_max = args.max_coeff
     r_min = 1/r_max
@@ -199,6 +170,23 @@ elif args.method == 'dynas':
 
     def get_LR_exp_coeff(num_param):
         return w * np.log(num_param) + tau
+
+    def param_adaptive_LR(exp_coeff, cur_ep, total_ep = args.epochs * len(search_loader), eta_min = 0):
+        y = ((-cur_ep+total_ep)) ** exp_coeff / (total_ep ** exp_coeff/ (1 - eta_min)) + eta_min
+        return float(y)
+
+nr_layer = 6
+nr_state = 5
+
+if args.method == 'baseline':
+    supernets = []
+    for i in range(nr_state):
+        supernets.append(get_new_model_optimizer_scheduler())
+
+elif args.method == 'dynas':
+    supernets = []
+    for i in range(nr_state):
+        supernets.append(get_new_model())
 
 from xautodl.models.cell_searchs.genotypes import Structure
 
@@ -212,7 +200,12 @@ for i in range(1, 4):
     genotypes.append(tuple(xlist))
 arch = Structure(genotypes)
 
-edge2index = network.edge2index
+if args.method == 'baseline':
+    edge2index = supernets[0][0].edge2index
+
+elif args.method == 'dynas':
+    edge2index = supernets[0].edge2index
+    
 max_nodes = 4
 def genotype(enc): # upon calling, the caller should pass the "theta" into this object as "alpha" first
 #     theta = torch.softmax(_arch_parameters, dim=-1) * enc
@@ -232,70 +225,145 @@ def genotype(enc): # upon calling, the caller should pass the "theta" into this 
 struc = get_struc()
 
 
-total_iter = 0
+def get_rand_arch(weight_split_edge, op_num):
+    rand_arch = list(np.random.randint(nr_state) for i in range(nr_layer))
+    rand_arch[weight_split_edge] = op_num
+    
+    return rand_arch
 
-split_edge = random.randrange(6)
-logging.info(f'Split Edge: {split_edge}')
- 
-for ep in range(epochs):
-    network.train()
-    for i, (input, label, _, _) in enumerate(search_loader):
-        input = input.cuda()
-        label = label.cuda()
+def to_struc(tup):
+    tensor = torch.zeros(nr_layer, nr_state)
+    for i, val in enumerate(tup):
+        tensor[i, val] = 1
 
-        # net_num = random.randrange(15625) # 15625: # of subnets in the search space
-        net_num = random.randrange(64)
-        network.arch_cache = genotype(struc[net_num]) 
+    return tensor
 
-        if args.method == 'baseline':
-            optimizer.zero_grad()
+# weight_split_edge = random.randint(0, nr_layer-1)
+weight_split_edge = 0 # This is how official code of FSNAS is implemented.
 
-            _, pred = network(input)
-            loss = criterion(pred, label)
-            loss.backward()
-            nn.utils.clip_grad_norm_(network.parameters(), 5)
-            optimizer.step()
+logging.info(f'weight_split_{weight_split_edge}')
+print(f'weight_split_{weight_split_edge}') 
 
-            scheduler.step()
+if args.method == 'dynas':
+    while True:
+        MS_split_edge = random.randrange(6)
+        if MS_split_edge != weight_split_edge:
+            break
+
+    logging.info(f'MS_split_{MS_split_edge}')
+    print(f'MS_split_{MS_split_edge}')
+
+if args.method == 'baseline':
+    for op_num, (network, optimizer, scheduler) in enumerate(supernets):
+        total_iter = 0
+        for ep in range(epochs):
+            network.train()
+            for i, (input, label, _, _) in enumerate(search_loader):
+                input = input.cuda()
+                label = label.cuda()
+
+                rand_arch = get_rand_arch(weight_split_edge, op_num)
+
+                network.arch_cache = genotype(to_struc(rand_arch))
+
+                optimizer.zero_grad()
+
+                _, pred = network(input)
+                loss = criterion(pred, label)
+                loss.backward()
+                nn.utils.clip_grad_norm_(network.parameters(), 5)
+                optimizer.step()
+
+                scheduler.step()           
+
+                writer.add_scalar('train/subnet_loss', loss.item(), total_iter)
+
+                base_prec1, base_prec5 = obtain_accuracy(
+                    pred.data, label.data, topk=(1, 5)
+                )
+
+                writer.add_scalar('train/subnet_top1', base_prec1, total_iter)
+                writer.add_scalar('train/subnet_top5', base_prec5, total_iter)
+                total_iter += 1        
+
+            print(f'ep: {ep}, top1: {base_prec1.item()}')
+
+elif args.method == 'dynas':
+    for op_num, network in enumerate(supernets):
+        total_iter = 0
         
-        elif args.method == 'dynas':
-            # for j in range(5):
-            for j in range(2):
-                if struc[net_num][split_edge,j] == 1:
-                    # The subnet is in the j-th cluster
-                    num_param = get_num_params(struc[net_num])
-                        
-                    schedulers[j].exp_coeff = get_LR_exp_coeff(num_param)
-                    schedulers[j].cur_ep = total_iter
-                    schedulers[j].step() # Set the LR considering the complexity of the subnet
+        optimizers = []
 
-                    optimizers[j].zero_grad()
+        for i in range(5):
+            optimizers.append(torch.optim.SGD(
+            params = network.parameters(),
+            lr = args.lr,
+            momentum = args.momentum,
+            weight_decay = args.wd,
+            nesterov = args.nesterov 
+        ))
 
-                    _, pred = network(input)
-                    loss = criterion(pred, label)
-                    loss.backward()
-                    # nn.utils.clip_grad_norm_(network.parameters(), 5)
-                    nn.utils.clip_grad_norm_(network.parameters(), 2)
-                    optimizers[j].step() 
 
-        writer.add_scalar('train/subnet_loss', loss.item(), total_iter)
+        schedulers = [AdaptiveParamSchedule(
+            optimizer = optimizer,
+            epochs = args.epochs * len(search_loader),
+            eta_min = 0
+        ) for optimizer in optimizers
+                    ] 
+         
+        for ep in range(epochs):
+            network.train()
+            for i, (input, label, _, _) in enumerate(search_loader):
+                input = input.cuda()
+                label = label.cuda()
+                
+                rand_arch = get_rand_arch(weight_split_edge, op_num)
 
-        base_prec1, base_prec5 = obtain_accuracy(
-            # pred.data, label.data, topk=(1, 5)
-            pred.data, label.data, topk=(1, 2)
-        )
+                network.arch_cache = genotype(to_struc(rand_arch))
 
-        writer.add_scalar('train/subnet_top1', base_prec1, total_iter)
-        writer.add_scalar('train/subnet_top5', base_prec5, total_iter)
-        total_iter += 1        
+                for j in range(5):
+                    if to_struc(rand_arch)[MS_split_edge,j] == 1:
+                        num_param = get_num_params(to_struc(rand_arch))
 
-    print(f'ep: {ep}, top1: {base_prec1.item()}')
+                        schedulers[j].exp_coeff = get_LR_exp_coeff(num_param)
+                        schedulers[j].cur_ep = total_iter
+                        schedulers[j].step()
+
+                        optimizers[j].zero_grad()
+
+                        _, pred = network(input)
+                        loss = criterion(pred, label)
+                        loss.backward()
+                        nn.utils.clip_grad_norm_(network.parameters(), 5)
+                        optimizers[j].step()
+
+                writer.add_scalar('train/subnet_loss', loss.item(), total_iter)
+
+                base_prec1, base_prec5 = obtain_accuracy(
+                    pred.data, label.data, topk=(1, 5)
+                )
+
+                writer.add_scalar('train/subnet_top1', base_prec1, total_iter)
+                writer.add_scalar('train/subnet_top5', base_prec5, total_iter)
+                total_iter += 1
+
+            print(f'OP: {op_num}, ep: {ep}, top1: {base_prec1.item()}')
+
+        
 
 print('================Evaluation start================')
 loader_iter = iter(valid_loader)
 valid_accs = []
 
 for i in range(len(struc)):        
+    sub_supernet_num = int(struc[i][weight_split_edge].nonzero(as_tuple=False))
+
+    if args.method == 'baseline':
+        network, _, _ = supernets[sub_supernet_num]
+
+    elif args.method == 'dynas':
+        network = supernets[sub_supernet_num]
+
     network.arch_cache = genotype(struc[i])
         
     with torch.no_grad():
@@ -327,8 +395,6 @@ with open(f"./exps/NAS-Bench-201-algos/valid_accs/{args.file_name}.pkl","wb") as
     pickle.dump(valid_accs, f)        
 
 print(f'############# Kendall #############') 
-
-eval_arch_list = [i for i in eval_arch_list if i < len(valid_accs)]
 
 cifar10_valid_true_tau_320, _ = stats.kendalltau(np.array(valid_accs)[eval_arch_list], np.array(cifar10_accs)[eval_arch_list])     
 cifar100_valid_true_tau_320, _ = stats.kendalltau(np.array(valid_accs)[eval_arch_list], np.array(cifar100_accs)[eval_arch_list])   

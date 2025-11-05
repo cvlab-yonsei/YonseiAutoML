@@ -194,3 +194,5 @@ _ext
 
 /dataset
 ysautoml/network/dataset
+
+*.0
