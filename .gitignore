@@ -193,3 +193,4 @@ _ext
 ./ysautoml/network/fewshot/mobilenet/tb_logs
 
 /dataset
+ysautoml/network/dataset
