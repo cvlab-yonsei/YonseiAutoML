@@ -8,6 +8,8 @@ from .resnet20 import *
 
 from .mobilenet_ori import *
 
+from .mobilenet_ste import *
+
 
 def get_model(config):
     print('model name:', config.student_model.name)

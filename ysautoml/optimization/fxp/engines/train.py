@@ -392,6 +392,21 @@ def log_q_param_train(model, log_dict={}, index=0):
                 uA_grad_scale = uA_grad
                 # transition_ratio = model._modules[m].weight_diff.clone()
 
+                # --- 여기부터 추가 ---
+                # grad 존재 여부 방어
+                if (
+                    not hasattr(model._modules[m], "quant_output_buff")
+                    or model._modules[m].quant_output_buff is None
+                    or model._modules[m].quant_output_buff.grad is None
+                    or not hasattr(model._modules[m], "output_buff")
+                    or model._modules[m].output_buff is None
+                    or model._modules[m].output_buff.grad is None
+                ):
+                    # grad가 없으면 스킵하고 다음 모듈로
+                    index += 1
+                    continue
+                # --- 여기까지 추가 ---
+
                 quant_output_grad = model._modules[m].quant_output_buff.grad
                 output_grad = model._modules[m].output_buff.grad
 
@@ -750,8 +765,11 @@ def run(config):
     student_model = get_model(config).to(device)
     print("The number of parameters : %d" % count_parameters(student_model))
     criterion = get_loss(config)
+    
 
+    print("config : ", config)
     q_param = qparam_extract(student_model)
+    print("len(list(q_param)) : ", len(list(q_param)))
     param = param_extract(student_model)
 
     optimizer = get_optimizer(config, param)
