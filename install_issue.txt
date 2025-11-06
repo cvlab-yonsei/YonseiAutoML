@@ -46,9 +46,100 @@ ln -s /usr/bin/python3 /usr/bin/python
 
 =======
 demo start 
+
+# 5. 실행
+python manage.py runserver 0.0.0.0:8888
+
+# 6. 외부 접속 URL
+http://{ip}:32609
+
+ysautoml import error 발생시 (경로지정)
+PYTHONPATH=/data1/hyunju/code/TempAutoML python manage.py runserver 0.0.0.0:8888
+
+
+# 7. 방화벽 해제 (필요시)
+sudo ufw allow 32609/tcp
 =========
 
 [FXP] Traceback (most recent call last): [FXP] File "/data1/hyunju/code/TempAutoML/ysautoml/optimization/fxp/engines/train.py", line 899, in <module> [FXP] main() [FXP] File "/data1/hyunju/code/TempAutoML/ysautoml/optimization/fxp/engines/train.py", line 894, in main [FXP] run(config) [FXP] File "/data1/hyunju/code/TempAutoML/ysautoml/optimization/fxp/engines/train.py", line 800, in run [FXP] q_scheduler = get_q_scheduler(config, q_optimizer, last_epoch) [FXP] File "/data1/hyunju/code/TempAutoML/ysautoml/optimization/fxp/engines/schedulers/scheduler_factory.py", line 46, in get_q_scheduler [FXP] return func(optimizer, last_epoch, **config.q_scheduler.params) [FXP] File "/data1/hyunju/code/TempAutoML/ysautoml/optimization/fxp/engines/schedulers/scheduler_factory.py", line 15, in multi_step [FXP] return lr_scheduler.MultiStepLR(optimizer, milestones=milestones, [FXP] File "/usr/local/lib/python3.8/dist-packages/torch/optim/lr_scheduler.py", line 412, in __init__ [FXP] super(MultiStepLR, self).__init__(optimizer, last_epoch, verbose) [FXP] File "/usr/local/lib/python3.8/dist-packages/torch/optim/lr_scheduler.py", line 39, in __init__ [FXP] raise KeyError("param 'initial_lr' is not specified " [FXP] KeyError: "param 'initial_lr' is not specified in param_groups[0] when resuming an optimizer" Traceback (most recent call last): File "api_test_opt.py", line 4, in <module> train_fxp( File "/data1/hyunju/code/TempAutoML/ysautoml/optimization/fxp/api.py", line 50, in train_fxp raise RuntimeError(f"FXP training failed with code {process.returncode}") RuntimeError: FXP training failed with code 1
 
 rm -rf ./logs/fxp_cifar100
 rm -rf ./results
+
+======
+
+[DYNAS] ep: 1, top1: 12.5
+[DYNAS] ep: 2, top1: 10.0
+[DYNAS] ep: 3, top1: 7.5
+[DYNAS] ep: 4, top1: 20.0
+[DYNAS] ================Evaluation start================
+[DYNAS] struc_num: 0, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.073M
+[DYNAS] struc_num: 1, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.073M
+[DYNAS] struc_num: 2, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.101M
+[DYNAS] struc_num: 3, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.316M
+[DYNAS] struc_num: 4, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.073M
+[DYNAS] struc_num: 5, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.073M
+[DYNAS] struc_num: 6, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.073M
+[DYNAS] struc_num: 7, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.101M
+[DYNAS] struc_num: 8, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.316M
+[DYNAS] struc_num: 9, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.073M
+[DYNAS] struc_num: 10, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.101M
+[DYNAS] struc_num: 11, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.101M
+[DYNAS] struc_num: 12, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.129M
+[DYNAS] struc_num: 13, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.344M
+[DYNAS] struc_num: 14, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.101M
+[DYNAS] struc_num: 15, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.316M
+[DYNAS] struc_num: 16, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.316M
+[DYNAS] struc_num: 17, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.344M
+[DYNAS] struc_num: 18, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.559M
+[DYNAS] struc_num: 19, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.316M
+[DYNAS] struc_num: 20, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.073M
+[DYNAS] struc_num: 21, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.073M
+[DYNAS] struc_num: 22, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.101M
+[DYNAS] struc_num: 23, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.316M
+[DYNAS] struc_num: 24, valid_acc: 10.088%, real_acc: 10.0%, num_params: 0.073M
+[DYNAS] struc_num: 25, valid_acc: 10.088%, real_acc: 86.45%, num_params: 0.073M
+[DYNAS] struc_num: 26, valid_acc: 10.088%, real_acc: 86.62%, num_params: 0.073M
+[DYNAS] struc_num: 27, valid_acc: 10.088%, real_acc: 86.69%, num_params: 0.101M
+[DYNAS] struc_num: 28, valid_acc: 10.088%, real_acc: 86.46%, num_params: 0.316M
+[DYNAS] struc_num: 29, valid_acc: 10.088%, real_acc: 86.27%, num_params: 0.073M
+[DYNAS] struc_num: 30, valid_acc: 10.088%, real_acc: 86.66%, num_params: 0.073M
+[DYNAS] struc_num: 31, valid_acc: 10.088%, real_acc: 86.66%, num_params: 0.073M
+[DYNAS] struc_num: 32, valid_acc: 10.088%, real_acc: 86.56%, num_params: 0.101M
+[DYNAS] struc_num: 33, valid_acc: 10.088%, real_acc: 86.58%, num_params: 0.316M
+[DYNAS] struc_num: 34, valid_acc: 10.088%, real_acc: 86.34%, num_params: 0.073M
+[DYNAS] struc_num: 35, valid_acc: 10.088%, real_acc: 86.4%, num_params: 0.101M
+[DYNAS] struc_num: 36, valid_acc: 10.088%, real_acc: 86.72%, num_params: 0.101M
+[DYNAS] struc_num: 37, valid_acc: 10.088%, real_acc: 86.89%, num_params: 0.129M
+[DYNAS] struc_num: 38, valid_acc: 10.088%, real_acc: 86.76%, num_params: 0.344M
+[DYNAS] struc_num: 39, valid_acc: 10.088%, real_acc: 86.77%, num_params: 0.101M
+[DYNAS] struc_num: 40, valid_acc: 10.088%, real_acc: 86.79%, num_params: 0.316M
+[DYNAS] struc_num: 41, valid_acc: 10.088%, real_acc: 86.41%, num_params: 0.316M
+[DYNAS] struc_num: 42, valid_acc: 10.088%, real_acc: 86.82%, num_params: 0.344M
+[DYNAS] struc_num: 43, valid_acc: 10.088%, real_acc: 86.87%, num_params: 0.559M
+[DYNAS] struc_num: 44, valid_acc: 10.088%, real_acc: 86.55%, num_params: 0.316M
+[DYNAS] struc_num: 45, valid_acc: 10.088%, real_acc: 86.73%, num_params: 0.073M
+[DYNAS] struc_num: 46, valid_acc: 10.088%, real_acc: 86.65%, num_params: 0.073M
+[DYNAS] struc_num: 47, valid_acc: 10.088%, real_acc: 86.78%, num_params: 0.101M
+[DYNAS] struc_num: 48, valid_acc: 10.088%, real_acc: 86.5%, num_params: 0.316M
+[DYNAS] struc_num: 49, valid_acc: 10.088%, real_acc: 86.34%, num_params: 0.073M
+[DYNAS] struc_num: 50, valid_acc: 10.088%, real_acc: 88.77%, num_params: 0.101M
+[DYNAS] struc_num: 51, valid_acc: 10.088%, real_acc: 89.09%, num_params: 0.101M
+[DYNAS] struc_num: 52, valid_acc: 10.088%, real_acc: 88.73%, num_params: 0.129M
+[DYNAS] struc_num: 53, valid_acc: 10.088%, real_acc: 88.9%, num_params: 0.344M
+[DYNAS] struc_num: 54, valid_acc: 10.088%, real_acc: 89.0%, num_params: 0.101M
+[DYNAS] struc_num: 55, valid_acc: 10.088%, real_acc: 89.05%, num_params: 0.101M
+[DYNAS] struc_num: 56, valid_acc: 10.088%, real_acc: 88.61%, num_params: 0.101M
+[DYNAS] struc_num: 57, valid_acc: 10.088%, real_acc: 88.83%, num_params: 0.129M
+[DYNAS] struc_num: 58, valid_acc: 10.088%, real_acc: 89.01%, num_params: 0.344M
+[DYNAS] struc_num: 59, valid_acc: 10.088%, real_acc: 89.31%, num_params: 0.101M
+[DYNAS] struc_num: 60, valid_acc: 10.088%, real_acc: 88.63%, num_params: 0.129M
+[DYNAS] struc_num: 61, valid_acc: 10.088%, real_acc: 88.75%, num_params: 0.129M
+[DYNAS] struc_num: 62, valid_acc: 10.088%, real_acc: 88.74%, num_params: 0.157M
+[DYNAS] struc_num: 63, valid_acc: 10.088%, real_acc: 88.87%, num_params: 0.372M
+[DYNAS] ############# Kendall #############
+[DYNAS] cifar10_kendall: nan
+[DYNAS] cifar100_kendall: nan
+[DYNAS] imagenet_kendall: nan
+
+✅ Completed DYNAS Training — Logs saved to: ./logs/dynas_test

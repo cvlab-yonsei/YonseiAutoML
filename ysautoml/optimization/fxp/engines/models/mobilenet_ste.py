@@ -2,38 +2,15 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn import init
-import math
-import torch.utils.model_zoo as model_zoo
-import pdb
-import numpy as np
-from collections import OrderedDict
-
+import re, os
 from .modules import DSQConv_a, DSQConv_8bit, DSQLinear, DSQConv_a_mobile
+
 
 __all__ = ['MobileNetV2', 'mobilenet_ste']
 
-model_urls = {
-    'mobilenet_v2': 'https://download.pytorch.org/models/mobilenet_v2-b0353104.pth',
-}
-
-def _make_divisible(v, divisor, min_value=None):
-    """
-    This function is taken from the original tf repo.
-    It ensures that all layers have a channel number that is divisible by 8
-    It can be seen here:
-    https://github.com/tensorflow/models/blob/master/research/slim/nets/mobilenet/mobilenet.py
-    :param v:
-    :param divisor:
-    :param min_value:
-    :return:
-    """
-    if min_value is None:
-        min_value = divisor
-    new_v = max(min_value, int(v + divisor / 2) // divisor * divisor)
-    # Make sure that round down does not go down by more than 10%.
-    if new_v < 0.9 * v:
-        new_v += divisor
-    return new_v
+# ----------------------------------------------
+# 기본 MobileNetV2 (원본 유지)
+# ----------------------------------------------
 
 class ConvBNReLU(nn.Sequential):
     def __init__(self, in_planes, out_planes, kernel_size=3, stride=1, groups=1, norm_layer=None, initial=False, symmetric=False):
@@ -42,49 +19,23 @@ class ConvBNReLU(nn.Sequential):
             norm_layer = nn.BatchNorm2d
 
         if initial:
-            QInput=False
+            QInput = False
         else:
-            QInput=True
-
-        # if initial:
-        #     super(ConvBNReLU, self).__init__(
-        #         nn.Conv2d(in_planes, out_planes, kernel_size, stride, padding, groups=groups,
-        #                 bias=False),
-        #         norm_layer(out_planes),
-        #         nn.ReLU6(inplace=True)
-        #     )
-
-        # elif (groups > 1):
-        #     super(ConvBNReLU, self).__init__(
-        #         DSQConv_a_mobile_DW(in_planes, out_planes, kernel_size, stride, padding, groups=groups,
-        #                 bias=False, QInput=QInput, symmetric=symmetric),
-        #         norm_layer(out_planes),
-        #         nn.ReLU6(inplace=True)
-        #     )
-
-        # else:
-        #     super(ConvBNReLU, self).__init__(
-        #         DSQConv_a_mobile(in_planes, out_planes, kernel_size, stride, padding, groups=groups,
-        #                 bias=False, QInput=QInput, symmetric=symmetric),
-        #         norm_layer(out_planes),
-        #         nn.ReLU6(inplace=True)
-        #     )
+            QInput = True
 
         if initial or (groups > 1):
             super(ConvBNReLU, self).__init__(
-                nn.Conv2d(in_planes, out_planes, kernel_size, stride, padding, groups=groups,
-                        bias=False),
+                nn.Conv2d(in_planes, out_planes, kernel_size, stride, padding, groups=groups, bias=False),
+                norm_layer(out_planes),
+                nn.ReLU6(inplace=True)
+            )
+        else:
+            super(ConvBNReLU, self).__init__(
+                DSQConv_a_mobile(in_planes, out_planes, kernel_size, stride, padding, groups=groups, bias=False, QInput=QInput, symmetric=symmetric),
                 norm_layer(out_planes),
                 nn.ReLU6(inplace=True)
             )
 
-        else:
-            super(ConvBNReLU, self).__init__(
-                DSQConv_a_mobile(in_planes, out_planes, kernel_size, stride, padding, groups=groups,
-                        bias=False, QInput=QInput, symmetric=symmetric),
-                norm_layer(out_planes),
-                nn.ReLU6(inplace=True)
-            )
 
 class InvertedResidual(nn.Module):
     def __init__(self, inp, oup, stride, expand_ratio, norm_layer=None, first_layer=False):
@@ -98,16 +49,11 @@ class InvertedResidual(nn.Module):
         hidden_dim = int(round(inp * expand_ratio))
         self.use_res_connect = self.stride == 1 and inp == oup
 
-        symmetric=True
-
-        if first_layer:
-            symmetric=False
-
+        symmetric = not first_layer
         layers = []
         if expand_ratio != 1:
             # pw
-            layers.append(ConvBNReLU(inp, hidden_dim, kernel_size=1, norm_layer=norm_layer, symmetric=symmetric)) # a
-
+            layers.append(ConvBNReLU(inp, hidden_dim, kernel_size=1, norm_layer=norm_layer, symmetric=symmetric))
         layers.extend([
             # dw
             ConvBNReLU(hidden_dim, hidden_dim, stride=stride, groups=hidden_dim, norm_layer=norm_layer, symmetric=False),
@@ -125,30 +71,10 @@ class InvertedResidual(nn.Module):
 
 
 class MobileNetV2(nn.Module):
-    def __init__(self,
-                 num_classes=1000,
-                 width_mult=1.0,
-                 num_bit=4,
-                 inverted_residual_setting=None,
-                 round_nearest=8,
-                 block=None,
-                 norm_layer=None):
-        """
-        MobileNet V2 main class
-        Args:
-            num_classes (int): Number of classes
-            width_mult (float): Width multiplier - adjusts number of channels in each layer by this amount
-            inverted_residual_setting: Network structure
-            round_nearest (int): Round the number of channels in each layer to be a multiple of this number
-            Set to 1 to turn off rounding
-            block: Module specifying inverted residual building block for mobilenet
-            norm_layer: Module specifying the normalization layer to use
-        """
+    def __init__(self, num_classes=1000, width_mult=1.0, num_bit=4, inverted_residual_setting=None, round_nearest=8, block=None, norm_layer=None):
         super(MobileNetV2, self).__init__()
-
         if block is None:
             block = InvertedResidual
-
         if norm_layer is None:
             norm_layer = nn.BatchNorm2d
 
@@ -157,7 +83,6 @@ class MobileNetV2(nn.Module):
 
         if inverted_residual_setting is None:
             inverted_residual_setting = [
-                # t, c, n, s
                 [1, 16, 1, 1],
                 [6, 24, 2, 2],
                 [6, 32, 3, 2],
@@ -167,74 +92,116 @@ class MobileNetV2(nn.Module):
                 [6, 320, 1, 1],
             ]
 
-        # only check the first element, assuming user knows t,c,n,s are required
-        if len(inverted_residual_setting) == 0 or len(inverted_residual_setting[0]) != 4:
-            raise ValueError("inverted_residual_setting should be non-empty "
-                             "or a 4-element list, got {}".format(inverted_residual_setting))
-
-        # building first layer
-        input_channel = _make_divisible(input_channel * width_mult, round_nearest)
-        self.last_channel = _make_divisible(last_channel * max(1.0, width_mult), round_nearest)
-        features = [ConvBNReLU(3, input_channel, stride=2, norm_layer=norm_layer, initial=True)] ##### initial
-        # building inverted residual blocks
+        input_channel = int(input_channel * width_mult)
+        self.last_channel = int(last_channel * width_mult)
+        features = [ConvBNReLU(3, input_channel, stride=2, norm_layer=norm_layer, initial=True)]
         first_layer = True
         for t, c, n, s in inverted_residual_setting:
-            output_channel = _make_divisible(c * width_mult, round_nearest)
+            output_channel = int(c * width_mult)
             for i in range(n):
                 stride = s if i == 0 else 1
                 features.append(block(input_channel, output_channel, stride, expand_ratio=t, norm_layer=norm_layer, first_layer=first_layer))
                 input_channel = output_channel
-                first_layer=False
-        # building last several layers
+                first_layer = False
+
         features.append(ConvBNReLU(input_channel, self.last_channel, kernel_size=1, norm_layer=norm_layer, symmetric=True))
-        # make it nn.Sequential
         self.features = nn.Sequential(*features)
-
-        # building classifier
-        self.classifier = nn.Sequential(
-            nn.Dropout(0.2),
-            nn.Linear(self.last_channel, num_classes),
-        )
-
-        # weight initialization
-        for m in self.modules():
-            if isinstance(m, nn.Conv2d):
-                nn.init.kaiming_normal_(m.weight, mode='fan_out')
-                if m.bias is not None:
-                    nn.init.zeros_(m.bias)
-            elif isinstance(m, (nn.BatchNorm2d, nn.GroupNorm)):
-                nn.init.ones_(m.weight)
-                nn.init.zeros_(m.bias)
-            elif isinstance(m, nn.Linear):
-                nn.init.normal_(m.weight, 0, 0.01)
-                nn.init.zeros_(m.bias)
-
-    def _forward_impl(self, x):
-        # This exists since TorchScript doesn't support inheritance, so the superclass method
-        # (this one) needs to have a name other than `forward` that can be accessed in a subclass
-        x = self.features(x)
-        # Cannot use "squeeze" as batch-size can be 1 => must use reshape with x.shape[0]
-        x = nn.functional.adaptive_avg_pool2d(x, 1).reshape(x.shape[0], -1)
-        x = self.classifier(x)
-        return x
+        self.classifier = nn.Sequential(nn.Dropout(0.2), DSQLinear(self.last_channel, num_classes))
 
     def forward(self, x):
-        ret_dict = dict()
-        ret_dict['out'] = self._forward_impl(x)
-        return ret_dict
+        x = self.features(x)
+        x = F.adaptive_avg_pool2d(x, 1).reshape(x.shape[0], -1)
+        x = self.classifier(x)
+        return {"out": x}
 
 
-def mobilenet_ste(pretrained=False, progress=True, **kwargs):
+# ----------------------------------------------
+# QuantPlainNet: CIFAR100 대응 + DSQConv 사용
+# ----------------------------------------------
+
+class QuantPlainNet(nn.Module):
+    def __init__(self, arch_path, num_classes=100):
+        super().__init__()
+        assert os.path.exists(arch_path), f"Architecture file not found: {arch_path}"
+        with open(arch_path, "r") as f:
+            arch_str = f.read().strip()
+
+        pattern = r"(Super\w+)\((.*?)\)"
+        blocks = re.findall(pattern, arch_str)
+        layers = []
+        in_ch = 3
+
+        for block_type, args in blocks:
+            args = list(map(int, args.split(",")))
+
+            # ---- SuperConvK3BNRELU ----
+            if "SuperConvK3BNRELU" in block_type:
+                _, out_ch, stride, _ = args
+                stride = 1  # CIFAR용: stride 줄임
+                layers.append(nn.Sequential(
+                    DSQConv_a_mobile(in_ch, out_ch, kernel_size=3, stride=stride, padding=1, bias=False),
+                    nn.BatchNorm2d(out_ch),
+                    nn.ReLU(inplace=True),
+                ))
+                in_ch = out_ch
+
+            # ---- SuperResIDWE ----
+            elif "SuperResIDWE" in block_type:
+                _, out_ch, stride, hidden, exp = args
+                stride = 1  # CIFAR용 stride 고정
+                expand_ch = int(hidden)
+                layers.append(nn.Sequential(
+                    DSQConv_a_mobile(in_ch, expand_ch, kernel_size=1, stride=1, padding=0, bias=False),
+                    nn.BatchNorm2d(expand_ch),
+                    nn.ReLU(inplace=True),
+                    DSQConv_a_mobile(expand_ch, expand_ch, kernel_size=3, stride=stride, padding=1, groups=expand_ch, bias=False),
+                    nn.BatchNorm2d(expand_ch),
+                    nn.ReLU(inplace=True),
+                    DSQConv_a_mobile(expand_ch, out_ch, kernel_size=1, stride=1, padding=0, bias=False),
+                    nn.BatchNorm2d(out_ch),
+                ))
+                in_ch = out_ch
+
+            # ---- SuperConvK1BNRELU ----
+            elif "SuperConvK1BNRELU" in block_type:
+                _, out_ch, _, _ = args
+                layers.append(nn.Sequential(
+                    DSQConv_a_mobile(in_ch, out_ch, kernel_size=1, stride=1, padding=0, bias=False),
+                    nn.BatchNorm2d(out_ch),
+                    nn.ReLU(inplace=True),
+                ))
+                in_ch = out_ch
+
+        # ---- Classifier for CIFAR100 ----
+        layers.append(nn.Sequential(
+            nn.AdaptiveAvgPool2d(1),  # 전역 평균 풀링
+            nn.Flatten(),
+            DSQLinear(in_ch, num_classes)
+        ))
+
+        self.features = nn.Sequential(*layers)
+
+        # 안정화: scale 조정
+        for m in self.modules():
+            if isinstance(m, DSQConv_a_mobile) and hasattr(m, 'sW'):
+                m.sW.data *= 0.1
+
+    def forward(self, x):
+        x = self.features(x)
+        return {"out": x}
+
+
+# ----------------------------------------------
+# mobilenet_ste unified entry
+# ----------------------------------------------
+
+def mobilenet_ste(pretrained=False, progress=True, arch_path=None, num_classes=100, **kwargs):
     """
-    Constructs a MobileNetV2 architecture from
-    `"MobileNetV2: Inverted Residuals and Linear Bottlenecks" <https://arxiv.org/abs/1801.04381>`_.
-    Args:
-        pretrained (bool): If True, returns a model pre-trained on ImageNet
-        progress (bool): If True, displays a progress bar of the download to stderr
+    arch_path가 주어지면 QuantPlainNet(CIFAR용 DSQConv 구조) 사용
+    그렇지 않으면 기본 MobileNetV2 사용
     """
-    model = MobileNetV2(**kwargs)
-#    if pretrained:
-#        state_dict = load_state_dict_from_url(model_urls['mobilenet_v2'],
-#                                              progress=progress)
-#        model.load_state_dict(state_dict)
-    return model
+    if arch_path is not None:
+        print(f"[mobilenet_ste] Loading structure from {arch_path}")
+        return QuantPlainNet(arch_path, num_classes=num_classes)
+    else:
+        return MobileNetV2(num_classes=num_classes, **kwargs)

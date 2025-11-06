@@ -166,8 +166,8 @@ cython_debug/
 /data
 
 # fewshot
-*.jpg
-*.png
+# *.jpg
+# *.png
 *.pt
 *.pth
 *.npy
