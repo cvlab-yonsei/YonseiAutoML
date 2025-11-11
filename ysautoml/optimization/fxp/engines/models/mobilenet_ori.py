@@ -178,7 +178,7 @@ class MobileNetV2(nn.Module):
         return ret_dict
 
 
-def mobilenet_ori(pretrained=False, progress=True, **kwargs):
+def mobilenet_ori(pretrained=False, progress=True, arch_path=None, **kwargs):
     """
     Constructs a MobileNetV2 architecture from
     `"MobileNetV2: Inverted Residuals and Linear Bottlenecks" <https://arxiv.org/abs/1801.04381>`_.

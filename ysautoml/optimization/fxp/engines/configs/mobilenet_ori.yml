@@ -15,6 +15,7 @@ student_model:
 train:
   dir: './results/cvpr_quant_resnet18'
   batch_size: 256
+  # batch_size: 128
   num_epochs: 150
   # student_dir: '.c100.4bit_grad_adam1e-5_naive_threshold1e-2_4bit_quant_ep100_ours_decay10_max_avg_real_20e-3'
   # student_dir: '.c100.4bit_grad_adam1e-5_naive_threshold1e-2_4bit_quant_ep100_ours_decay_alpha_1'
@@ -77,4 +78,4 @@ loss:
   params:
     reduction: 'mean'
 
-gpu: 0
+gpu: 0, 1, 2, 3
