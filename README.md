@@ -178,9 +178,3 @@ If you use this toolbox or benchmark in your research, please cite:
   note    = {https://github.com/cvlab-yonsei/YonseiAutoML}
 }
 ```
-
----
-
-## License
-
-This project is released under the [Apache 2.0 license](LICENSE).
