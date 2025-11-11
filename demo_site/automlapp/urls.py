@@ -17,4 +17,6 @@ urlpatterns = [
     path('total/', views.total_dashboard, name='total_dashboard'),
     path("run_total_pipeline/", views.run_total_pipeline, name="run_total_pipeline"),
     path("download_file/", views.download_file, name="download_file"), 
+    path("visualize_model_from_structure/", views.visualize_model_from_structure, name="visualize_model_from_structure"),
+
 ]

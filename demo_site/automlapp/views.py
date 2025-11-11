@@ -3,13 +3,19 @@ sys.path.append(os.path.abspath("/data2/hyunju/data/YonseiAutoML"))
 
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, StreamingHttpResponse, FileResponse
-import io, sys, threading
+import io, sys, threading, traceback
 from ysautoml.data.fyi import run_dsa
 from ysautoml.network.zeroshot.mobilenetv2 import run_search_zeroshot
 import subprocess
 from pathlib import Path
 from django.views.decorators.csrf import csrf_exempt
-import json, io, re, os, contextlib
+import json, io, re, os, contextlib, torch
+from torchviz import make_dot
+from django.conf import settings
+from django.views.decorators.http import require_POST
+
+
+
 
 # 로그 캡처용 전역 버퍼
 log_buffer = []
@@ -222,3 +228,155 @@ def download_file(request):
         filename = os.path.basename(path)
         return FileResponse(open(path, "rb"), as_attachment=True, filename=filename)
     return JsonResponse({"error": "File not found"}, status=404)
+
+
+
+@csrf_exempt
+@require_POST
+def visualize_model_from_structure(request):
+    """
+    best_structure.txt 경로를 받아서 모델 그래프를 torchviz로 시각화.
+    절대경로 없이 BASE_DIR과 상대경로 기반으로 처리.
+    """
+    print("hi111")
+    print("request.body >>>", request.body)
+
+    sys.path.append(str(Path(__file__).resolve().parents[2]))
+
+    if request.method != "POST":
+        print("hi222")
+        return JsonResponse({"error": "Invalid request"}, status=400)
+
+    try:
+        print("hi333")
+        data = json.loads(request.body)
+        struct_path = data.get("path")
+
+        # 1️⃣ 구조파일 유효성 검사
+        if not struct_path:
+            return JsonResponse({"error": "No structure path provided"}, status=400)
+        print("11111")
+        # 절대경로 or 상대경로 모두 허용
+        struct_path = Path(struct_path)
+        if not struct_path.is_absolute():
+            struct_path = (Path.cwd() / struct_path).resolve()
+        print("22222")
+        if not struct_path.exists():
+            return JsonResponse({"error": f"File not found: {struct_path}"}, status=404)
+        print("33333")
+        # 2️⃣ 프로젝트 내 ysaautoml 경로 자동 탐색
+        base_dir = Path(settings.BASE_DIR).resolve()
+        project_root = base_dir.parent
+        ysa_path = None
+        for subdir in ["ysautoml", "YSAutoML"]:
+            candidate = project_root / subdir
+            if candidate.exists():
+                ysa_path = candidate
+                break
+        print("44444")
+        if ysa_path is None:
+            return JsonResponse({"error": "Cannot locate ysautoml directory."}, status=500)
+        
+        print("5555")
+
+        # sys.path.append(str(ysa_path / "network" / "zeroshot" / "mobilenetv2"))
+        
+        print("hi444 - importing model loader")
+
+        from ysautoml.network.zeroshot.mobilenetv2.engines.ImageNet_MBV2 import ModelLoader
+
+        # -----------------------------------------
+        # opt, argv 직접 구성 (run_retrain_zeroshot 기반)
+        # -----------------------------------------
+        argv = [
+            "--dataset", "imagenet",
+            "--num_classes", "1000",
+            "--input_image_size", "224",
+            "--arch", "Masternet.py:MasterNet",
+            "--plainnet_struct_txt", str(struct_path),
+            "--use_se",
+            "--target_downsample_ratio", "16",
+            "--batch_size_per_gpu", "64",
+        ]
+
+        input_image_size = 224
+
+        class DummyOpt:
+            pass
+
+        opt = DummyOpt()
+        opt.dataset = "imagenet"
+        opt.num_classes = 1000
+        opt.input_image_size = input_image_size
+        opt.arch = "Masternet.py:MasterNet"
+        opt.plainnet_struct_txt = str(struct_path)
+        opt.use_se = True
+        opt.target_downsample_ratio = 16
+        opt.batch_size_per_gpu = 64
+        opt.save_dir = str(base_dir / "static" / "visuals")
+
+        # ✅ ModelLoader 내부 참조 대비
+        opt.pretrained = False
+        opt.bn_momentum = 0.01
+        opt.wd = 4e-5
+        opt.weight_init = "custom_kaiming"
+        opt.nesterov = True
+        opt.world_size = 1
+        opt.dist_mode = "single"
+        opt.workers_per_gpu = 4
+        opt.optimizer = "sgd"
+        opt.lr_per_256 = 0.4
+        opt.target_lr_per_256 = 0.0
+        opt.lr_mode = "cosine"
+        opt.use_label_smoothing = True
+
+
+        print(f"[INFO] Building model from structure: {struct_path}", flush=True)
+        model = ModelLoader.get_model(opt, argv)
+        x = torch.randn(1, 3, input_image_size, input_image_size, requires_grad=True)
+
+         # ✅ eval mode 강제 적용
+        model.eval()
+        for m in model.modules():
+            if hasattr(m, "training"):
+                m.train(False)
+
+        y_pred = model(x)
+        if isinstance(y_pred, dict):
+            y_pred = y_pred.get("out", list(y_pred.values())[0])
+
+        # ✅ torchviz 시각화
+        dot = make_dot(
+            y_pred,
+            params=dict(model.named_parameters()),
+            # show_attrs=True,
+            # show_saved=True
+        )
+        output_dir = base_dir / "static" / "visuals"
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        img_path = output_dir / f"model_graph_{struct_path.stem}.png"
+        dot.render(filename=img_path.with_suffix(''), format="png", cleanup=True)
+
+        img_url = f"/static/visuals/{img_path.name}"
+        return JsonResponse({"url": img_url})
+
+    except Exception as e:
+        err_msg = traceback.format_exc()
+
+        # 🚨 1️⃣ 표준출력 강제 flush
+        sys.stderr.write("\n" + "="*80 + "\n")
+        sys.stderr.write("🔥 [visualize_model_from_structure ERROR - STDERR]\n")
+        sys.stderr.write(err_msg)
+        sys.stderr.write("\n" + "="*80 + "\n")
+        sys.stderr.flush()
+
+        # 🚨 2️⃣ 표준출력도 함께 강제 flush
+        sys.stdout.write("\n" + "="*80 + "\n")
+        sys.stdout.write("🔥 [visualize_model_from_structure ERROR - STDOUT]\n")
+        sys.stdout.write(err_msg)
+        sys.stdout.write("\n" + "="*80 + "\n")
+        sys.stdout.flush()
+
+        # 🚨 3️⃣ 임시로 바로 중단시켜서 Django 기본 traceback 출력 유도
+        raise e

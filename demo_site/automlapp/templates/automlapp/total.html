@@ -221,6 +221,12 @@
       </div>
     </form>
 
+    <div id="modelGraphBox" style="margin-top:30px; display:none; text-align:center;">
+      <h4>🧩 Model Architecture Graph</h4>
+      <img id="modelGraphImage" src="" style="max-width:100%; border-radius:8px; border:1px solid #333;">
+    </div>
+
+
     <div class="logbox" id="logBox"></div>
 
     <table id="resultTable" style="display:none;">
@@ -370,6 +376,8 @@
           );
           resultTable.style.display = "table";
           downloadAdded = true; // ✅ 한 번만 실행되게 함
+
+          await visualizeModelGraph(filePath);
         }
       }
     };
@@ -412,6 +420,26 @@
     function fakeDelay(ms) {
       return new Promise((resolve) => setTimeout(resolve, ms));
     }
+
+    async function visualizeModelGraph(filePath) {
+      logLine("🧠 Generating model graph visualization...");
+      const response = await fetch("/visualize_model_from_structure/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-CSRFToken": getCookie("csrftoken") },
+        body: JSON.stringify({ path: filePath }),
+      });
+      const data = await response.json();
+      if (data.url) {
+        const box = document.getElementById("modelGraphBox");
+        const img = document.getElementById("modelGraphImage");
+        img.src = data.url + "?t=" + new Date().getTime(); // cache 방지
+        box.style.display = "block";
+        logLine(`✅ Model visualization ready: ${data.url}`);
+      } else {
+        logLine("⚠️ Model visualization failed.");
+      }
+    }
+
   </script>
 </body>
 </html>
