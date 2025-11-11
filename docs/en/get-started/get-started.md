@@ -64,8 +64,8 @@ pip install torch torchvision
 **Step 1.** Install YSAutoML.
 
 ```bash
-git clone https://github.com/cvlab-yonsei/TempAutoML.git
-cd TempAutoML
+git clone https://github.com/cvlab-yonsei/YonseiAutoML.git
+cd YonseiAutoML
 pip install -v -e
 # "-v" means verbose, or more output
 # "-e" means installing a project in editable mode,
@@ -81,8 +81,8 @@ pip install -v -e
 **Step 1.** Install YSAutoML.
 
 ```
-!git clone https://github.com/cvlab-yonsei/TempAutoML.git
-%cd TempAutoML
+!git clone https://github.com/cvlab-yonsei/YonseiAutoML.git
+%cd YonseiAutoML
 !pip install -e .
 ```
 
@@ -102,7 +102,7 @@ Within Jupyter, the exclamation mark `!` is used to call external executables an
 
 ## Troubleshooting
 
-If you have some issues during the installation, please first view the FAQ page. You may [open an issue](https://github.com/cvlab-yonsei/TempAutoML/issues) on GitHub if no solution is found.
+If you have some issues during the installation, please first view the FAQ page. You may [open an issue](https://github.com/cvlab-yonsei/YonseiAutoML/issues) on GitHub if no solution is found.
 
 
 

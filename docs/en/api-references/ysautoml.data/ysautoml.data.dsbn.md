@@ -164,7 +164,7 @@ Files already downloaded and verified
 [Final Accuracy] 55.90%
 Final Accuracy: 0.559
 Number of log entries: 392
-(yscvlab) root@d63c8bd87808:/data2/hyunju/data/TempAutoML# python api_test.py
+(yscvlab) root@d63c8bd87808:/data2/hyunju/data/YonseiAutoML# python api_test.py
 Files already downloaded and verified
 [Epoch 1/2][Step 0] Loss=2.5428
 [Epoch 1/2][Step 10] Loss=2.0431

@@ -1,11 +1,15 @@
 import sys, os
-sys.path.append(os.path.abspath("/data2/hyunju/data/TempAutoML"))
+sys.path.append(os.path.abspath("/data2/hyunju/data/YonseiAutoML"))
 
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse, StreamingHttpResponse
+from django.http import HttpResponse, JsonResponse, StreamingHttpResponse, FileResponse
 import io, sys, threading
 from ysautoml.data.fyi import run_dsa
+from ysautoml.network.zeroshot.mobilenetv2 import run_search_zeroshot
 import subprocess
+from pathlib import Path
+from django.views.decorators.csrf import csrf_exempt
+import json, io, re, os, contextlib
 
 # 로그 캡처용 전역 버퍼
 log_buffer = []
@@ -44,7 +48,7 @@ def run_dsa_api(request):
 
 def run_dsa_stream(request):
     env = os.environ.copy()
-    env["PYTHONPATH"] = "/data2/hyunju/data/TempAutoML"  # ysautoml 루트 경로
+    env["PYTHONPATH"] = "/data2/hyunju/data/YonseiAutoML"  # ysautoml 루트 경로
 
     cmd = [
         "python", "-u", "-c",
@@ -145,3 +149,76 @@ def run_total(request):
         return JsonResponse({"result": result})
     else:
         return JsonResponse({"error": "Invalid request method."}, status=400)
+
+
+@csrf_exempt
+def run_total_pipeline(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        network = data.get("network")
+
+        if network == "zeroshot":
+            gpu = int(data.get("gpu", 0))
+            seed = int(data.get("seed", 123))
+            metric = data.get("metric", "AZ_NAS")
+            population = int(data.get("population_size", 100))
+            evo_iter = int(data.get("evolution_max_iter", 100))
+            resolution = int(data.get("resolution", 224))
+            budget_flops = float(data.get("budget_flops", 1e9))
+            max_layers = int(data.get("max_layers", 16))
+            batch_size = int(data.get("batch_size", 32))
+            data_path = data.get("data_path", "/dataset/ILSVRC2012/")
+
+            def stream():
+                yield "🚀 Starting Zero-Shot NAS...\n"
+
+                try:
+                    # ✅ subprocess로 별도 프로세스에서 실행 (stdout 즉시 flush)
+                    cmd = [
+                        sys.executable, "-u", "-c",
+                        (
+                            "from ysautoml.network.zeroshot.mobilenetv2.api import run_search_zeroshot; "
+                            f"run_search_zeroshot("
+                            f"gpu={gpu}, seed={seed}, metric='{metric}', "
+                            f"population_size={population}, evolution_max_iter={evo_iter}, "
+                            f"resolution={resolution}, budget_flops={budget_flops}, "
+                            f"max_layers={max_layers}, batch_size={batch_size}, "
+                            f"data_path='{data_path}')"
+                        )
+                    ]
+
+                    process = subprocess.Popen(
+                        cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                        text=True, bufsize=1, universal_newlines=True
+                    )
+
+                    for line in iter(process.stdout.readline, ""):
+                        yield line
+                        # ✅ 다운로드 경로 감지
+                        if "Completed Search & Analyze" in line:
+                            match = re.search(r"→ (/.+)", line)
+                            if match:
+                                best_file = os.path.join(match.group(1).strip(), "best_structure.txt")
+                                yield f"\n[DOWNLOAD_READY] {best_file}\n"
+
+                    process.stdout.close()
+                    process.wait()
+
+                    yield "\n✅ Completed Zero-Shot NAS.\n"
+
+                except Exception as e:
+                    yield f"\n❌ Error: {str(e)}\n"
+
+            return StreamingHttpResponse(stream(), content_type="text/plain")
+
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+
+# ✅ 파일 다운로드 뷰
+@csrf_exempt
+def download_file(request):
+    path = request.GET.get("path")
+    if path and os.path.exists(path):
+        filename = os.path.basename(path)
+        return FileResponse(open(path, "rb"), as_attachment=True, filename=filename)
+    return JsonResponse({"error": "File not found"}, status=404)

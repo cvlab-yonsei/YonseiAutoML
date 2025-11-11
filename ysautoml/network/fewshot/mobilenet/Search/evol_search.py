@@ -4,7 +4,7 @@ import os, sys, importlib.util
 cur_dir = os.path.dirname(os.path.abspath(__file__))      # .../Search
 mobilenet_dir = os.path.dirname(cur_dir)                  # .../mobilenet
 network_dir = os.path.dirname(mobilenet_dir)              # .../fewshot/network
-repo_root = os.path.dirname(os.path.dirname(network_dir)) # .../TempAutoML
+repo_root = os.path.dirname(os.path.dirname(network_dir)) # .../YonseiAutoML
 
 # 1. 경로 추가
 for p in [mobilenet_dir, network_dir, repo_root]:

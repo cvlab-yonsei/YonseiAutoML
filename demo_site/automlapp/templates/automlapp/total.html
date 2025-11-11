@@ -8,7 +8,26 @@
     body { margin:0; font-family:Inter, sans-serif; background:#1B1B1B; color:#FAF1E4; display:flex; }
 
     /* Sidebar */
-    .sidebar { width:250px; background:#111; padding:20px; height:100vh; }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      width: 250px;
+      background: #111;
+      padding: 20px;
+      z-index: 1000; /* ✅ 겹칠 때 위에 오지 않도록 명시 */
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+      margin-left: 300px; /* ✅ sidebar만큼 오른쪽으로 밀기 */
+      box-sizing: border-box;
+      min-width: calc(100% - 300px); /* ✅ 콘텐츠가 잘리지 않게 */
+    }
+
     .sidebar h1 { font-size:22px; margin-bottom:5px; }
     .sidebar p { font-size:12px; color:#aaa; margin-bottom:30px; }
     .menu-item { padding:10px 15px; cursor:pointer; border-radius:6px; transition:background 0.2s; margin-bottom:5px; }
@@ -19,7 +38,7 @@
     .logo-link:hover { color:#FAF1E4; }
 
     /* Content */
-    .content { flex:1; padding:20px; }
+    /* .content { flex:1; padding:20px; } */
     .topbar { display:flex; justify-content:flex-end; align-items:center; gap:10px; margin-bottom:15px; }
     .btn-train { background:#1F53FF; border:none; padding:10px 20px; color:#fff; border-radius:6px; cursor:pointer; }
     .btn-stop { background:#d32f2f; border:none; padding:10px 20px; color:#fff; border-radius:6px; cursor:pointer; }
@@ -54,7 +73,39 @@
     table { width:100%; border-collapse:collapse; margin-top:20px; background:#262626; border-radius:8px; overflow:hidden; }
     th, td { padding:10px; border-bottom:1px solid #333; text-align:left; }
     th { background:#333; }
+
+    .btn-small {
+      background:#333;
+      border:none;
+      padding:6px 10px;
+      border-radius:6px;
+      color:#FAF1E4;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .btn-small:hover { background:#1F53FF; color:#fff; }
+
   </style>
+  <!-- ✅ CSRF 토큰을 가져오는 유틸 함수 추가 -->
+  <script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    // ✅ 전역 변수로 CSRF 토큰 저장
+    const csrftoken = getCookie('csrftoken');
+  </script>
 </head>
 <body>
 
@@ -113,6 +164,52 @@
         </div>
       </div>
 
+      <!-- NAS Config (Zero-shot only) -->
+      <div class="form-card" id="nasConfigBox" style="display:none;">
+        <h3>NAS Config</h3>
+
+        <!-- GPU & SEED -->
+        <label>GPU ID <input type="number" name="gpu" value="0" /></label>
+        <label>Seed <input type="number" name="seed" value="123" /></label>
+
+        <!-- Metric -->
+        <label>Metric
+          <select name="metric">
+            <option value="AZ_NAS">AZ_NAS</option>
+            <option value="SynFlow">SynFlow</option>
+            <option value="GradNorm">GradNorm</option>
+          </select>
+        </label>
+
+        <!-- Population & Iteration -->
+        <label>Population Size <input type="number" name="population_size" value="100" /></label>
+        <label>Evolution Max Iter <input type="number" name="evolution_max_iter" value="100" /></label>
+
+        <!-- Resolution -->
+        <label>Resolution <input type="number" name="resolution" value="224" /></label>
+
+        <!-- Budget FLOPs -->
+        <label>Budget FLOPs (×1e6):</label>
+        <input type="range" id="flopsSlider" min="50" max="1000" step="50" value="1000" />
+        <p id="flopsValue" style="margin-top:8px;">Current: 1000e6</p>
+
+        <div style="display:flex; gap:8px; margin-top:10px;">
+          <button type="button" class="btn-small" id="flopsSmall">Small (450e6)</button>
+          <button type="button" class="btn-small" id="flopsMedium">Medium (600e6)</button>
+          <button type="button" class="btn-small" id="flopsLarge">Large (1000e6)</button>
+        </div>
+        <input type="hidden" name="budget_flops" id="budgetFlopsHidden" value="1000e6" />
+
+        <!-- Max Layers / Batch Size -->
+        <label>Max Layers <input type="number" name="max_layers" value="16" /></label>
+        <label>Batch Size <input type="number" name="batch_size" value="32" /></label>
+
+        <!-- Data Path -->
+        <label>Data Path <input type="text" name="data_path" value="/dataset/ILSVRC2012/" /></label>
+      </div>
+
+
+
       <!-- Optimization -->
       <div class="form-card">
         <h3>Optimization (select one)</h3>
@@ -140,45 +237,143 @@
     const resultBody = resultTable.querySelector("tbody");
     const form = document.getElementById("totalForm");
 
+    // === NAS CONFIG Logic ===
+    const nasBox = document.getElementById("nasConfigBox");
+    const flopsSlider = document.getElementById("flopsSlider");
+    const flopsValue = document.getElementById("flopsValue");
+    const flopsHidden = document.getElementById("budgetFlopsHidden");
+
+    const flopsSmall = document.getElementById("flopsSmall");
+    const flopsMedium = document.getElementById("flopsMedium");
+    const flopsLarge = document.getElementById("flopsLarge");
+
+    // ① Network 선택 변화 감지 → Zero-shot 시 NAS Config 표시
+    const networkRadios = document.querySelectorAll("input[name='network']");
+    networkRadios.forEach(radio => {
+      radio.addEventListener("change", () => {
+        if (radio.value === "zeroshot" && radio.checked) {
+          nasBox.style.display = "block";
+        } else if (radio.checked) {
+          nasBox.style.display = "none";
+        }
+      });
+    });
+
+    // ② 슬라이더 값 업데이트
+    flopsSlider.addEventListener("input", () => {
+      const val = flopsSlider.value;
+      flopsValue.textContent = `Current: ${val}e6`;
+      flopsHidden.value = `${val}e6`;
+    });
+
+    // ③ 버튼 클릭 시 슬라이더 이동
+    flopsSmall.onclick = () => {
+      flopsSlider.value = 450;
+      flopsValue.textContent = "Current: 450e6";
+      flopsHidden.value = "450e6";
+    };
+    flopsMedium.onclick = () => {
+      flopsSlider.value = 600;
+      flopsValue.textContent = "Current: 600e6";
+      flopsHidden.value = "600e6";
+    };
+    flopsLarge.onclick = () => {
+      flopsSlider.value = 1000;
+      flopsValue.textContent = "Current: 1000e6";
+      flopsHidden.value = "1000e6";
+    };
+
+
     let isRunning = false;
     let stopRequested = false;
 
-    runBtn.onclick = async () => {
-      if (isRunning) return;
-      isRunning = true;
-      stopRequested = false;
+    // runBtn.onclick = async () => {
+    //   if (isRunning) return;
+    //   isRunning = true;
+    //   stopRequested = false;
 
-      // ✅ 로그 완전 초기화
-      logBox.innerHTML = "";
+    //   // ✅ 로그 완전 초기화
+    //   logBox.innerHTML = "";
+    //   resultTable.style.display = "none";
+    //   resultBody.innerHTML = "";
+
+    //   logLine("🚀 Running YSAutoML Total Pipeline...");
+
+    //   const formData = new FormData(form);
+    //   const selectedData = formData.getAll("data");
+    //   const network = formData.get("network");
+    //   const optimization = formData.get("optimization");
+    //   const model = formData.get("model");
+
+    //   // Stage 1
+    //   if (await stageCheck(`[Stage 1] Running ${network} search for ${model}...`, 2000)) return;
+    //   addRow("Network Search", "Done", `ckpt_best_${network}.pth`);
+
+    //   // Stage 2
+    //   for (const d of selectedData) {
+    //     if (await stageCheck(`[Stage 2] Applying Data Method: ${d.toUpperCase()}...`, 1500)) return;
+    //     addRow(`Data: ${d.toUpperCase()}`, "Applied", `processed_${d}.json`);
+    //   }
+
+    //   // Stage 3
+    //   if (await stageCheck(`[Stage 3] Running ${optimization} optimization...`, 2500)) return;
+    //   addRow("Optimization", "Done", `final_${optimization}.pth`);
+
+    //   logLine(`✅ Total Pipeline Finished Successfully.`);
+    //   resultTable.style.display = "table";
+    //   isRunning = false;
+    // };
+    runBtn.onclick = async () => {
+      logBox.innerHTML = "🚀 Running YSAutoML Total Pipeline...\n";
       resultTable.style.display = "none";
       resultBody.innerHTML = "";
 
-      logLine("🚀 Running YSAutoML Total Pipeline...");
-
       const formData = new FormData(form);
-      const selectedData = formData.getAll("data");
-      const network = formData.get("network");
-      const optimization = formData.get("optimization");
-      const model = formData.get("model");
+      const body = {};
+      formData.forEach((v, k) => (body[k] = v));
 
-      // Stage 1
-      if (await stageCheck(`[Stage 1] Running ${network} search for ${model}...`, 2000)) return;
-      addRow("Network Search", "Done", `ckpt_best_${network}.pth`);
+      const response = await fetch("/run_total_pipeline/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-CSRFToken": getCookie("csrftoken") },
+        body: JSON.stringify(body),
+      });
 
-      // Stage 2
-      for (const d of selectedData) {
-        if (await stageCheck(`[Stage 2] Applying Data Method: ${d.toUpperCase()}...`, 1500)) return;
-        addRow(`Data: ${d.toUpperCase()}`, "Applied", `processed_${d}.json`);
+      if (!response.ok) {
+        logBox.innerHTML += "❌ Failed to start pipeline.\n";
+        return;
       }
 
-      // Stage 3
-      if (await stageCheck(`[Stage 3] Running ${optimization} optimization...`, 2500)) return;
-      addRow("Optimization", "Done", `final_${optimization}.pth`);
+      // ✅ 스트리밍 로그 읽기
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let buffer = "";
 
-      logLine(`✅ Total Pipeline Finished Successfully.`);
-      resultTable.style.display = "table";
-      isRunning = false;
+      let downloadAdded = false;  // ✅ 중복 방지용 flag
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        buffer += chunk;
+        logBox.innerHTML += chunk;
+        logBox.scrollTop = logBox.scrollHeight;
+
+        // ✅ 다운로드 경로 감지 (한 번만 추가)
+        const match = buffer.match(/\[DOWNLOAD_READY\] (.+)/);
+        if (match && !downloadAdded) {
+          const filePath = match[1].trim();
+          const fileUrl = `/download_file/?path=${encodeURIComponent(filePath)}`;
+          addRow(
+            "Best Architecture",
+            "Ready",
+            `<a href="${fileUrl}" target="_blank">Download best_structure.txt</a>`
+          );
+          resultTable.style.display = "table";
+          downloadAdded = true; // ✅ 한 번만 실행되게 함
+        }
+      }
     };
+
 
     stopBtn.onclick = () => {
       if (isRunning) {
@@ -203,9 +398,9 @@
       return false;
     }
 
-    function addRow(stage, status, path) {
+    function addRow(stage, status, pathHTML) {
       const row = document.createElement("tr");
-      row.innerHTML = `<td>${stage}</td><td>${status}</td><td>${path}</td>`;
+      row.innerHTML = `<td>${stage}</td><td>${status}</td><td>${pathHTML}</td>`;
       resultBody.appendChild(row);
     }
 

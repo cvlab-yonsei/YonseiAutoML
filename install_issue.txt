@@ -36,7 +36,7 @@ pip install --no-cache-dir --force-reinstall horovod==0.28.0
 Traceback (most recent call last):
   File "api_test_network.py", line 70, in <module>
     run_retrain_zeroshot(
-  File "/data1/hyunju/code/TempAutoML/ysautoml/network/zeroshot/mobilenetv2/api.py", line 278, in run_retrain_zeroshot
+  File "/data1/hyunju/code/YonseiAutoML/ysautoml/network/zeroshot/mobilenetv2/api.py", line 278, in run_retrain_zeroshot
     raise RuntimeError(f"Training failed with code {train_proc.returncode}")
 RuntimeError: Training failed with code 134
 
@@ -54,14 +54,14 @@ python manage.py runserver 0.0.0.0:8888
 http://{ip}:32609
 
 ysautoml import error 발생시 (경로지정)
-PYTHONPATH=/data1/hyunju/code/TempAutoML python manage.py runserver 0.0.0.0:8888
+PYTHONPATH=/data1/hyunju/code/YonseiAutoML python manage.py runserver 0.0.0.0:8888
 
 
 # 7. 방화벽 해제 (필요시)
 sudo ufw allow 32609/tcp
 =========
 
-[FXP] Traceback (most recent call last): [FXP] File "/data1/hyunju/code/TempAutoML/ysautoml/optimization/fxp/engines/train.py", line 899, in <module> [FXP] main() [FXP] File "/data1/hyunju/code/TempAutoML/ysautoml/optimization/fxp/engines/train.py", line 894, in main [FXP] run(config) [FXP] File "/data1/hyunju/code/TempAutoML/ysautoml/optimization/fxp/engines/train.py", line 800, in run [FXP] q_scheduler = get_q_scheduler(config, q_optimizer, last_epoch) [FXP] File "/data1/hyunju/code/TempAutoML/ysautoml/optimization/fxp/engines/schedulers/scheduler_factory.py", line 46, in get_q_scheduler [FXP] return func(optimizer, last_epoch, **config.q_scheduler.params) [FXP] File "/data1/hyunju/code/TempAutoML/ysautoml/optimization/fxp/engines/schedulers/scheduler_factory.py", line 15, in multi_step [FXP] return lr_scheduler.MultiStepLR(optimizer, milestones=milestones, [FXP] File "/usr/local/lib/python3.8/dist-packages/torch/optim/lr_scheduler.py", line 412, in __init__ [FXP] super(MultiStepLR, self).__init__(optimizer, last_epoch, verbose) [FXP] File "/usr/local/lib/python3.8/dist-packages/torch/optim/lr_scheduler.py", line 39, in __init__ [FXP] raise KeyError("param 'initial_lr' is not specified " [FXP] KeyError: "param 'initial_lr' is not specified in param_groups[0] when resuming an optimizer" Traceback (most recent call last): File "api_test_opt.py", line 4, in <module> train_fxp( File "/data1/hyunju/code/TempAutoML/ysautoml/optimization/fxp/api.py", line 50, in train_fxp raise RuntimeError(f"FXP training failed with code {process.returncode}") RuntimeError: FXP training failed with code 1
+[FXP] Traceback (most recent call last): [FXP] File "/data1/hyunju/code/YonseiAutoML/ysautoml/optimization/fxp/engines/train.py", line 899, in <module> [FXP] main() [FXP] File "/data1/hyunju/code/YonseiAutoML/ysautoml/optimization/fxp/engines/train.py", line 894, in main [FXP] run(config) [FXP] File "/data1/hyunju/code/YonseiAutoML/ysautoml/optimization/fxp/engines/train.py", line 800, in run [FXP] q_scheduler = get_q_scheduler(config, q_optimizer, last_epoch) [FXP] File "/data1/hyunju/code/YonseiAutoML/ysautoml/optimization/fxp/engines/schedulers/scheduler_factory.py", line 46, in get_q_scheduler [FXP] return func(optimizer, last_epoch, **config.q_scheduler.params) [FXP] File "/data1/hyunju/code/YonseiAutoML/ysautoml/optimization/fxp/engines/schedulers/scheduler_factory.py", line 15, in multi_step [FXP] return lr_scheduler.MultiStepLR(optimizer, milestones=milestones, [FXP] File "/usr/local/lib/python3.8/dist-packages/torch/optim/lr_scheduler.py", line 412, in __init__ [FXP] super(MultiStepLR, self).__init__(optimizer, last_epoch, verbose) [FXP] File "/usr/local/lib/python3.8/dist-packages/torch/optim/lr_scheduler.py", line 39, in __init__ [FXP] raise KeyError("param 'initial_lr' is not specified " [FXP] KeyError: "param 'initial_lr' is not specified in param_groups[0] when resuming an optimizer" Traceback (most recent call last): File "api_test_opt.py", line 4, in <module> train_fxp( File "/data1/hyunju/code/YonseiAutoML/ysautoml/optimization/fxp/api.py", line 50, in train_fxp raise RuntimeError(f"FXP training failed with code {process.returncode}") RuntimeError: FXP training failed with code 1
 
 rm -rf ./logs/fxp_cifar100
 rm -rf ./results

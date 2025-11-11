@@ -24,7 +24,7 @@ def train_dynas(
     # --- 경로 계산 ---
     base_dir = Path(__file__).resolve().parent / "engines"   # ✅ engines 폴더로 이동
     script_path = base_dir / "train_spos.py"                 # ✅ 실제 파일 경로
-    root_dir = base_dir.parent.parent.parent                 # .../TempAutoML
+    root_dir = base_dir.parent.parent.parent                 # .../YonseiAutoML
 
     if not script_path.exists():
         raise FileNotFoundError(f"train_spos.py not found at {script_path}")

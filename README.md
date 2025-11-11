@@ -21,7 +21,7 @@
 [📘Documentation](https://dev-julie.gitbook.io/ysautoml) |
 [🛠️Installation](https://dev-julie.gitbook.io/ysautoml/get-started/get-started#installation) |
 [🚀Research](https://cvlab.yonsei.ac.kr/research/) |
-[🤔Reporting Issues](https://github.com/cvlab-yonsei/TempAutoML/issues)
+[🤔Reporting Issues](https://github.com/cvlab-yonsei/YonseiAutoML/issues)
 
 </div>
 
@@ -86,8 +86,8 @@ The library is designed as part of a multi-year project that aims to:
 YSAutoML requires **Python 3.8+** and **PyTorch 1.8+**.
 
 ```bash
-git clone https://github.com/cvlab-yonsei/TempAutoML.git
-cd TempAutoML
+git clone https://github.com/cvlab-yonsei/YonseiAutoML.git
+cd YonseiAutoML
 pip install -v -e .
 ```
 
@@ -175,7 +175,7 @@ If you use this toolbox or benchmark in your research, please cite:
   title   = {YSAutoML: Automated AI System Construction Library},
   author  = {Yonsei CVLab},
   year    = {2025},
-  note    = {https://github.com/cvlab-yonsei/TempAutoML}
+  note    = {https://github.com/cvlab-yonsei/YonseiAutoML}
 }
 ```
 

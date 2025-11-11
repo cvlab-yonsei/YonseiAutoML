@@ -15,4 +15,6 @@ urlpatterns = [
     path("optimization/", views.optimization_utility, name="optimization"),
     path('run/', views.run_automl, name='run_automl'),
     path('total/', views.total_dashboard, name='total_dashboard'),
+    path("run_total_pipeline/", views.run_total_pipeline, name="run_total_pipeline"),
+    path("download_file/", views.download_file, name="download_file"), 
 ]
