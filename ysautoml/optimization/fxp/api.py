@@ -16,7 +16,8 @@ def train_fxp(
     """
 
     base_dir = Path(__file__).resolve().parent
-    train_script = base_dir / "engines" / "train.py"
+    # train_script = base_dir / "engines" / "train.py"
+    train_script = base_dir / "engines" / "train_ImageNet.py"
     config_path = base_dir / "engines" / config
     save_path = Path(save_dir).resolve()
     os.makedirs(save_path, exist_ok=True)

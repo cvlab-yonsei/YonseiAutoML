@@ -6,8 +6,8 @@ student_model:
   name: 'mobilenet_ste'
   params:
     pretrained: True
-    num_classes: 100
-    # num_classes: 1000 # ㅇ0ㅇ 
+    # num_classes: 100
+    num_classes: 1000 # ㅇ0ㅇ 
     # num_bit: 4
   pretrain:
     pretrained: False
