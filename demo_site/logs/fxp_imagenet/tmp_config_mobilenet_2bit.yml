@@ -1,0 +1,44 @@
+data:
+  num_workers: 32
+  pin_memory: true
+eval:
+  batch_size: 500
+gpu: 0,1,2,3
+loss:
+  name: cross_entropy
+  params:
+    reduction: mean
+optimizer:
+  name: sgd
+  params:
+    lr: 0.05
+    weight_decay: 4.0e-05
+q_optimizer:
+  name: adam
+  params:
+    lr: 1.0e-05
+    weight_decay: 0.0
+q_scheduler:
+  name: cosine
+  params:
+    T_max: 750750
+    eta_min: 0.0
+scheduler:
+  name: cosine
+  params:
+    T_max: 750750
+    eta_min: 0.0
+student_model:
+  name: mobilenet_ste
+  params:
+    arch_path: /data1/hyunju/code/YonseiAutoML/ysautoml/network/zeroshot/mobilenetv2/engines/ImageNet_MBV2/save_dir/AZ_NAS_flops1G-searchbs32-pop100-iter100-123/best_structure.txt
+    num_classes: 1000
+    pretrained: true
+  pretrain:
+    dir: ./results/cvpr_quant/resnet18_ste_mpq_act.w2a2bit_weight_2.0bit_val_0.1con_0.0osi_STE_from_2bit_express_weight_0.5_soft_T10_float_bitloss_0.0_schedule_mu5_adam/checkpoint/epoch_0029.pth
+    pretrained: false
+train:
+  batch_size: 256
+  dir: ./results/cvpr_quant_resnet18
+  num_epochs: 150
+  student_dir: .5bit_grad_adam1e-5_maxratio1e-5_3e-5_gamma_base_0.6

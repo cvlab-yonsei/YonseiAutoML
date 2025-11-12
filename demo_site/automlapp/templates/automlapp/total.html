@@ -37,14 +37,39 @@
     .logo-link { color:#FAF1E4; text-decoration:none; cursor:pointer; }
     .logo-link:hover { color:#FAF1E4; }
 
+    a {
+      color: #FAF1E4;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #1F53FF; /* hover 시 포인트 색 */
+    }
+
+
     /* Content */
     /* .content { flex:1; padding:20px; } */
-    .topbar { display:flex; justify-content:flex-end; align-items:center; gap:10px; margin-bottom:15px; }
+    .topbar {
+      position: fixed;          /* ✅ 화면 상단 고정 */
+      top: 0;                   /* ✅ 위에서 0px */
+      right: 0;                 /* 오른쪽 정렬 */
+      left: 300px;              /* sidebar 폭만큼 띄움 */
+      height: 60px;             /* 필요시 고정 높이 */
+      background: #1B1B1B;      /* 배경색 깔아서 가려지지 않게 */
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      padding: 0 20px;
+      z-index: 1001;            /* sidebar보다 살짝 위 */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
     .btn-train { background:#1F53FF; border:none; padding:10px 20px; color:#fff; border-radius:6px; cursor:pointer; }
     .btn-stop { background:#d32f2f; border:none; padding:10px 20px; color:#fff; border-radius:6px; cursor:pointer; }
 
     /* Form layout */
-    .form-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
+    .form-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; margin-top: 50px;}
     .form-card { background:#1F1F1F; padding:16px; border-radius:10px; box-shadow:0 0 6px rgba(0,0,0,0.3); }
     .form-card h3 { font-size:14px; font-weight:600; margin-bottom:10px; color:#EAEAEA; }
     .form-card select, .form-card input { width:100%; padding:10px; background:#262626; border:1px solid #333; border-radius:6px; color:#FAF1E4; font-size:14px; }
@@ -242,7 +267,7 @@
           <label><span>MTL</span><input type="radio" name="optimization" value="mtl"></label>
         </div>
       </div>
-
+      
       <div id="modelGraphBox" style="margin-top:30px; display:none; text-align:center;">
         <h4>🧩 Model Architecture Graph</h4>
         <div id="graphViewerWrapper">
@@ -251,6 +276,19 @@
       </div>
 
     </form>
+
+    
+      <!-- FXP Config Upload -->
+      <div id="fxpUploadBox" style="margin-top:30px;">
+        <h3>⚙️ FXP Optimization Config</h3>
+        <form id="fxpForm" enctype="multipart/form-data">
+          <label>FXP Config File (.yml)
+            <input type="file" name="config_file" accept=".yml,.yaml" required lang="en">
+          </label>
+        </form>
+      </div>
+
+
 
 
     <div class="logbox" id="logBox"></div>
@@ -404,6 +442,21 @@
           downloadAdded = true; // ✅ 한 번만 실행되게 함
 
           await visualizeModelGraph(filePath);
+          
+          await runFXPTrainingAutomatically();
+
+          if (data.url) {
+            const box = document.getElementById("modelGraphBox");
+            const img = document.getElementById("modelGraphImage");
+            img.src = data.url + "?t=" + new Date().getTime();
+            box.style.display = "block";
+            logLine(`✅ Model visualization ready: ${data.url}`);
+
+            // ✅ FXP 실행 박스 활성화
+            document.getElementById("fxpUploadBox").style.display = "block";
+          }
+
+
         }
       }
     };
@@ -501,13 +554,128 @@
       if (data.url) {
         const box = document.getElementById("modelGraphBox");
         const img = document.getElementById("modelGraphImage");
-        img.src = data.url + "?t=" + new Date().getTime(); // cache 방지
+        img.src = data.url + "?t=" + new Date().getTime();
         box.style.display = "block";
         logLine(`✅ Model visualization ready: ${data.url}`);
       } else {
         logLine("⚠️ Model visualization failed.");
       }
     }
+
+
+
+    const fxpForm = document.getElementById("fxpForm");
+
+    fxpForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      logLine("⚙️ Starting FXP training...");
+      const formData = new FormData(fxpForm);
+
+      // ✅ FYI / DSBN 체크박스 값 가져오기
+      const dsbnChecked = document.querySelector("input[name='data'][value='dsbn']").checked;
+      const fyiChecked = document.querySelector("input[name='data'][value='fyi']").checked;
+
+      formData.set("dsbn", dsbnChecked ? "true" : "false");
+      formData.set("fyi", fyiChecked ? "true" : "false");
+
+      // ✅ best_structure.txt 경로는 서버가 자동 참조하므로 프론트에서 안보냄
+
+      const response = await fetch("/run_fxp_training/", {
+        method: "POST",
+        headers: { "X-CSRFToken": getCookie("csrftoken") },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        logLine("❌ FXP training failed to start.");
+        return;
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+
+      let buffer = "";
+      let downloadAdded = false;
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        buffer += chunk;
+        logBox.innerHTML += chunk;
+        logBox.scrollTop = logBox.scrollHeight;
+
+        const match = buffer.match(/\[FXP_DONE\] (.+)/);
+        if (match && !downloadAdded) {
+          const pthPath = match[1].trim();
+          const fileUrl = `/download_file/?path=${encodeURIComponent(pthPath)}`;
+          addRow("FXP Optimization", "Done", `<a href="${fileUrl}" target="_blank">Download .pth</a>`);
+          resultTable.style.display = "table";
+          downloadAdded = true;
+        }
+      }
+    });
+
+    async function runFXPTrainingAutomatically() {
+      console.log("🔥 FXP auto run triggered");
+      logLine("⚙️ Auto FXP starting with hardcoded config...");
+
+      // ✅ 절대경로 하드코딩
+      const configPath = "/data1/hyunju/code/YonseiAutoML/ysautoml/optimization/fxp/engines/configs/mobilenet_2bit.yml";
+
+      // ✅ DSBN/FYI 체크 여부
+      const dsbnChecked = document.querySelector("input[name='data'][value='dsbn']").checked;
+      const fyiChecked  = document.querySelector("input[name='data'][value='fyi']").checked;
+      logLine(`⚙️ DSBN=${dsbnChecked}, FYI=${fyiChecked}`);
+
+      // ✅ FormData 구성 (파일 대신 경로 문자열만 전송)
+      const formData = new FormData();
+      formData.append("config_path", configPath);
+      formData.append("dsbn", dsbnChecked ? "true" : "false");
+      formData.append("fyi",  fyiChecked  ? "true" : "false");
+
+      logLine(`📄 Using config: ${configPath}`);
+
+      // ✅ FXP 요청
+      const response = await fetch("/run_fxp_training/", {
+        method: "POST",
+        headers: { "X-CSRFToken": getCookie("csrftoken") },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        logLine("❌ FXP training failed to start.");
+        return;
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let buffer = "";
+      let doneFlag = false;
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        buffer += chunk;
+        logBox.innerHTML += chunk;
+        logBox.scrollTop = logBox.scrollHeight;
+
+        const match = buffer.match(/\[FXP_DONE\] (.+)/);
+        if (match && !doneFlag) {
+          const pthPath = match[1].trim();
+          const url = `/download_file/?path=${encodeURIComponent(pthPath)}`;
+          addRow("FXP Optimization", "Done", `<a href="${url}" target="_blank">Download .pth</a>`);
+          resultTable.style.display = "table";
+          doneFlag = true;
+          logLine(`✅ FXP done: ${pthPath}`);
+        }
+      }
+    }
+
 
   </script>
 </body>

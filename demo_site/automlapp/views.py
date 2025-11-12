@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, time
 sys.path.append(os.path.abspath("/data2/hyunju/data/YonseiAutoML"))
 
 from django.shortcuts import render
@@ -13,6 +13,10 @@ import json, io, re, os, contextlib, torch
 from torchviz import make_dot
 from django.conf import settings
 from django.views.decorators.http import require_POST
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+from contextlib import redirect_stdout, redirect_stderr
+
 
 
 
@@ -53,11 +57,19 @@ def run_dsa_api(request):
     return JsonResponse({"error": "Invalid request"}, status=400)
 
 def run_dsa_stream(request):
+    """
+    FYI용 데이터 증류 스트리밍 실행 (절대경로 하드코딩 제거 버전)
+    """
+    # ✅ 현재 Django 프로젝트의 루트 기준
+    project_root = Path(settings.BASE_DIR).resolve().parent
+    ysa_root = project_root / "ysautoml"
+
+    # ✅ 환경 변수 설정
     env = os.environ.copy()
-    env["PYTHONPATH"] = "/data2/hyunju/data/YonseiAutoML"  # ysautoml 루트 경로
+    env["PYTHONPATH"] = str(project_root)  # 🔥 자동으로 ysautoml 상위 경로 등록
 
     cmd = [
-        "python", "-u", "-c",
+        sys.executable, "-u", "-c",
         (
             "from ysautoml.data.fyi import run_dsa; "
             "run_dsa(dataset='CIFAR10', model='ConvNet', ipc=10, device='0')"
@@ -66,7 +78,7 @@ def run_dsa_stream(request):
 
     process = subprocess.Popen(
         cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-        text=True, env=env
+        text=True, bufsize=1, universal_newlines=True, env=env
     )
 
     def stream():
@@ -76,7 +88,6 @@ def run_dsa_stream(request):
         process.wait()
 
     return StreamingHttpResponse(stream(), content_type="text/event-stream")
-
 
 def fetch_logs(request):
     return JsonResponse({"logs": log_buffer})
@@ -380,3 +391,109 @@ def visualize_model_from_structure(request):
 
         # 🚨 3️⃣ 임시로 바로 중단시켜서 Django 기본 traceback 출력 유도
         raise e
+
+
+@csrf_exempt
+def run_fxp_training(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "Invalid method"}, status=405)
+
+    config_path = "/data1/hyunju/code/YonseiAutoML/ysautoml/optimization/fxp/engines/configs/mobilenet_2bit.yml"
+    dsbn_flag = request.POST.get("dsbn", "false").lower() == "true"
+    fyi_flag  = request.POST.get("fyi", "false").lower() == "true"
+
+    best_struct_path = Path(
+        "/data1/hyunju/code/YonseiAutoML/ysautoml/network/zeroshot/mobilenetv2/engines/"
+        "ImageNet_MBV2/save_dir/AZ_NAS_flops1G-searchbs32-pop100-iter100-123/best_structure.txt"
+    )
+
+    def stream_fxp():
+        yield f"[FXP] Config: {config_path}\n"
+        yield f"[FXP] DSBN={dsbn_flag}, FYI={fyi_flag}\n"
+        yield f"[FXP] Using best structure: {best_struct_path}\n"
+        yield "[FXP] Starting FXP training...\n\n"
+        sys.stdout.flush()
+
+        # ✅ subprocess 실행 (stdout을 스트리밍으로 바로 읽기)
+        cmd = [
+            sys.executable, "-u", "-c",
+            (
+                "from ysautoml.optimization.fxp import train_fxp; "
+                "trained_pth = train_fxp("
+                f"config='{config_path}', "
+                f"device='cuda:0', seed=42, "
+                f"save_dir='./logs/fxp_imagenet', "
+                f"arch_path='{best_struct_path}', "
+                f"dsbn={dsbn_flag}, fyi={fyi_flag}); "
+                "print(f'\\n[FXP_DONE] {trained_pth}')"
+            )
+        ]
+
+        process = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            bufsize=1,
+            universal_newlines=True,
+        )
+
+        for line in iter(process.stdout.readline, ""):
+            yield line
+            sys.stdout.write(line)  # 터미널에도 출력
+            sys.stdout.flush()
+
+        process.stdout.close()
+        process.wait()
+
+        yield "\n✅ FXP training process finished.\n"
+
+    response = StreamingHttpResponse(stream_fxp(), content_type="text/plain")
+    response["Cache-Control"] = "no-cache"
+    response["X-Accel-Buffering"] = "no"
+    return response
+
+
+# @csrf_exempt
+# def run_fxp_training(request):
+#     if request.method != "POST":
+#         return JsonResponse({"error": "Invalid method"}, status=405)
+
+#     # ✅ 업로드된 config.yml 저장
+#     config_file = request.FILES["config_file"]
+#     tmp_dir = Path(tempfile.mkdtemp(prefix="fxp_"))
+#     config_path = tmp_dir / config_file.name
+#     default_storage.save(str(config_path), ContentFile(config_file.read()))
+
+#     dsbn_flag = request.POST.get("dsbn", "false").lower() == "true"
+#     fyi_flag = request.POST.get("fyi", "false").lower() == "true"
+
+#     # ✅ zero-shot 과정에서 생성된 best_structure.txt 경로 자동 참조
+#     best_struct_path = Path("/data1/hyunju/code/YonseiAutoML/ysautoml/network/zeroshot/mobilenetv2/engines/ImageNet_MBV2/save_dir/AZ_NAS_flops1G-searchbs32-pop100-iter100-123/best_structure.txt")
+
+#     def stream_fxp():
+#         yield f"[FXP] Config: {config_path}\n"
+#         yield f"[FXP] DSBN={dsbn_flag}, FYI={fyi_flag}\n"
+#         yield f"[FXP] Using best structure: {best_struct_path}\n"
+#         try:
+#             from ysautoml.optimization.fxp import train_fxp
+#             yield "[FXP] Starting FXP training...\n"
+
+#             trained_pth = train_fxp(
+#                 config=str(config_path),
+#                 device="cuda:0",
+#                 seed=42,
+#                 save_dir="./logs/fxp_imagenet",
+#                 arch_path=str(best_struct_path),
+#                 dsbn=dsbn_flag,
+#                 fyi=fyi_flag,
+#             )
+
+#             if trained_pth:
+#                 yield f"[FXP_DONE] {trained_pth}\n"
+#             else:
+#                 yield "[FXP] Training finished but no .pth found.\n"
+#         except Exception as e:
+#             yield f"[FXP_ERROR] {e}\n"
+
+#     return StreamingHttpResponse(stream_fxp(), content_type="text/plain")

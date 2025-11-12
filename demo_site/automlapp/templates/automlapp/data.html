@@ -229,9 +229,16 @@
     // 1) 로그 스트리밍 시작
     const eventSource = new EventSource("/api/run_dsa_stream/");
     eventSource.onmessage = function(event) {
-      logBox.innerHTML += event.data + "\n";
+      // ✅ \n을 실제 HTML 줄바꿈으로 변환
+      const formatted = event.data
+        .replace(/\r?\n/g, "<br>")
+        .replace(/\s\s/g, "&nbsp;&nbsp;"); // (선택) 공백 유지
+
+      // ✅ 로그 누적
+      logBox.insertAdjacentHTML("beforeend", formatted + "<br>");
       logBox.scrollTop = logBox.scrollHeight;
     };
+
 
     // 2) 실행 끝나면 SSE 닫히고 결과 가져오기
     eventSource.onerror = async function() {
