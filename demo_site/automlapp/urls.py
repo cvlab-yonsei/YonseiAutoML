@@ -20,4 +20,10 @@ urlpatterns = [
     path("visualize_model_from_structure/", views.visualize_model_from_structure, name="visualize_model_from_structure"),
     path("run_fxp_training/", views.run_fxp_training, name="run_fxp_training"), 
 
+    path("api/dsbn_convert_stream/", views.dsbn_convert_stream, name="dsbn_convert_stream"),
+    path("api/dsbn_convert/", views.dsbn_convert_api, name="dsbn_convert_api"),
+    path("api/dsbn_train_stream/", views.dsbn_train_stream, name="dsbn_train_stream"),
+    path("api/dsbn_train/", views.dsbn_train_api, name="dsbn_train_api"),
+
+
 ]

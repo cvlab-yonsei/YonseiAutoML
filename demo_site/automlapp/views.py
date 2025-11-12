@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, StreamingHttpResponse, FileResponse
 import io, sys, threading, traceback
 from ysautoml.data.fyi import run_dsa
+from ysautoml.data.dsbn import convert_and_wrap, train_with_dsbn
 from ysautoml.network.zeroshot.mobilenetv2 import run_search_zeroshot
 import subprocess
 from pathlib import Path
@@ -16,6 +17,10 @@ from django.views.decorators.http import require_POST
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from contextlib import redirect_stdout, redirect_stderr
+
+import torchvision
+import torchvision.transforms as transforms
+from torch.utils.data import DataLoader, random_split
 
 
 
@@ -497,3 +502,197 @@ def run_fxp_training(request):
 #             yield f"[FXP_ERROR] {e}\n"
 
 #     return StreamingHttpResponse(stream_fxp(), content_type="text/plain")
+
+# 공통 결과 저장 경로 (SSE 실행 중에 결과를 파일로 떨궈두고 /api에서 읽음)
+_TMP_DIR = Path(settings.BASE_DIR).resolve() / "static" / "tmp"
+_TMP_DIR.mkdir(parents=True, exist_ok=True)
+_DSBN_CONVERT_JSON = _TMP_DIR / "dsbn_convert_result.json"
+_DSBN_TRAIN_JSON   = _TMP_DIR / "dsbn_train_result.json"
+
+# -----------------------------
+# DSBN Convert - SSE Stream
+# -----------------------------
+def dsbn_convert_stream(request):
+    """
+    convert_and_wrap 실행 로그를 SSE로 전달.
+    convert는 내부적으로 크게 프린트가 많지 않으니, 여기서 수동으로 단계 로그를 보냄.
+    """
+    # GET 파라미터
+    model_or_name = request.GET.get("model_or_name", "").strip() or None
+    dataset = request.GET.get("dataset", "CIFAR10")
+    num_classes = int(request.GET.get("num_classes", 10))
+    use_aug = request.GET.get("use_aug", "false").lower() == "true"
+    mode_str = request.GET.get("mode", "").strip()
+    mode = int(mode_str) if mode_str.isdigit() else None
+    device = request.GET.get("device", "0")
+    export_path = request.GET.get("export_path", "").strip() or None
+
+    def stream():
+        try:
+            yield f"data: [DSBN-CONVERT] Starting... dataset={dataset}, num_classes={num_classes}, use_aug={use_aug}, mode={mode}, device={device}\n\n"
+
+            # 실제 변환
+            model = convert_and_wrap(
+                model_or_name=model_or_name or "resnet18_cifar",
+                dataset=dataset,
+                num_classes=num_classes,
+                use_aug=use_aug,
+                mode=mode,
+                device=device,
+                export_path=export_path
+            )
+
+            yield f"data: [DSBN-CONVERT] Model converted to DSBN. Mode set. ({'inferred from use_aug' if mode is None else f'mode={mode}'})\n\n"
+
+            if export_path:
+                yield f"data: [DSBN-CONVERT] state_dict saved to: {export_path}\n\n"
+
+            # 결과 JSON 떨구기
+            result = {
+                "model": model_or_name or "resnet18_cifar",
+                "dataset": dataset,
+                "num_classes": num_classes,
+                "mode": mode_str or None,
+                "exported_path": export_path,
+            }
+            _DSBN_CONVERT_JSON.write_text(json.dumps(result), encoding="utf-8")
+            yield "data: [DONE]\n\n"
+
+        except Exception as e:
+            err = f"[ERROR] {str(e)}"
+            yield f"data: {err}\n\n"
+
+    resp = StreamingHttpResponse(stream(), content_type="text/event-stream")
+    resp["Cache-Control"] = "no-cache"
+    return resp
+
+# -----------------------------
+# DSBN Convert - Final JSON
+# -----------------------------
+@csrf_exempt
+def dsbn_convert_api(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "Invalid method"}, status=405)
+    try:
+        if not _DSBN_CONVERT_JSON.exists():
+            return JsonResponse({"error": "No convert result found."}, status=404)
+        data = json.loads(_DSBN_CONVERT_JSON.read_text(encoding="utf-8"))
+        return JsonResponse({"result": data})
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+
+# -----------------------------
+# DSBN Train - SSE Stream
+# -----------------------------
+def dsbn_train_stream(request):
+    dataset = request.GET.get("dataset", "CIFAR10")
+    batch_size = int(request.GET.get("batch_size", 128))
+    epochs = int(request.GET.get("epochs", 1))
+    lr = float(request.GET.get("lr", 0.01))
+    mixed_batch = request.GET.get("mixed_batch", "false").lower() == "true"
+    device = request.GET.get("device", "cuda")
+
+    def stream():
+        try:
+            yield f"data: [DSBN-TRAIN] Preparing dataset {dataset}...\n\n"
+            transform = transforms.Compose([transforms.ToTensor()])
+
+            if dataset.upper() == "CIFAR100":
+                full_train = torchvision.datasets.CIFAR100(root="./data", train=True, download=True, transform=transform)
+                num_classes = 100
+            else:
+                full_train = torchvision.datasets.CIFAR10(root="./data", train=True, download=True, transform=transform)
+                num_classes = 10
+
+            len_source = len(full_train) // 2
+            len_target = len(full_train) - len_source
+            source_dataset, target_dataset = random_split(full_train, [len_source, len_target])
+
+            source_loader = DataLoader(source_dataset, batch_size=batch_size, shuffle=True, num_workers=2)
+            target_loader = DataLoader(target_dataset, batch_size=batch_size, shuffle=True, num_workers=2)
+
+            yield f"data: [DSBN-TRAIN] Converting model to DSBN...\n\n"
+            model = convert_and_wrap(
+                model_or_name="resnet18_cifar",
+                dataset=dataset,
+                num_classes=num_classes,
+                use_aug=mixed_batch,
+                mode=(3 if mixed_batch else 1),
+                device="0" if device.startswith("cuda") else device,
+            )
+
+            yield f"data: [DSBN-TRAIN] Start training... epochs={epochs}, lr={lr}, mixed_batch={mixed_batch}\n\n"
+
+            # === 핵심 수정 ===
+            result = train_with_dsbn(
+                model,
+                source_loader=source_loader if not mixed_batch else source_loader,
+                target_loader=None if mixed_batch else target_loader,
+                epochs=epochs,
+                lr=lr,
+                mixed_batch=mixed_batch,
+                device=device,
+            )
+            # === 여기까지 ===
+
+            yield f"data: [DSBN-TRAIN] Training finished. Collecting logs...\n\n"
+
+            logs = result.get("logs", [])
+            final_acc = result.get("final_acc", None)
+            state_dict = result.get("state_dict", None)
+
+            # logs 리스트를 하나씩 yield 해줌
+            if logs:
+                for entry in logs[:50]:  # 너무 길면 50개까지만
+                    yield f"data: {entry}\n\n"
+                    time.sleep(0.01)
+
+            if final_acc is not None:
+                yield f"data: [DSBN-TRAIN] Final Acc = {final_acc}\n\n"
+
+            state_path = None
+            if state_dict:
+                out_path = _TMP_DIR / "dsbn_trained.pth"
+                torch.save(state_dict, out_path)
+                state_path = str(out_path)
+                yield f"data: [DSBN-TRAIN] Saved model → {state_path}\n\n"
+
+            final_result = {
+                "dataset": dataset,
+                "batch_size": batch_size,
+                "epochs": epochs,
+                "lr": lr,
+                "mixed_batch": mixed_batch,
+                "final_acc": final_acc,
+                "state_dict_path": state_path,
+            }
+            _DSBN_TRAIN_JSON.write_text(json.dumps(final_result), encoding="utf-8")
+
+            yield f"data: [DSBN-TRAIN] ✅ Training complete.\n\n"
+            yield "data: [DONE]\n\n"
+
+        except Exception as e:
+            err = traceback.format_exc()
+            yield f"data: [ERROR] {e}\n\n"
+            yield f"data: {err}\n\n"
+
+    resp = StreamingHttpResponse(stream(), content_type="text/event-stream")
+    resp["Cache-Control"] = "no-cache"
+    return resp
+
+
+# -----------------------------
+# DSBN Train - Final JSON
+# -----------------------------
+@csrf_exempt
+def dsbn_train_api(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "Invalid method"}, status=405)
+    try:
+        if not _DSBN_TRAIN_JSON.exists():
+            return JsonResponse({"error": "No train result found."}, status=404)
+        data = json.loads(_DSBN_TRAIN_JSON.read_text(encoding="utf-8"))
+        return JsonResponse({"result": data})
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)

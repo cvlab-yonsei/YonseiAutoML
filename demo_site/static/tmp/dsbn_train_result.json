@@ -1,0 +1,1 @@
+{"dataset": "CIFAR10", "batch_size": 128, "epochs": 1, "lr": 0.01, "mixed_batch": false, "final_acc": 0.60890625, "state_dict_path": "/data1/hyunju/code/YonseiAutoML/demo_site/static/tmp/dsbn_trained.pth"}

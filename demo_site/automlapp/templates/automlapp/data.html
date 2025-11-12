@@ -178,14 +178,132 @@
     <!-- Convert Section -->
     <div id="section-convert" class="section" style="display:none;">
       <h2>DSBN - Convert</h2>
-      <p>아직 빈 대시보드입니다.</p>
+
+      <form id="dsbnConvertForm" class="form-grid">
+        <div class="form-card">
+          <h3>Model (name or leave blank)</h3>
+          <input type="text" name="model_or_name" placeholder='e.g., "resnet18_cifar"'>
+        </div>
+        <div class="form-card">
+          <h3>Dataset</h3>
+          <select name="dataset">
+            <option value="CIFAR10">CIFAR10</option>
+            <option value="CIFAR100">CIFAR100</option>
+          </select>
+        </div>
+        <div class="form-card">
+          <h3>Num Classes</h3>
+          <input type="number" name="num_classes" value="10">
+        </div>
+        <div class="form-card">
+          <h3>Use Aug</h3>
+          <select name="use_aug">
+            <option value="false">false</option>
+            <option value="true">true</option>
+          </select>
+        </div>
+        <div class="form-card">
+          <h3>Mode</h3>
+          <select name="mode">
+            <option value="">(infer from use_aug)</option>
+            <option value="1">1 (Source BN)</option>
+            <option value="2">2 (Target BN)</option>
+            <option value="3">3 (Split-Half)</option>
+          </select>
+        </div>
+        <div class="form-card">
+          <h3>Device</h3>
+          <input type="text" name="device" value="0">
+        </div>
+        <div class="form-card">
+          <h3>Export Path (optional)</h3>
+          <input type="text" name="export_path" placeholder="/path/to/save/dsbn_model.pth">
+        </div>
+      </form>
+
+      <div class="topbar" style="margin-top:8px;">
+        <button class="btn-train" id="btnDsbnConvert">Convert</button>
+      </div>
+
+      <div class="logbox" id="logDsbnConvert"></div>
+
+      <table id="tableDsbnConvert" style="display:none;">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Dataset</th>
+            <th>Num Classes</th>
+            <th>Mode</th>
+            <th>Exported</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
 
     <!-- Train Section -->
     <div id="section-train" class="section" style="display:none;">
       <h2>DSBN - Train</h2>
-      <p>아직 빈 대시보드입니다.</p>
+
+      <form id="dsbnTrainForm" class="form-grid">
+        <div class="form-card">
+          <h3>Dataset</h3>
+          <select name="dataset">
+            <option value="CIFAR10">CIFAR10</option>
+            <option value="CIFAR100">CIFAR100</option>
+          </select>
+        </div>
+        <div class="form-card">
+          <h3>Batch Size</h3>
+          <input type="number" name="batch_size" value="128">
+        </div>
+        <div class="form-card">
+          <h3>Epochs</h3>
+          <input type="number" name="epochs" value="1">
+        </div>
+        <div class="form-card">
+          <h3>Learning Rate</h3>
+          <input type="number" step="0.0001" name="lr" value="0.01">
+        </div>
+        <div class="form-card">
+          <h3>Mixed Batch</h3>
+          <select name="mixed_batch">
+            <option value="false">false (separate source/target)</option>
+            <option value="true">true (concat source+target)</option>
+          </select>
+        </div>
+        <div class="form-card">
+          <h3>Log Interval</h3>
+          <input type="number" name="log_interval" value="10">
+        </div>
+        <div class="form-card">
+          <h3>Device</h3>
+          <input type="text" name="device" value="cuda">
+        </div>
+      </form>
+
+      <div class="topbar" style="margin-top:8px;">
+        <button class="btn-train" id="btnDsbnTrain">Train</button>
+      </div>
+
+      <div class="logbox" id="logDsbnTrain"></div>
+
+      <table id="tableDsbnTrain" style="display:none;">
+        <thead>
+          <tr>
+            <th>Dataset</th>
+            <th>Batch Size</th>
+            <th>Epochs</th>
+            <th>LR</th>
+            <th>Mixed</th>
+            <th>Final Acc</th>
+            <th>State Dict Path</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
+
 
   </div>
 
@@ -265,6 +383,105 @@
         <td>${JSON.stringify(res.accs_all_exps)}</td>
       `;
       resultBody.appendChild(row);
+    };
+  };
+
+    // ===== DSBN Convert =====
+  const btnDsbnConvert = document.getElementById("btnDsbnConvert");
+  const formDsbnConvert = document.getElementById("dsbnConvertForm");
+  const logDsbnConvert = document.getElementById("logDsbnConvert");
+  const tableDsbnConvert = document.getElementById("tableDsbnConvert");
+  const bodyDsbnConvert = tableDsbnConvert.querySelector("tbody");
+
+  btnDsbnConvert.onclick = async () => {
+    logDsbnConvert.innerHTML = "Running DSBN convert...\n";
+    bodyDsbnConvert.innerHTML = "";
+    tableDsbnConvert.style.display = "none";
+
+    const formData = new FormData(formDsbnConvert);
+
+    // 1) SSE 로그
+    const query = new URLSearchParams();
+    for (const [k, v] of formData.entries()) query.append(k, v);
+    const ev = new EventSource(`/api/dsbn_convert_stream/?${query.toString()}`);
+
+    ev.onmessage = (event) => {
+      const formatted = event.data.replace(/\r?\n/g, "<br>").replace(/\s\s/g, "&nbsp;&nbsp;");
+      logDsbnConvert.insertAdjacentHTML("beforeend", formatted + "<br>");
+      logDsbnConvert.scrollTop = logDsbnConvert.scrollHeight;
+    };
+
+    ev.onerror = async () => {
+      ev.close();
+      // 2) 결과 JSON
+      const resp = await fetch("/api/dsbn_convert/", { method: "POST", body: formData });
+      const data = await resp.json();
+
+      if (data.error) {
+        logDsbnConvert.innerHTML += "<br>Error: " + data.error;
+        return;
+      }
+      tableDsbnConvert.style.display = "table";
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${data.result.model || "(custom nn.Module)"}</td>
+        <td>${data.result.dataset}</td>
+        <td>${data.result.num_classes}</td>
+        <td>${data.result.mode || "(inferred)"}</td>
+        <td>${data.result.exported_path || "-"}</td>
+      `;
+      bodyDsbnConvert.appendChild(row);
+    };
+  };
+
+  // ===== DSBN Train =====
+  const btnDsbnTrain = document.getElementById("btnDsbnTrain");
+  const formDsbnTrain = document.getElementById("dsbnTrainForm");
+  const logDsbnTrain = document.getElementById("logDsbnTrain");
+  const tableDsbnTrain = document.getElementById("tableDsbnTrain");
+  const bodyDsbnTrain = tableDsbnTrain.querySelector("tbody");
+
+  btnDsbnTrain.onclick = async () => {
+    logDsbnTrain.innerHTML = "Running DSBN training...\n";
+    bodyDsbnTrain.innerHTML = "";
+    tableDsbnTrain.style.display = "none";
+
+    const formData = new FormData(formDsbnTrain);
+
+    // 1) SSE 로그
+    const query = new URLSearchParams();
+    for (const [k, v] of formData.entries()) query.append(k, v);
+    const ev = new EventSource(`/api/dsbn_train_stream/?${query.toString()}`);
+
+    ev.onmessage = (event) => {
+      const formatted = event.data.replace(/\r?\n/g, "<br>").replace(/\s\s/g, "&nbsp;&nbsp;");
+      logDsbnTrain.insertAdjacentHTML("beforeend", formatted + "<br>");
+      logDsbnTrain.scrollTop = logDsbnTrain.scrollHeight;
+    };
+
+    ev.onerror = async () => {
+      ev.close();
+      // 2) 결과 JSON
+      const resp = await fetch("/api/dsbn_train/", { method: "POST", body: formData });
+      const data = await resp.json();
+
+      if (data.error) {
+        logDsbnTrain.innerHTML += "<br>Error: " + data.error;
+        return;
+      }
+      tableDsbnTrain.style.display = "table";
+      const r = data.result;
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${r.dataset}</td>
+        <td>${r.batch_size}</td>
+        <td>${r.epochs}</td>
+        <td>${r.lr}</td>
+        <td>${r.mixed_batch}</td>
+        <td>${r.final_acc}</td>
+        <td>${r.state_dict_path || "-"}</td>
+      `;
+      bodyDsbnTrain.appendChild(row);
     };
   };
   </script>

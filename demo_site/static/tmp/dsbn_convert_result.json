@@ -1,0 +1,1 @@
+{"model": "resnet18_cifar", "dataset": "CIFAR10", "num_classes": 10, "mode": null, "exported_path": null}
