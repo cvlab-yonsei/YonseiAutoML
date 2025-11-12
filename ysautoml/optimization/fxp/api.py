@@ -81,7 +81,7 @@ def train_fxp(
 
     
     base_dir = Path(__file__).resolve().parent  # 🔹 /ysautoml/optimization/fxp/
-    print(f"[DEBUG] base_dir = {base_dir}")
+    # print(f"[DEBUG] base_dir = {base_dir}")
 
     # ✅ config 로드
     with open(config_path, "r") as f:
@@ -98,21 +98,14 @@ def train_fxp(
     result_dir = train_dir / f"{model_name}{student_dir}"
     checkpoint_dir = result_dir / "checkpoint"
 
-    print(f"[DEBUG] train_dir(abs)   = {train_dir}")
-    print(f"[DEBUG] result_dir(abs)  = {result_dir}")
-    print(f"[DEBUG] checkpoint_dir   = {checkpoint_dir}")
-    print(f"[DEBUG] Exists(result_dir)? {result_dir.exists()}")
-    print(f"[DEBUG] Exists(checkpoint_dir)? {checkpoint_dir.exists()}")
-
     # ✅ 파일 탐색
     trained_pth = None
     if (result_dir / "dsbn_trained.pth").exists():
         trained_pth = result_dir / "dsbn_trained.pth"
     elif checkpoint_dir.exists():
         epoch_files = sorted(checkpoint_dir.glob("epoch_*.pth"))
-        print(f"[DEBUG] Found {len(epoch_files)} epoch_*.pth files.")
-        for ef in epoch_files:
-            print(f"   └─ {ef}")
+        # for ef in epoch_files:
+        #     print(f"   └─ {ef}")
         trained_pth = epoch_files[-1] if epoch_files else None
     else:
         print("[DEBUG] No candidate directories found.")
