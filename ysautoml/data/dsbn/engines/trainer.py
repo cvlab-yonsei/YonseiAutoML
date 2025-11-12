@@ -31,10 +31,12 @@ def train_with_dsbn(model, train_loader_source, train_loader_target=None,
     logs = []
     model.train()
 
-    for epoch in range(epochs):
+    for epoch in range(2):
         if mixed_batch:
             # 한 배치에 소스+타깃 섞여 들어온 경우
             for step, (imgs, labels) in enumerate(train_loader_source):
+                if step >= 50:   # ✅ step 50까지만 실행
+                    break   
                 set_dsbn_mode(model, 3)
                 imgs, labels = imgs.to(device), labels.to(device)
 
@@ -46,7 +48,7 @@ def train_with_dsbn(model, train_loader_source, train_loader_target=None,
                 optimizer.step()
 
                 if step % log_interval == 0:
-                    print(f"[Epoch {epoch+1}/{epochs}][Step {step}] Loss={loss.item():.4f}")
+                    print(f"[Epoch {epoch+1}/{epochs}][Step {step}] Loss={loss.item():.4f}", flush=True)
                 logs.append((epoch, step, loss.item()))
 
         else:
@@ -71,16 +73,18 @@ def train_with_dsbn(model, train_loader_source, train_loader_target=None,
                 optimizer.step()
 
                 if step % log_interval == 0:
-                    print(f"[Epoch {epoch+1}/{epochs}][Step {step}] LossS={loss_s.item():.4f} LossT={loss_t.item():.4f}")
+                    print(f"[Epoch {epoch+1}/{epochs}][Step {step}] LossS={loss_s.item():.4f} LossT={loss_t.item():.4f}", flush=True)
                 logs.append((epoch, step, (loss_s.item(), loss_t.item())))
 
-        print(f"[Epoch {epoch+1}/{epochs}] Done")
+        print(f"[Epoch {epoch+1}/{epochs}] Done", flush=True)
 
     # --- 최종 Accuracy 측정 (source domain 기준) ---
     model.eval()
     correct, total = 0, 0
     with torch.no_grad():
-        for imgs, labels in train_loader_source:
+        for step, (imgs, labels) in enumerate(train_loader_source):
+            if step >= 50:   # ✅ 평가도 50 step까지만 실행
+                break
             imgs, labels = imgs.to(device), labels.to(device)
             outputs = model(imgs)
             preds = outputs.argmax(dim=1)
@@ -88,7 +92,7 @@ def train_with_dsbn(model, train_loader_source, train_loader_target=None,
             total += labels.size(0)
 
     final_acc = correct / total if total > 0 else 0.0
-    print(f"[Final Accuracy] {final_acc*100:.2f}%")
+    print(f"[Final Accuracy] {final_acc*100:.2f}%", flush=True)
 
     return {
         "logs": logs,

@@ -9,7 +9,9 @@ if __name__ == "__main__":
         seed=42,
         # save_dir="./logs/fxp_cifar100",
         save_dir="./logs/fxp_imagenet",
-        arch_path="/data1/hyunju/code/YonseiAutoML/ysautoml/network/zeroshot/mobilenetv2/engines/ImageNet_MBV2/save_dir/AZ_NAS_flops1G-searchbs32-pop100-iter100-123/best_structure.txt"
+        arch_path="/data1/hyunju/code/YonseiAutoML/ysautoml/network/zeroshot/mobilenetv2/engines/ImageNet_MBV2/save_dir/AZ_NAS_flops1G-searchbs32-pop100-iter100-123/best_structure.txt",
+        # fyi=True,
+        dsbn=True
     )
 
 # ###############

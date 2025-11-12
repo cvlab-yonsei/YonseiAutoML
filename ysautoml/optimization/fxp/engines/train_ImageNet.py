@@ -768,7 +768,88 @@ def run(config):
     student_model = get_model(config).to(device)
     print("The number of parameters : %d" % count_parameters(student_model))
     criterion = get_loss(config)
-    
+
+    import sys, os
+    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../..")))
+
+
+    # ✅ FYI 모드: condensation 실행
+    if hasattr(config, "fyi") and config.fyi:
+        try:
+            from ysautoml.data.fyi import run_dsa
+            print("[FYI MODE] Running dataset condensation before ImageNet training...")
+            run_dsa(
+                dataset="ImageNet",
+                model=config.student_model.name if hasattr(config, "student_model") else "mobilenet_ste",
+                ipc=10,
+                device=str(config.gpu)
+            )
+            print("[FYI MODE] Condensation complete.")
+        except Exception as e:
+            print(f"[FYI MODE] Failed to run dataset condensation: {e}")
+            raise e
+
+    # ✅ DSBN 모드: BN → DSBN 변환 및 별도 학습 루프 적용
+    if hasattr(config, "dsbn") and config.dsbn:
+        try:
+            from ysautoml.data.dsbn import convert_and_wrap, train_with_dsbn
+            print("[DSBN MODE] Converting model to DSBN variant...")
+
+            model_name = getattr(config.student_model, "name", "mobilenet_ste")
+            student_model = convert_and_wrap(
+                model_or_name=model_name,  # ← model_name → model_or_name 으로 변경
+                dataset="ImageNet",
+                num_classes=getattr(config, "num_classes", 1000),
+                use_aug=True,
+                device=str(config.gpu),
+            )
+            print("[DSBN MODE] Model converted successfully.")
+
+            # ✅ 기존 ImageNet DataLoader 재사용
+            train_transform = torchvision.transforms.Compose([
+                torchvision.transforms.RandomResizedCrop(224),
+                torchvision.transforms.RandomHorizontalFlip(),
+                torchvision.transforms.ToTensor(),
+                torchvision.transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                                std=[0.229, 0.224, 0.225])
+            ])
+            test_transform = torchvision.transforms.Compose([
+                torchvision.transforms.Resize(256),
+                torchvision.transforms.CenterCrop(224),
+                torchvision.transforms.ToTensor(),
+                torchvision.transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                                std=[0.229, 0.224, 0.225])
+            ])
+
+            trainset = datasets.ImageFolder(root="/dataset/ILSVRC2012/train", transform=train_transform)
+            testset = datasets.ImageFolder(root="/dataset/ILSVRC2012/val", transform=test_transform)
+            train_loader = DataLoader(trainset, batch_size=config.train.batch_size, shuffle=True,
+                                      num_workers=config.data.num_workers, pin_memory=config.data.pin_memory, drop_last=True)
+            test_loader = DataLoader(testset, batch_size=config.eval.batch_size, shuffle=False,
+                                     num_workers=config.data.num_workers, pin_memory=config.data.pin_memory)
+
+            print("[DSBN MODE] Starting DSBN training ...")
+
+            gpu_str = str(config.gpu).split(",")[0].strip()  # → "0"
+            device_str = f"cuda:{gpu_str}" if torch.cuda.is_available() else "cpu"
+
+            result = train_with_dsbn(
+                student_model,
+                source_loader=train_loader,
+                target_loader=train_loader,
+                epochs=config.train.num_epochs,
+                lr=getattr(config.optimizer.params, "lr", 0.1),
+                mixed_batch=True,
+                device=device_str, 
+                # device=f"cuda:{config.gpu}" if torch.cuda.is_available() else "cpu"
+            )
+            print(f"[DSBN MODE] Completed. Final accuracy: {result['final_acc']:.2f}%")
+            torch.save(result["state_dict"], os.path.join(config.train["student" + "_dir"], "dsbn_trained.pth"))
+            return  # ✅ DSBN 모드에서는 기본 run() 학습 스킵
+
+        except Exception as e:
+            print(f"[DSBN MODE] Failed: {e}")
+            raise e
 
     print("config : ", config)
     q_param = qparam_extract(student_model)
@@ -875,7 +956,15 @@ def parse_args():
     parser.add_argument('--config', dest='config_file',
                         help='configuration filename',
                         default=None, type=str)
+
+    # ✅ 추가된 인자
+    parser.add_argument('--fyi', action='store_true',
+                        help='Run FYI dataset condensation before training')
+    parser.add_argument('--dsbn', action='store_true',
+                        help='Enable Domain-Specific BatchNorm training mode')
+
     return parser.parse_args()
+
 
 def main():
     global device
@@ -891,6 +980,10 @@ def main():
 
     config = utils.config.load(args.config_file)
 
+    # ✅ FYI / DSBN 인자 주입
+    config.fyi = args.fyi
+    config.dsbn = args.dsbn
+
     os.environ["CUDA_VISIBLE_DEVICES"]= str(config.gpu)
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -899,6 +992,7 @@ def main():
     run(config)
 
     print('success!')
+
 
 if __name__ == '__main__':
     main()

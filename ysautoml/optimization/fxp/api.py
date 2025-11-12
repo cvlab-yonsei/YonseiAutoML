@@ -9,6 +9,8 @@ def train_fxp(
     seed=42,
     save_dir="./logs/fxp_exp",
     arch_path=None,   # ✅ 추가: best_structure.txt 경로
+    fyi=False,
+    dsbn=False
 ):
     """
     Run FXP (Fixed-point / Quantization training) using the original LBT `train.py`.
@@ -45,6 +47,13 @@ def train_fxp(
         "--config", str(config_path),
     ]
 
+    # FYI condensation 옵션 전달
+    if fyi:
+        cmd += ["--fyi"]
+    if dsbn:
+        cmd += ["--dsbn"]
+
+
     env = os.environ.copy()
     env["CUDA_VISIBLE_DEVICES"] = device.split(":")[-1]
     env["PYTHONPATH"] = str(base_dir / "engines")
@@ -69,3 +78,48 @@ def train_fxp(
         raise RuntimeError(f"FXP training failed with code {process.returncode}")
 
     print(f"\n✅ FXP training complete. Logs saved to {save_dir}")
+
+    
+    base_dir = Path(__file__).resolve().parent  # 🔹 /ysautoml/optimization/fxp/
+    print(f"[DEBUG] base_dir = {base_dir}")
+
+    # ✅ config 로드
+    with open(config_path, "r") as f:
+        cfg = yaml.safe_load(f)
+
+    train_dir = Path(cfg["train"]["dir"])
+    student_dir = cfg["train"].get("student_dir", "")
+    model_name = cfg["student_model"]["name"]
+
+    # ✅ 경로 보정 (상대경로 → 절대경로)
+    if not train_dir.is_absolute():
+        train_dir = (base_dir / "engines" / train_dir).resolve()
+
+    result_dir = train_dir / f"{model_name}{student_dir}"
+    checkpoint_dir = result_dir / "checkpoint"
+
+    print(f"[DEBUG] train_dir(abs)   = {train_dir}")
+    print(f"[DEBUG] result_dir(abs)  = {result_dir}")
+    print(f"[DEBUG] checkpoint_dir   = {checkpoint_dir}")
+    print(f"[DEBUG] Exists(result_dir)? {result_dir.exists()}")
+    print(f"[DEBUG] Exists(checkpoint_dir)? {checkpoint_dir.exists()}")
+
+    # ✅ 파일 탐색
+    trained_pth = None
+    if (result_dir / "dsbn_trained.pth").exists():
+        trained_pth = result_dir / "dsbn_trained.pth"
+    elif checkpoint_dir.exists():
+        epoch_files = sorted(checkpoint_dir.glob("epoch_*.pth"))
+        print(f"[DEBUG] Found {len(epoch_files)} epoch_*.pth files.")
+        for ef in epoch_files:
+            print(f"   └─ {ef}")
+        trained_pth = epoch_files[-1] if epoch_files else None
+    else:
+        print("[DEBUG] No candidate directories found.")
+
+    if trained_pth:
+        print(f"✅ Trained model saved at: {trained_pth}")
+    else:
+        print("⚠️ No .pth file found in result directory!")
+
+    return str(trained_pth) if trained_pth else None
