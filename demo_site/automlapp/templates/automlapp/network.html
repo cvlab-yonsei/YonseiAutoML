@@ -1,7 +1,211 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
-<head><title>Network Utility</title></head>
-<body style="background:#1B1B1B; color:white; text-align:center; padding-top:100px;">
-  <h1>Network Utility Page</h1>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YSAutoML Network Utility</title>
+  <style>
+    body { margin:0; font-family:Inter,sans-serif; background:#1B1B1B; color:#FAF1E4; display:flex; }
+
+    /* Sidebar */
+    .sidebar { width:250px; background:#111; padding:20px; height:100vh; }
+    .sidebar h1 { font-size:22px; margin-bottom:5px; }
+    .sidebar p { font-size:12px; color:#aaa; margin-bottom:30px; }
+    .menu-item { display:flex; justify-content:space-between; align-items:center; padding:10px 15px; border-radius:6px; cursor:pointer; margin-bottom:5px; transition:background 0.2s; }
+    .menu-item:hover { background:#1F1F1F; }
+    .menu-item.active { background:#1F53FF; color:white; }
+    .submenu { margin-left:15px; display:none; flex-direction:column; }
+    .submenu-item { padding:8px 15px; cursor:pointer; border-radius:6px; margin-top:3px; }
+    .submenu-item:hover { background:#1F1F1F; }
+    .submenu-item.active { background:#1F53FF; color:white; }
+
+    /* Content */
+    .content { flex:1; padding:20px; overflow-y:auto; }
+    .form-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; margin-top:20px; }
+    .form-card { background:#1F1F1F; padding:16px; border-radius:10px; box-shadow:0 0 6px rgba(0,0,0,0.3); }
+    .form-card h3 { font-size:14px; margin-bottom:10px; color:#EAEAEA; }
+    .form-card input, .form-card select { width:100%; padding:10px; background:#262626; border:1px solid #333; border-radius:6px; color:#FAF1E4; font-size:14px; }
+    .btn-run { background:#1F53FF; border:none; padding:10px 20px; color:#fff; border-radius:6px; cursor:pointer; margin-top:10px; }
+    .logbox { background:#000; color:#0f0; font-family:monospace; height:200px; overflow-y:scroll; margin-top:20px; padding:10px; border-radius:8px; }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h1><a href="/" style="text-decoration:none; color:#FAF1E4;">YSAutoML</a></h1>
+    <p>Network Utility</p>
+    <div class="menu">
+
+      <!-- Few-shot -->
+      <div class="menu-item" id="few-toggle">
+        <span>Few-shot</span>
+        <span id="few-arrow">▼</span>
+      </div>
+      <div class="submenu" id="few-submenu">
+        <div class="submenu-item" data-section="few-train">Train</div>
+        <div class="submenu-item" data-section="few-search">Search</div>
+      </div>
+
+      <!-- One-shot -->
+      <div class="menu-item" data-section="one">One-shot</div>
+
+      <!-- Zero-shot -->
+      <div class="menu-item" id="zero-toggle">
+        <span>Zero-shot</span>
+        <span id="zero-arrow">▼</span>
+      </div>
+      <div class="submenu" id="zero-submenu">
+        <div class="submenu-item" data-section="zero-search">Search</div>
+        <div class="submenu-item" data-section="zero-retrain">Retrain</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Few-shot Train -->
+    <div id="section-few-train" class="section">
+      <h2>Few-shot - Train SuperNet</h2>
+      <form id="fewTrainForm" class="form-grid">
+        <div class="form-card"><h3>Tag</h3><input type="text" name="tag" value="exp1"></div>
+        <div class="form-card"><h3>Seed</h3><input type="number" name="seed" value="42"></div>
+        <div class="form-card"><h3>Thresholds</h3><input type="text" name="thresholds" value="38,40"></div>
+        <div class="form-card"><h3>Data Path</h3><input type="text" name="data_path" value="/dataset/ILSVRC2012"></div>
+        <div class="form-card"><h3>Save Path</h3><input type="text" name="save_path" value="./SuperNet"></div>
+      </form>
+      <button class="btn-run" id="btnFewTrain">Train</button>
+      <div class="logbox" id="logFewTrain"></div>
+    </div>
+
+    <!-- Few-shot Search -->
+    <div id="section-few-search" class="section" style="display:none;">
+      <h2>Few-shot - Search</h2>
+      <form id="fewSearchForm" class="form-grid">
+        <div class="form-card"><h3>Checkpoint</h3><input type="text" name="ckpt" value="baseline0-seed-0"></div>
+        <div class="form-card"><h3>Seed</h3><input type="number" name="seed" value="123"></div>
+        <div class="form-card"><h3>GPU</h3><input type="number" name="gpu" value="0"></div>
+      </form>
+      <button class="btn-run" id="btnFewSearch">Search</button>
+      <div class="logbox" id="logFewSearch"></div>
+    </div>
+
+    <!-- One-shot -->
+    <div id="section-one" class="section" style="display:none;">
+      <h2>One-shot - Train DYNAS/SPOS</h2>
+      <form id="oneTrainForm" class="form-grid">
+        <div class="form-card"><h3>Log Dir</h3><input type="text" name="log_dir" value="./logs/dynas_exp1"></div>
+        <div class="form-card"><h3>File Name</h3><input type="text" name="file_name" value="dynas_c10"></div>
+        <div class="form-card"><h3>Seed</h3><input type="number" name="seed" value="42"></div>
+        <div class="form-card"><h3>Epochs</h3><input type="number" name="epochs" value="5"></div>
+        <div class="form-card"><h3>Method</h3>
+          <select name="method">
+            <option value="dynas">dynas</option>
+            <option value="baseline">baseline</option>
+          </select>
+        </div>
+      </form>
+      <button class="btn-run" id="btnOneTrain">Run</button>
+      <div class="logbox" id="logOneTrain"></div>
+    </div>
+
+    <!-- Zero-shot Search -->
+    <div id="section-zero-search" class="section" style="display:none;">
+      <h2>Zero-shot - Search</h2>
+      <form id="zeroSearchForm" class="form-grid">
+        <div class="form-card"><h3>Model Type</h3>
+          <select name="model_type">
+            <option value="mobilenetv2">mobilenetv2</option>
+            <option value="autoformer">autoformer</option>
+          </select>
+        </div>
+        <div class="form-card"><h3>Seed</h3><input type="number" name="seed" value="123"></div>
+        <div class="form-card"><h3>GPU</h3><input type="number" name="gpu" value="0"></div>
+        <div class="form-card"><h3>Budget FLOPs</h3><input type="number" name="budget_flops" value="1e9"></div>
+      </form>
+      <button class="btn-run" id="btnZeroSearch">Search</button>
+      <div class="logbox" id="logZeroSearch"></div>
+    </div>
+
+    <!-- Zero-shot Retrain -->
+    <div id="section-zero-retrain" class="section" style="display:none;">
+      <h2>Zero-shot - Retrain</h2>
+      <form id="zeroRetrainForm" class="form-grid">
+        <div class="form-card"><h3>Model Type</h3>
+          <select name="model_type">
+            <option value="mobilenetv2">mobilenetv2</option>
+            <option value="autoformer">autoformer</option>
+          </select>
+        </div>
+        <div class="form-card"><h3>Epochs</h3><input type="number" name="epochs" value="150"></div>
+        <div class="form-card"><h3>Best Structure Path</h3><input type="text" name="best_structure_path" value="best_structure.txt"></div>
+      </form>
+      <button class="btn-run" id="btnZeroRetrain">Retrain</button>
+      <div class="logbox" id="logZeroRetrain"></div>
+    </div>
+  </div>
+
+  <script>
+    // --- Toggle controls ---
+    const fewToggle = document.getElementById("few-toggle");
+    const fewSubmenu = document.getElementById("few-submenu");
+    const fewArrow = document.getElementById("few-arrow");
+    fewToggle.onclick = () => {
+      const isOpen = fewSubmenu.style.display === "flex";
+      fewSubmenu.style.display = isOpen ? "none" : "flex";
+      fewArrow.textContent = isOpen ? "▼" : "▲";
+    };
+
+    const zeroToggle = document.getElementById("zero-toggle");
+    const zeroSubmenu = document.getElementById("zero-submenu");
+    const zeroArrow = document.getElementById("zero-arrow");
+    zeroToggle.onclick = () => {
+      const isOpen = zeroSubmenu.style.display === "flex";
+      zeroSubmenu.style.display = isOpen ? "none" : "flex";
+      zeroArrow.textContent = isOpen ? "▼" : "▲";
+    };
+
+    // --- Section switching ---
+    const menuItems = document.querySelectorAll(".menu-item, .submenu-item");
+    const sections = document.querySelectorAll(".section");
+    menuItems.forEach(item => {
+      item.addEventListener("click", () => {
+        menuItems.forEach(i => i.classList.remove("active"));
+        item.classList.add("active");
+        sections.forEach(s => s.style.display = "none");
+        const section = item.dataset.section;
+        if (section) document.getElementById("section-" + section).style.display = "block";
+      });
+    });
+
+    // --- SSE helper ---
+    function runSSE(buttonId, formId, logId, urlPrefix) {
+      const btn = document.getElementById(buttonId);
+      const form = document.getElementById(formId);
+      const logBox = document.getElementById(logId);
+      btn.onclick = () => {
+        logBox.innerHTML = "Running...\n";
+        const formData = new FormData(form);
+        const query = new URLSearchParams();
+        for (const [k, v] of formData.entries()) query.append(k, v);
+        const ev = new EventSource(`${urlPrefix}_stream/?${query.toString()}`);
+        ev.onmessage = e => {
+          const formatted = e.data.replace(/\r?\n/g, "<br>");
+          logBox.insertAdjacentHTML("beforeend", formatted + "<br>");
+          logBox.scrollTop = logBox.scrollHeight;
+        };
+        ev.onerror = () => { ev.close(); };
+      };
+    }
+
+    // Bind SSE buttons
+    runSSE("btnFewTrain", "fewTrainForm", "logFewTrain", "/api/network_few_train");
+    runSSE("btnFewSearch", "fewSearchForm", "logFewSearch", "/api/network_few_search");
+    runSSE("btnOneTrain", "oneTrainForm", "logOneTrain", "/api/network_one_train");
+    runSSE("btnZeroSearch", "zeroSearchForm", "logZeroSearch", "/api/network_zero_search");
+    runSSE("btnZeroRetrain", "zeroRetrainForm", "logZeroRetrain", "/api/network_zero_retrain");
+  </script>
 </body>
 </html>

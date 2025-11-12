@@ -25,5 +25,14 @@ urlpatterns = [
     path("api/dsbn_train_stream/", views.dsbn_train_stream, name="dsbn_train_stream"),
     path("api/dsbn_train/", views.dsbn_train_api, name="dsbn_train_api"),
 
+    # Network Utility
+    # path("network/", views.network_utility, name="network"),
+    path("api/network_few_train_stream/", views.network_few_train_stream, name="network_few_train_stream"),
+    path("api/network_few_search_stream/", views.network_few_search_stream, name="network_few_search_stream"),
+    path("api/network_one_train_stream/", views.network_one_train_stream, name="network_one_train_stream"),
+    path("api/network_zero_search_stream/", views.network_zero_search_stream, name="network_zero_search_stream"),
+    path("api/network_zero_retrain_stream/", views.network_zero_retrain_stream, name="network_zero_retrain_stream"),
+
+
 
 ]

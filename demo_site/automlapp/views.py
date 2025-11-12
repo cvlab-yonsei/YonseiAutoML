@@ -22,6 +22,12 @@ import torchvision
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader, random_split
 
+from ysautoml.network.fewshot.mobilenet import train_supernet, search_supernet
+from ysautoml.network.oneshot import train_dynas
+from ysautoml.network.zeroshot.mobilenetv2 import run_search_zeroshot as run_mbv2_search, run_retrain_zeroshot as run_mbv2_retrain
+from ysautoml.network.zeroshot.autoformer import run_search_zeroshot as run_autoformer_search, run_retrain_zeroshot as run_autoformer_retrain
+
+
 
 
 
@@ -696,3 +702,97 @@ def dsbn_train_api(request):
         return JsonResponse({"result": data})
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+
+
+        # --- Few-shot Train ---
+def network_few_train_stream(request):
+    def stream():
+        try:
+            tag = request.GET.get("tag", "exp1")
+            seed = int(request.GET.get("seed", 42))
+            thresholds = tuple(map(int, request.GET.get("thresholds", "38,40").split(",")))
+            data_path = request.GET.get("data_path", "/dataset/ILSVRC2012")
+            save_path = request.GET.get("save_path", "./SuperNet")
+            num_gpus = int(request.GET.get("num_gpus", 2))
+            max_epoch = int(request.GET.get("max_epoch", 2))
+            batch = int(request.GET.get("train_batch_size", 1024))
+
+            yield f"data: [Few-shot Train] Starting SuperNet training...\n\n"
+            train_supernet(tag=tag, seed=seed, thresholds=thresholds,
+                           data_path=data_path, save_path=save_path,
+                           num_gpus=num_gpus, max_epoch=max_epoch,
+                           train_batch_size=batch)
+            yield "data: ✅ SuperNet training completed.\n\n"
+        except Exception as e:
+            yield f"data: [ERROR] {e}\n\n"
+    return StreamingHttpResponse(stream(), content_type="text/event-stream")
+
+
+# --- Few-shot Search ---
+def network_few_search_stream(request):
+    def stream():
+        try:
+            ckpt = request.GET.get("ckpt", "baseline0-seed-0")
+            seed = int(request.GET.get("seed", 123))
+            gpu = int(request.GET.get("gpu", 0))
+            save_path = request.GET.get("save_path", "./Search")
+            yield f"data: [Few-shot Search] Searching on ckpt={ckpt}\n\n"
+            search_supernet(ckpt=ckpt, seed=seed, gpu=gpu, save_path=save_path)
+            yield "data: ✅ Search complete.\n\n"
+        except Exception as e:
+            yield f"data: [ERROR] {e}\n\n"
+    return StreamingHttpResponse(stream(), content_type="text/event-stream")
+
+
+# --- One-shot Train ---
+def network_one_train_stream(request):
+    def stream():
+        try:
+            log_dir = request.GET.get("log_dir", "./logs/dynas_exp1")
+            file_name = request.GET.get("file_name", "dynas_c10")
+            seed = int(request.GET.get("seed", 42))
+            epochs = int(request.GET.get("epochs", 5))
+            method = request.GET.get("method", "dynas")
+            yield f"data: [One-shot] Training mode={method}, epochs={epochs}\n\n"
+            train_dynas(log_dir=log_dir, file_name=file_name, seed=seed, epochs=epochs, method=method)
+            yield "data: ✅ One-shot NAS training finished.\n\n"
+        except Exception as e:
+            yield f"data: [ERROR] {e}\n\n"
+    return StreamingHttpResponse(stream(), content_type="text/event-stream")
+
+
+# --- Zero-shot Search ---
+def network_zero_search_stream(request):
+    def stream():
+        try:
+            model_type = request.GET.get("model_type", "mobilenetv2")
+            seed = int(request.GET.get("seed", 123))
+            gpu = int(request.GET.get("gpu", 0))
+            budget_flops = float(request.GET.get("budget_flops", 1e9))
+            yield f"data: [Zero-shot Search] model={model_type}, flops={budget_flops}\n\n"
+            if model_type == "autoformer":
+                run_autoformer_search(param_limits=6, min_param_limits=4, cfg="space-T.yaml", output_dir="./OUTPUT/search/AZ-NAS/Tiny")
+            else:
+                run_mbv2_search(gpu=gpu, seed=seed, budget_flops=budget_flops)
+            yield "data: ✅ Zero-shot search complete.\n\n"
+        except Exception as e:
+            yield f"data: [ERROR] {e}\n\n"
+    return StreamingHttpResponse(stream(), content_type="text/event-stream")
+
+
+# --- Zero-shot Retrain ---
+def network_zero_retrain_stream(request):
+    def stream():
+        try:
+            model_type = request.GET.get("model_type", "mobilenetv2")
+            epochs = int(request.GET.get("epochs", 150))
+            best_path = request.GET.get("best_structure_path", "best_structure.txt")
+            yield f"data: [Zero-shot Retrain] model={model_type}, epochs={epochs}\n\n"
+            if model_type == "autoformer":
+                run_autoformer_retrain(cfg="./Tiny.yaml", output_dir="./OUTPUT/AZ-NAS/Tiny-bs256x8", epochs=epochs)
+            else:
+                run_mbv2_retrain(best_structure_path=best_path, epochs=epochs)
+            yield "data: ✅ Retraining complete.\n\n"
+        except Exception as e:
+            yield f"data: [ERROR] {e}\n\n"
+    return StreamingHttpResponse(stream(), content_type="text/event-stream")
