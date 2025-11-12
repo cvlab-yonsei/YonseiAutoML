@@ -85,6 +85,29 @@
     }
     .btn-small:hover { background:#1F53FF; color:#fff; }
 
+    #graphViewerWrapper {
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      width: 200%; /* form-card의 2배 너비 */
+      max-width: 1600px; /* 최대 한계 */
+      height: 600px; /* 고정 높이 제한 */
+      border: 1px solid #333;
+      border-radius: 8px;
+      background-color: #111;
+      cursor: grab;
+    }
+
+    #modelGraphImage {
+      width: 100%;
+      height: auto;
+      transform-origin: center center;
+      transition: transform 0.1s ease-out;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+
   </style>
   <!-- ✅ CSRF 토큰을 가져오는 유틸 함수 추가 -->
   <script>
@@ -219,12 +242,15 @@
           <label><span>MTL</span><input type="radio" name="optimization" value="mtl"></label>
         </div>
       </div>
-    </form>
 
-    <div id="modelGraphBox" style="margin-top:30px; display:none; text-align:center;">
-      <h4>🧩 Model Architecture Graph</h4>
-      <img id="modelGraphImage" src="" style="max-width:100%; border-radius:8px; border:1px solid #333;">
-    </div>
+      <div id="modelGraphBox" style="margin-top:30px; display:none; text-align:center;">
+        <h4>🧩 Model Architecture Graph</h4>
+        <div id="graphViewerWrapper">
+          <img id="modelGraphImage" src="" alt="Model Graph" />
+        </div>
+      </div>
+
+    </form>
 
 
     <div class="logbox" id="logBox"></div>
@@ -391,6 +417,49 @@
         logLine("⚠️ No process is currently running.");
       }
     };
+
+    const graphBox = document.getElementById("graphViewerWrapper");
+    const graphImg = document.getElementById("modelGraphImage");
+
+    let scale = 1;
+    let isDragging = false;
+    let startX, startY, translateX = 0, translateY = 0;
+
+    graphBox.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 0.1 : -0.1;
+      scale = Math.min(Math.max(0.5, scale + delta), 5); // 0.5x ~ 5x
+      updateTransform();
+    });
+
+    graphBox.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      startX = e.clientX - translateX;
+      startY = e.clientY - translateY;
+      graphBox.style.cursor = "grabbing";
+    });
+
+    graphBox.addEventListener("mouseup", () => {
+      isDragging = false;
+      graphBox.style.cursor = "grab";
+    });
+
+    graphBox.addEventListener("mouseleave", () => {
+      isDragging = false;
+      graphBox.style.cursor = "grab";
+    });
+
+    graphBox.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      translateX = e.clientX - startX;
+      translateY = e.clientY - startY;
+      updateTransform();
+    });
+
+    function updateTransform() {
+      graphImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    }
+
 
     async function stageCheck(message, delay) {
       logLine(message);
