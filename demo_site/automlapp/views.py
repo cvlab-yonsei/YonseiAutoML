@@ -28,7 +28,9 @@ from ysautoml.network.zeroshot.mobilenetv2 import run_search_zeroshot as run_mbv
 from ysautoml.network.zeroshot.autoformer import run_search_zeroshot as run_autoformer_search, run_retrain_zeroshot as run_autoformer_retrain
 
 
-
+from ysautoml.optimization.fxp import train_fxp
+from ysautoml.optimization.losssearch import train_losssearch, custom_loss
+from ysautoml.optimization.mtl.examples.nyusp import train_mtl_nyusp
 
 
 
@@ -704,31 +706,48 @@ def dsbn_train_api(request):
         return JsonResponse({"error": str(e)}, status=500)
 
 
-        # --- Few-shot Train ---
+##############################
+# --- Few-shot Train ---
+##############################
 def network_few_train_stream(request):
     def stream():
         try:
             tag = request.GET.get("tag", "exp1")
             seed = int(request.GET.get("seed", 42))
-            thresholds = tuple(map(int, request.GET.get("thresholds", "38,40").split(",")))
+            thresholds = request.GET.get("thresholds", "38,40")
             data_path = request.GET.get("data_path", "/dataset/ILSVRC2012")
             save_path = request.GET.get("save_path", "./SuperNet")
             num_gpus = int(request.GET.get("num_gpus", 2))
             max_epoch = int(request.GET.get("max_epoch", 2))
             batch = int(request.GET.get("train_batch_size", 1024))
 
-            yield f"data: [Few-shot Train] Starting SuperNet training...\n\n"
-            train_supernet(tag=tag, seed=seed, thresholds=thresholds,
-                           data_path=data_path, save_path=save_path,
-                           num_gpus=num_gpus, max_epoch=max_epoch,
-                           train_batch_size=batch)
+            yield f"data: 🚀 Starting Few-shot SuperNet training...\n\n"
+
+            cmd = [
+                sys.executable, "-u", "-c",
+                (
+                    "from ysautoml.network.fewshot import train_supernet; "
+                    f"train_supernet(tag='{tag}', seed={seed}, thresholds=({thresholds}), "
+                    f"data_path='{data_path}', save_path='{save_path}', "
+                    f"num_gpus={num_gpus}, max_epoch={max_epoch}, train_batch_size={batch})"
+                )
+            ]
+            process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                       text=True, bufsize=1, universal_newlines=True)
+            for line in iter(process.stdout.readline, ""):
+                yield f"data: {line.strip()}\n\n"
+            process.wait()
+
             yield "data: ✅ SuperNet training completed.\n\n"
+
         except Exception as e:
             yield f"data: [ERROR] {e}\n\n"
     return StreamingHttpResponse(stream(), content_type="text/event-stream")
 
 
+##############################
 # --- Few-shot Search ---
+##############################
 def network_few_search_stream(request):
     def stream():
         try:
@@ -736,15 +755,32 @@ def network_few_search_stream(request):
             seed = int(request.GET.get("seed", 123))
             gpu = int(request.GET.get("gpu", 0))
             save_path = request.GET.get("save_path", "./Search")
-            yield f"data: [Few-shot Search] Searching on ckpt={ckpt}\n\n"
-            search_supernet(ckpt=ckpt, seed=seed, gpu=gpu, save_path=save_path)
+
+            yield f"data: 🚀 Starting Few-shot Search...\n\n"
+
+            cmd = [
+                sys.executable, "-u", "-c",
+                (
+                    "from ysautoml.network.fewshot import search_supernet; "
+                    f"search_supernet(ckpt='{ckpt}', seed={seed}, gpu={gpu}, save_path='{save_path}')"
+                )
+            ]
+            process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                       text=True, bufsize=1, universal_newlines=True)
+            for line in iter(process.stdout.readline, ""):
+                yield f"data: {line.strip()}\n\n"
+            process.wait()
+
             yield "data: ✅ Search complete.\n\n"
+
         except Exception as e:
             yield f"data: [ERROR] {e}\n\n"
     return StreamingHttpResponse(stream(), content_type="text/event-stream")
 
 
+##############################
 # --- One-shot Train ---
+##############################
 def network_one_train_stream(request):
     def stream():
         try:
@@ -753,15 +789,33 @@ def network_one_train_stream(request):
             seed = int(request.GET.get("seed", 42))
             epochs = int(request.GET.get("epochs", 5))
             method = request.GET.get("method", "dynas")
-            yield f"data: [One-shot] Training mode={method}, epochs={epochs}\n\n"
-            train_dynas(log_dir=log_dir, file_name=file_name, seed=seed, epochs=epochs, method=method)
+
+            yield f"data: 🚀 Starting One-shot NAS ({method})...\n\n"
+
+            cmd = [
+                sys.executable, "-u", "-c",
+                (
+                    "from ysautoml.network.oneshot import train_dynas; "
+                    f"train_dynas(log_dir='{log_dir}', file_name='{file_name}', "
+                    f"seed={seed}, epochs={epochs}, method='{method}')"
+                )
+            ]
+            process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                       text=True, bufsize=1, universal_newlines=True)
+            for line in iter(process.stdout.readline, ""):
+                yield f"data: {line.strip()}\n\n"
+            process.wait()
+
             yield "data: ✅ One-shot NAS training finished.\n\n"
+
         except Exception as e:
             yield f"data: [ERROR] {e}\n\n"
     return StreamingHttpResponse(stream(), content_type="text/event-stream")
 
 
+##############################
 # --- Zero-shot Search ---
+##############################
 def network_zero_search_stream(request):
     def stream():
         try:
@@ -769,30 +823,187 @@ def network_zero_search_stream(request):
             seed = int(request.GET.get("seed", 123))
             gpu = int(request.GET.get("gpu", 0))
             budget_flops = float(request.GET.get("budget_flops", 1e9))
-            yield f"data: [Zero-shot Search] model={model_type}, flops={budget_flops}\n\n"
+
+            yield f"data: 🚀 Starting Zero-shot Search ({model_type})...\n\n"
+
             if model_type == "autoformer":
-                run_autoformer_search(param_limits=6, min_param_limits=4, cfg="space-T.yaml", output_dir="./OUTPUT/search/AZ-NAS/Tiny")
+                code = (
+                    "from ysautoml.network.zeroshot.autoformer import run_autoformer_search; "
+                    "run_autoformer_search(param_limits=6, min_param_limits=4, cfg='space-T.yaml', output_dir='./OUTPUT/search/AZ-NAS/Tiny')"
+                )
             else:
-                run_mbv2_search(gpu=gpu, seed=seed, budget_flops=budget_flops)
+                code = (
+                    "from ysautoml.network.zeroshot.mobilenetv2 import run_mbv2_search; "
+                    f"run_mbv2_search(gpu={gpu}, seed={seed}, budget_flops={budget_flops})"
+                )
+
+            process = subprocess.Popen([sys.executable, "-u", "-c", code],
+                                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                       text=True, bufsize=1, universal_newlines=True)
+
+            for line in iter(process.stdout.readline, ""):
+                yield f"data: {line.strip()}\n\n"
+            process.wait()
+
             yield "data: ✅ Zero-shot search complete.\n\n"
+
         except Exception as e:
             yield f"data: [ERROR] {e}\n\n"
     return StreamingHttpResponse(stream(), content_type="text/event-stream")
 
 
+##############################
 # --- Zero-shot Retrain ---
+##############################
 def network_zero_retrain_stream(request):
     def stream():
         try:
             model_type = request.GET.get("model_type", "mobilenetv2")
             epochs = int(request.GET.get("epochs", 150))
             best_path = request.GET.get("best_structure_path", "best_structure.txt")
-            yield f"data: [Zero-shot Retrain] model={model_type}, epochs={epochs}\n\n"
+
+            yield f"data: 🚀 Starting Zero-shot Retrain ({model_type})...\n\n"
+
             if model_type == "autoformer":
-                run_autoformer_retrain(cfg="./Tiny.yaml", output_dir="./OUTPUT/AZ-NAS/Tiny-bs256x8", epochs=epochs)
+                code = (
+                    "from ysautoml.network.zeroshot.autoformer import run_autoformer_retrain; "
+                    f"run_autoformer_retrain(cfg='./Tiny.yaml', output_dir='./OUTPUT/AZ-NAS/Tiny-bs256x8', epochs={epochs})"
+                )
             else:
-                run_mbv2_retrain(best_structure_path=best_path, epochs=epochs)
+                code = (
+                    "from ysautoml.network.zeroshot.mobilenetv2 import run_mbv2_retrain; "
+                    f"run_mbv2_retrain(best_structure_path='{best_path}', epochs={epochs})"
+                )
+
+            process = subprocess.Popen([sys.executable, "-u", "-c", code],
+                                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                       text=True, bufsize=1, universal_newlines=True)
+
+            for line in iter(process.stdout.readline, ""):
+                yield f"data: {line.strip()}\n\n"
+            process.wait()
+
             yield "data: ✅ Retraining complete.\n\n"
+
+        except Exception as e:
+            yield f"data: [ERROR] {e}\n\n"
+    return StreamingHttpResponse(stream(), content_type="text/event-stream")
+
+
+##############################
+# --- FXP ---
+##############################
+def opt_fxp_stream(request):
+    def stream():
+        try:
+            config = request.GET.get("config", "configs/mobilenet_ori.yml")
+            device = request.GET.get("device", "cuda:0")
+            seed = int(request.GET.get("seed", 42))
+            save_dir = request.GET.get("save_dir", "./logs/fxp_mobilenet")
+
+            yield f"data: 🚀 Starting FXP Quantization...\n\n"
+
+            code = (
+                "from ysautoml.optimization.fxp import train_fxp; "
+                f"train_fxp(config='{config}', device='{device}', seed={seed}, save_dir='{save_dir}')"
+            )
+            process = subprocess.Popen([sys.executable, "-u", "-c", code],
+                                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                       text=True, bufsize=1, universal_newlines=True)
+            for line in iter(process.stdout.readline, ""):
+                yield f"data: {line.strip()}\n\n"
+            process.wait()
+
+            yield "data: ✅ FXP training completed.\n\n"
+
+        except Exception as e:
+            yield f"data: [ERROR] {e}\n\n"
+    return StreamingHttpResponse(stream(), content_type="text/event-stream")
+
+
+##############################
+# --- Loss Search ---
+##############################
+def opt_loss_train_stream(request):
+    def stream():
+        try:
+            epochs = int(request.GET.get("epochs", 50))
+            lr_model = float(request.GET.get("lr_model", 0.05))
+            lr_loss = float(request.GET.get("lr_loss", 0.0005))
+            save_dir = request.GET.get("save_dir", "./logs/losssearch_exp1")
+
+            yield f"data: 🚀 Starting Loss Search...\n\n"
+
+            code = (
+                "from ysautoml.optimization.losssearch import train_losssearch; "
+                f"train_losssearch(epochs={epochs}, lr_model={lr_model}, lr_loss={lr_loss}, save_dir='{save_dir}')"
+            )
+            process = subprocess.Popen([sys.executable, "-u", "-c", code],
+                                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                       text=True, bufsize=1, universal_newlines=True)
+            for line in iter(process.stdout.readline, ""):
+                yield f"data: {line.strip()}\n\n"
+            process.wait()
+
+            yield "data: ✅ Loss Search training finished.\n\n"
+
+        except Exception as e:
+            yield f"data: [ERROR] {e}\n\n"
+    return StreamingHttpResponse(stream(), content_type="text/event-stream")
+
+
+def opt_loss_custom_stream(request):
+    def stream():
+        try:
+            yield "data: 🚀 Running custom loss demo...\n\n"
+
+            code = (
+                "from ysautoml.optimization.losssearch import custom_loss; "
+                "import torch; c=custom_loss(); print('Criterion:',c); "
+                "x=torch.randn(4,10); y=torch.randint(0,10,(4,)); "
+                "l=c(x,y); print('Sample loss:',l.item())"
+            )
+            process = subprocess.Popen([sys.executable, "-u", "-c", code],
+                                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                       text=True, bufsize=1, universal_newlines=True)
+            for line in iter(process.stdout.readline, ""):
+                yield f"data: {line.strip()}\n\n"
+            process.wait()
+
+            yield "data: ✅ Custom loss test finished.\n\n"
+
+        except Exception as e:
+            yield f"data: [ERROR] {e}\n\n"
+    return StreamingHttpResponse(stream(), content_type="text/event-stream")
+
+
+##############################
+# --- MTL ---
+##############################
+def opt_mtl_stream(request):
+    def stream():
+        try:
+            gpu_id = int(request.GET.get("gpu_id", 0))
+            seed = int(request.GET.get("seed", 42))
+            weighting = request.GET.get("weighting", "GeMTL")
+            arch = request.GET.get("arch", "HPS")
+            save_dir = request.GET.get("save_dir", "./logs/nyusp_exp1")
+
+            yield f"data: 🚀 Starting MTL training ({weighting}, {arch})...\n\n"
+
+            code = (
+                "from ysautoml.optimization.mtl.examples.nyusp import train_mtl_nyusp; "
+                f"train_mtl_nyusp(gpu_id={gpu_id}, seed={seed}, weighting='{weighting}', arch='{arch}', save_dir='{save_dir}')"
+            )
+            process = subprocess.Popen([sys.executable, "-u", "-c", code],
+                                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                       text=True, bufsize=1, universal_newlines=True)
+            for line in iter(process.stdout.readline, ""):
+                yield f"data: {line.strip()}\n\n"
+            process.wait()
+
+            yield "data: ✅ Multi-Task training completed.\n\n"
+
         except Exception as e:
             yield f"data: [ERROR] {e}\n\n"
     return StreamingHttpResponse(stream(), content_type="text/event-stream")

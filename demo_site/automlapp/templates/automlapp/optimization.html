@@ -1,7 +1,158 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
-<head><title>Optimization Utility</title></head>
-<body style="background:#1B1B1B; color:white; text-align:center; padding-top:100px;">
-  <h1>Optimization Utility Page</h1>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YSAutoML Optimization Utility</title>
+  <style>
+    body { margin:0; font-family:Inter,sans-serif; background:#1B1B1B; color:#FAF1E4; display:flex; }
+    .sidebar { width:250px; background:#111; padding:20px; height:100vh; }
+    .sidebar h1 { font-size:22px; margin-bottom:5px; }
+    .sidebar p { font-size:12px; color:#aaa; margin-bottom:30px; }
+    .menu-item { display:flex; justify-content:space-between; align-items:center; padding:10px 15px; border-radius:6px; cursor:pointer; margin-bottom:5px; transition:background 0.2s; }
+    .menu-item:hover { background:#1F1F1F; }
+    .menu-item.active { background:#1F53FF; color:white; }
+    .submenu { margin-left:15px; display:none; flex-direction:column; }
+    .submenu-item { padding:8px 15px; cursor:pointer; border-radius:6px; margin-top:3px; }
+    .submenu-item:hover { background:#1F1F1F; }
+    .submenu-item.active { background:#1F53FF; color:white; }
+    .content { flex:1; padding:20px; overflow-y:auto; }
+    .form-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; margin-top:20px; }
+    .form-card { background:#1F1F1F; padding:16px; border-radius:10px; box-shadow:0 0 6px rgba(0,0,0,0.3); }
+    .form-card h3 { font-size:14px; margin-bottom:10px; color:#EAEAEA; }
+    .form-card input, .form-card select { width:100%; padding:10px; background:#262626; border:1px solid #333; border-radius:6px; color:#FAF1E4; font-size:14px; }
+    .btn-run { background:#1F53FF; border:none; padding:10px 20px; color:#fff; border-radius:6px; cursor:pointer; margin-top:10px; }
+    .logbox { background:#000; color:#0f0; font-family:monospace; height:200px; overflow-y:scroll; margin-top:20px; padding:10px; border-radius:8px; }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h1><a href="/" style="text-decoration:none; color:#FAF1E4;">YSAutoML</a></h1>
+    <p>Optimization Utility</p>
+    <div class="menu">
+
+      <!-- FXP -->
+      <div class="menu-item" data-section="fxp">FXP</div>
+
+      <!-- Loss Search -->
+      <div class="menu-item" id="loss-toggle">
+        <span>Loss Search</span>
+        <span id="loss-arrow">▼</span>
+      </div>
+      <div class="submenu" id="loss-submenu">
+        <div class="submenu-item" data-section="loss-train">Train</div>
+        <div class="submenu-item" data-section="loss-custom">Custom</div>
+      </div>
+
+      <!-- Multi-task -->
+      <div class="menu-item" data-section="mtl">Multi-Task Loss</div>
+
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- FXP -->
+    <div id="section-fxp" class="section">
+      <h2>FXP - Quantization Training</h2>
+      <form id="fxpForm" class="form-grid">
+        <div class="form-card"><h3>Config Path</h3><input type="text" name="config" value="configs/mobilenet_ori.yml"></div>
+        <div class="form-card"><h3>Device</h3><input type="text" name="device" value="cuda:0"></div>
+        <div class="form-card"><h3>Seed</h3><input type="number" name="seed" value="42"></div>
+        <div class="form-card"><h3>Save Dir</h3><input type="text" name="save_dir" value="./logs/fxp_mobilenet"></div>
+      </form>
+      <button class="btn-run" id="btnFXP">Run FXP</button>
+      <div class="logbox" id="logFXP"></div>
+    </div>
+
+    <!-- Loss Search - Train -->
+    <div id="section-loss-train" class="section" style="display:none;">
+      <h2>Loss Search - Train</h2>
+      <form id="lossTrainForm" class="form-grid">
+        <div class="form-card"><h3>Epochs</h3><input type="number" name="epochs" value="50"></div>
+        <div class="form-card"><h3>LR (Model)</h3><input type="number" step="0.001" name="lr_model" value="0.05"></div>
+        <div class="form-card"><h3>LR (Loss)</h3><input type="number" step="0.0001" name="lr_loss" value="0.0005"></div>
+        <div class="form-card"><h3>Save Dir</h3><input type="text" name="save_dir" value="./logs/losssearch_exp1"></div>
+      </form>
+      <button class="btn-run" id="btnLossTrain">Train</button>
+      <div class="logbox" id="logLossTrain"></div>
+    </div>
+
+    <!-- Loss Search - Custom -->
+    <div id="section-loss-custom" class="section" style="display:none;">
+      <h2>Loss Search - Custom Loss Demo</h2>
+      <button class="btn-run" id="btnLossCustom">Run Custom Loss</button>
+      <div class="logbox" id="logLossCustom"></div>
+    </div>
+
+    <!-- Multi-task Loss -->
+    <div id="section-mtl" class="section" style="display:none;">
+      <h2>Multi-Task Loss - NYUv2 Training</h2>
+      <form id="mtlForm" class="form-grid">
+        <div class="form-card"><h3>GPU ID</h3><input type="number" name="gpu_id" value="0"></div>
+        <div class="form-card"><h3>Seed</h3><input type="number" name="seed" value="42"></div>
+        <div class="form-card"><h3>Weighting</h3><input type="text" name="weighting" value="GeMTL"></div>
+        <div class="form-card"><h3>Architecture</h3><input type="text" name="arch" value="HPS"></div>
+        <div class="form-card"><h3>Save Dir</h3><input type="text" name="save_dir" value="./logs/nyusp_exp1"></div>
+      </form>
+      <button class="btn-run" id="btnMTL">Run MTL</button>
+      <div class="logbox" id="logMTL"></div>
+    </div>
+  </div>
+
+  <script>
+    // --- Toggle for Loss Search ---
+    const lossToggle = document.getElementById("loss-toggle");
+    const lossSubmenu = document.getElementById("loss-submenu");
+    const lossArrow = document.getElementById("loss-arrow");
+    lossToggle.onclick = () => {
+      const isOpen = lossSubmenu.style.display === "flex";
+      lossSubmenu.style.display = isOpen ? "none" : "flex";
+      lossArrow.textContent = isOpen ? "▼" : "▲";
+    };
+
+    // --- Section switching ---
+    const menuItems = document.querySelectorAll(".menu-item, .submenu-item");
+    const sections = document.querySelectorAll(".section");
+    menuItems.forEach(item => {
+      item.addEventListener("click", () => {
+        menuItems.forEach(i => i.classList.remove("active"));
+        item.classList.add("active");
+        sections.forEach(s => s.style.display = "none");
+        const section = item.dataset.section;
+        if (section) document.getElementById("section-" + section).style.display = "block";
+      });
+    });
+
+    // --- SSE helper ---
+    function runSSE(buttonId, formId, logId, urlPrefix) {
+      const btn = document.getElementById(buttonId);
+      const form = formId ? document.getElementById(formId) : null;
+      const logBox = document.getElementById(logId);
+      btn.onclick = () => {
+        logBox.innerHTML = "Running...\n";
+        const query = new URLSearchParams();
+        if (form) {
+          const formData = new FormData(form);
+          for (const [k,v] of formData.entries()) query.append(k,v);
+        }
+        const ev = new EventSource(`${urlPrefix}_stream/?${query.toString()}`);
+        ev.onmessage = e => {
+          const formatted = e.data.replace(/\r?\n/g,"<br>");
+          logBox.insertAdjacentHTML("beforeend", formatted+"<br>");
+          logBox.scrollTop = logBox.scrollHeight;
+        };
+        ev.onerror = () => ev.close();
+      };
+    }
+
+    runSSE("btnFXP", "fxpForm", "logFXP", "/api/opt_fxp");
+    runSSE("btnLossTrain", "lossTrainForm", "logLossTrain", "/api/opt_loss_train");
+    runSSE("btnLossCustom", null, "logLossCustom", "/api/opt_loss_custom");
+    runSSE("btnMTL", "mtlForm", "logMTL", "/api/opt_mtl");
+  </script>
 </body>
 </html>

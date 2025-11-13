@@ -33,6 +33,14 @@ urlpatterns = [
     path("api/network_zero_search_stream/", views.network_zero_search_stream, name="network_zero_search_stream"),
     path("api/network_zero_retrain_stream/", views.network_zero_retrain_stream, name="network_zero_retrain_stream"),
 
+    # Optimization Utility
+    # path("optimization/", views.optimization_utility, name="optimization"),
+    path("api/opt_fxp_stream/", views.opt_fxp_stream, name="opt_fxp_stream"),
+    path("api/opt_loss_train_stream/", views.opt_loss_train_stream, name="opt_loss_train_stream"),
+    path("api/opt_loss_custom_stream/", views.opt_loss_custom_stream, name="opt_loss_custom_stream"),
+    path("api/opt_mtl_stream/", views.opt_mtl_stream, name="opt_mtl_stream"),
+
+
 
 
 ]
