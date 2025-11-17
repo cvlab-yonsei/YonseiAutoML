@@ -773,7 +773,7 @@ def run(config):
     sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../..")))
 
 
-    # ✅ FYI 모드: condensation 실행
+    # FYI 모드: condensation 실행
     if hasattr(config, "fyi") and config.fyi:
         try:
             from ysautoml.data.fyi import run_dsa
@@ -789,7 +789,7 @@ def run(config):
             print(f"[FYI MODE] Failed to run dataset condensation: {e}")
             raise e
 
-    # ✅ DSBN 모드: BN → DSBN 변환 및 별도 학습 루프 적용
+    # DSBN 모드: BN → DSBN 변환 및 별도 학습 루프 적용
     if hasattr(config, "dsbn") and config.dsbn:
         try:
             from ysautoml.data.dsbn import convert_and_wrap, train_with_dsbn
@@ -805,7 +805,7 @@ def run(config):
             )
             print("[DSBN MODE] Model converted successfully.")
 
-            # ✅ 기존 ImageNet DataLoader 재사용
+            # 기존 ImageNet DataLoader 재사용
             train_transform = torchvision.transforms.Compose([
                 torchvision.transforms.RandomResizedCrop(224),
                 torchvision.transforms.RandomHorizontalFlip(),
@@ -845,7 +845,7 @@ def run(config):
             )
             print(f"[DSBN MODE] Completed. Final accuracy: {result['final_acc']:.2f}%")
             torch.save(result["state_dict"], os.path.join(config.train["student" + "_dir"], "dsbn_trained.pth"))
-            return  # ✅ DSBN 모드에서는 기본 run() 학습 스킵
+            return  # DSBN 모드에서는 기본 run() 학습 스킵
 
         except Exception as e:
             print(f"[DSBN MODE] Failed: {e}")
@@ -957,7 +957,7 @@ def parse_args():
                         help='configuration filename',
                         default=None, type=str)
 
-    # ✅ 추가된 인자
+    # 추가된 인자
     parser.add_argument('--fyi', action='store_true',
                         help='Run FYI dataset condensation before training')
     parser.add_argument('--dsbn', action='store_true',
@@ -980,7 +980,7 @@ def main():
 
     config = utils.config.load(args.config_file)
 
-    # ✅ FYI / DSBN 인자 주입
+    # FYI / DSBN 인자 주입
     config.fyi = args.fyi
     config.dsbn = args.dsbn
 
