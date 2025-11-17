@@ -141,7 +141,7 @@ def run_retrain_zeroshot(
         run_retrain_zeroshot(best_structure_path="save_dir/AZ_NAS_flops600M/best_structure.txt")
 
         # 절대경로로 지정
-        run_retrain_zeroshot(best_structure_path="/data2/hyunju/exp/best_structure.txt")
+        run_retrain_zeroshot(best_structure_path="/your/path/exp/best_structure.txt")
     """
 
     base_dir = Path(__file__).resolve().parent
