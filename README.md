@@ -85,10 +85,41 @@ The library is designed as part of a multi-year project that aims to:
 
 YSAutoML requires **Python 3.8+** and **PyTorch 1.8+**.
 
+You can install `ysautoml` using two primary methods: via the Python Package Index (PyPI) for stable releases or directly from the source code via Git for the latest developments.
+
+---
+
+### 1. Installation via PyPI (Recommended)
+
+Since `ysautoml` is a deep learning library with specific CUDA dependencies, you must use a custom index URL provided by PyTorch to ensure compatibility.
+
+#### Prerequisites
+
+To successfully install and run the package, you must first build and run a **Docker container** based on the provided `Dockerfile` in the root directory. This ensures that all necessary system dependencies and the correct CUDA environment (`cu111`) are available.
+
+#### Installation Command
+
+Once inside the prepared Docker container, execute the following command to install the package, noting the use of **multiple index URLs** to find both `ysautoml` (on TestPyPI) and PyTorch's CUDA-specific binaries:
+
 ```bash
-git clone https://github.com/cvlab-yonsei/YonseiAutoML.git
-cd YonseiAutoML
-pip install -v -e .
+pip install \
+    --index-url [https://test.pypi.org/simple/](https://test.pypi.org/simple/) \
+    --extra-index-url [https://pypi.org/simple/](https://pypi.org/simple/) \
+    --extra-index-url [https://download.pytorch.org/whl/cu111](https://download.pytorch.org/whl/cu111) \
+    ysautoml==0.1.1
+```
+
+### 2. Installation via Git Clone
+
+If you prefer to work with the latest, unreleased version of the source code, you can clone the repository directly and install it in "**editable**" mode.
+
+```bash
+# Clone the repository
+git clone [https://github.com/YourOrganization/ysautoml.git](https://github.com/YourOrganization/ysautoml.git)
+cd ysautoml
+
+# Install the package in editable mode within your environment
+pip install -e .
 ```
 
 ---
