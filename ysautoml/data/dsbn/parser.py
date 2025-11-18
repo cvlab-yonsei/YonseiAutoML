@@ -15,7 +15,7 @@ def make_parser():
     p.add_argument("--mixed_batch", action="store_true",
                    help="if set, use mixed batch mode (source+target in same batch)")
 
-    # DSBN 동작 옵션
+    # DSBN action option
     p.add_argument("--use_aug", action="store_true", help="use target/aug branch")
     p.add_argument("--mode", type=int, default=None, help="DSBN mode: 1(S), 2(T), 3(split half)")
     p.add_argument("--device", type=str, default="0", help="CUDA_VISIBLE_DEVICES")
