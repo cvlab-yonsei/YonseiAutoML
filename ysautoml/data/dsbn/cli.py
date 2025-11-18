@@ -17,8 +17,9 @@ def main(argv=None):
         export_path=args.export_path,
     )
 
-    # 2) 더미 예시 학습 (실제론 사용자 DataLoader 필요)
-    # 여기서는 mixed_batch 여부에 따라 분기
+    # 2) Dummy example training (actual usage requires a user-provided DataLoader)
+    # Here, the logic branches depending on whether mixed_batch is enabled
+    
     if args.mixed_batch:
         print("[DSBN] Running in mixed-batch mode (mode=3)")
         # train_with_dsbn_api(model, mixed_loader, epochs=args.epochs, lr=args.lr, mixed_batch=True)
