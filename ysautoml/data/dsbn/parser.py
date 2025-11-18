@@ -3,7 +3,7 @@ import argparse
 def make_parser():
     p = argparse.ArgumentParser(description="DSBN (Domain-Specific BatchNorm) Utilities")
 
-    # 모델/데이터셋/클래스 수
+    # number of model/dataset/class 
     p.add_argument("--model", type=str, default="resnet18_cifar", help="model name")
     p.add_argument("--num_classes", type=int, default=10, help="number of classes")
     p.add_argument("--dataset", type=str, default="CIFAR10", help="dataset name")
