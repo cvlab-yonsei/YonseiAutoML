@@ -19,6 +19,7 @@ def main(argv=None):
 
     # 2) Dummy example training (actual usage requires a user-provided DataLoader)
     # Here, the logic branches depending on whether mixed_batch is enabled
+    
     if args.mixed_batch:
         print("[DSBN] Running in mixed-batch mode (mode=3)")
         # train_with_dsbn_api(model, mixed_loader, epochs=args.epochs, lr=args.lr, mixed_batch=True)
