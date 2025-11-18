@@ -16,5 +16,5 @@ def main_dm(argv=None):
     return _run_dm_impl(args)
 
 if __name__ == "__main__":
-    # 디버그 용
+    # for debugging
     sys.exit(main_dsa())
