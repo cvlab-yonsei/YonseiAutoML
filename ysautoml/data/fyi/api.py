@@ -4,7 +4,7 @@ from .engines.dm_impl import run as _run_dm_impl
 
 def _build_args(**kwargs):
     parser = make_parser()
-    # 빈 리스트로 parse하고, 이후 kwargs로 덮어쓴다 (CLI와 동일한 Namespace 구성)
+    # Initially parse with an empty list, then override the values with kwargs to match the CLI-style Namespace
     args = parser.parse_args([])
     for k, v in kwargs.items():
         if not hasattr(args, k):
