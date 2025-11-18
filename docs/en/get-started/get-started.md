@@ -4,75 +4,48 @@
 
 In this section, we demonstrate how to prepare an environment with PyTorch.
 
-YSAutoML works on Linux, Windows, and macOS. It requires Python 3.7+, CUDA 9.2+, and PyTorch 1.8+.
+YSAutoML works on Linux, Windows, and macOS. It requires Python 3.8, CUDA 11,1, and PyTorch 1.9.1.
 
-{% hint style="info" %}
-If you are experienced with PyTorch and have already installed it, just skip this part and jump to the [next section](https://mmdetection.readthedocs.io/en/latest/get_started.html#installation). Otherwise, you can follow these steps for the preparation.
-{% endhint %}
+### Method 1: Using the Official Docker Container (Recommended for GPU)
 
-**Step 0.** Download and install Miniconda from the [official website](https://docs.conda.io/en/latest/miniconda.html).
+For guaranteed environment consistency and to handle complex CUDA dependencies (`torchvision==0.10.1+cu111`), we strongly recommend using the official Docker setup.
 
-**Step 1.** Create a conda environment and activate it.
+**Step 0.** Clone the Repository.
 
-```
-conda create --name yscvlab python=3.8 -y
-conda activate yscvlab
-```
+The required `Dockerfile` is located in the root of the GitHub repository.
 
-**Step 2.** Install PyTorch following [official instructions](https://pytorch.org/get-started/locally/), e.g.
-
-On GPU platforms:
-
-```
-conda install pytorch torchvision -c pytorch
+```shellscript
+git clone [https://github.com/cvlab-yonsei/YonseiAutoML.git](https://github.com/cvlab-yonsei/YonseiAutoML.git)
+cd YonseiAutoML
 ```
 
-On CPU platforms:
+**Step 1.** Build the Docker Image.
 
-```
-conda install pytorch torchvision cpuonly -c pytorch
-```
+Use the cloned `Dockerfile` to build your environment.
 
-
-
-### Use YSAutoML with virtualenv
-
-**Step 0.** Install virtualenv with python 3.7+.
-
-```
-apt install python3.8-venv
+```shellscript
+docker build -t ysautoml:0.1.1 .
 ```
 
-**Step 1.** Create a virtual environment and activate it.
+**Step 2.** Run the Container.
 
-<pre><code><strong>python3 -m venv yscvlab
-</strong>source yscvlab/bin/activate
-</code></pre>
+Run the container, exposing necessary resources (e.g., GPU support).
 
-**Step 2.** Install PyTorch.
-
+```shellscript
+docker run -it --gpus all ysautoml:0.1.1 /bin/bash
 ```
-pip install torch torchvision
-```
-
-
-
-
 
 ## Installation
 
-**Step 1.** Install YSAutoML.
+Once inside the container, execute the comprehensive `pip install` command, which includes all necessary index URLs (TestPyPI, official PyPI, and PyTorch CUDA channel).
 
-```bash
-git clone https://github.com/cvlab-yonsei/YonseiAutoML.git
-cd YonseiAutoML
-pip install -v -e
-# "-v" means verbose, or more output
-# "-e" means installing a project in editable mode,
-# thus any local modifications made to the code will take effect without reinstallation.
+```shellscript
+pip install \
+    --index-url [https://test.pypi.org/simple/](https://test.pypi.org/simple/) \
+    --extra-index-url [https://pypi.org/simple/](https://pypi.org/simple/) \
+    --extra-index-url [https://download.pytorch.org/whl/cu111](https://download.pytorch.org/whl/cu111) \
+    ysautoml==0.1.1
 ```
-
-
 
 ### Install on Google Colab
 
@@ -80,7 +53,7 @@ pip install -v -e
 
 **Step 1.** Install YSAutoML.
 
-```
+```shellscript
 !git clone https://github.com/cvlab-yonsei/YonseiAutoML.git
 %cd YonseiAutoML
 !pip install -e .
@@ -88,21 +61,16 @@ pip install -v -e
 
 **Step 2.** Verification
 
-```
+```shellscript
 import ysautoml
 print(ysautoml.__version__)
-# Example output: 3.0.0, or an another version.
+# Example output: 0.1.1, or an another version.
 ```
 
 {% hint style="info" %}
 Within Jupyter, the exclamation mark `!` is used to call external executables and `%cd` is a [magic command](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-cd) to change the current working directory of Python.
 {% endhint %}
 
-
-
 ## Troubleshooting
 
 If you have some issues during the installation, please first view the FAQ page. You may [open an issue](https://github.com/cvlab-yonsei/YonseiAutoML/issues) on GitHub if no solution is found.
-
-
-
