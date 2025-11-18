@@ -6,7 +6,7 @@ def main(argv=None):
     parser = make_parser()
     args = parser.parse_args(argv)
 
-    # 1) 모델 준비
+    # 1) preparing model
     model = convert_and_wrap(
         model_or_name=args.model,
         dataset=args.dataset,
