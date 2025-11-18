@@ -8,7 +8,7 @@ def make_parser():
     p.add_argument("--num_classes", type=int, default=10, help="number of classes")
     p.add_argument("--dataset", type=str, default="CIFAR10", help="dataset name")
 
-    # 학습 옵션
+    # training option
     p.add_argument("--epochs", type=int, default=1, help="training epochs")
     p.add_argument("--lr", type=float, default=0.1, help="learning rate")
     p.add_argument("--batch_size", type=int, default=128, help="batch size")
