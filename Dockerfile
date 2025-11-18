@@ -4,7 +4,7 @@ LABEL maintainer="hyunjulee@yonsei.ac.kr"
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Seoul
 
-# Core deps
+# Core deps (libgirepository1.0-dev 추가됨)
 RUN apt-get update && apt-get install -y \
     git vim zsh tmux htop curl wget locales tzdata \
     cmake build-essential gcc g++ gfortran \
@@ -13,17 +13,19 @@ RUN apt-get update && apt-get install -y \
     libpng-dev libfreetype6-dev libjpeg8-dev xdg-utils \
     libnss3 libxkbfile1 libsecret-1-0 \
     libgtk-3-0 libxss1 libasound2 libxtst6 libglib2.0-0 libdrm2 \
- && ln -fs /usr/share/zoneinfo/$TZ /etc/localtime \
- && dpkg-reconfigure --frontend noninteractive tzdata \
- && rm -rf /var/lib/apt/lists/*
+    libgirepository1.0-dev \
+    && ln -fs /usr/share/zoneinfo/$TZ /etc/localtime \
+    && dpkg-reconfigure --frontend noninteractive tzdata \
+    && rm -rf /var/lib/apt/lists/*
 
 # Locale
 RUN locale-gen en_US.UTF-8 && update-locale
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 
-# Python deps
-RUN apt-get update && apt-get install -y python3-pip python3-dev
+# Python setup
+# NOTE: 이미 Core deps에서 apt-get update를 했으므로 여기서는 생략
+RUN apt-get install -y python3-pip python3-dev
 RUN pip3 install -U pip setuptools wheel
 
 # PyTorch 1.8.1 (CUDA 11.1)
