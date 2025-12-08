@@ -3,6 +3,7 @@
 ## Funtional Modules
 
 * `ysautoml.network.oneshot.train_dynas`
+* `ysautoml.network.oneshot.quantize_dynas`
 
 #### ysautoml.network.oneshot.train\_dynas
 
@@ -64,3 +65,55 @@ train_dynas(
 )
 
 ```
+
+***
+
+#### ysautoml.network.oneshot.quantize\_dynas
+
+> ysautoml.network.oneshot.quantize\_dynas(\*\***kwargs)**
+
+Run **post-training quantization** for a searched DYNAS/SPOS subnet using the original comparison.py script, integrated into the YSAutoML API system. This function loads the searched architecture from a text file, restores a trained checkpoint, applies uniform k-bit quantization, and saves the quantized checkpoint automatically.
+
+> Parameters
+
+* `arch_file` (`str`, default `best_structure.txt`): Path to the text file containing the searched architecture configuration. The file must contain comma-separated integers (e.g., `2, 2, 6, 0, ...`).
+* `ckpt` (`str`, default `epoch-241.pt`): Path to the trained floating-point checkpoint file to be quantized.
+* `quant_bits` (`int`, default `8`): Bit-width for uniform weight quantization (e.g., 8-bit, 6-bit).
+* `log_name` (`int`, default `quantize_output`): Tag name for quantization process logging.
+
+
+
+> Returns
+
+*   `None` : &#x20;
+
+    All quantization results are saved automatically as a new checkpoint file.
+
+    * Quantized checkpoint:\
+      `${ckpt_dir}/${ckpt_name}_quant{quant_bits}.pt`
+    * Console output:
+      * Loaded architecture tuple
+      * Quantization status
+      * Final saved checkpoint path
+
+#### Examples
+
+```python
+from ysautoml.network.oneshot import quantize_dynas
+
+# Run 8-bit post-training quantization
+quantize_dynas(
+    arch_file="best_architecture.txt",
+    ckpt="epoch-241.pt",
+    quant_bits=8
+)
+
+# Run lower-bit quantization (e.g., 6-bit)
+quantize_dynas(
+    arch_file="./outputs/best_architecture.txt",
+    ckpt="./checkpoints/epoch-250.pt",
+    quant_bits=6,
+    log_name="quant6_test"
+)
+```
+
