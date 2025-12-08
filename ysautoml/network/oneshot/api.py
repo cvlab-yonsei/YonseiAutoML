@@ -72,3 +72,63 @@ def train_dynas(
         raise RuntimeError(f"DYNAS training failed with code {process.returncode}")
 
     print(f"\n✅ Completed DYNAS Training — Logs saved to: {log_dir}")
+
+
+def quantize_dynas(
+    arch_file="best_architecture.txt",
+    ckpt="epoch-241.pt",
+    quant_bits=8,
+    log_name="quantize_output",
+):
+    """
+    Run comparison.py to load architecture, load checkpoint, and quantize the model.
+
+    Args:
+        arch_file (str): path to architecture txt file
+        ckpt (str): checkpoint path (.pt)
+        quant_bits (int): quantization bits (default 8)
+        log_name (str): tag for logging
+    """
+
+    # --- 경로 계산 ---
+    base_dir = Path(__file__).resolve().parent / "engines"   # engines 폴더
+    script_path = base_dir / "comparison.py"                 # comparison.py 경로
+    root_dir = base_dir.parent.parent.parent                 # .../YonseiAutoML
+
+    if not script_path.exists():
+        raise FileNotFoundError(f"comparison.py not found at {script_path}")
+
+    # --- 실행 환경 설정 ---
+    env = os.environ.copy()
+    env["PYTHONPATH"] = f"{root_dir}:{env.get('PYTHONPATH', '')}"
+
+    # --- 실행 명령어 ---
+    cmd = [
+        "python3",
+        str(script_path),
+        "--arch_file", str(arch_file),
+        "--ckpt", str(ckpt),
+        "--bits", str(quant_bits),
+    ]
+
+    print(f"[QUANTIZE] Running: {' '.join(cmd)}")
+
+    # --- subprocess 실행 ---
+    process = subprocess.Popen(
+        cmd,
+        cwd=str(base_dir),
+        env=env,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        bufsize=1,
+    )
+
+    for line in process.stdout:
+        print(f"[QUANTIZE] {line}", end="")
+
+    process.wait()
+    if process.returncode != 0:
+        raise RuntimeError(f"Quantization (comparison.py) failed with code {process.returncode}")
+
+    print(f"\n✅ Completed Quantization — Output Logged as: {log_name}")

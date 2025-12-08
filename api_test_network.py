@@ -19,48 +19,48 @@
 
 # ########################
 
-from ysautoml.network.zeroshot.mobilenetv2 import run_search_zeroshot
+# from ysautoml.network.zeroshot.mobilenetv2 import run_search_zeroshot
 
-# 기본 실행
-run_search_zeroshot(
-    gpu=0,
-    seed=123,
-    metric="AZ_NAS",
-    # population_size=1024,
-    # evolution_max_iter=int(1e5),
-    population_size=100,
-    evolution_max_iter=100,
-    resolution=224,
-    budget_flops=1e9,
-    max_layers=16,
-    # batch_size=64,
-    batch_size=32,
-    data_path="/dataset/ILSVRC2012/",
-)
+# # 기본 실행
+# run_search_zeroshot(
+#     gpu=0,
+#     seed=123,
+#     metric="AZ_NAS",
+#     # population_size=1024,
+#     # evolution_max_iter=int(1e5),
+#     population_size=100,
+#     evolution_max_iter=100,
+#     resolution=224,
+#     budget_flops=1e9,
+#     max_layers=16,
+#     # batch_size=64,
+#     batch_size=32,
+#     data_path="/dataset/ILSVRC2012/",
+# )
 
-# Small (450M)
-run_search_zeroshot(
-    gpu=0,
-    seed=123,
-    budget_flops=450e6,
-    max_layers=14,
-)
+# # Small (450M)
+# run_search_zeroshot(
+#     gpu=0,
+#     seed=123,
+#     budget_flops=450e6,
+#     max_layers=14,
+# )
 
-# Medium (600M)
-run_search_zeroshot(
-    gpu=0,
-    seed=123,
-    budget_flops=600e6,
-    max_layers=14,
-)
+# # Medium (600M)
+# run_search_zeroshot(
+#     gpu=0,
+#     seed=123,
+#     budget_flops=600e6,
+#     max_layers=14,
+# )
 
-# Large (1G)
-run_search_zeroshot(
-    gpu=0,
-    seed=123,
-    budget_flops=1000e6,
-    max_layers=16,
-)
+# # Large (1G)
+# run_search_zeroshot(
+#     gpu=0,
+#     seed=123,
+#     budget_flops=1000e6,
+#     max_layers=16,
+# )
 
 # #################
 
@@ -91,12 +91,18 @@ run_search_zeroshot(
 #     save_path="./results"
 # )
 
-from ysautoml.network.oneshot import train_dynas
+from ysautoml.network.oneshot import train_dynas, quantize_dynas
 
-train_dynas(
-    log_dir="./logs/dynas_test",
-    file_name="spos_dynamic",
-    seed=42,
-    epochs=5,
-    method="dynas"
+# train_dynas(
+#     log_dir="./logs/dynas_test",
+#     file_name="spos_dynamic",
+#     seed=42,
+#     epochs=5,
+#     method="dynas"
+# )
+
+quantize_dynas(
+    arch_file="best_architecture.txt",
+    ckpt="epoch-241.pt",
+    quant_bits=8,
 )
